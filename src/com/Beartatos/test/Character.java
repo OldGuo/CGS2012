@@ -1,3 +1,4 @@
+
 package com.Beartatos.test;
 
 public class Character {
