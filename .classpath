@@ -3,16 +3,16 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/jogg-0.0.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/lwjgl.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Young/Desktop/lwjgl/native/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/natives-linux.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/natives-mac.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/natives-win32.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Young/git/fbla/lib/slick.jar"/>
+	<classpathentry kind="lib" path="lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/natives-linux.jar"/>
+	<classpathentry kind="lib" path="lib/natives-mac.jar"/>
+	<classpathentry kind="lib" path="lib/natives-win32.jar"/>
+	<classpathentry kind="lib" path="lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
