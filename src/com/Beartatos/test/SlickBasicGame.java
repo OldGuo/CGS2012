@@ -22,8 +22,7 @@ public class SlickBasicGame extends BasicGame{
     }
 
     @Override
-    public void init(GameContainer gc)
-			throws SlickException {
+    public void init(GameContainer gc) throws SlickException {
         plane = new Image("plane.png");
         land = new Image("land.jpg");
     }
@@ -56,12 +55,12 @@ public class SlickBasicGame extends BasicGame{
 
         if(input.isKeyDown(Input.KEY_2))
         {
-            scale += (scale >= 5.0f) ? 0 : 0.1f;
+            scale += (scale >= 10.0f) ? 0 : 0.1f;
             plane.setCenterOfRotation(plane.getWidth()/2.0f*scale, plane.getHeight()/2.0f*scale);
         }
         if(input.isKeyDown(Input.KEY_1))
         {
-            scale -= (scale <= 1.0f) ? 0 : 0.1f;
+            scale -= (scale <= 0.0f) ? 0 : 0.1f;
             plane.setCenterOfRotation(plane.getWidth()/2.0f*scale, plane.getHeight()/2.0f*scale);
         }
     }
