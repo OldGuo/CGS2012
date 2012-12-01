@@ -8,12 +8,16 @@ import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
 
+	private Map map;
+	
 	public Game() {
-		super("one class barebone game");
+		super("Our Game");
 	}
 
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60); 
+		map = new Map("data\\map01.tmx", "data");
+		
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -21,6 +25,7 @@ public class Game extends BasicGame {
 	}
 
 	public void render(GameContainer container, Graphics g)  {
+		map.getMap().render(0, 0);
 	}
 
 	public static void main(String[] argv) throws SlickException {
