@@ -24,9 +24,10 @@ public class TestGame extends BasicGame {
 	private double velY;
 	private static final double MAX_SPEED = 4;
 	// The acceleration of gravity
-	private double gravity = 0.1;
+	private double gravity = 0.2;
 	// An integer to store the last intersection state
 	private int intersect = 0;
+	private boolean inAir;
 
 	public TestGame() {
 		super("one class barebone game");
@@ -63,7 +64,10 @@ public class TestGame extends BasicGame {
 		}
 		if (!movePressed) {
 			// Slow down the player
-			velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
+			if(inAir)
+				velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
+			else
+				velX = 0;
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
@@ -75,9 +79,11 @@ public class TestGame extends BasicGame {
 		double xChange = velX;
 		if(intersect == 3)
 			velY = 0;
-		if(intersect != 1)
+		if(intersect != 1){
+			inAir = true;
 			velY -= gravity;
-		else {
+		} else {
+			inAir = false;
 			velY = Math.max(0, velY);
 		}
 		double yChange = velY;
