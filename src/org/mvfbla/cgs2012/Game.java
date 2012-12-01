@@ -17,7 +17,7 @@ public class Game extends BasicGame {
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
-
+		
 	}
 
 	public void render(GameContainer container, Graphics g)  {
