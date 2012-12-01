@@ -4,13 +4,13 @@ import java.awt.geom.Rectangle2D;
 
 import org.newdawn.slick.geom.Polygon;
 
-public class Rectangle extends Polygon{
+public class BoundingBox extends Polygon{
 	private static final long serialVersionUID = -3752843176428390925L;
 
 	private float width;
 	private float height;
 	
-	public Rectangle(float x, float y, float width, float height) {
+	public BoundingBox(float x, float y, float width, float height) {
 		super(new float[] {
 			x, y,
 			x+width, y,
@@ -20,7 +20,7 @@ public class Rectangle extends Polygon{
 		this.width = width;
 		this.height = height;
 	}
-	public boolean intersects(Rectangle r) {
+	public boolean intersects(BoundingBox r) {
 		return getRect().intersects(r.getRect());
 	}
 	public Rectangle2D.Float getRect() {

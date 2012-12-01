@@ -13,8 +13,11 @@ public class TestGame extends BasicGame {
 
 	private float playerX=340;
 	private float playerY=240;
+	private float cameraX=290;
+	private float cameraY=190;
 	private Animation playerAnim;
 	private Rectangle player;
+	private Rectangle cameraBox;
 	public BlockMap map;
 	// Represents the acceleration from pressing a button
 	private double speed = 0.5;
@@ -43,6 +46,7 @@ public class TestGame extends BasicGame {
 			playerAnim.addFrame(sheet.getSprite(frame,0), 150);
 		}
 		player = new Rectangle(playerX, playerY, 32, 32);
+		cameraBox = new Rectangle(cameraX, cameraY, 132, 132);
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
@@ -95,6 +99,10 @@ public class TestGame extends BasicGame {
 		player.setY((float) playerY);
 		//checkCollision();
 		intersect = checkCollision();
+		if(Math.abs(cameraX - playerX) <= 10)
+			cameraX = playerX;
+		cameraBox.setX(cameraX);
+		cameraBox.setY(cameraY);
 	}
 
 	// Method for handling collision - Returns the direction the player was shunted in
@@ -163,6 +171,7 @@ public class TestGame extends BasicGame {
 	public void render(GameContainer container, Graphics g)  {
 		BlockMap.tmap.render(0, 0);
 		g.drawAnimation(playerAnim, playerX, playerY);
+		g.draw(cameraBox);
 		//g.draw(player);
 	}
 
