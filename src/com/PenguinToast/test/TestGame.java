@@ -54,7 +54,7 @@ public class TestGame extends BasicGame {
 		} else if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			velX += speed;
 			if(velX > MAX_SPEED)
-				velX = MAX_SPEED;
+				velX = MAX_SPEED;	
 			playerAnim.update(delta);
 		} else {
 			// Slow down the player
@@ -89,7 +89,7 @@ public class TestGame extends BasicGame {
 			if(player.intersects(ent)) {
 				// Float to store the least overlap
 				float overlap = 100;
-				// The direction the shunts needs to be in:
+				// The direction the player needs to be shunted needs to be in:
 				/*
 				 *      1
 				 *   /`````\
@@ -111,11 +111,13 @@ public class TestGame extends BasicGame {
 				// Check the distance between the right of the player and the left of the object
 				if(player.getMaxX() - ent.getMinX() < overlap && player.getMaxX() - ent.getMinX() >= 0) {
 					overlap = player.getMaxX() - ent.getMinX();
+					velX = Math.min(velX, 0);
 					direction = 4;
 				}
 				// Check the distance between the left of the player and the right of the object
 				if(ent.getMaxX() - player.getMinX() < overlap && ent.getMaxX() - player.getMinX() >= 0) {
 					overlap = ent.getMaxX() - player.getMinX();
+					velX = Math.max(0, velX);
 					direction = 2;
 				}
 				// Shunt the player
