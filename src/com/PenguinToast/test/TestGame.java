@@ -45,27 +45,33 @@ public class TestGame extends BasicGame {
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
+		boolean movePressed = false;
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+			movePressed = true;
 			velX -= speed;
 			if(velX < -MAX_SPEED)
 				velX = -MAX_SPEED;
 			playerAnim.update(delta);
-		} else if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+		} 
+		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			movePressed = true;
 			velX += speed;
 			if(velX > MAX_SPEED)
 				velX = MAX_SPEED;	
 			playerAnim.update(delta);
-		} else {
+		}
+		if (!movePressed) {
 			// Slow down the player
 			velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
 			if(velY == 0)
-				velY = 5;
+				velY += 5;
+			//else 
+			//	System.out.println(velY);
 		}
-		
 		double xChange = velX;
 		if(intersect != 1)
 			velY -= gravity;
@@ -75,8 +81,11 @@ public class TestGame extends BasicGame {
 		double yChange = velY;
 		playerX += xChange;
 		playerY -= yChange;
+		//if(yChange < 0 && intersect != 0)
+			//System.out.println(intersect);
 		player.setX((float) playerX);
 		player.setY((float) playerY);
+		//checkCollision();
 		intersect = checkCollision();
 	}
 
@@ -136,7 +145,8 @@ public class TestGame extends BasicGame {
 				} else {
 					System.err.println("WAT THE GAY");
 				}
-				out = direction;
+				if(out != 1)
+					out = direction;
 			}
 		}       
 		return out;
