@@ -11,6 +11,7 @@ import org.newdawn.slick.SpriteSheet;
 
 public class TestGame extends BasicGame {
 
+	private boolean inAir = false;
 	private float playerX=340;
 	private float playerY=240;
 	private Animation playerAnim;
@@ -24,7 +25,7 @@ public class TestGame extends BasicGame {
 	private double velY;
 	private static final double MAX_SPEED = 4;
 	// The acceleration of gravity
-	private double gravity = 0.1;
+	private double gravity = 0.2;
 	// An integer to store the last intersection state
 	private int intersect = 0;
 
@@ -33,9 +34,9 @@ public class TestGame extends BasicGame {
 	}
 
 	public void init(GameContainer container) throws SlickException {
-		container.setVSync(true);
-		SpriteSheet sheet = new SpriteSheet("karbonator.png",32,32);
-		map = new BlockMap("\\map01.tmx");		
+		container.setTargetFrameRate(60); 
+		SpriteSheet sheet = new SpriteSheet("data\\karbonator.png",32,32);
+		map = new BlockMap("data\\map01.tmx");		
 		playerAnim = new Animation();
 		playerAnim.setAutoUpdate(false);
 		for (int frame=0;frame<3;frame++) {
@@ -45,38 +46,55 @@ public class TestGame extends BasicGame {
 	}
 
 	public void update(GameContainer container, int delta) throws SlickException {
+		boolean movePressed = false;
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+			movePressed = true;
 			velX -= speed;
 			if(velX < -MAX_SPEED)
 				velX = -MAX_SPEED;
 			playerAnim.update(delta);
-		} else if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+		} 
+		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			movePressed = true;
 			velX += speed;
 			if(velX > MAX_SPEED)
 				velX = MAX_SPEED;	
 			playerAnim.update(delta);
-		} else {
+		}
+		if (!movePressed) {
 			// Slow down the player
-			velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
+			if(inAir)
+				velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
+			else
+				velX = 0;
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
-			if(velY == 0)
-				velY = 5;
+			if(intersect == 1)
+				velY += 5;
+			//else 
+			//	System.out.println(velY);
 		}
-		
 		double xChange = velX;
-		if(intersect != 1)
+		if(intersect == 3)
+			velY = 0;
+		if(intersect != 1){
+			inAir = true;
 			velY -= gravity;
+		}
 		else {
 			velY = Math.max(0, velY);
+			inAir = false;
 		}
 		double yChange = velY;
 		playerX += xChange;
 		playerY -= yChange;
+		//if(yChange < 0 && intersect != 0)
+			//System.out.println(intersect);
 		player.setX((float) playerX);
 		player.setY((float) playerY);
+		//checkCollision();
 		intersect = checkCollision();
 	}
 
@@ -136,7 +154,8 @@ public class TestGame extends BasicGame {
 				} else {
 					System.err.println("WAT THE GAY");
 				}
-				out = direction;
+				if(out != 1)
+					out = direction;
 			}
 		}       
 		return out;
