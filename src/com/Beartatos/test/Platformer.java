@@ -32,7 +32,7 @@ public class Platformer extends BasicGameState {
                 p = new Image("pr.png");
                 w = new Image("w.png");
                 level = new Level();
-                File map1 = new File("C:\\Users\\Young\\git\\fbla\\map1.txt");
+                File map1 = new File("\\map1.txt");
                 //or your file name...
 
                 try
