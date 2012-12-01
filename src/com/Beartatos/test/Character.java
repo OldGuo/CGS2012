@@ -3,25 +3,23 @@ package com.Beartatos.test;
 
 public class Character {
 
-	private int xPos, yPos;
+	private float xPos, yPos;
+	private final boolean gravity;
 
-	public Character(){
-		//DOES THIS WORK 
+	public Character(boolean hasGravity){
+		gravity = hasGravity;
 	}
 
-	public int getxPos() {
+	public float getxPos() { //returns x position
 		return xPos;
 	}
-
-	public void setxPos(int xPos) {
+	public void setxPos(float xPos) { //sets x position
 		this.xPos = xPos;
 	}
-
-	public int getyPos() {
+	public float getyPos() { //returns y position
 		return yPos;
 	}
-
-	public void setyPos(int yPos) {
+	public void setyPos(float yPos) { //sets y position
 		this.yPos = yPos;
 	}
 }
