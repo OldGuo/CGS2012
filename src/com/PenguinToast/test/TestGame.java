@@ -67,12 +67,14 @@ public class TestGame extends BasicGame {
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
-			if(velY == 0)
+			if(intersect == 1)
 				velY += 5;
 			//else 
 			//	System.out.println(velY);
 		}
 		double xChange = velX;
+		if(intersect == 3)
+			velY = 0;
 		if(intersect != 1)
 			velY -= gravity;
 		else {
