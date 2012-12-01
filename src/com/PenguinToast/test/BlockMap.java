@@ -12,7 +12,7 @@ public class BlockMap {
 
 	public BlockMap(String ref) throws SlickException {
 		entities = new ArrayList<Rectangle>();
-		tmap = new TiledMap(ref, ".");
+		tmap = new TiledMap(ref, "data");
 		mapWidth = tmap.getWidth() * tmap.getTileWidth();
 		mapHeight = tmap.getHeight() * tmap.getTileHeight();
 

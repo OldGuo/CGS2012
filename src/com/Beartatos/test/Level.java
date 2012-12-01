@@ -14,7 +14,7 @@ public class Level {
         int[][] level = new int[15][10];
 
         public Level() throws SlickException {
-                w = new Image("w.png");
+                w = new Image("data\\w.png");
         }
 
         public int getTile(int x, int y) {

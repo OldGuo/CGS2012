@@ -29,10 +29,10 @@ public class Platformer extends BasicGameState {
 
         @Override
 		public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
-                p = new Image("pr.png");
-                w = new Image("w.png");
+                p = new Image("data\\pr.png");
+                w = new Image("data\\w.png");
                 level = new Level();
-                File map1 = new File("map1.txt");
+                File map1 = new File("data\\map1.txt");
                 //or your file name...
 
                 try

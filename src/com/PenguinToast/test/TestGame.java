@@ -34,9 +34,9 @@ public class TestGame extends BasicGame {
 	}
 
 	public void init(GameContainer container) throws SlickException {
-		container.setVSync(true);
-		SpriteSheet sheet = new SpriteSheet("karbonator.png",32,32);
-		map = new BlockMap("\\map01.tmx");		
+		container.setTargetFrameRate(60); 
+		SpriteSheet sheet = new SpriteSheet("data\\karbonator.png",32,32);
+		map = new BlockMap("data\\map01.tmx");		
 		playerAnim = new Animation();
 		playerAnim.setAutoUpdate(false);
 		for (int frame=0;frame<3;frame++) {
