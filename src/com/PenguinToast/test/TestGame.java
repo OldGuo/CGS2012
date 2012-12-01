@@ -107,12 +107,12 @@ public class TestGame extends BasicGame {
 					direction = 1;
 				}
 				// Check the distance between the right of the player and the left of the object
-				if(player.getMaxX() - ent.getMinX() < overlap && player.getMaxX() - ent.getMinX() > 0) {
+				if(player.getMaxX() - ent.getMinX() < overlap && player.getMaxX() - ent.getMinX() >= 0) {
 					overlap = player.getMaxX() - ent.getMinX();
 					direction = 4;
 				}
 				// Check the distance between the left of the player and the right of the object
-				if(ent.getMaxX() - player.getMinX() < overlap && ent.getMaxX() - player.getMinX() > 0) {
+				if(ent.getMaxX() - player.getMinX() < overlap && ent.getMaxX() - player.getMinX() >= 0) {
 					overlap = ent.getMaxX() - player.getMinX();
 					direction = 2;
 				}
