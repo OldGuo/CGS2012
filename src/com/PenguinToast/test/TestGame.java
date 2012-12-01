@@ -50,10 +50,12 @@ public class TestGame extends BasicGame {
 			velX -= speed;
 			if(velX < -MAX_SPEED)
 				velX = -MAX_SPEED;
+			playerAnim.update(delta);
 		} else if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			velX += speed;
 			if(velX > MAX_SPEED)
 				velX = MAX_SPEED;
+			playerAnim.update(delta);
 		} else {
 			// Slow down the player
 			velX = Math.signum(velX)*Math.max(0, (Math.abs(velX)-0.1));
