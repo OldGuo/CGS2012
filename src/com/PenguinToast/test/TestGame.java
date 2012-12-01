@@ -11,7 +11,6 @@ import org.newdawn.slick.SpriteSheet;
 
 public class TestGame extends BasicGame {
 
-	private boolean inAir = false;
 	private float playerX=340;
 	private float playerY=240;
 	private Animation playerAnim;
@@ -28,6 +27,7 @@ public class TestGame extends BasicGame {
 	private double gravity = 0.2;
 	// An integer to store the last intersection state
 	private int intersect = 0;
+	private boolean inAir;
 
 	public TestGame() {
 		super("one class barebone game");
@@ -82,10 +82,9 @@ public class TestGame extends BasicGame {
 		if(intersect != 1){
 			inAir = true;
 			velY -= gravity;
-		}
-		else {
-			velY = Math.max(0, velY);
+		} else {
 			inAir = false;
+			velY = Math.max(0, velY);
 		}
 		double yChange = velY;
 		playerX += xChange;
