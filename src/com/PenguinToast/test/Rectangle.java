@@ -1,6 +1,5 @@
 package com.PenguinToast.test;
 
-import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import org.newdawn.slick.geom.Polygon;
