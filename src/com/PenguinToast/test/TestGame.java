@@ -24,7 +24,7 @@ public class TestGame extends BasicGame {
 	private double velY;
 	private static final double MAX_SPEED = 4;
 	// The acceleration of gravity
-	private double gravity = 0.2;
+	private double gravity = 0.15;
 	// An integer to store the last intersection state
 	private int intersect = 0;
 	private boolean inAir;
@@ -72,13 +72,13 @@ public class TestGame extends BasicGame {
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
 			if(intersect == 1)
-				velY += 5;
+				velY = 5;
 			//else 
 			//	System.out.println(velY);
 		}
 		double xChange = velX;
 		if(intersect == 3)
-			velY = 0;
+			velY = Math.min(0, velY);
 		if(intersect != 1){
 			inAir = true;
 			velY -= gravity;
@@ -163,7 +163,7 @@ public class TestGame extends BasicGame {
 	public void render(GameContainer container, Graphics g)  {
 		BlockMap.tmap.render(0, 0);
 		g.drawAnimation(playerAnim, playerX, playerY);
-		g.draw(player);
+		//g.draw(player);
 	}
 
 	public static void main(String[] argv) throws SlickException {
