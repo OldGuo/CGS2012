@@ -8,7 +8,7 @@
  </tileset>
  <layer name="collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2TORIAIAjE9P+ftrGgsAABz2Rm25CGUgAAAN6j9p0KfT7o80Gfj4y+SOfPfXKRLq9X69HcyOjTYunbAX125L2Mvqi/0bpW9Y3+LuJ/rZvx3tzXALULLf7AEgAA
+   H4sIAAAAAAAAC+3TQQ4AEAwFUe5/aRsroYqKH5lJum1fIlIiIiL6r1xHrdyMWvjOwneWgs+6f9Pn3Ylvftfav+IbzY8+b6/e1xu+fVNr6Jl2fFH/Rs3Xu+f9o5Ez8qhMtK8AQmeFocASAAA=
   </data>
  </layer>
  <layer name="tiles" width="40" height="30">
