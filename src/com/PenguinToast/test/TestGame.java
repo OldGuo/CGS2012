@@ -99,10 +99,15 @@ public class TestGame extends BasicGame {
 		player.setY((float) playerY);
 		//checkCollision();
 		intersect = checkCollision();
-		if(Math.abs(cameraX - playerX) <= 10)
+		
+		if(playerX - cameraX < -1){
 			cameraX = playerX;
-		cameraBox.setX(cameraX);
-		cameraBox.setY(cameraY);
+			cameraBox.setX(cameraX);
+		}
+		if(playerY - cameraY < -1){
+			cameraY = playerY;
+			cameraBox.setY(cameraY);
+		}
 	}
 
 	// Method for handling collision - Returns the direction the player was shunted in
