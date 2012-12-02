@@ -1,31 +1,40 @@
 package org.mvfbla.cgs2012;
 
-public abstract class GameObject {
-	private float xPos, yPos;
-	private float width, height;
+import java.awt.geom.Rectangle2D;
+
+import org.newdawn.slick.geom.Polygon;
+
+/**
+ * @author PenguinToast
+ * An abstract class to represent all game objects
+ */
+public abstract class GameObject extends Polygon{
+	private static final long serialVersionUID = 5424643444518720876L;
 	
-	public float getxPos() { //returns x position
-		return xPos;
+	/**
+	 * Creates a new empty GameObject
+	 */
+	public GameObject() {
+		this(0, 0, 0, 0);
 	}
-	public void setxPos(float xPos) { //sets x position
-		this.xPos = xPos;
+	public GameObject(float x, float y, float width, float height) {
+		super(new float[] {
+			x, y,
+			x+width, y,
+			x+width, y+height,
+			x, y+height
+		});
 	}
-	public float getyPos() { //returns y position
-		return yPos;
+	public boolean intersects(GameObject r) {
+		return getRect().intersects(r.getRect());
 	}
-	public void setyPos(float yPos) { //sets y position
-		this.yPos = yPos;
+	public Rectangle2D.Float getRect() {
+		return new Rectangle2D.Float(x, y, getWidth(), getHeight());
 	}
-	public void setWidth(float w){
-		width = w;
+	public float getWidth() {
+		return getMaxX()-getMinX();
 	}
-	public float getWidth(){
-		return width;
+	public float getHeight() {
+		return getMaxY()-getMinY();
 	}
-	public void setHeight(float h){
-		
-	}
-	public float getHeight(){
-		return height;
-	} 
 }

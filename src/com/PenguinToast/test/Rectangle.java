@@ -4,7 +4,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.newdawn.slick.geom.Polygon;
 
-public class Rectangle extends Polygon{
+public class Rectangle extends Polygon {
 	private static final long serialVersionUID = -3752843176428390925L;
 
 	private float width;
