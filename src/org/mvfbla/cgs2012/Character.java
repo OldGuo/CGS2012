@@ -11,7 +11,7 @@ public class Character extends AnimatedObject {
 	}
 	public int doCollision(GameObject obj) {
 		int out = 0;
-		if(intersects(obj)) {
+		if(collides(obj)) {
 			float diff = getWidth() + getHeight();
 			boolean vertical = false;
 			// Check distance between bottom of the character and top of the object

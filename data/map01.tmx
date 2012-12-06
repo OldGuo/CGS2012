@@ -5,15 +5,25 @@
  </tileset>
  <tileset firstgid="25" name="tiles" tilewidth="16" tileheight="16">
   <image source="tiles.png" width="128" height="64"/>
+  <tile id="2">
+   <properties>
+    <property name="test" value="notasdf"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="test" value="asdf"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="collision" width="40" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3TOwoAIAwEUb3/pW2sRGP84RJmIG3yQEyJiIgoXrmOWrkZtfCdhe8sBZ91/6XPuxPf/K61f8U3mog+b7/e1xu+fVNr6Jl2fLf+jZqvd8/7R2+N5VGYF74CsYNW3MASAAA=
   </data>
  </layer>
- <layer name="tiles" width="40" height="30" visible="0">
+ <layer name="tiles" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VQQqAIBBF5xppm6JVu6j7n62kBB3Gyikx4j9423yUMxEBAAAA/8NstrUjBBra2/rNoXKLREd7G/p0oO8ZX+hzM2pJ3h8l+6bDK3yDdD76Yp/0OY2g9r9Som8WXJR9d6n1fe+CvnzczvP3mvf5fWgpvns5feHzNW3hebyPz4Smz82iZm58W6qHvzOufUHeE+6qkZ1n6LynhCGpb5XrCtt5cWjAEgAA
+   H4sIAAAAAAAAC+2V0QrDIAxF8xvVvbTsZX3b2v//tipSSEMy1CqOcQ/cx5qDMSkRAAAA8H+4kMdoCYWJktsS8hzsojFTcoNfHfC7xy/4xRn1pO+Pnn6TUdNy0Or39HtlnjnSL96fJ7t/JX4xTkntf+Ud8mHZG/htSqxzWzGqv7nArxy+e6TfuQ89Xd9eiV/ubrO+5fWkn5yJGr84mzVzc7pZPvLOZHyDSB++q1ZRz9F3nx7hWL0qzQHaHvAzwBIAAA==
   </data>
  </layer>
 </map>
