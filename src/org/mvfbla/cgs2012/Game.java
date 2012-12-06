@@ -28,8 +28,8 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60);
-		map = new Map("data\\largemap.tmx", "data");
-		player = new Character(150, 736, 32, 32, "data\\Bot.png");
+		map = new Map("data\\map02.tmx", "data");
+		player = new Character(150, 336, 32, 32, "data\\Bot.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
 	}
 
@@ -115,7 +115,7 @@ public class Game extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)  {
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
-		g.translate(cameraBox.getOffsetX(), cameraBox.getOffsetY());
+		g.translate(cameraBox.getOffsetX(),cameraBox.getOffsetY());
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
 		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
@@ -123,7 +123,7 @@ public class Game extends BasicGame {
 
 	public static void main(String[] argv) throws SlickException {
 		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new Game(), 600, 800, false);
+		AppGameContainer container = new AppGameContainer(new Game(), 640, 480, false);
 		container.start();
 	}
 }
