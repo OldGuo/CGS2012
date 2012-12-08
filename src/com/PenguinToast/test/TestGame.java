@@ -27,7 +27,7 @@ public class TestGame extends BasicGame {
 	private double velY;
 	private static final double MAX_SPEED = 4;
 	// The acceleration of gravity
-	private double gravity = 0.15;
+	private double gravity = 0.01;
 	// An integer to store the last intersection state
 	private int intersect = 0;
 	private boolean inAir;
