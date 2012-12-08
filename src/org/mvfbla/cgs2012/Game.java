@@ -28,7 +28,7 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60);
 		map = new Map("data\\largemap.tmx", "data");
-		player = new Character(304, 316, 32, 32, "data\\Bot.png");
+		player = new Character(304, 316, 32, 32, "data\\whitebox.png");
 		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
 	}
