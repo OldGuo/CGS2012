@@ -22,7 +22,7 @@ public class CameraObject extends GameObject {
 			return false;
 		}
 	}
-	public boolean intersectedUp(Character p){ //up
+	public boolean intersectedUp(Character p){
 		if(p.getY() - getY() < -1){
 			return true;
 		}else{
