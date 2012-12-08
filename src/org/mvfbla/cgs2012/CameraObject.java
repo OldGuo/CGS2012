@@ -15,14 +15,14 @@ public class CameraObject extends GameObject {
 			return false;
 		}
 	}
-	public boolean intersectedLeft(Character p){
+	public boolean intersectedLeft(Character p){ //left
 		if(p.getX() - getX() < -1){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	public boolean intersectedUp(Character p){
+	public boolean intersectedUp(Character p){ //up
 		if(p.getY() - getY() < -1){
 			return true;
 		}else{

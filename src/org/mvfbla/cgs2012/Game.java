@@ -10,14 +10,13 @@ import org.newdawn.slick.SlickException;
 public class Game extends BasicGame {
 
 	private Map map;
-	private Character player;
+	private Character player,enemy;
 	private CameraObject cameraBox;
-	// Represents the acceleration from pressing a button
+	private final static int MAP_WIDTH = 640;
+	private final static int MAP_HEIGHT = 480;
 	private final float speed = 0.5f;
-	private static final float MAX_SPEED = 4;
-	// The acceleration of gravity
+	private static final float MAX_SPEED = 3;
 	private final float gravity = 0.1f;
-	// An integer to store the last intersection state
 	private int intersect = 0;
 	private boolean inAir;
 
@@ -28,8 +27,9 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60);
-		map = new Map("data\\map02.tmx", "data");
-		player = new Character(150, 336, 32, 32, "data\\Bot.png");
+		map = new Map("data\\largemap.tmx", "data");
+		player = new Character(304, 316, 32, 32, "data\\Bot.png");
+		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
 	}
 
@@ -83,17 +83,17 @@ public class Game extends BasicGame {
 		//checkCollision();
 		intersect = checkCollision();
 
-		if(cameraBox.intersectedRight(player)){
-			cameraBox.setX(player.getX() - 100);
-			cameraBox.incOffsetX(-xChange);
-		}
 		if(cameraBox.intersectedLeft(player)){
 			cameraBox.setX(player.getX());
 			cameraBox.decOffsetX(xChange);
 		}
+		if(cameraBox.intersectedRight(player)){
+			cameraBox.setX(player.getX() - 100);
+			cameraBox.incOffsetX(-xChange);
+		}
 		if(cameraBox.intersectedDown(player)){
 			cameraBox.setY(player.getY() - 100);
-			cameraBox.incOffsetY(yChange);
+				cameraBox.incOffsetY(yChange);
 		}
 		if(cameraBox.intersectedUp(player)){
 			cameraBox.setY(player.getY());
@@ -117,13 +117,14 @@ public class Game extends BasicGame {
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		g.translate(cameraBox.getOffsetX(),cameraBox.getOffsetY());
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
+		g.drawAnimation(enemy.getAnim(),enemy.getX(),enemy.getY());
 		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 	}
 
 	public static void main(String[] argv) throws SlickException {
 		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new Game(), 640, 480, false);
+		AppGameContainer container = new AppGameContainer(new Game(), MAP_WIDTH, MAP_HEIGHT, false);
 		container.start();
 	}
 }

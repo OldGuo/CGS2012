@@ -22,7 +22,6 @@ public class AnimatedObject extends GameObject {
 			}
 		}
 	}
-	
 	public void addAnimation(String name, int start, int end) {
 		int[] t = {start, end};
 		animMap.put(name, t);
