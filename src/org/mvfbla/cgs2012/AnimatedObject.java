@@ -10,10 +10,14 @@ public class AnimatedObject extends GameObject {
 
 	private Animation anim;
 	private HashMap<String, int[]> animMap;
+	SpriteSheet sheet;
 
 	public AnimatedObject(int x, int y, int width, int height, String fileLoc) throws SlickException {
 		super(x, y, width, height);
-		SpriteSheet sheet = new SpriteSheet(fileLoc, width, height);
+		setAnimation(width,height,fileLoc);
+	}
+	public void setAnimation(int width, int height, String fileName) throws SlickException{
+		SpriteSheet sheet = new SpriteSheet(fileName, width, height);
 		anim = new Animation(sheet, 150);
 		anim.setAutoUpdate(false);
 		for(int i = 0; i < sheet.getWidth()/width; i++) {

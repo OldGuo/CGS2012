@@ -19,6 +19,8 @@ public class Game extends BasicGame {
 	private final float gravity = 0.1f;
 	private int intersect = 0;
 	private boolean inAir;
+	private boolean movingRight = true;
+	private boolean movingLeft = false;
 
 	public Game() {
 		super("Our Game");
@@ -28,7 +30,7 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60);
 		map = new Map("data\\largemap.tmx", "data");
-		player = new Character(304, 316, 32, 32, "data\\whitebox.png");
+		player = new Character(304, 316, 32, 32, "data\\PlayerRight.png");
 		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
 	}
@@ -38,6 +40,11 @@ public class Game extends BasicGame {
 		boolean movePressed = false;
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+			if(movingRight){
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\PlayerLeft.png");
+				movingRight = false;
+				movingLeft = true;
+			}
 			movePressed = true;
 			player.setVelX(player.getVelX() - speed);
 			if(player.getVelX() < -MAX_SPEED)
@@ -45,6 +52,11 @@ public class Game extends BasicGame {
 			player.getAnim().update(delta);
 		}
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			if(movingLeft){
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\PlayerRight.png");
+				movingRight = true;
+				movingLeft = false;
+			}
 			movePressed = true;
 			player.setVelX(player.getVelX() + speed);
 			if(player.getVelX() > MAX_SPEED)
@@ -53,10 +65,11 @@ public class Game extends BasicGame {
 		}
 		if (!movePressed) {
 			// Slow down the player
-			if(inAir)
+			if(inAir){
 				player.setVelX(Math.signum(player.getVelX())*Math.max(0, (Math.abs(player.getVelX())-0.1f)));
-			else
+			}else{
 				player.setVelX(0);
+			}
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
