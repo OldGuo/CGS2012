@@ -11,6 +11,7 @@ public class Game extends BasicGame {
 
 	private Map map;
 	private Character player,enemy;
+	private AnimatedObject dust;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 640;
 	private final static int MAP_HEIGHT = 480;
@@ -30,7 +31,8 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(60);
 		map = new Map("data\\largemap.tmx", "data");
-		player = new Character(304, 316, 32, 32, "data\\PlayerRight.png");
+		player = new Character(304, 316, 32, 32, "data\\CharacterRight.png");
+		dust = new AnimatedObject(304,316,32,32, "data\\DustRight.png");
 		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
 	}
@@ -41,7 +43,8 @@ public class Game extends BasicGame {
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
 			if(movingRight){
-				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\PlayerLeft.png");
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\CharacterLeft.png");
+				dust.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\DustLeft.png");
 				movingRight = false;
 				movingLeft = true;
 			}
@@ -50,10 +53,12 @@ public class Game extends BasicGame {
 			if(player.getVelX() < -MAX_SPEED)
 				player.setVelX(-MAX_SPEED);
 			player.getAnim().update(delta);
+			dust.getAnim().update(delta);
 		}
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			if(movingLeft){
-				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\PlayerRight.png");
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\CharacterRight.png");
+				dust.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\DustRight.png");
 				movingRight = true;
 				movingLeft = false;
 			}
@@ -62,6 +67,7 @@ public class Game extends BasicGame {
 			if(player.getVelX() > MAX_SPEED)
 				player.setVelX(MAX_SPEED);
 			player.getAnim().update(delta);
+			dust.getAnim().update(delta);
 		}
 		if (!movePressed) {
 			// Slow down the player
@@ -69,6 +75,8 @@ public class Game extends BasicGame {
 				player.setVelX(Math.signum(player.getVelX())*Math.max(0, (Math.abs(player.getVelX())-0.1f)));
 			}else{
 				player.setVelX(0);
+				dust.setFrame(0);
+				player.setFrame(0);
 			}
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
@@ -132,6 +140,7 @@ public class Game extends BasicGame {
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
 		g.drawAnimation(enemy.getAnim(),enemy.getX(),enemy.getY());
 		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
+		g.drawAnimation(dust.getAnim(), player.getX(), player.getY());
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 	}
 

@@ -20,6 +20,7 @@ public class AnimatedObject extends GameObject {
 		SpriteSheet sheet = new SpriteSheet(fileName, width, height);
 		anim = new Animation(sheet, 150);
 		anim.setAutoUpdate(false);
+		anim.setSpeed(1);
 		for(int i = 0; i < sheet.getWidth()/width; i++) {
 			for(int j = 0; j < sheet.getHeight()/height; j++) {
 				anim.addFrame(sheet.getSprite(i, j), 150);
@@ -37,5 +38,11 @@ public class AnimatedObject extends GameObject {
 	}
 	public Animation getAnim() {
 		return anim;
+	}
+	public void setFrame(int frame){
+		anim.setCurrentFrame(0);
+	}
+	public void setSpeed(float speed){
+		anim.setSpeed(speed);
 	}
 }
