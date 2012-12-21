@@ -1,7 +1,5 @@
 package org.mvfbla.cgs2012;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -9,7 +7,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Shape;
 
 public class Game extends BasicGame {
 
@@ -24,10 +21,6 @@ public class Game extends BasicGame {
 	// The acceleration of gravity
 	private final float gravity = 0.1f;
 	// An integer to store the last intersection state
-	private int intersect = 0;
-	private boolean inAir;
-	private boolean movingRight = true;
-	private boolean movingLeft = false;
 
 	public Game() {
 		super("Our Game");
@@ -81,7 +74,7 @@ public class Game extends BasicGame {
 		player.setY(player.getY() - yChange);
 		player.setX(player.getX());
 		player.setY(player.getY());
-		intersect = checkCollision();
+		checkCollision();
 
 		if(cameraBox.intersectedRight(player)){
 			cameraBox.setX(player.getX() - 100);
