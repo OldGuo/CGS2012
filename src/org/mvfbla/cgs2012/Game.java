@@ -21,6 +21,8 @@ public class Game extends BasicGame {
 	// The acceleration of gravity
 	private final float gravity = 0.1f;
 	// An integer to store the last intersection state
+	private boolean movingRight = true;
+	private boolean movingLeft = false;
 
 	public Game() {
 		super("Our Game");
@@ -41,18 +43,32 @@ public class Game extends BasicGame {
 		boolean movePressed = false;
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
+			if(movingRight){
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\CharacterLeft.png");
+				dust.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\DustLeft.png");
+				movingRight = false;
+				movingLeft = true;
+			}
 			movePressed = true;
 			player.setVelX(player.getVelX() - speed);
 			if(player.getVelX() < -MAX_SPEED)
 				player.setVelX(-MAX_SPEED);
 			player.getAnim().update(delta);
+			dust.getAnim().update(delta);
 		}
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			if(movingLeft){
+				player.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\CharacterRight.png");
+				dust.setAnimation((int)player.getWidth(),(int)player.getHeight(),"data\\DustRight.png");
+				movingRight = true;
+				movingLeft = false;
+			}
 			movePressed = true;
 			player.setVelX(player.getVelX() + speed);
 			if(player.getVelX() > MAX_SPEED)
 				player.setVelX(MAX_SPEED);
 			player.getAnim().update(delta);
+			dust.getAnim().update(delta);
 		}
 		if (!movePressed) {
 			// Slow down the player
@@ -112,10 +128,12 @@ public class Game extends BasicGame {
 
 		g.setColor(Color.white);
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
+		g.drawAnimation(enemy.getAnim(),enemy.getX(),enemy.getY());
 		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
+		g.drawAnimation(dust.getAnim(), player.getX(), player.getY());
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		for(Tile t : map.getBoxes())
-			g.draw(t.getCollision());
+/*		for(Tile t : map.getBoxes())
+			g.draw(t.getCollision());*/
 	}
 
 	public static void main(String[] argv) throws SlickException {
