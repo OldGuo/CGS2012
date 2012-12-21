@@ -4,20 +4,26 @@
   <image source="tiles2.png" width="120" height="52"/>
   <tile id="11">
    <properties>
-    <property name="angle" value="45"/>
-    <property name="triangle" value="true"/>
+    <property name="point0" value="16,0"/>
+    <property name="point1" value="0,16"/>
+    <property name="point2" value="16,16"/>
+    <property name="points" value="3"/>
+    <property name="rect" value="false"/>
    </properties>
   </tile>
   <tile id="12">
    <properties>
-    <property name="angle" value="135"/>
-    <property name="triangle" value="true"/>
+    <property name="point0" value="0,0"/>
+    <property name="point1" value="0,16"/>
+    <property name="point2" value="16,16"/>
+    <property name="points" value="3"/>
+    <property name="rect" value="false"/>
    </properties>
   </tile>
  </tileset>
  <layer name="Main" width="40" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3VsQ6AIAxF0S5suvH/32oYmpAGSOkDabQ36aieiAhR9OXSacCgYsunEYMyhQ8pfFjhwwoflmffRX59tc2bT9o8+Vq2t3xJMS2bp/cnCx/WH3xlz/W+9xu8t8UnPb09x4MYZ329/9Mu46zPYkOMWh+vKeKzGDU+65quMPI1ljMHGc1Zt+vZq+cBbY3yqsASAAA=
+   H4sIAAAAAAAAC+3VsQrAIAxF0Sxu7eb/f2txEEowkuShhjYXstZD1ZYo+3LlNGBSs9XTiEmV0oeUPqz0YaUPK7Lvori+ty2aj9si+Ua2Xb6imJEt0vvjpQ/rD75256TzfoPP9vi4R7pzfRCj1Sd9n1YZrT6PzWLkZ0Lr63uK+DRG7tH4vHvqMUo+zz8HmZ1rrZ4HdNQQhMASAAA=
   </data>
  </layer>
 </map>

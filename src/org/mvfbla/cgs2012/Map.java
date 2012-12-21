@@ -15,7 +15,17 @@ public class Map {
 			for (int y = 0; y < map.getHeight(); y++) {
 				int tileID = map.getTileId(x, y, 0);
 				if (tileID != 0) {
-					Tile t = new Tile(x*16, y*16, 15, 15);
+					boolean rect = map.getTileProperty(tileID, "rect", "true").equals("true");
+					Tile t = new Tile(x*16, y*16, 16, 16);
+					if(!rect) {
+						int n = Integer.parseInt(map.getTileProperty(tileID, "points", "3"));
+						Polygon coll = new Polygon();
+						for(int i = 0; i < n; i++) {
+							String[] point = map.getTileProperty(tileID, "point" + i, "0,0").split(",");
+							coll.addPoint(x*16+Float.parseFloat(point[0]), y*16+Float.parseFloat(point[1]));
+						}
+						t.setCollision(coll);
+					}
 					boxes.add(t);
 				}
 			}
