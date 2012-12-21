@@ -10,7 +10,7 @@ public class Character extends AnimatedObject {
 	//private float velX, velY;
 	private Vector force;
 
-	public Character(int x, int y, int width, int height, String fileLoc, Game game) throws SlickException {
+	public Character(int x, int y, int width, int height, String fileLoc) throws SlickException {
 		super(x, y, width, height, fileLoc);
 		force = new Vector(0,0);
 	}
