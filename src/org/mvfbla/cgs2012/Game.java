@@ -23,6 +23,7 @@ public class Game extends BasicGame {
 	// An integer to store the last intersection state
 	private boolean movingRight = true;
 	private boolean movingLeft = false;
+	private Vector trans = new Vector();
 
 	public Game() {
 		super("Our Game");
@@ -31,16 +32,18 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(30);
-		map = new Map("data\\largemap.tmx", "data");
-		player = new Character(304, 316, 32, 32, "data\\CharacterRight.png");
+		map = new Map("data\\map02.tmx", "data");
+		player = new Character(314, 316, 32, 32, "data\\CharacterRight.png");
 		dust = new AnimatedObject(304,316,32,32, "data\\DustRight.png");
 		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
+		GameConstants.game = this;
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		boolean movePressed = false;
+		player.update(container, delta);
+/*		boolean movePressed = false;
 		// Moving left/right/up
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
 			if(movingRight){
@@ -72,27 +75,28 @@ public class Game extends BasicGame {
 		}
 		if (!movePressed) {
 			// Slow down the player
-				player.setVelX(0);
+			player.setVelX(Math.signum(player.getVelX())*Math.max(0, (Math.abs(player.getVelX())-0.1f)));
+
+//				player.setVelX(0);
 				dust.setFrame(0);
 				player.setFrame(0);
 		}
 		if (container.getInput().isKeyDown(Input.KEY_UP) || container.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
-			//if(intersect == 1)
-				player.setVelY(5);
-			//else
-			//	System.out.println(velY);
+			if(trans != null && trans.y <= -0.09) {
+				player.setVelY(-5);
+			}
 		}
 		float xChange = player.getVelX();
-		player.setForce(player.getForce().sub(new Vector(0, gravity)));
+		player.setForce(player.getForce().add(new Vector(0, gravity)));
 		float yChange = player.getVelY();
 		player.setX(player.getX() + xChange);
-		player.setY(player.getY() - yChange);
+		player.setY(player.getY() + yChange);
 		player.setX(player.getX());
 		player.setY(player.getY());
-		checkCollision();
-
-		if(cameraBox.intersectedRight(player)){
+		trans = checkCollision();
+*/
+/*		if(cameraBox.intersectedRight(player)){
 			cameraBox.setX(player.getX() - 100);
 			cameraBox.incOffsetX(-xChange);
 		}
@@ -102,23 +106,23 @@ public class Game extends BasicGame {
 		}
 		if(cameraBox.intersectedDown(player)){
 			cameraBox.setY(player.getY() - 100);
-			cameraBox.incOffsetY(yChange);
+			cameraBox.incOffsetY(-yChange);
 		}
 		if(cameraBox.intersectedUp(player)){
 			cameraBox.setY(player.getY());
-			cameraBox.decOffsetY(-yChange);
-		}
+			cameraBox.decOffsetY(yChange);
+		}*/
 	}
 
-	public int checkCollision() {
-		int out = 0;
+	public Vector checkCollision() {
+		Vector v = null;
 		for(int i = 0; i < map.getBoxes().size(); i++) {
 			GameObject obj = map.getBoxes().get(i);
-			int c = player.newCollision(obj);
-			if(out != 1 && c != 0)
-				out = c;
+			Vector t = player.newCollision(obj);
+			if(v == null) v = t;
+			if(t != null) v.add(t);
 		}
-		return out;
+		return v;
 	}
 
 	@Override
@@ -132,8 +136,8 @@ public class Game extends BasicGame {
 		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
 		g.drawAnimation(dust.getAnim(), player.getX(), player.getY());
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-/*		for(Tile t : map.getBoxes())
-			g.draw(t.getCollision());*/
+		for(Tile t : map.getBoxes())
+			g.draw(t.getCollision());
 	}
 
 	public static void main(String[] argv) throws SlickException {

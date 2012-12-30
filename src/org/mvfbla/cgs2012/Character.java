@@ -1,5 +1,7 @@
 package org.mvfbla.cgs2012;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.GeomUtil;
 import org.newdawn.slick.geom.Line;
@@ -7,22 +9,29 @@ import org.newdawn.slick.geom.Shape;
 
 public class Character extends AnimatedObject {
 
-	//private float velX, velY;
 	private Vector force;
+	private final float speed = 0.5f;
+	private static final float MAX_SPEED = 4;
+	// The acceleration of gravity
+	private final float gravity = 0.1f;
+	private Vector trans = new Vector();
 
 	public Character(int x, int y, int width, int height, String fileLoc) throws SlickException {
 		super(x, y, width, height, fileLoc);
 		force = new Vector(0,0);
 	}
-	public int newCollision(GameObject obj) {
-		int out = 0;
+	public Vector newCollision(GameObject obj) {
 		Vector trans = getProjectionVector(obj, this);
 		if(trans != null) {
 			translate(trans);
-			force.sub(trans);
-			System.out.println(force);
+			if(force.x < 0 && force.y < 0) {
+				System.out.print("");
+			}
+			force.add(trans);
+			System.out.println("Trans: " + trans);
+//			System.out.println("Force: "+ force);
 		}
-		return out;
+		return trans;
 	}
 	public Vector getProjectionVector(GameObject a, GameObject b) {
 		Vector v1 = getProjectionVectorHelper(a, b);
@@ -93,6 +102,46 @@ public class Character extends AnimatedObject {
 		Vector x = new Vector(a).add(new Vector(d).scale(new Vector(p).sub(a).dot(d)));
 		Vector result = new Vector(x).sub(p);
 		return result;
+	}
+	@Override
+	public void update(GameContainer gc, int delta) {
+		boolean movePressed = false;
+		// Moving left/right/up
+		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+			movePressed = true;
+			this.setVelX(this.getVelX() - speed);
+			if(this.getVelX() < -MAX_SPEED)
+				this.setVelX(-MAX_SPEED);
+			this.getAnim().update(delta);
+		}
+		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			movePressed = true;
+			this.setVelX(this.getVelX() + speed);
+			if(this.getVelX() > MAX_SPEED)
+				this.setVelX(MAX_SPEED);
+			this.getAnim().update(delta);
+		}
+		if (!movePressed) {
+			// Slow down the player
+			this.setVelX(Math.signum(this.getVelX())*Math.max(0, (Math.abs(this.getVelX())-0.1f)));
+
+//				player.setVelX(0);
+				this.setFrame(0);
+		}
+		if (gc.getInput().isKeyDown(Input.KEY_UP) || gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+			// Jump
+			if(trans != null && trans.y <= -0.09) {
+				this.setVelY(-5);
+			}
+		}
+		float xChange = this.getVelX();
+		this.setForce(this.getForce().add(new Vector(0, gravity)));
+		float yChange = this.getVelY();
+		this.setX(this.getX() + xChange);
+		this.setY(this.getY() + yChange);
+		this.setX(this.getX());
+		this.setY(this.getY());
+		trans = GameConstants.game.checkCollision();
 	}
 	public Vector toVector(Line l) {
 		return new Vector(l.getX2()-l.getX1(), l.getY2() - l.getY1());

@@ -1,5 +1,7 @@
 package org.mvfbla.cgs2012;
 
+import org.newdawn.slick.GameContainer;
+
 public class CameraObject extends GameObject {
 
 	private float offsetX;
@@ -60,5 +62,10 @@ public class CameraObject extends GameObject {
 	}
 	public float getOffsetY(){
 		return offsetY;
+	}
+	@Override
+	public void update(GameContainer gc, int delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }

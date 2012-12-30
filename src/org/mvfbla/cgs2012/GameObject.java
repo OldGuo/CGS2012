@@ -2,8 +2,8 @@ package org.mvfbla.cgs2012;
 
 import java.awt.geom.Rectangle2D;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 /**
@@ -99,4 +99,5 @@ public abstract class GameObject extends Polygon{
 	public boolean collides(GameObject obj) {
 		return obj.getCollision().intersects(collision);
 	}
+	public abstract void update(GameContainer gc, int delta);
 }
