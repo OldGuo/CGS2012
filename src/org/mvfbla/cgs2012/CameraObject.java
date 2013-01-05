@@ -9,15 +9,15 @@ public class CameraObject extends GameObject {
 	private float offsetY;
 	private GameObject target;
 
-	public CameraObject(GameObject target, float width, float height){
+	public CameraObject(GameObject target, float width, float height) {
 		super(target.getCenterX()-(width/2), target.getCenterY()-(height/2),width,height);
 		this.target = target;
 	}
 
-	public float getOffsetX(){
+	public float getOffsetX() {
 		return offsetX;
-	}
-	public float getOffsetY(){
+	} 
+	public float getOffsetY() {
 		return offsetY;
 	}
 	@Override
