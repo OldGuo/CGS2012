@@ -4,51 +4,48 @@ import java.util.HashMap;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 public class AnimatedObject extends GameObject {
 
-	private Animation anim;
-	private HashMap<String, int[]> animMap;
-	SpriteSheet sheet;
+	protected HashMap<String, Animation> animMap;
+	private Animation current;
 
-	public AnimatedObject(int x, int y, int width, int height, String fileLoc) throws SlickException {
+	public AnimatedObject(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
-		setAnimation(width,height,fileLoc);
+		animMap = new HashMap<String, Animation>();
 	}
-	public void setAnimation(int width, int height, String fileName) throws SlickException{
-		SpriteSheet sheet = new SpriteSheet(fileName, width, height);
-		anim = new Animation(sheet, 150);
-		anim.setAutoUpdate(false);
-		anim.setSpeed(1);
-		for(int i = 0; i < sheet.getWidth()/width; i++) {
-			for(int j = 0; j < sheet.getHeight()/height; j++) {
-				anim.addFrame(sheet.getSprite(i, j), 150);
-			}
-		}
-	}
-	public void addAnimation(String name, int start, int end) {
-		int[] t = {start, end};
-		animMap.put(name, t);
+	public void addAnimation(String name, Animation anim) {
+		animMap.put(name, anim);
+		current = anim;
 	}
 	public void playAnimation(String name) {
-		anim.setCurrentFrame(animMap.get(name)[0]);
-		anim.start();
-		anim.stopAt(animMap.get(name)[1]);
+		current = animMap.get(name);
+		current.start();
 	}
-	public Animation getAnim() {
-		return anim;
+	public void resetAnimation() {
+		current.setCurrentFrame(0);
+		current.stop();
 	}
-	public void setFrame(int frame){
-		anim.setCurrentFrame(0);
+	public void stopAnimation() {
+		current.stop();
 	}
-	public void setSpeed(float speed){
-		anim.setSpeed(speed);
+	public Animation getCurrentAnimation() {
+		return current;
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void draw(Graphics g) {
+		g.drawAnimation(current, x, y);
+		g.translate(x, y);
+		for(GameObject obj : objects) {
+			obj.draw(g);
+		}
+		g.translate(-x, -y);
 	}
 }

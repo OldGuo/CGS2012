@@ -1,6 +1,7 @@
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 public class CameraObject extends GameObject {
 
@@ -65,6 +66,11 @@ public class CameraObject extends GameObject {
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

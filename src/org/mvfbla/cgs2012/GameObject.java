@@ -1,8 +1,10 @@
 package org.mvfbla.cgs2012;
 
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
@@ -13,6 +15,7 @@ import org.newdawn.slick.geom.Shape;
 public abstract class GameObject extends Polygon{
 	private static final long serialVersionUID = 5424643444518720876L;
 	protected Shape collision;
+	protected ArrayList<GameObject> objects;
 	/**
 	 * Creates a new empty GameObject
 	 */
@@ -39,6 +42,7 @@ public abstract class GameObject extends Polygon{
 				x+width, y+height,
 				x+width, y
 		});
+		objects = new ArrayList<GameObject>();
 	}
 	/**
 	 * Checks for intersection between the bounding boxes of the two GameObjects
@@ -99,5 +103,9 @@ public abstract class GameObject extends Polygon{
 	public boolean collides(GameObject obj) {
 		return obj.getCollision().intersects(collision);
 	}
+	public void addObject(GameObject obj) {
+		objects.add(obj);
+	}
 	public abstract void update(GameContainer gc, int delta);
+	public abstract void draw(Graphics g);
 }

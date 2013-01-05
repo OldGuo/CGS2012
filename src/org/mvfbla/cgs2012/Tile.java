@@ -1,6 +1,7 @@
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 
 public class Tile extends GameObject{
@@ -12,6 +13,12 @@ public class Tile extends GameObject{
 
 	@Override
 	public void update(GameContainer gc, int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

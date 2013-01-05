@@ -12,18 +12,9 @@ public class Game extends BasicGame {
 
 	private Map map;
 	private Character player,enemy;
-	private AnimatedObject dust;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 640;
 	private final static int MAP_HEIGHT = 480;
-	private final float speed = 0.5f;
-	private static final float MAX_SPEED = 4;
-	// The acceleration of gravity
-	private final float gravity = 0.1f;
-	// An integer to store the last intersection state
-	private boolean movingRight = true;
-	private boolean movingLeft = false;
-	private Vector trans = new Vector();
 
 	public Game() {
 		super("Our Game");
@@ -33,11 +24,10 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(30);
 		map = new Map("data\\map02.tmx", "data");
-		player = new Character(314, 316, 32, 32, "data\\CharacterRight.png");
-		dust = new AnimatedObject(304,316,32,32, "data\\DustRight.png");
-		enemy = new Character(336,316,32,32,"data\\Karbonator.png");
+		GameConstants.currMap = map;
+		player = new Player(314, 316);
+//		dust = new AnimatedObject(304,316,32,32, "data\\DustRight.png");
 		cameraBox = new CameraObject(player.getX() - 50,player.getY() - 50,132,132);
-		GameConstants.game = this;
 	}
 
 	@Override
@@ -114,16 +104,7 @@ public class Game extends BasicGame {
 		}*/
 	}
 
-	public Vector checkCollision() {
-		Vector v = null;
-		for(int i = 0; i < map.getBoxes().size(); i++) {
-			GameObject obj = map.getBoxes().get(i);
-			Vector t = player.newCollision(obj);
-			if(v == null) v = t;
-			if(t != null) v.add(t);
-		}
-		return v;
-	}
+
 
 	@Override
 	public void render(GameContainer container, Graphics g)  {
@@ -132,9 +113,7 @@ public class Game extends BasicGame {
 
 		g.setColor(Color.white);
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
-		g.drawAnimation(enemy.getAnim(),enemy.getX(),enemy.getY());
-		g.drawAnimation(player.getAnim(), player.getX(), player.getY());
-		g.drawAnimation(dust.getAnim(), player.getX(), player.getY());
+		player.draw(g);
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 		for(Tile t : map.getBoxes())
 			g.draw(t.getCollision());
