@@ -7,55 +7,11 @@ public class CameraObject extends GameObject {
 
 	private float offsetX;
 	private float offsetY;
+	private GameObject target;
 
-	public CameraObject(float x, float y, float width, float height){
-		super(x,y,width,height);
-	}
-	public boolean intersectedRight(Character p){
-		if((p.getX() + p.getWidth()) - (getX() + getWidth()) > 1){ //right
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public boolean intersectedLeft(Character p){ //left
-		if(p.getX() - getX() < -1){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public boolean intersectedUp(Character p){
-		if(p.getY() - getY() < -1){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public boolean intersectedDown(Character p){
-		if((p.getY() + p.getHeight()) - (getY() + getHeight()) > 1){ //down
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public void setOffsetX(float offset){
-		offsetX = offset;
-	}
-	public void incOffsetX(float value){
-		offsetX+=value;
-	}
-	public void decOffsetX(float value){
-		offsetX-=value;
-	}
-	public void setOffsetY(float offset){
-		offsetY = offset;
-	}
-	public void incOffsetY(float value){
-		offsetY+=value;
-	}
-	public void decOffsetY(float value){
-		offsetY-=value;
+	public CameraObject(GameObject target, float width, float height){
+		super(target.getCenterX()-(width/2), target.getCenterY()-(height/2),width,height);
+		this.target = target;
 	}
 
 	public float getOffsetX(){
@@ -66,12 +22,26 @@ public class CameraObject extends GameObject {
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
-		// TODO Auto-generated method stub
-		
+		//System.out.println(getMinX());
+		if(target.getMinX() < getMinX()) {
+			offsetX += getMinX()-target.getMinX();
+			setX(getX() - (getMinX()-target.getMinX()));
+		}
+		if(target.getMaxX() > getMaxX()) {
+			offsetX -= target.getMaxX() - getMaxX();
+			setX(getX() + (target.getMaxX() - getMaxX()));
+		}
+		if(target.getMinY() < getMinY()) {
+			offsetY += getMinY()-target.getMinY();
+			setY(getY() - (getMinY()-target.getMinY()));
+		}
+		if(target.getMaxY() > getMaxY()) {
+			offsetY -= target.getMaxY() - getMaxY();
+			setY(getY() + (target.getMaxY() - getMaxY()));
+		}
 	}
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		g.translate(offsetX, offsetY);
 	}
 }
