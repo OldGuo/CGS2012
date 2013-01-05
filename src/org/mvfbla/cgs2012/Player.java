@@ -25,7 +25,7 @@ public class Player extends Character{
 		// Moving left/right/up
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
 			movePressed = true;
-			this.setVelX(this.getVelX() - speed);
+			this.setVelX(-MAX_SPEED);
 			if(this.getVelX() < -MAX_SPEED)
 				this.setVelX(-MAX_SPEED);
 			playAnimation("walkLeft");
@@ -33,7 +33,7 @@ public class Player extends Character{
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			movePressed = true;
-			this.setVelX(this.getVelX() + speed);
+			this.setVelX(MAX_SPEED);
 			if(this.getVelX() > MAX_SPEED)
 				this.setVelX(MAX_SPEED);
 			playAnimation("walkRight");
@@ -41,7 +41,8 @@ public class Player extends Character{
 		}
 		if (!movePressed) {
 			// Slow down the player
-			this.setVelX(Math.signum(this.getVelX())*Math.max(0, (Math.abs(this.getVelX())-0.1f)));
+			//this.setVelX(Math.signum(this.getVelX())*Math.max(0, (Math.abs(this.getVelX())-0.1f)));
+			this.setVelX(0);
 			resetAnimation();
 			dust.resetAnimation();
 //				player.setVelX(0);
