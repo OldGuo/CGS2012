@@ -5,7 +5,6 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Game extends BasicGame {
@@ -13,8 +12,8 @@ public class Game extends BasicGame {
 	private Map map;
 	private Character player,enemy;
 	private CameraObject cameraBox;
-	private final static int MAP_WIDTH = 640;
-	private final static int MAP_HEIGHT = 480;
+	private final static int MAP_WIDTH = 1280;
+	private final static int MAP_HEIGHT = 720;
 
 	public Game() {
 		super("Our Game");
@@ -23,9 +22,9 @@ public class Game extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(30);
-		map = new Map("data\\map02.tmx", "data");
+		map = new Map("data\\TutorialLevel.tmx", "data");
 		GameConstants.currMap = map;
-		player = new Player(314, 316);
+		player = new Player(376, 585);
 		cameraBox = new CameraObject(player,132,132);
 	}
 
@@ -38,13 +37,14 @@ public class Game extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)  {
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
+		//map.getMap().render(0,0);
 		cameraBox.draw(g);
 		g.setColor(Color.white);
 		g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
 		player.draw(g);
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		for(Tile t : map.getBoxes())
-			g.draw(t.getCollision());
+	//	for(Tile t : map.getBoxes())
+	//		g.draw(t.getCollision());
 	}
 
 	public static void main(String[] argv) throws SlickException {
