@@ -49,7 +49,7 @@ public class Game extends BasicGame {
 
 	public static void main(String[] argv) throws SlickException {
 		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new Game(), MAP_WIDTH, MAP_HEIGHT, false);
+		AppGameContainer container = new AppGameContainer(new Game(), MAP_WIDTH, MAP_HEIGHT, true);
 		container.start();
 	}
 }
