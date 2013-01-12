@@ -9,17 +9,18 @@ import org.newdawn.slick.SpriteSheet;
 public class Player extends Character{
 
 	private final float speed = 0.5f;
-	private static final float MAX_SPEED = 4;
+	private static final float MAX_SPEED = 6;
 	AnimatedObject dust;
 	public Player(int x, int y) throws SlickException {
-		super(x, y, 32, 32);
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharacterRight.png", 32, 32), 150));
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharacterLeft.png", 32, 32), 150));
-		dust = new AnimatedObject(0, 0, 32, 32);
-		dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 32, 32), 150));
-		dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 32, 32), 150));
+		super(x, y, 48, 48);
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharacterRight.png", 48, 48), 150));
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharacterLeft.png", 48, 48), 150));
+		dust = new AnimatedObject(0, 0, 48, 48);
+		dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
+		dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
 		addObject(dust);
 	}
+	@Override
 	public void update(GameContainer gc, int delta) {
 		boolean movePressed = false;
 		// Moving left/right/up
