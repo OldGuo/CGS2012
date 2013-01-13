@@ -37,7 +37,7 @@ public class Game extends BasicGame {
 		player = new Player(500, 496);
 		enemy1= new BasicEnemy(2200,300);
 		enemy2 = new BiggerEnemy(2400,300);
-		enemy3 = new PlantedEnemy(2400,496);
+		enemy3 = new PlantedEnemy(2400,300);
 		enemies = new ArrayList<Enemy>();
 		enemies.add(enemy1);
 		enemies.add(enemy2);
@@ -57,10 +57,10 @@ public class Game extends BasicGame {
 			player.update(container, delta);
 		for(Enemy guy:enemies){
 			guy.update(container, delta);
-			if(player.collides(guy)){
+			/*if(player.collides(guy)){
 				lost=true;
 				System.out.println("GG");
-			}
+			}*/
 		}
 		cameraBox.update(container, delta);
 	}
