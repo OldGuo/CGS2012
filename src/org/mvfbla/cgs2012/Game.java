@@ -57,6 +57,17 @@ public class Game extends BasicGame {
 			player.update(container, delta);
 		for(Enemy guy:enemies){
 			guy.update(container, delta);
+			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+				float tempX=player.getCenterX()-guy.getCenterX();
+				double Xdist=Math.pow((double)tempX, 2);
+				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
+				if((float)Math.sqrt(Xdist+Ydist)<((PlantedEnemy)guy).getSight()/2){
+					((PlantedEnemy)guy).changeSleep(true);
+					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
+				}
+				else
+					((PlantedEnemy)guy).changeSleep(false);
+			}
 			/*if(player.collides(guy)){
 				lost=true;
 				System.out.println("GG");
