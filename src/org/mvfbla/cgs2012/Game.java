@@ -1,5 +1,7 @@
 package org.mvfbla.cgs2012;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
@@ -13,12 +15,15 @@ import org.newdawn.slick.SpriteSheet;
 public class Game extends BasicGame {
 
 	private Map map;
-	private Character player,enemy;
+	private Character player;
+	private Enemy enemy1,enemy2,enemy3;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 1280;
 	private final static int MAP_HEIGHT = 720;
 	private Image background;
 	private Image star, red,blue,yellow,black;
+	private boolean lost=false;
+	private ArrayList<Enemy> enemies;
 
 	public Game() {
 		super("Our Game");
@@ -30,8 +35,13 @@ public class Game extends BasicGame {
 		map = new Map("data\\TutorialLevelBlackScheme.tmx", "data");
 		GameConstants.currMap = map;
 		player = new Player(500, 496);
-		enemy = new Character(2100,508,32,32);
-		enemy.addAnimation("Enemy", new Animation(new SpriteSheet("data\\Bot.png", 32, 32), 150));
+		enemy1= new BasicEnemy(2200,300);
+		enemy2 = new BiggerEnemy(2400,300);
+		enemy3 = new PlantedEnemy(2400,496);
+		enemies = new ArrayList<Enemy>();
+		enemies.add(enemy1);
+		enemies.add(enemy2);
+		enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 		star = new Image("data\\StarScreen.png");
@@ -43,7 +53,15 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		player.update(container, delta);
+		if(!lost)
+			player.update(container, delta);
+		for(Enemy guy:enemies){
+			guy.update(container, delta);
+			if(player.collides(guy)){
+				lost=true;
+				System.out.println("GG");
+			}
+		}
 		cameraBox.update(container, delta);
 	}
 
@@ -58,8 +76,9 @@ public class Game extends BasicGame {
 		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
 		player.draw(g);
 		g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		/*enemy.draw(g);
-		star.draw(0,0);
+		for(Enemy guy:enemies)
+			guy.draw(g);
+		/*star.draw(0,0);
 		red.draw(0,0);
 		blue.draw(0,0);
 		yellow.draw(0,0);
