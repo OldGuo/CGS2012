@@ -12,7 +12,7 @@ public class Player extends Character{
 	private static final float MAX_SPEED = 5;
 	AnimatedObject dust;
 	public Player(int x, int y) throws SlickException {
-		super(x, y, 16, 48);
+		super(x, y, 48, 48);
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
 		dust = new AnimatedObject(0, 0, 48, 48);
