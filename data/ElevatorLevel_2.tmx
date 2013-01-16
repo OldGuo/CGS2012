@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="124" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Black" tilewidth="16" tileheight="16">
+  <image source="LargeBlackSquare.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="124" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2cwY7DIAxEQ9r//+b2gmRZY8eA0mUzM5JFCwSI7Wd6ajuOo33t3KB9Ddp7k3P/p7b7Tnq2eqx77KVny9dF6dnqcRbfHOrxFt8cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt9cEt/76U72xPd+upM98c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0l8c0ly/cO/zug9v7/deh8e9bVPrdVvMdb39eMWa7OG/Zebdsmdgb21+dCsURx3fG87BbFBMXRfvc1EPHeLVu7OubP89rMrC9nn4t+Z0QxqIxlcyM+0T2H4pzlQDReHbP9q7mD3jdrozHkpzeYg57za6A7cdbH1bkRn+iervizubXROa5yGX1ezR30vtndHt2rmZ/8O0d9NkeuLMqbSr4jP4/mNorrlVkfVnJ5JMfRuf0+yCq+RrG9yvUoBv1Zz0K0pvf3TJ2vcOXj6/Myu6tma3pUt1vSb8f9viuxqcYvO1N1jYwbv9dMna9whWqQZSmqdSN+qtTd0Xm/spn6Fq1TGYvydmXv0boa3WEjvhrJjSz2lZqB7APKqhDFMFcAAA==
+  </data>
+ </layer>
+</map>

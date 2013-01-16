@@ -2,6 +2,7 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.Graphics;
@@ -16,13 +17,12 @@ public class PlantedEnemy extends Enemy{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
-		
+
 		if(!awake){
 			super.resetAnimation();
 			super.setSpeed(0);
 			super.setDirection(0);
-		}
-		else{
+		}else{
 			super.playAnimation("PlantedEnemy");
 		}
 		super.update(gc, delta);
