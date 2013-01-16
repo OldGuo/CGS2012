@@ -15,10 +15,6 @@ public class Player extends Character{
 		super(x, y, 48, 48);
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
-		dust = new AnimatedObject(0, 0, 48, 48);
-		dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
-		dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
-	//	addObject(dust);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
@@ -51,7 +47,7 @@ public class Player extends Character{
 		if (gc.getInput().isKeyDown(Input.KEY_UP) || gc.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
 			if(trans != null && trans.y <= -0.09) {
-				this.setVelY(-5);
+				this.setVelY(-8);
 			}
 		}
 		super.update(gc, delta);
