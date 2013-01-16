@@ -61,9 +61,8 @@ public class Player extends Character{
 				this.setVelY(-8);
 			}
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_A)){
+		if(gc.getInput().isKeyDown(Input.KEY_A))
 			punching=true;
-		}
 		else
 			punching=false;
 		if(gc.getInput().isKeyDown(Input.KEY_S))

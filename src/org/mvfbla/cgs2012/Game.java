@@ -56,7 +56,7 @@ public class Game extends BasicGame {
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
 			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				if((float)Math.sqrt(Xdist+Ydist)<((PlantedEnemy)guy).getSight()){
+				if(totalDist<((PlantedEnemy)guy).getSight()){
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
 					((PlantedEnemy)guy).setSpeed(4*Math.signum(tempX));
@@ -64,7 +64,7 @@ public class Game extends BasicGame {
 				else
 					((PlantedEnemy)guy).changeSleep(false);
 			}
-			if(player.isPunching()&&totalDist<player.getRange()){
+			if(player.isPunching()&&Math.abs(tempX)<Math.abs(player.getRange())&&-1*Math.signum(tempX)==Math.signum(player.getRange())){
 				guy.setHealth(guy.getHealth()-1);
 			}
 			if(player.collides(guy)){
