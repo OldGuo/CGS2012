@@ -10,6 +10,7 @@ public class BiggerEnemy extends Enemy{
 		super(x, y, 96, 96);
 		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 96, 96), 150));
 		super.setSpeed(-1);
+		super.setHealth(2);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){

@@ -11,10 +11,14 @@ public class Character extends AnimatedObject {
 
 	private Vector force;
 	protected Vector trans = new Vector();
+	private boolean alive;
+	private float health;
 
 	public Character(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
 		force = new Vector(0,0);
+		alive=true;
+		health=1;
 	}
 	public Vector newCollision(GameObject obj) {
 		Vector trans = getProjectionVector(obj, this);
@@ -110,6 +114,9 @@ public class Character extends AnimatedObject {
 		this.setX(this.getX());
 		this.setY(this.getY());
 		trans = checkCollision();
+		if(health<=0){
+			alive=false;
+		}
 	}
 	public Vector checkCollision() {
 		Vector v = null;
@@ -142,5 +149,13 @@ public class Character extends AnimatedObject {
 	public void setForce(Vector v) {
 		force = v;
 	}
-
+	public float getHealth(){
+		return health;
+	}
+	public void setHealth(float howHealthy){
+		health=howHealthy;
+	}
+	public boolean isAlive(){
+		return alive;
+	}
 }

@@ -15,7 +15,7 @@ import org.newdawn.slick.SpriteSheet;
 public class Game extends BasicGame {
 
 	private Map map;
-	private Character player;
+	private Player player;
 	private Enemy enemy1,enemy2,enemy3;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 1280;
@@ -57,21 +57,28 @@ public class Game extends BasicGame {
 			player.update(container, delta);
 		for(Enemy guy:enemies){
 			guy.update(container, delta);
+			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
+			double Xdist=Math.pow((double)tempX, 2);
+			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
+			float totalDist=(float)Math.sqrt(Xdist+Ydist);
 			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				float tempX=player.getCenterX()-guy.getCenterX();
-				double Xdist=Math.pow((double)tempX, 2);
-				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
-				if((float)Math.sqrt(Xdist+Ydist)<((PlantedEnemy)guy).getSight()/2){
+				if(totalDist<((PlantedEnemy)guy).getSight()){
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
+					((PlantedEnemy)guy).setSpeed(4*Math.signum(tempX));
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
 			}
-			/*if(player.collides(guy)){
-				lost=true;
-				System.out.println("GG");
-			}*/
+			if(player.isPunching()&&totalDist<player.getRange()){
+				guy.setHealth(guy.getHealth()-1);
+			}
+			if(player.collides(guy)){
+				player.setHealth(guy.getHealth()-1);
+				/*if(!player.isAlive()){
+					System.out.println("GG");
+				}*/
+			}
 		}
 		cameraBox.update(container, delta);
 	}
