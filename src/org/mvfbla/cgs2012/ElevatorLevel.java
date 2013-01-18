@@ -30,7 +30,7 @@ public class ElevatorLevel extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		container.setTargetFrameRate(90);
+		container.setTargetFrameRate(30);
 		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
 		player = new Player(300, 496);

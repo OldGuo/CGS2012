@@ -2,10 +2,10 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.Graphics;
 
 public class Player extends Character{
 
@@ -14,14 +14,20 @@ public class Player extends Character{
 	AnimatedObject dust;
 	private float punchRange = 50; //if negative, means facing the other way
 	private boolean punching = false;
+	private final AnimatedObject arm;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
+
+		arm = new AnimatedObject(0,0,48,48);
+		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
+		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
+		addObject(arm);
 		//dust = new AnimatedObject(0, 0, 48, 48);
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
-		
+
 		super.setHealth(3);
 	//	addObject(dust);
 	}
@@ -55,16 +61,25 @@ public class Player extends Character{
 		//	dust.resetAnimation();
 //				player.setVelX(0);
 		}
-		if (gc.getInput().isKeyDown(Input.KEY_UP) || gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
 			if(trans != null && trans.y <= -0.09) {
 				this.setVelY(-8);
 			}
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_A))
+		if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
 			punching=true;
-		else
+			if(punchRange > 0)
+				arm.playAnimation("right");
+			else
+				arm.playAnimation("left");
+			arm.setFrame(1);
+			arm.stopAnimation();
+		}else{
 			punching=false;
+			arm.setFrame(0);
+			arm.stopAnimation();
+		}
 		if(gc.getInput().isKeyDown(Input.KEY_S))
 			System.out.println("action");
 		super.update(gc, delta);

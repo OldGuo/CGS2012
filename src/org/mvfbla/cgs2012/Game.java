@@ -29,7 +29,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		container.setTargetFrameRate(90);
+		container.setTargetFrameRate(30);
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		//map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
@@ -52,7 +52,7 @@ public class Game extends BasicGame {
 		for(Enemy guy:enemies){
 			guy.update(container, delta);
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
-			double Xdist=Math.pow((double)tempX, 2);
+			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
 			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
