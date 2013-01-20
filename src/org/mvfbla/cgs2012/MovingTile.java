@@ -35,8 +35,11 @@ public class MovingTile extends Tile {
 	public void draw(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.red);
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
-		g.drawImage(image, getX(), getY());
+		for(int x = 0; x < nWidth/16; x++) {
+			for(int y = 0; y < nHeight/16; y++) {
+				g.drawImage(image, getX()+x*16, getY()+y*16);
+			}
+		}
 		g.setColor(c);
 	}
 	@Override
