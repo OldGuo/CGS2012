@@ -19,7 +19,7 @@ public class RedBossLevel extends BasicGame {
 
 	private Map map;
 	private Character player;
-	private Enemy BiggerEnemy;
+	private Boss redBoss;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
@@ -34,11 +34,11 @@ public class RedBossLevel extends BasicGame {
 		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		GameConstants.currMap = map;
+		GameConstants.collidableObjects.addAll(map.getBoxes());
 		player = new Player(300, 496);
-		BiggerEnemy = new BiggerEnemy(150,448);
-		BiggerEnemy.setSpeed(5);
+		redBoss = new RedBoss(150,350);
 		enemies = new ArrayList<Enemy>();
-		enemies.add(BiggerEnemy);
+		enemies.add(redBoss);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
