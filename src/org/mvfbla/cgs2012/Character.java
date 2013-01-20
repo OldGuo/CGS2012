@@ -20,6 +20,10 @@ public class Character extends AnimatedObject {
 	public Vector doCollision(GameObject obj) {
 		Vector out = null;
 		if(collides(obj)) {
+			while(getVelY() > 7) {
+				setVelY(getVelY()-1);
+				setY(getY()-1);
+			}
 			float diff = getWidth() + getHeight();
 			boolean vertical = false;
 			// Check distance between bottom of the character and top of the object
@@ -35,17 +39,17 @@ public class Character extends AnimatedObject {
 			// Check distance between right of the character and left of the object
 			if(getMaxX() - obj.getMinX() < Math.abs(diff) && getMaxX() - obj.getMinX() >= 0) {
 				diff = getMaxX() - obj.getMinX();
-				setVelX(Math.min(getVelX(), 0));
+				//setVelX(Math.min(getVelX(), 0));
 				vertical = false;
 			}
 			// Check distance between left of the character and right of the object
 			if(-(getMinX() - obj.getMaxX()) < Math.abs(diff) && getMinX() - obj.getMaxX() <= 0) {
 				diff = getMinX() - obj.getMaxX();
-				setVelX(Math.max(0, getVelX()));
+				//setVelX(Math.max(0, getVelX()));
 				vertical = false;
 			}
 			// Get the projection vector
-			System.out.println("colliding: " + diff);
+			//System.out.println("colliding: " + diff);
 			if(vertical) {
 				out = new Vector(0, -diff);
 			} else {
@@ -88,18 +92,25 @@ public class Character extends AnimatedObject {
 	}
 	public Vector checkCollision() {
 		Vector v = null;
+		Vector max = new Vector();
 		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
 			GameObject obj = GameConstants.collidableObjects.get(i);
 			Vector t = this.doCollision(obj);
 			if(v == null) {
 				v = t;
 			}
-			if(t != null) translate(t);
+			if(t != null) {
+				translate(t);
+				if(t.length() >= max.length())
+					max = t;
+			}
 			if(v != null && t != null && !t.equals(new Vector(0,0))) {
 				if(v.getY() >= 0)
 					v = t;
 			}
 		}
+		//if(!max.equals(new Vector()))
+		//	return max;
 		return v;
 	}
 	public Vector toVector(Line l) {
