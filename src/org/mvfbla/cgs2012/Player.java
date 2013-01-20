@@ -59,7 +59,7 @@ public class Player extends Character{
 		//	dust.resetAnimation();
 //				player.setVelX(0);
 		}
-		if (gc.getInput().isKeyDown(Input.KEY_UP) || gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
 			if(trans != null && trans.y <= -0.09) {
 				this.setVelY(-9);
