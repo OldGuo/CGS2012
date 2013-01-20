@@ -17,9 +17,8 @@ public class Player extends Character{
 	private final AnimatedObject arm;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
-
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
 		arm = new AnimatedObject(0,0,48,48);
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
 		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
@@ -29,7 +28,6 @@ public class Player extends Character{
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
 
 		super.setHealth(3);
-	//	addObject(dust);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
@@ -61,7 +59,7 @@ public class Player extends Character{
 		//	dust.resetAnimation();
 //				player.setVelX(0);
 		}
-		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
+		if (gc.getInput().isKeyDown(Input.KEY_UP) || gc.getInput().isKeyDown(Input.KEY_SPACE)) {
 			// Jump
 			if(trans != null && trans.y <= -0.09) {
 				this.setVelY(-9);

@@ -22,6 +22,7 @@ public class Game extends BasicGame {
 	private Image star, red,blue,yellow,black;
 	private final boolean lost=false;
 	private ArrayList<Enemy> enemies;
+	private ArrayList<MovingTile> platforms;
 
 	public Game() {
 		super("Our Game");
@@ -33,16 +34,37 @@ public class Game extends BasicGame {
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		//map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
-		player = new Player(300, 496);
-		enemy1=new BasicEnemy(2200,300);
-		enemy2=new BiggerEnemy(2400,300);
-		enemy3=new PlantedEnemy(2300,300);
+		GameConstants.collidableObjects.addAll(map.getBoxes());
+		platforms = new ArrayList<MovingTile>();
 		enemies = new ArrayList<Enemy>();
+		for(TiledObject to : map.getObjects()) {
+			if(to.getType().equals("spawn"))
+				enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
+			if(to.getType().equals("movingPlatform")) {
+				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
+				platforms.add(t);
+				GameConstants.collidableObjects.add(t);
+			}
+		}
+		player = new Player(300, 496);
+		enemy1= new BasicEnemy(2200,300);
+		enemy2 = new BiggerEnemy(2400,300);
+		enemy3 = new PlantedEnemy(2400,496);
 		enemies.add(enemy1);
 		enemies.add(enemy2);
 		enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
+	}
+	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
+		Enemy out = null;
+		switch(name) {
+			case "BasicEnemy" :
+				out = new BasicEnemy(x, y);
+				break;
+			
+		}
+		return out;
 	}
 
 	@Override
@@ -50,7 +72,7 @@ public class Game extends BasicGame {
 		if(!lost)
 			player.update(container, delta);
 		for(Enemy guy:enemies){
-			guy.update(container, delta);
+			//guy.update(container, delta);
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
@@ -75,6 +97,8 @@ public class Game extends BasicGame {
 			}
 		}
 		cameraBox.update(container, delta);
+		for(MovingTile t : platforms)
+			t.update(container, delta);
 	}
 
 	@Override
@@ -90,6 +114,16 @@ public class Game extends BasicGame {
 		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 		for(Enemy guy:enemies)
 			guy.draw(g);
+		for(MovingTile t : platforms)
+			t.draw(g);
+		for(GameObject go : GameConstants.collidableObjects)
+			g.draw(go);
+		g.draw(player.getCollision());
+		/*star.draw(0,0);
+		red.draw(0,0);
+		blue.draw(0,0);
+		yellow.draw(0,0);
+		black.draw(0,0);*/
 	}
 
 	public static void main(String[] argv) throws SlickException {
