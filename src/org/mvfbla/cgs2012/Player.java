@@ -6,14 +6,17 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import java.util.Timer;
 
 public class Player extends Character{
 
 	private final float speed = 10f;
 	private static final float MAX_SPEED = 5;
+	private int punchTime=0;
 	AnimatedObject dust;
-	private float punchRange = 50; //if negative, means facing the other way
+	private float punchRange = 25; //if negative, means facing the other way
 	private boolean punching = false;
+	private boolean cooldown = false;
 	private final AnimatedObject arm;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
@@ -24,6 +27,7 @@ public class Player extends Character{
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
 		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
 		addObject(arm);
+		arm.stopAnimation();
 		//dust = new AnimatedObject(0, 0, 48, 48);
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
@@ -67,19 +71,34 @@ public class Player extends Character{
 				this.setVelY(-9);
 			}
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
+		if(gc.getInput().isKeyDown(Input.KEY_SPACE)&&!cooldown&&!punching){
 			punching=true;
+			punchTime=0;
 			if(punchRange > 0)
 				arm.playAnimation("right");
 			else
 				arm.playAnimation("left");
 			arm.setFrame(1);
 			arm.stopAnimation();
-		}else{
+		}
+		if(punching){
+			punchTime+=delta;
+		}
+		if(cooldown){
+			punchTime-=delta;
+		}
+		if(punchTime<=-500){
+			punchTime=0;
+			cooldown=false;
+		}
+		if(punchTime>=300){
+			punchTime=0;
 			punching=false;
+			cooldown=true;
 			arm.setFrame(0);
 			arm.stopAnimation();
 		}
+		System.out.println(punchTime);
 		if(gc.getInput().isKeyDown(Input.KEY_S))
 			System.out.println("action");
 		super.update(gc, delta);

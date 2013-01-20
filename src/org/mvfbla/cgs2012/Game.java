@@ -59,7 +59,7 @@ public class Game extends BasicGame {
 				if(totalDist<((PlantedEnemy)guy).getSight()){
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
-					((PlantedEnemy)guy).setSpeed(4*Math.signum(tempX));
+					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
