@@ -11,6 +11,7 @@ public class AnimatedObject extends GameObject {
 
 	protected HashMap<String, Animation> animMap;
 	private Animation current;
+	private int currentFrame;
 
 	public AnimatedObject(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
@@ -37,7 +38,7 @@ public class AnimatedObject extends GameObject {
 	@Override
 	public void update(GameContainer gc, int delta) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void draw(Graphics g) {
@@ -47,5 +48,11 @@ public class AnimatedObject extends GameObject {
 			obj.draw(g);
 		}
 		g.translate(-x, -y);
+	}
+	public int getFrame(){
+		return current.getFrame();
+	}
+	public void setFrame(int frame){
+		current.setCurrentFrame(frame);
 	}
 }

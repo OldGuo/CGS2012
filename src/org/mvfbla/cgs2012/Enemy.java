@@ -13,11 +13,16 @@ public class Enemy extends Character{;
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
-		if(Math.abs(this.getVelX())<Math.abs(speed)){
-			direction*=-1;
-				this.setVelX(direction*speed);
-		}//if something reduces its speed (collision), change direction
-		super.update(gc, delta);
+		if(super.isAlive()){
+			if(Math.abs(this.getVelX())<Math.abs(speed)){
+				direction*=-1;
+					this.setVelX(direction*speed);
+			}//if something reduces its speed (collision), change direction
+			super.update(gc, delta);
+		}
+		else{
+			super.resetAnimation();
+		}
 	}
 	public float getSpeed(){
 		return speed;
@@ -31,5 +36,7 @@ public class Enemy extends Character{;
 	}
 	public void setDirection(float whichWay){
 		direction=whichWay;
+		if(Math.signum(speed)!=whichWay)
+			speed*=-1;
 	}
 }

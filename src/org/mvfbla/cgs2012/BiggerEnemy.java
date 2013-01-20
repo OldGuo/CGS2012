@@ -7,9 +7,10 @@ import org.newdawn.slick.SpriteSheet;
 
 public class BiggerEnemy extends Enemy{
 	public BiggerEnemy (int x, int y) throws SlickException{
-		super(x, y, 58, 96);
-		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 58, 96), 150));
+		super(x, y, 96, 96);
+		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 96, 96), 150));
 		super.setSpeed(-1);
+		super.setHealth(2);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
