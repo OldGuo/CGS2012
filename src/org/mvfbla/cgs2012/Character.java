@@ -1,11 +1,8 @@
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.GeomUtil;
 import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.geom.Shape;
 
 public class Character extends AnimatedObject {
 
@@ -20,111 +17,88 @@ public class Character extends AnimatedObject {
 		alive=true;
 		health=1;
 	}
-	public Vector newCollision(GameObject obj) {
-		Vector trans = getProjectionVector(obj, this);
-		if(trans != null) {
-			translate(trans);
-			if(force.x < 0 && force.y < 0) {
-				System.out.print("");
-			}
-			force.add(trans);
-//			System.out.println("Trans: " + trans);
-//			System.out.println("Force: "+ force);
-		}
-		return trans;
-	}
-	public Vector getProjectionVector(GameObject a, GameObject b) {
-		Vector v1 = getProjectionVectorHelper(a, b);
-		Vector v2 = getProjectionVectorHelper(b, a);
-		if(v1 != null && v2 != null) {
-			if(v1.length() < v2.length())
-				return v1;
-			else
-				return v2.negateLocal();
-		} else
-			return null;
-	}
-	private Vector getProjectionVectorHelper(GameObject aGO, GameObject bGO) {
-		Shape a = aGO.getCollision();
-		Shape b = bGO.getCollision();
-		// Vector to return
+	public Vector doCollision(GameObject obj) {
 		Vector out = null;
-		// Vector connecting the centers of the two Polygons
-		Vector connect = toVector(new Line(a.getCenterX(), a.getCenterY(), b.getCenterX(), b.getCenterY()));
-		// float for holding the smallest vector size found
-		float minDot = Float.MAX_VALUE;
-		GeomUtil g = new GeomUtil();
-		// Loop through every side of Polygon a
-		for(int i = 0; i < a.getPointCount(); i++) {
-			// Current side
-			Line side = g.getLine(a, i, i == a.getPointCount()-1 ? 0 : i+1);
-			// Vector for the line we will be projecting onto
-			Vector project = toVector(side).getPerpendicular().normalise();
-			// Check if the side is facing Polygon b
-			float facing = project.dot(connect);
-			if(facing >= 0) {
-				// Vector representing the side of Polygon a
-				Vector vectorA = new Vector(side.getX1(), side.getY1());
-				vectorA.projectOntoUnit(project, vectorA);
-				// Find the correct point to project from Polygon b
-				float min = Float.MAX_VALUE;
-				// The minimum point found
-				Vector minPoint = new Vector();
-				for(int j = 0; j < b.getPointCount(); j++) {
-					// The point currently being checked
-					Vector point = new Vector(b.getPoint(j));
-					Vector comp = new Vector();
-					point.projectOntoUnit(project, comp);
-					// Do comparisons
-					if(project.dot(comp) < min) {
-						min = project.dot(comp);
-						minPoint = point;
-					}
-				}	
-				// Get the projection of the two polygons
-				Vector perp = getPerpendicular(minPoint, side);
-				float dotp = perp.dot(project);
-				// If the projection and the side are not in the same direction, there is no collision
-				if(dotp < 0)
-					return null;
-				else if(dotp < minDot) {
-					minDot = dotp;
-					out = perp;
-				}
+		if(collides(obj)) {
+			float diff = getWidth() + getHeight();
+			boolean vertical = false;
+			// Check distance between bottom of the character and top of the object
+			if(getMaxY() - obj.getMinY()  < Math.abs(diff) && getMaxY() - obj.getMinY() >= 0) {
+				diff = getMaxY() - obj.getMinY();
+				vertical = true;
+			}
+			// Check distance between top of the character and bottom of the object
+			if(-(getMinY() - obj.getMaxY())  < Math.abs(diff) && getMinY() - obj.getMaxY() <= 0) {
+				diff = getMinY() - obj.getMaxY();
+				vertical = true;
+			}
+			// Check distance between right of the character and left of the object
+			if(getMaxX() - obj.getMinX() < Math.abs(diff) && getMaxX() - obj.getMinX() >= 0) {
+				diff = getMaxX() - obj.getMinX();
+				setVelX(Math.min(getVelX(), 0));
+				vertical = false;
+			}
+			// Check distance between left of the character and right of the object
+			if(-(getMinX() - obj.getMaxX()) < Math.abs(diff) && getMinX() - obj.getMaxX() <= 0) {
+				diff = getMinX() - obj.getMaxX();
+				setVelX(Math.max(0, getVelX()));
+				vertical = false;
+			}
+			// Get the projection vector
+			System.out.println("colliding: " + diff);
+			if(vertical) {
+				out = new Vector(0, -diff);
+			} else {
+				out = new Vector(-diff, 0);
 			}
 		}
- 		return out;
-	}
-	public Vector getPerpendicular(Vector p, Line l) {
-		Vector v = toVector(l);
-		Vector d = new Vector(v.getNormal());
-		Vector a = new Vector(l.getX1(), l.getY1());
-		Vector x = new Vector(a).add(new Vector(d).scale(new Vector(p).sub(a).dot(d)));
-		Vector result = new Vector(x).sub(p);
-		return result;
+		return out;
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
 
 		float xChange = this.getVelX();
-		this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
+		int direction = getDirection(trans);
+		if(direction == 3 || direction == 1) {
+			this.setForce(new Vector(this.getForce().getX(), 0));
+		}
+		if(direction != 1)
+			this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
 		float yChange = this.getVelY();
 		this.setX(this.getX() + xChange);
 		this.setY(this.getY() + yChange);
-		this.setX(this.getX());
-		this.setY(this.getY());
 		trans = checkCollision();
 		if(health<=0){
 			alive=false;
 		}
 	}
+	public int getDirection(Vector v) {
+		if(v == null || v.equals(new Vector(0,0)))
+			return 0;
+		v.normalise();
+		if(v.dot(new Vector(0, -1)) == 1)
+			return 1;
+		if(v.dot(new Vector(0, 1)) == 1)
+			return 3;
+		if(v.dot(new Vector(-1, 0)) == 1)
+			return 4;
+		if(v.dot(new Vector(1, 0)) == 1)
+			return 2;
+		return -1;
+	}
 	public Vector checkCollision() {
 		Vector v = null;
-		for(int i = 0; i < GameConstants.currMap.getBoxes().size(); i++) {
-			GameObject obj = GameConstants.currMap.getBoxes().get(i);
-			Vector t = this.newCollision(obj);
-			if(v == null) v = t;
-			if(t != null) v.add(t);
+		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
+			GameObject obj = GameConstants.collidableObjects.get(i);
+			Vector t = this.doCollision(obj);
+			if(v == null) {
+				v = t;
+			}
+			if(t != null) translate(t);
+			if(v != null && t != null && !t.equals(new Vector(0,0))) {
+				if(v.getY() >= 0)
+					v = t;
+			}
 		}
 		return v;
 	}
