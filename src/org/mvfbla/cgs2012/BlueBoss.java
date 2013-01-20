@@ -9,6 +9,8 @@ public class BlueBoss extends Boss{
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
 		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\BlueBossWalking.png", 256, 256), 150));
+		super.setHealth(1);
+		super.setSpeed(0);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
