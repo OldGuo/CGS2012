@@ -72,7 +72,7 @@ public class Game extends BasicGame {
 		if(!lost)
 			player.update(container, delta);
 		for(Enemy guy:enemies){
-			//guy.update(container, delta);
+			guy.update(container, delta);
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);

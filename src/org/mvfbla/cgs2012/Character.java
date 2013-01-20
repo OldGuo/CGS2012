@@ -1,11 +1,8 @@
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.GeomUtil;
 import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.geom.Shape;
 
 public class Character extends AnimatedObject {
 
@@ -61,24 +58,47 @@ public class Character extends AnimatedObject {
 	public void update(GameContainer gc, int delta) {
 
 		float xChange = this.getVelX();
-		if(trans != null && trans.normalise().dot(new Vector(0,-1)) != 1)
+		int direction = getDirection(trans);
+		if(direction == 3 || direction == 1) {
+			this.setForce(new Vector(this.getForce().getX(), 0));
+		}
+		if(direction != 1)
 			this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
 		float yChange = this.getVelY();
 		this.setX(this.getX() + xChange);
 		this.setY(this.getY() + yChange);
 		trans = checkCollision();
-		if(trans != null) translate(trans);
 		if(health<=0){
 			alive=false;
 		}
+	}
+	public int getDirection(Vector v) {
+		if(v == null || v.equals(new Vector(0,0)))
+			return 0;
+		v.normalise();
+		if(v.dot(new Vector(0, -1)) == 1)
+			return 1;
+		if(v.dot(new Vector(0, 1)) == 1)
+			return 3;
+		if(v.dot(new Vector(-1, 0)) == 1)
+			return 4;
+		if(v.dot(new Vector(1, 0)) == 1)
+			return 2;
+		return -1;
 	}
 	public Vector checkCollision() {
 		Vector v = null;
 		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
 			GameObject obj = GameConstants.collidableObjects.get(i);
 			Vector t = this.doCollision(obj);
-			if(v == null) v = t;
-			if(t != null) v = t;
+			if(v == null) {
+				v = t;
+			}
+			if(t != null) translate(t);
+			if(v != null && t != null && !t.equals(new Vector(0,0))) {
+				if(v.getY() >= 0)
+					v = t;
+			}
 		}
 		return v;
 	}

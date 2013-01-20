@@ -61,7 +61,9 @@ public class Player extends Character{
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
-			if(trans != null && trans.y <= -0.09) {
+			System.out.println(getDirection(trans));
+			if(getDirection(trans) == 1) {
+				trans = new Vector(0,0);
 				this.setVelY(-9);
 			}
 		}
