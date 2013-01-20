@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="49" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="LargeBlackSquare" tilewidth="16" tileheight="16">
+  <image source="LargeBlackSquare.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="49" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2Z0QqEIBBFNfv/b66HhHZY0zFcj8s9cBkKBZ0zPRVDCPHMtmBNZ/ZbXRF7pxWRBwbywEAeGMgDA3lgIA8M5IGBPDCQBwbywEAeGMgDA3lgIA8M5IHBP3qIhXel6v1nMyLWQ7oSG5IK+5/qyOQ+7eHzLk+5r63VkR6sj/zccu+8tmWOWt2+jZ3xWn5xJk/efA+UfJstz57a2hlePLNk54o4Z72zOTu955zdO28faf0/AK/EN7l0IgAA
+  </data>
+ </layer>
+</map>
