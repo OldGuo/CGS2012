@@ -10,18 +10,18 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class BlueBossLevel extends BasicGame {
+public class GravityLevel extends BasicGame {
 
-	public BlueBossLevel() {
-		super("BlueBossLevel");
+	public GravityLevel() {
+		super("GravityLevel");
 		// TODO Auto-generated constructor stub
 	}
 
 	private Map map;
 	private Character player;
-	private Boss blueBoss;
+	private Enemy BiggerEnemy;
 	private CameraObject cameraBox;
-	private final static int MAP_WIDTH = 780;
+	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
 	private Image background;
 
@@ -31,14 +31,13 @@ public class BlueBossLevel extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(30);
-		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
-		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
+		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.currMap = map;
 		player = new Player(300, 496);
-		blueBoss = new BlueBoss(150,150);
+		BiggerEnemy = new BiggerEnemy(150,448);
 		enemies = new ArrayList<Enemy>();
-		enemies.add(blueBoss);
+		enemies.add(BiggerEnemy);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
@@ -67,8 +66,8 @@ public class BlueBossLevel extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)  {
 		g.setColor(new Color(58,58,58));
-		for(int i = 0; i < 7; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i+42,(int)cameraBox.getOffsetY()-176);
+		for(int i = 0; i < 19; i++)
+			background.draw((int)cameraBox.getOffsetX()+100*i+35,(int)cameraBox.getOffsetY()-176);
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		cameraBox.draw(g);
 		g.setColor(Color.white);
@@ -81,7 +80,7 @@ public class BlueBossLevel extends BasicGame {
 
 	public static void main(String[] argv) throws SlickException {
 		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new BlueBossLevel(), MAP_WIDTH, MAP_HEIGHT, false);
+		AppGameContainer container = new AppGameContainer(new GravityLevel(), MAP_WIDTH, MAP_HEIGHT, false);
 		container.start();
 	}
 }

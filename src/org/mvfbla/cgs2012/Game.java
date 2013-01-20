@@ -30,7 +30,7 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		container.setTargetFrameRate(30);
+		container.setTargetFrameRate(120);
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		//map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
@@ -104,8 +104,8 @@ public class Game extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)  {
 		g.setColor(new Color(58,58,58));
-		for(int i = 0; i < 28; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i+1617,(int)cameraBox.getOffsetY()-176);
+		for(int i = 0; i < 29; i++)
+			background.draw((int)cameraBox.getOffsetX()+100*i+1600,(int)cameraBox.getOffsetY()-176);
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		cameraBox.draw(g);
 		g.setColor(Color.white);
@@ -116,8 +116,8 @@ public class Game extends BasicGame {
 			guy.draw(g);
 		for(MovingTile t : platforms)
 			t.draw(g);
-		for(GameObject go : GameConstants.collidableObjects)
-			g.draw(go);
+		//for(GameObject go : GameConstants.collidableObjects)
+		//	g.draw(go);
 		g.draw(player.getCollision());
 		/*star.draw(0,0);
 		red.draw(0,0);
