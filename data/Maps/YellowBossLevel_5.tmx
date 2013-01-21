@@ -3,9 +3,12 @@
  <tileset firstgid="1" name="LargeBlackSquare" tilewidth="16" tileheight="16">
   <image source="LargeBlackSquare.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="5" name="collision" tilewidth="16" tileheight="16">
+  <image source="collision.png" width="128" height="51"/>
+ </tileset>
  <layer name="Tile Layer 1" width="49" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Z0QqEIBBFNfv/b66HhHZY0zFcj8s9cBkKBZ0zPRVDCPHMtmBNZ/ZbXRF7pxWRBwbywEAeGMgDA3lgIA8M5IGBPDCQBwbywEAeGMgDA3lgIA8M5IHBP3qIhXel6v1nMyLWQ7oSG5IK+5/qyOQ+7eHzLk+5r63VkR6sj/zccu+8tmWOWt2+jZ3xWn5xJk/efA+UfJstz57a2hlePLNk54o4Z72zOTu955zdO28faf0/AK/EN7l0IgAA
+   H4sIAAAAAAAAC+2Z2wrEIAxEdd3+/y9vH1aQEE1TbyPMwBBK6/VEUBtDCPH258CYbn+LeKLkmE4UOWCIHDBEDhgiBwyRA4bIwa5X7jNjGN/WLA65vrLuVHhkW1wPGLI4WGeoFX2y2rQ4yPcruHnb5HrAEDlgiBwwRA4YIgcMeThcf3t1hf6yLXk4oI6B6wFD2h7d8x/G+89mhrU9eir613KqlG/Fmc7zVJ7jLWtn/lqcyUHyyM9Pxq3dvdTiU7a9ljlueUWfPO5ZDyjWcstTxvp2BxdPLmn3kLvzalRu7vbbfu6eO+88os3/D3MIrbZ0IgAA
   </data>
  </layer>
 </map>

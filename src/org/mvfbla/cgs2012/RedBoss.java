@@ -8,8 +8,8 @@ import org.newdawn.slick.SpriteSheet;
 public class RedBoss extends Boss{
 	public RedBoss (int x, int y) throws SlickException{
 		super(x,y);
-		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\RedBossWalking.png", 256, 256), 150));
-		super.setSpeed(10);
+		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\RedBossWalking.png", 128, 128), 150));
+		super.setSpeed(3.7f);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){

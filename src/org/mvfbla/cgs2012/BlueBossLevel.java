@@ -19,7 +19,7 @@ public class BlueBossLevel extends BasicGame {
 
 	private Map map;
 	private Character player;
-	private Enemy BiggerEnemy;
+	private Boss blueBoss;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
@@ -33,9 +33,12 @@ public class BlueBossLevel extends BasicGame {
 		container.setTargetFrameRate(30);
 		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
+		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.currMap = map;
 		player = new Player(300, 496);
+		blueBoss = new BlueBoss(150,150);
 		enemies = new ArrayList<Enemy>();
+		enemies.add(blueBoss);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
