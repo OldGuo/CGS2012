@@ -7,7 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
-public class Player extends Character{
+public class Player extends Characters{
 
 	private final float speed = 10f;
 	private static final float MAX_SPEED = 5;

@@ -4,14 +4,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
 
-public class Character extends AnimatedObject {
+public class Characters extends AnimatedObject {
 
 	private Vector force;
 	protected Vector trans = new Vector();
 	private boolean alive;
 	private float health;
 
-	public Character(int x, int y, int width, int height) throws SlickException {
+	public Characters(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
 		force = new Vector(0,0);
 		alive=true;

@@ -3,7 +3,7 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
-public class Enemy extends Character{;
+public class Enemy extends Characters{;
 	private float speed, direction;
 	private float lastX;
 	public Enemy (int x, int y, int width, int height) throws SlickException{

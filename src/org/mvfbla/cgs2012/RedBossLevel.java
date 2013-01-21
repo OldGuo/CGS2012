@@ -18,7 +18,7 @@ public class RedBossLevel extends BasicGame {
 	}
 
 	private Map map;
-	private Character player;
+	private Characters player;
 	private Boss redBoss;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 780;

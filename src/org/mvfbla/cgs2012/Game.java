@@ -15,7 +15,7 @@ public class Game extends BasicGame {
 
 	private Map map;
 	private Player player;
-	private Enemy enemy1,enemy2,enemy3;
+	private Enemy enemy3;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
@@ -25,6 +25,7 @@ public class Game extends BasicGame {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<MovingTile> platforms;
 	private Button b;
+	private TypeWriterTest text;
 
 	public Game() {
 		super("Our Game");
@@ -32,7 +33,8 @@ public class Game extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		container.setTargetFrameRate(120);
+		container.setTargetFrameRate(90);
+		text = new TypeWriterTest();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
@@ -72,17 +74,14 @@ public class Game extends BasicGame {
 					public void buttonPressed() {
 						System.out.println("WHEEEEEEEEEE");
 					}
-					
+
 				});
 				this.b = b;
 			}
 		}
+
 		player = new Player(300, 496);
-		enemy1= new BasicEnemy(2200,300);
-		enemy2 = new BiggerEnemy(2400,300);
-		enemy3 = new PlantedEnemy(2400,496);
-		enemies.add(enemy1);
-		enemies.add(enemy2);
+		enemy3 = new PlantedEnemy(2000,396);
 		enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
@@ -93,7 +92,7 @@ public class Game extends BasicGame {
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
 				break;
-			
+
 		}
 		return out;
 	}
@@ -127,13 +126,14 @@ public class Game extends BasicGame {
 				}*/
 			}
 		}
+		text.update(delta);
 		cameraBox.update(container, delta);
 		for(MovingTile t : platforms)
 			t.update(container, delta);
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g)  {
+	public void render(GameContainer container, Graphics g) throws SlickException  {
 		g.setColor(new Color(58,58,58));
 		for(int i = 0; i < 29; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i+1600,(int)cameraBox.getOffsetY()-176);
@@ -147,19 +147,13 @@ public class Game extends BasicGame {
 			guy.draw(g);
 		for(MovingTile t : platforms)
 			t.draw(g);
-		for(GameObject go : GameConstants.collidableObjects)
-			g.draw(go);
-		for(Trigger t : GameConstants.triggers)
-			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
+		for(Trigger t : GameConstants.triggers)
+			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		g.draw(player.getCollision());
 		b.draw(g);
-		/*star.draw(0,0);
-		red.draw(0,0);
-		blue.draw(0,0);
-		yellow.draw(0,0);
-		black.draw(0,0);*/
+		text.render(container, g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 	}
 
 	public static void main(String[] argv) throws SlickException {

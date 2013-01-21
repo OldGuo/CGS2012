@@ -18,8 +18,8 @@ public class BlackBossLevel extends BasicGame {
 	}
 
 	private Map map;
-	private Character player;
-	private Character BlackBoss;
+	private Characters player;
+	private Characters BlackBoss;
 	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
