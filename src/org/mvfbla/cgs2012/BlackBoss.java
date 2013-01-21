@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
-import java.util.Timer;
 
 public class BlackBoss extends Character{
 
@@ -23,8 +22,8 @@ public class BlackBoss extends Character{
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\BlackBossLeft.png", 48, 48), 150));
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\BlackBossRight.png", 48, 48), 150));
 		arm = new AnimatedObject(0,0,48,48);
-		arm.addAnimation("right",new Animation(new SpriteSheet("data\\BossAttackRight.png", 48, 48), 750));
-		arm.addAnimation("left",new Animation(new SpriteSheet("data\\BossAttackLeft.png", 48, 48), 750));
+		arm.addAnimation("right",new Animation(new SpriteSheet("data\\BlackBossAttackRight.png", 48, 48), 750));
+		arm.addAnimation("left",new Animation(new SpriteSheet("data\\BlackBossAttackLeft.png", 48, 48), 750));
 		addObject(arm);
 		//dust = new AnimatedObject(0, 0, 48, 48);
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));

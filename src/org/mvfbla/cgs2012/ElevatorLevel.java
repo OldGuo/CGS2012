@@ -33,6 +33,7 @@ public class ElevatorLevel extends BasicGame {
 		container.setTargetFrameRate(30);
 		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
+		GameConstants.collidableObjects.addAll(map.getBoxes());
 		player = new Player(300, 496);
 		plantedEnemy = new PlantedEnemy(150,224);
 		enemies = new ArrayList<Enemy>();
