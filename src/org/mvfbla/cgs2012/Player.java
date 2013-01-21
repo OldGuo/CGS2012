@@ -14,7 +14,7 @@ public class Player extends Character{
 	private static final float MAX_SPEED = 5;
 	private int punchTime=0;
 	AnimatedObject dust;
-	private float punchRange = 25; //if negative, means facing the other way
+	private float punchRange = 37; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;
@@ -26,6 +26,7 @@ public class Player extends Character{
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
 		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
 		addObject(arm);
+		arm.stopAnimation();
 		//dust = new AnimatedObject(0, 0, 48, 48);
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
@@ -82,6 +83,8 @@ public class Player extends Character{
 		}
 		if(punching){
 			punchTime+=delta;
+			arm.setFrame(1);
+			arm.stopAnimation();
 		}
 		if(cooldown){
 			punchTime-=delta;
