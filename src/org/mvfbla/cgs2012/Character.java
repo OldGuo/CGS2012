@@ -72,6 +72,13 @@ public class Character extends AnimatedObject {
 		this.setX(this.getX() + xChange);
 		this.setY(this.getY() + yChange);
 		trans = checkCollision();
+		for(Trigger t : GameConstants.triggers) {
+			if(t.collides(this))
+				t.hit(this);
+			else
+				if(t.contains(this))
+					t.exit(this);
+		}
 		if(health<=0){
 			alive=false;
 		}

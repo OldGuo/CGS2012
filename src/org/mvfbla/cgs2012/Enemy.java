@@ -15,7 +15,6 @@ public class Enemy extends Character{;
 		if(super.isAlive()){
 			if(lastX == getX()){
 				direction*=-1;
-				System.out.println(getVelX());
 				this.setVelX(direction*speed);
 			}//if something reduces its speed (collision), change direction
 			lastX = getX();

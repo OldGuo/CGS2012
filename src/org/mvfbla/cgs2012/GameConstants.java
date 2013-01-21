@@ -8,5 +8,6 @@ public class GameConstants {
 	// The acceleration of gravity
 	public static final float GRAVITY = 0.35f;
 	public static ArrayList<GameObject> collidableObjects = new ArrayList<GameObject>();
+	public static ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	public static Map currMap;
 }

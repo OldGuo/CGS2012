@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class Game extends BasicGame {
 
@@ -23,6 +24,7 @@ public class Game extends BasicGame {
 	private final boolean lost=false;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<MovingTile> platforms;
+	private Button b;
 
 	public Game() {
 		super("Our Game");
@@ -44,6 +46,36 @@ public class Game extends BasicGame {
 				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
 				platforms.add(t);
 				GameConstants.collidableObjects.add(t);
+			}
+			if(to.getType().equals("trigger")) {
+				Trigger t = new Trigger(to, new TriggerListener() {
+					@Override
+					public void triggered(GameObject src) {
+						System.out.println("");
+					}
+
+					@Override
+					public void onEnter(GameObject src) {
+						System.out.println("I WAS ENTEREDDDD");
+					}
+
+					@Override
+					public void onExit(GameObject src) {
+						System.out.println("I WAS EXITTEDDDDD");
+					}
+				});
+				GameConstants.triggers.add(t);
+			}
+			if(to.getType().equals("button")) {
+				Button b = new Button(to.getX(), to.getY(), new ButtonListener() {
+
+					@Override
+					public void buttonPressed() {
+						System.out.println("WHEEEEEEEEEE");
+					}
+					
+				});
+				this.b = b;
 			}
 		}
 		player = new Player(300, 496);
@@ -118,7 +150,10 @@ public class Game extends BasicGame {
 			t.draw(g);
 		for(GameObject go : GameConstants.collidableObjects)
 			g.draw(go);
+		for(Trigger t : GameConstants.triggers)
+			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		g.draw(player.getCollision());
+		b.draw(g);
 		/*star.draw(0,0);
 		red.draw(0,0);
 		blue.draw(0,0);

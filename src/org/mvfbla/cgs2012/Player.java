@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
-import java.util.Timer;
 
 public class Player extends Character{
 
@@ -64,7 +63,6 @@ public class Player extends Character{
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
-			System.out.println(getDirection(trans));
 			if(getDirection(trans) == 1) {
 				trans = new Vector(0,0);
 				this.setVelY(-9);

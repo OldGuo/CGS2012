@@ -24,5 +24,11 @@
     <property name="var" value="0,-300,1"/>
    </properties>
   </object>
+  <object type="trigger" x="4343" y="155" width="111" height="113">
+   <properties>
+    <property name="var" value="end"/>
+   </properties>
+  </object>
+  <object type="button" x="2738" y="232" width="16" height="16"/>
  </objectgroup>
 </map>

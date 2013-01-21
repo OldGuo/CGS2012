@@ -32,6 +32,7 @@ public class MotionSensorLevel extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(30);
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
+		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.currMap = map;
 		player = new Player(300, 496);
 		BiggerEnemy = new BiggerEnemy(150,448);
