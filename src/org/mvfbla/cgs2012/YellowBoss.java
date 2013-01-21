@@ -8,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 public class YellowBoss extends Boss{
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
-		addAnimation("YellowBoss", new Animation(new SpriteSheet("data\\YellowBossWalking.png", 256, 256), 150));
+		addAnimation("YellowBoss", new Animation(new SpriteSheet("data\\YellowBossWalking.png", 128, 128), 150));
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
