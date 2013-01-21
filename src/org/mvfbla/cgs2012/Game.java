@@ -32,7 +32,6 @@ public class Game extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		container.setTargetFrameRate(120);
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
-		//map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		platforms = new ArrayList<MovingTile>();
