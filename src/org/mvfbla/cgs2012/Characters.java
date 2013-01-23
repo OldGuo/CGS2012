@@ -8,14 +8,17 @@ public class Characters extends AnimatedObject {
 
 	private Vector force;
 	protected Vector trans = new Vector();
-	private boolean alive;
+	private boolean alive, blinking;
 	private float health;
+	private int time;
 
 	public Characters(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
 		force = new Vector(0,0);
 		alive=true;
+		blinking=false;
 		health=1;
+		time=0;
 	}
 	public Vector doCollision(GameObject obj) {
 		Vector out = null;
@@ -82,6 +85,13 @@ public class Characters extends AnimatedObject {
 		if(health<=0){
 			alive=false;
 		}
+		if(blinking){
+			time+=delta;
+			if(time>=500){
+				blinking=false;
+				time=0;
+			}
+		}
 	}
 	public int getDirection(Vector v) {
 		if(v == null || v.equals(new Vector(0,0)))
@@ -145,7 +155,10 @@ public class Characters extends AnimatedObject {
 		return health;
 	}
 	public void setHealth(float howHealthy){
-		health=howHealthy;
+		if(/*howHealth<health&&*/!blinking){
+			health=howHealthy;
+			blinking=true;
+		}
 	}
 	public boolean isAlive(){
 		return alive;
