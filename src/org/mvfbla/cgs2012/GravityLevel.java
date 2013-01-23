@@ -2,18 +2,20 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-public class GravityLevel extends BasicGame {
+public class GravityLevel extends BasicGameState {
 
-	public GravityLevel() {
-		super("GravityLevel");
+	private int stateID = -1;
+
+	public GravityLevel(int stateID) {
+		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,7 +31,7 @@ public class GravityLevel extends BasicGame {
 	private ArrayList<Enemy> enemies;
 
 	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		container.setTargetFrameRate(30);
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		GameConstants.collidableObjects.addAll(map.getBoxes());
@@ -43,7 +45,7 @@ public class GravityLevel extends BasicGame {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		if(!lost)
 			player.update(container, delta);
 		for(Enemy guy:enemies){
@@ -64,7 +66,7 @@ public class GravityLevel extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g)  {
+	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
 		g.setColor(new Color(58,58,58));
 		for(int i = 0; i < 19; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i+35,(int)cameraBox.getOffsetY()-176);
@@ -77,10 +79,8 @@ public class GravityLevel extends BasicGame {
 		for(Enemy guy:enemies)
 			guy.draw(g);
 	}
-
-	public static void main(String[] argv) throws SlickException {
-		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new GravityLevel(), MAP_WIDTH, MAP_HEIGHT, false);
-		container.start();
+	@Override
+	public int getID(){
+		return stateID;
 	}
 }

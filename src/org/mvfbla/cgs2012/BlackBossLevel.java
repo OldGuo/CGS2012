@@ -2,18 +2,20 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-public class BlackBossLevel extends BasicGame {
+public class BlackBossLevel extends BasicGameState {
 
-	public BlackBossLevel() {
-		super("BlackBossLevel");
+	private int stateID = -1;
+
+	public BlackBossLevel(int stateID) {
+		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,22 +31,20 @@ public class BlackBossLevel extends BasicGame {
 	private ArrayList<Enemy> enemies;
 
 	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		container.setTargetFrameRate(30);
-		//map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		player = new Player(33, 15);
 		BlackBoss = new BlackBoss(704,16);
 		enemies = new ArrayList<Enemy>();
-		//enemies.add(BlackBoss);
 		cameraBox = new CameraObject(player,1000,1200);
 		background = new Image("data\\Background.png");
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		BlackBoss.update(container, delta);
 		if(!lost)
 			player.update(container, delta);
@@ -66,7 +66,7 @@ public class BlackBossLevel extends BasicGame {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics g)  {
+	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
 		g.setColor(new Color(58,58,58));
 		for(int i = 0; i < 7; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i+42,(int)cameraBox.getOffsetY()-176);
@@ -80,10 +80,8 @@ public class BlackBossLevel extends BasicGame {
 		for(Enemy guy:enemies)
 			guy.draw(g);
 	}
-
-	public static void main(String[] argv) throws SlickException {
-		//AppGameContainer container = new AppGameContainer(new Game(), 1600, 800, false);
-		AppGameContainer container = new AppGameContainer(new BlackBossLevel(), MAP_WIDTH, MAP_HEIGHT, false);
-		container.start();
+	@Override
+	public int getID(){
+		return stateID;
 	}
 }

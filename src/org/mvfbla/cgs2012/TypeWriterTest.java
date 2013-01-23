@@ -76,7 +76,6 @@ public class TypeWriterTest{
         time -= delta;
         if (time<=0 && !finished) { // a character is printed every TYPE_DELAY milliseconds
             time = TYPE_DELAY;
-            String line = lines.get(renderRow);
 
             //if we are moving down to the next line
             if (renderCol > lines.get(renderRow).length()-1) {
