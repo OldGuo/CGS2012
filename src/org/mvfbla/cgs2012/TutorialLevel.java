@@ -38,52 +38,8 @@ public class TutorialLevel extends BasicGameState {
 		container.setTargetFrameRate(30);
 		text = new TypeWriterTest();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
-		GameConstants.currMap = map;
-		GameConstants.collidableObjects = new ArrayList<GameObject>();
-		GameConstants.collidableObjects.addAll(map.getBoxes());
-		platforms = new ArrayList<MovingTile>();
-		enemies = new ArrayList<Enemy>();
-		for(TiledObject to : map.getObjects()) {
-			if(to.getType().equals("spawn"))
-				enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
-			if(to.getType().equals("movingPlatform")) {
-				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
-				platforms.add(t);
-				GameConstants.collidableObjects.add(t);
-			}
-			if(to.getType().equals("trigger")) {
-				Trigger t = new Trigger(to, new TriggerListener() {
-					@Override
-					public void triggered(GameObject src) {
-						System.out.println("");
-					}
-
-					@Override
-					public void onEnter(GameObject src) {
-						System.out.println("I WAS ENTEREDDDD");
-					}
-
-					@Override
-					public void onExit(GameObject src) {
-						System.out.println("I WAS EXITTEDDDDD");
-					}
-				});
-				GameConstants.triggers.add(t);
-			}
-			if(to.getType().equals("button")) {
-				Button b = new Button(to.getX(), to.getY(), new ButtonListener() {
-
-					@Override
-					public void buttonPressed() {
-						System.out.println("WHEEEEEEEEEE");
-					}
-
-				});
-				this.b = b;
-			}
-		}
-
 		player = new Player(300, 496);
+		enemies = new ArrayList<Enemy>();
 		enemy3 = new PlantedEnemy(2000,396);
 		enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
@@ -169,8 +125,8 @@ public class TutorialLevel extends BasicGameState {
 			guy.draw(g);
 		for(MovingTile t : platforms)
 			t.draw(g);
-		for(GameObject go : GameConstants.collidableObjects)
-			g.draw(go);
+	//	for(GameObject go : GameConstants.collidableObjects)
+	//		g.draw(go);
 		for(Trigger t : GameConstants.triggers)
 			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		g.draw(player.getCollision());
@@ -184,9 +140,50 @@ public class TutorialLevel extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
-		GameConstants.collidableObjects = new ArrayList<GameObject>();
 		GameConstants.currMap = map;
+		GameConstants.collidableObjects = new ArrayList<GameObject>();
 		GameConstants.collidableObjects.addAll(map.getBoxes());
+		platforms = new ArrayList<MovingTile>();
+		for(TiledObject to : map.getObjects()) {
+			if(to.getType().equals("spawn"))
+				enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
+			if(to.getType().equals("movingPlatform")) {
+				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
+				platforms.add(t);
+				GameConstants.collidableObjects.add(t);
+			}
+			if(to.getType().equals("trigger")) {
+				Trigger t = new Trigger(to, new TriggerListener() {
+					@Override
+					public void triggered(GameObject src) {
+						System.out.println("");
+					}
+
+					@Override
+					public void onEnter(GameObject src) {
+						System.out.println("I WAS ENTEREDDDD");
+					}
+
+					@Override
+					public void onExit(GameObject src) {
+						System.out.println("I WAS EXITTEDDDDD");
+					}
+				});
+				GameConstants.triggers.add(t);
+			}
+			if(to.getType().equals("button")) {
+				Button b = new Button(to.getX(), to.getY(), new ButtonListener() {
+
+					@Override
+					public void buttonPressed() {
+						System.out.println("WHEEEEEEEEEE");
+					}
+
+				});
+				this.b = b;
+			}
+		}
+
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

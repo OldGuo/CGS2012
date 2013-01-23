@@ -109,8 +109,8 @@ public class ElevatorLevel extends BasicGameState {
 		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 		for(Enemy guy:enemies)
 			guy.draw(g);
-		for(GameObject go : GameConstants.collidableObjects)
-			g.draw(go);
+		//for(GameObject go : GameConstants.collidableObjects)
+		//	g.draw(go);
 	}
 	@Override
 	public int getID(){

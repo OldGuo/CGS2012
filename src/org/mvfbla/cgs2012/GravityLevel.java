@@ -38,9 +38,7 @@ public class GravityLevel extends BasicGameState {
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.currMap = map;
 		player = new Player(300, 496);
-		BiggerEnemy = new BiggerEnemy(150,448);
 		enemies = new ArrayList<Enemy>();
-		enemies.add(BiggerEnemy);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
