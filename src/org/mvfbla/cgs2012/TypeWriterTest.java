@@ -12,7 +12,10 @@ import org.newdawn.slick.SlickException;
 /** @author davedes */
 public class TypeWriterTest{
 
-	private int renderRow, renderCol,TYPE_DELAY,time;
+	private int renderRow;
+	private int renderCol;
+	private int TYPE_DELAY;
+	private int time;
 	private final int width;
 	private boolean finished;
 	private Font font;
@@ -22,9 +25,7 @@ public class TypeWriterTest{
 
     public TypeWriterTest() {
         width = 720;
-        List<String> lines;
         text = "Language is one of the keys to being human. It allows use to communicate with other human beings and to leave a legacy of our thoughts and actions for future generations. The dominant temporal lobe helps to process sounds and written words into meaninful information.";
-
         //create a list of lines based on the above text
         box = new Color(200,200,200,0.45f);
 
@@ -44,9 +45,7 @@ public class TypeWriterTest{
     public void setDelay(int d){
     	TYPE_DELAY = d;
     }
-	public void render(GameContainer container, Graphics g,int xPos,int yPos) throws SlickException {
-        font = container.getDefaultFont();
-        lines = wrap(text, font, width);
+	public void draw(Graphics g,int xPos,int yPos) throws SlickException {
         if(!finished){
 			int x = 40 + xPos;
 	        int y = 55 + yPos;
@@ -72,8 +71,10 @@ public class TypeWriterTest{
     }
 
     //update the game logic and typewriting effect
-	public void update(int delta) {
+	public void update(GameContainer container,int delta) {
         time -= delta;
+        font = container.getDefaultFont();
+        lines = wrap(text, font, width);
         if (time<=0 && !finished) { // a character is printed every TYPE_DELAY milliseconds
             time = TYPE_DELAY;
 

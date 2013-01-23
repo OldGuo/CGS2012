@@ -28,13 +28,13 @@ public class Game extends StateBasedGame{
 	@Override
 	public void initStatesList(GameContainer g) throws SlickException{
 		this.addState(new MainMenu(MAIN_MENU_STATE));
-	//	this.addState(new TutorialLevel(TUTORIAL_STATE));
+		this.addState(new TutorialLevel(TUTORIAL_STATE));
 		this.addState(new ElevatorLevel(ELEVATOR_STATE));
 		this.addState(new MotionSensorLevel(MOTION_SENSOR_STATE));
-		/*this.addState(new GravityLevel(GRAVITY_STATE));
+		this.addState(new GravityLevel(GRAVITY_STATE));
 		this.addState(new BlueBossLevel(BLUE_BOSS_STATE));
 		this.addState(new RedBossLevel(RED_BOSS_STATE));
 		this.addState(new YellowBossLevel(YELLOW_BOSS_STATE));
-		this.addState(new BlackBossLevel(BLACK_BOSS_STATE)); */
+		this.addState(new BlackBossLevel(BLACK_BOSS_STATE));
 	}
 }

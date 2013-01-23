@@ -38,7 +38,7 @@ public class Player extends Characters{
 		// Moving left/right/up
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
 			movePressed = true;
-			this.setVelX(-MAX_SPEED);
+			setVelX(-MAX_SPEED);
 			if(this.getVelX() < -MAX_SPEED)
 				this.setVelX(-MAX_SPEED);
 			playAnimation("walkLeft");

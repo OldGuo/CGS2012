@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -64,6 +65,25 @@ public class YellowBossLevel extends BasicGameState {
 			}
 		}
 		cameraBox.update(container, delta);
+
+		//testing
+		Input input = container.getInput();
+		if (input.isKeyDown(Input.KEY_1))
+			sbg.enterState(Game.TUTORIAL_STATE);
+		if (input.isKeyDown(Input.KEY_2))
+			sbg.enterState(Game.ELEVATOR_STATE);
+		if (input.isKeyDown(Input.KEY_3))
+			sbg.enterState(Game.MOTION_SENSOR_STATE);
+		if (input.isKeyDown(Input.KEY_4))
+			sbg.enterState(Game.GRAVITY_STATE);
+		if (input.isKeyDown(Input.KEY_5))
+			sbg.enterState(Game.BLUE_BOSS_STATE);
+		if (input.isKeyDown(Input.KEY_6))
+			sbg.enterState(Game.RED_BOSS_STATE);
+		if (input.isKeyDown(Input.KEY_7))
+			sbg.enterState(Game.YELLOW_BOSS_STATE);
+		if (input.isKeyDown(Input.KEY_8))
+			sbg.enterState(Game.BLACK_BOSS_STATE);
 	}
 
 	@Override
@@ -83,5 +103,16 @@ public class YellowBossLevel extends BasicGameState {
 	@Override
 	public int getID(){
 		return stateID;
+	}
+	@Override
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
+		System.out.println("Entering state " + getID());
+		GameConstants.collidableObjects = new ArrayList<GameObject>();
+		GameConstants.currMap = map;
+		GameConstants.collidableObjects.addAll(map.getBoxes());
+	}
+	@Override
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
+		System.out.println("Leaving state " + getID());
 	}
 }
