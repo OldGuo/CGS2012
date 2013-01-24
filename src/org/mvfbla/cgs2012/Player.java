@@ -13,7 +13,7 @@ public class Player extends Characters{
 	private static final float MAX_SPEED = 5;
 	private int punchTime=0;
 	AnimatedObject dust;
-	private float punchRange = 37; //if negative, means facing the other way
+	private float punchRange = 25; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;

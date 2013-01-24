@@ -15,8 +15,6 @@ public class BlackBossLevel extends GameLevel {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-
-	private Map map;
 	private Characters BlackBoss;
 	private final static int MAP_HEIGHT = 600;
 
@@ -24,8 +22,6 @@ public class BlackBossLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
-		GameConstants.currMap = map;
-		GameConstants.collidableObjects.addAll(map.getBoxes());
 		player = new Player(33, 15);
 		BlackBoss = new BlackBoss(704,16);
 		cameraBox = new CameraObject(player,1000,1200);
@@ -37,6 +33,31 @@ public class BlackBossLevel extends GameLevel {
 		BlackBoss.update(container, delta);
 		if(!lost)
 			player.update(container, delta);
+		for(Enemy guy:GameConstants.enemies){
+			guy.update(container, delta);
+			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
+			double Xdist=Math.pow(tempX, 2);
+			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
+			float totalDist=(float)Math.sqrt(Xdist+Ydist);
+			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+				if(totalDist<((PlantedEnemy)guy).getSight()){
+					((PlantedEnemy)guy).changeSleep(true);
+					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
+					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
+				}
+				else
+					((PlantedEnemy)guy).changeSleep(false);
+			}
+			if(player.isPunching()&&Math.abs(tempX)<Math.abs(player.getRange())&&-1*Math.signum(tempX)==Math.signum(player.getRange())){
+				guy.setHealth(guy.getHealth()-1);
+			}
+			if(player.collides(guy)){
+				player.setHealth(guy.getHealth()-1);
+				/*if(!player.isAlive()){
+					System.out.println("GG");
+				}*/
+			}
+		}
 		cameraBox.update(container, delta);
 
 		//testing

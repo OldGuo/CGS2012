@@ -25,6 +25,7 @@ public class BlackBoss extends Characters{
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\BlackBossAttackRight.png", 48, 48), 750));
 		arm.addAnimation("left",new Animation(new SpriteSheet("data\\BlackBossAttackLeft.png", 48, 48), 750));
 		addObject(arm);
+		arm.stopAnimation();
 		//dust = new AnimatedObject(0, 0, 48, 48);
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
