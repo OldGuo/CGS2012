@@ -69,15 +69,25 @@ public class Player extends Characters{
 				this.setVelY(-9);
 			}
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_SPACE)&&!cooldown&&!punching){
-			punching=true;
-			punchTime=0;
-			if(punchRange > 0)
-				arm.playAnimation("right");
-			else
-				arm.playAnimation("left");
-			arm.setFrame(1);
-			arm.stopAnimation();
+		if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
+			boolean interacting = false;
+			for(InteractiveObject io : GameConstants.interacts) {
+				if(io.inRange(this)) {
+					interacting = true;
+					io.interact(this);
+				}
+			}
+			// do da punches
+			if(!interacting&&!cooldown&&!punching) {
+				punching=true;
+				punchTime=0;
+				if(punchRange > 0)
+					arm.playAnimation("right");
+				else
+					arm.playAnimation("left");
+				arm.setFrame(1);
+				arm.stopAnimation();
+			}
 		}
 		if(punching){
 			punchTime+=delta;

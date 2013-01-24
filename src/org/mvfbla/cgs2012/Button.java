@@ -8,6 +8,8 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	private Trigger trigger;
 	private AnimatedObject arm;
 	private ButtonListener listener;
+	private long lastPress = 0;
+	private long cooldown = 1000;
 	public Button(int x, int y, ButtonListener bl) throws SlickException {
 		super(x, y, 32, 32);
 		listener = bl;
@@ -28,7 +30,11 @@ public class Button extends AnimatedObject implements InteractiveObject {
 
 	@Override
 	public void interact(GameObject source) {
-		listener.buttonPressed();
+		long time = System.currentTimeMillis();
+		if(time-lastPress >= cooldown) {
+			lastPress = time;
+			listener.buttonPressed();
+		}
 	}
 	
 	private class myListener implements TriggerListener {
