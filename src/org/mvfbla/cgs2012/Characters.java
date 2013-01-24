@@ -13,7 +13,7 @@ public class Characters extends AnimatedObject {
 	private int time;
 
 	public Characters(int x, int y, int width, int height) throws SlickException {
-		super(x, y, width, height);
+		super(x, y, width, height-1);
 		force = new Vector(0,0);
 		alive=true;
 		blinking=false;

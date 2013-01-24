@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class BlueBossLevel extends BasicGameState {
+public class BlueBossLevel extends GameLevel {
 
 	private int stateID = -1;
 
@@ -20,28 +20,19 @@ public class BlueBossLevel extends BasicGameState {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Map map;
-	private Player player;
 	private Boss blueBoss;
-	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
-	private Image background;
 
-	private final boolean lost=false;
-	private ArrayList<Enemy> enemies;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		container.setTargetFrameRate(30);
 		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
-		GameConstants.collidableObjects.addAll(map.getBoxes());
-		GameConstants.currMap = map;
 		player = new Player(300, 496);
 		blueBoss = new BlueBoss(150,150);
-		enemies = new ArrayList<Enemy>();
-		enemies.add(blueBoss);
+		GameConstants.enemies = new ArrayList<Enemy>();
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
@@ -50,7 +41,7 @@ public class BlueBossLevel extends BasicGameState {
 	public void update(GameContainer container,StateBasedGame sbg,int delta) throws SlickException {
 		if(!lost)
 			player.update(container, delta);
-		for(Enemy guy:enemies){
+		for(Enemy guy:GameConstants.enemies){
 			guy.update(container, delta);
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
@@ -69,7 +60,7 @@ public class BlueBossLevel extends BasicGameState {
 				guy.setHealth(guy.getHealth()-1);
 			}
 			if(player.collides(guy)){
-				player.setHealth(guy.getHealth()-1);
+				player.setHealth(player.getHealth()-1);
 				/*if(!player.isAlive()){
 					System.out.println("GG");
 				}*/
@@ -99,17 +90,7 @@ public class BlueBossLevel extends BasicGameState {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
-		g.setColor(new Color(58,58,58));
-		for(int i = 0; i < 7; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i+42,(int)cameraBox.getOffsetY()-176);
-		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
-		cameraBox.draw(g);
-		g.setColor(Color.white);
-		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
-		player.draw(g);
-		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		for(Enemy guy:enemies)
-			guy.draw(g);
+		draw(g);
 	}
 
 	@Override
@@ -119,9 +100,9 @@ public class BlueBossLevel extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
-		GameConstants.collidableObjects = new ArrayList<GameObject>();
-		GameConstants.currMap = map;
-		GameConstants.collidableObjects.addAll(map.getBoxes());
+		initStuff();
+		GameConstants.enemies.add(blueBoss);
+		
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

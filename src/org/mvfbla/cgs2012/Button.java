@@ -4,11 +4,13 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
-public class Button extends AnimatedObject{
+public class Button extends AnimatedObject implements InteractiveObject {
 	private Trigger trigger;
 	private AnimatedObject arm;
+	private ButtonListener listener;
 	public Button(int x, int y, ButtonListener bl) throws SlickException {
 		super(x, y, 32, 32);
+		listener = bl;
 		addAnimation("off", new Animation(new SpriteSheet("data\\maps\\LargeBlackSquare.png", 32, 32), 150));
 		addAnimation("on", new Animation(new SpriteSheet("data\\maps\\Tile.png", 32, 32), 150));
 		arm = new AnimatedObject(0,0,48,48);
@@ -23,6 +25,12 @@ public class Button extends AnimatedObject{
 		playAnimation("off");
 		arm.playAnimation("near");
 	}
+
+	@Override
+	public void interact(GameObject source) {
+		listener.buttonPressed();
+	}
+	
 	private class myListener implements TriggerListener {
 
 		@Override
@@ -42,6 +50,11 @@ public class Button extends AnimatedObject{
 			
 		}
 		
+	}
+
+	@Override
+	public boolean inRange(GameObject source) {
+		return trigger.collides(source);
 	}
 
 }

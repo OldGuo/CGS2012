@@ -12,21 +12,12 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class TutorialLevel extends BasicGameState {
+public class TutorialLevel extends GameLevel {
 
 	private int stateID = -1;
-
-	private Map map;
-	private Player player;
 	private Enemy enemy3;
-	private CameraObject cameraBox;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
-	private Image background;
-	private final boolean lost=false;
-	private ArrayList<Enemy> enemies;
-	private ArrayList<MovingTile> platforms;
-	private Button b;
 	private TypeWriterTest text;
 
 	public TutorialLevel(int stateID) {
@@ -39,28 +30,19 @@ public class TutorialLevel extends BasicGameState {
 		text = new TypeWriterTest();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
-		enemies = new ArrayList<Enemy>();
+		GameConstants.enemies = new ArrayList<Enemy>();
 		enemy3 = new PlantedEnemy(2000,396);
-		enemies.add(enemy3);
+		GameConstants.enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
-	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
-		Enemy out = null;
-		switch(name) {
-			case "BasicEnemy" :
-				out = new BasicEnemy(x, y);
-				break;
 
-		}
-		return out;
-	}
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
 		if(!lost)
 			player.update(container, delta);
-		for(Enemy guy:enemies){
+		for(Enemy guy:GameConstants.enemies){
 			guy.update(container, delta);
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
@@ -87,7 +69,7 @@ public class TutorialLevel extends BasicGameState {
 		}
 		text.update(container,delta);
 		cameraBox.update(container, delta);
-		for(MovingTile t : platforms)
+		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);
 
 		//testing
@@ -111,26 +93,8 @@ public class TutorialLevel extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
-		g.setColor(new Color(58,58,58));
-		for(int i = 0; i < 29; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i+1600,(int)cameraBox.getOffsetY()-176);
-		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
-		cameraBox.draw(g);
-		g.setColor(Color.white);
-		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
-		player.draw(g);
-		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		for(Enemy guy:enemies)
-			guy.draw(g);
-		for(MovingTile t : platforms)
-			t.draw(g);
-	//	for(GameObject go : GameConstants.collidableObjects)
-	//		g.draw(go);
-		for(Trigger t : GameConstants.triggers)
-			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
-		g.draw(player.getCollision());
-		b.draw(g);
+	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException  {
+		draw(g);
 		text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 	}
 	@Override
@@ -140,49 +104,7 @@ public class TutorialLevel extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
-		GameConstants.currMap = map;
-		GameConstants.collidableObjects = new ArrayList<GameObject>();
-		GameConstants.collidableObjects.addAll(map.getBoxes());
-		platforms = new ArrayList<MovingTile>();
-		for(TiledObject to : map.getObjects()) {
-			if(to.getType().equals("spawn"))
-				enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
-			if(to.getType().equals("movingPlatform")) {
-				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
-				platforms.add(t);
-				GameConstants.collidableObjects.add(t);
-			}
-			if(to.getType().equals("trigger")) {
-				Trigger t = new Trigger(to, new TriggerListener() {
-					@Override
-					public void triggered(GameObject src) {
-						System.out.println("");
-					}
-
-					@Override
-					public void onEnter(GameObject src) {
-						System.out.println("I WAS ENTEREDDDD");
-					}
-
-					@Override
-					public void onExit(GameObject src) {
-						System.out.println("I WAS EXITTEDDDDD");
-					}
-				});
-				GameConstants.triggers.add(t);
-			}
-			if(to.getType().equals("button")) {
-				Button b = new Button(to.getX(), to.getY(), new ButtonListener() {
-
-					@Override
-					public void buttonPressed() {
-						System.out.println("WHEEEEEEEEEE");
-					}
-
-				});
-				this.b = b;
-			}
-		}
+		initStuff();
 
 	}
 	@Override
