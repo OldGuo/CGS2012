@@ -1,14 +1,10 @@
 package org.mvfbla.cgs2012;
 
-import java.util.ArrayList;
-
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class ElevatorLevel extends GameLevel {
@@ -26,7 +22,7 @@ public class ElevatorLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
+		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		player = new Player(300, 496);
 		plantedEnemy = new PlantedEnemy(150,224);

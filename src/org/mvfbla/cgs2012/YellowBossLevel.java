@@ -23,8 +23,7 @@ public class YellowBossLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
-		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
+		super.setBackgroundInfo(33, 8);
 		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
 		yellowBoss = new YellowBoss(150,150);

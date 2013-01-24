@@ -22,7 +22,7 @@ public class GravityLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
+		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1000);

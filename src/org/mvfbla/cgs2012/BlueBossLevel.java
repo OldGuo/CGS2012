@@ -2,13 +2,11 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class BlueBossLevel extends GameLevel {
@@ -27,8 +25,7 @@ public class BlueBossLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
-		//map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
+		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
 		blueBoss = new BlueBoss(150,150);
@@ -102,7 +99,7 @@ public class BlueBossLevel extends GameLevel {
 		System.out.println("Entering state " + getID());
 		initStuff();
 		GameConstants.enemies.add(blueBoss);
-		
+
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

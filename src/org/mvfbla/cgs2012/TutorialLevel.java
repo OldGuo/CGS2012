@@ -2,14 +2,11 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class TutorialLevel extends GameLevel {
@@ -26,7 +23,7 @@ public class TutorialLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
+		super.setBackgroundInfo(1600, 29);
 		text = new TypeWriterTest();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);

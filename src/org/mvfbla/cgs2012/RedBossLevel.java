@@ -1,14 +1,10 @@
 package org.mvfbla.cgs2012;
 
-import java.util.ArrayList;
-
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class RedBossLevel extends GameLevel {
@@ -26,7 +22,7 @@ public class RedBossLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		container.setTargetFrameRate(30);
+		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
 		redBoss = new RedBoss(150,350);

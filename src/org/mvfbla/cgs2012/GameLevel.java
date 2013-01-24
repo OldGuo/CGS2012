@@ -10,6 +10,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 
 public abstract class GameLevel extends BasicGameState{
+	protected int bgOffsetX, bgNumRepeat;
 	protected Map map;
 	protected Player player;
 	protected CameraObject cameraBox;
@@ -72,8 +73,8 @@ public abstract class GameLevel extends BasicGameState{
 	}
 	public void draw(Graphics g) {
 		g.setColor(new Color(58,58,58));
-		for(int i = 0; i < 100; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i,(int)cameraBox.getOffsetY()-176);
+		for(int i = 0; i < bgNumRepeat; i++)
+			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		cameraBox.draw(g);
 		g.setColor(Color.white);
@@ -84,13 +85,17 @@ public abstract class GameLevel extends BasicGameState{
 			guy.draw(g);
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
-	//	for(GameObject go : GameConstants.collidableObjects)
-	//		g.draw(go);
+		//for(GameObject go : GameConstants.collidableObjects)
+		//	g.draw(go);
 		for(Trigger t : GameConstants.triggers)
 			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
 		g.draw(cameraBox);
 		g.draw(player.getCollision());
+	}
+	public void setBackgroundInfo(int offset, int numRepeat){
+		bgNumRepeat = numRepeat;
+		bgOffsetX = offset;
 	}
 }
