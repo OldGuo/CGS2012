@@ -27,9 +27,7 @@ public class TutorialLevel extends GameLevel {
 		text = new TypeWriterTest();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
-		GameConstants.enemies = new ArrayList<Enemy>();
 		enemy3 = new PlantedEnemy(2000,396);
-		GameConstants.enemies.add(enemy3);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
@@ -37,56 +35,8 @@ public class TutorialLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
-		if(!lost)
-			player.update(container, delta);
-		for(Enemy guy:GameConstants.enemies){
-			guy.update(container, delta);
-			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
-			double Xdist=Math.pow(tempX, 2);
-			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
-			float totalDist=(float)Math.sqrt(Xdist+Ydist);
-			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				if(totalDist<((PlantedEnemy)guy).getSight()){
-					((PlantedEnemy)guy).changeSleep(true);
-					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
-					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
-				}
-				else
-					((PlantedEnemy)guy).changeSleep(false);
-			}
-			if(player.isPunching()&&Math.abs(tempX)<Math.abs(player.getRange())&&-1*Math.signum(tempX)==Math.signum(player.getRange())){
-				guy.setHealth(guy.getHealth()-1);
-			}
-			if(player.collides(guy)){
-				player.setHealth(guy.getHealth()-1);
-				/*if(!player.isAlive()){
-					System.out.println("GG");
-				}*/
-			}
-		}
+		updateMain(container, sbg, delta);
 		text.update(container,delta);
-		cameraBox.update(container, delta);
-		for(MovingTile t : GameConstants.platforms)
-			t.update(container, delta);
-
-		//testing
-		Input input = container.getInput();
-		if (input.isKeyDown(Input.KEY_1))
-			sbg.enterState(Game.TUTORIAL_STATE);
-		if (input.isKeyDown(Input.KEY_2))
-			sbg.enterState(Game.ELEVATOR_STATE);
-		if (input.isKeyDown(Input.KEY_3))
-			sbg.enterState(Game.MOTION_SENSOR_STATE);
-		if (input.isKeyDown(Input.KEY_4))
-			sbg.enterState(Game.GRAVITY_STATE);
-		if (input.isKeyDown(Input.KEY_5))
-			sbg.enterState(Game.BLUE_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_6))
-			sbg.enterState(Game.RED_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_7))
-			sbg.enterState(Game.YELLOW_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_8))
-			sbg.enterState(Game.BLACK_BOSS_STATE);
 	}
 
 	@Override
@@ -102,6 +52,7 @@ public class TutorialLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
+		GameConstants.enemies.add(enemy3);
 
 	}
 	@Override

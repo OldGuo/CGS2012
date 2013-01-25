@@ -12,6 +12,7 @@ public class MovingTile extends Tile {
 	private Image image;
 	private float[] move;
 	private int nX, nY, nWidth, nHeight;
+	private boolean on;
 	public MovingTile(int x, int y, int width, int height, String movement, String imageData) {
 		super(x, y, width, height);
 		nX = x;
@@ -44,17 +45,25 @@ public class MovingTile extends Tile {
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
-		Vector v = new Vector();
-		if(getX() == nX && getY() == nY)
-			movement = false;
-		if(getX() == nX + move[0] && getY() == nY + move[1])
-			movement = true;
-		if(!movement) {
-			v.set((nX + move[0])-getX(), (nY + move[1])-getY());
-		} else {
-			v.set((nX)-getX(), (nY)-getY());
+		if(on) {
+			Vector v = new Vector();
+			if(getX() == nX && getY() == nY)
+				movement = false;
+			if(getX() == nX + move[0] && getY() == nY + move[1])
+				movement = true;
+			if(!movement) {
+				v.set((nX + move[0])-getX(), (nY + move[1])-getY());
+			} else {
+				v.set((nX)-getX(), (nY)-getY());
+			}
+			v.normalise().scale(move[2]);
+			translate(v);
 		}
-		v.normalise().scale(move[2]);
-		translate(v);
+	}
+	public boolean isOn() {
+		return on;
+	}
+	public void setOn(boolean on) {
+		this.on = on;
 	}
 }

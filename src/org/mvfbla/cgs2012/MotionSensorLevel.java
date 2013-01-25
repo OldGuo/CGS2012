@@ -31,52 +31,7 @@ public class MotionSensorLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
-		if(!lost)
-			player.update(container, delta);
-		for(Enemy guy:GameConstants.enemies){
-			guy.update(container, delta);
-			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
-			double Xdist=Math.pow(tempX, 2);
-			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
-			float totalDist=(float)Math.sqrt(Xdist+Ydist);
-			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				if(totalDist<((PlantedEnemy)guy).getSight()){
-					((PlantedEnemy)guy).changeSleep(true);
-					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
-					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
-				}
-				else
-					((PlantedEnemy)guy).changeSleep(false);
-			}
-			if(player.isPunching()&&Math.abs(tempX)<Math.abs(player.getRange())&&-1*Math.signum(tempX)==Math.signum(player.getRange())){
-				guy.setHealth(guy.getHealth()-1);
-			}
-			if(player.collides(guy)){
-				player.setHealth(guy.getHealth()-1);
-				/*if(!player.isAlive()){
-					System.out.println("GG");
-				}*/
-			}
-		}
-		cameraBox.update(container, delta);
-		//testing
-		Input input = container.getInput();
-		if (input.isKeyDown(Input.KEY_1))
-			sbg.enterState(Game.TUTORIAL_STATE);
-		if (input.isKeyDown(Input.KEY_2))
-			sbg.enterState(Game.ELEVATOR_STATE);
-		if (input.isKeyDown(Input.KEY_3))
-			sbg.enterState(Game.MOTION_SENSOR_STATE);
-		if (input.isKeyDown(Input.KEY_4))
-			sbg.enterState(Game.GRAVITY_STATE);
-		if (input.isKeyDown(Input.KEY_5))
-			sbg.enterState(Game.BLUE_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_6))
-			sbg.enterState(Game.RED_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_7))
-			sbg.enterState(Game.YELLOW_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_8))
-			sbg.enterState(Game.BLACK_BOSS_STATE);
+		updateMain(container, sbg, delta);
 
 	}
 

@@ -51,5 +51,4 @@ public class Trigger extends TiledObject{
 		GameObject go = new Tile(getX(), getY(), getWidth(), getHeight());
 		return test.collides(go) || go.contains(test.getCollision()) || test.getCollision().contains(go);
 	}
-	
 }

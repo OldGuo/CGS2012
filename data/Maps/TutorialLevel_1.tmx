@@ -18,11 +18,11 @@
   </data>
  </layer>
  <objectgroup name="objects" width="284" height="45">
-  <object type="button" x="2740" y="223" width="16" height="16"/>
+  <object type="button" x="2515" y="519" width="16" height="16"/>
   <object type="movingPlatform" x="2551" y="467" width="64" height="16">
    <properties>
     <property name="image" value="3,0,0"/>
-    <property name="var" value="0,-300,1"/>
+    <property name="var" value="0,-270,2"/>
    </properties>
   </object>
  </objectgroup>

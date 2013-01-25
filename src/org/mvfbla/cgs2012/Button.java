@@ -9,19 +9,21 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	private AnimatedObject arm;
 	private ButtonListener listener;
 	private long lastPress = 0;
-	private long cooldown = 1000;
+	private long cooldown = 500;
+	private boolean on;
 	public Button(int x, int y, ButtonListener bl) throws SlickException {
 		super(x, y, 32, 32);
 		listener = bl;
 		addAnimation("off", new Animation(new SpriteSheet("data\\maps\\LargeBlackSquare.png", 32, 32), 150));
 		addAnimation("on", new Animation(new SpriteSheet("data\\maps\\Tile.png", 32, 32), 150));
-		arm = new AnimatedObject(0,0,48,48);
+		arm = new AnimatedObject(-25,-30,48,48);
 		int[] one = {0,0};
 		int[] two = {1,0};
 		int[] dur = {150};
 		arm.addAnimation("near",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), one, dur));
 		arm.addAnimation("far",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), two, dur));
 		addObject(arm);
+		
 		trigger = new Trigger(x-16, y-16, 64, 64, new myListener());
 		GameConstants.triggers.add(trigger);
 		playAnimation("off");
@@ -33,7 +35,13 @@ public class Button extends AnimatedObject implements InteractiveObject {
 		long time = System.currentTimeMillis();
 		if(time-lastPress >= cooldown) {
 			lastPress = time;
-			listener.buttonPressed();
+			if(on) {
+				playAnimation("off");
+			} else {
+				playAnimation("on");
+			}
+			on = !on;
+			listener.buttonPressed(on);
 		}
 	}
 	
@@ -41,13 +49,11 @@ public class Button extends AnimatedObject implements InteractiveObject {
 
 		@Override
 		public void onEnter(GameObject src) {
-			playAnimation("on");
 			arm.playAnimation("far");
 		}
 
 		@Override
 		public void onExit(GameObject src) {
-			playAnimation("off");
 			arm.playAnimation("near");
 		}
 
@@ -61,6 +67,12 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	@Override
 	public boolean inRange(GameObject source) {
 		return trigger.collides(source);
+	}
+	public void setState(boolean on) {
+		this.on = on;
+	}
+	public boolean getState() {
+		return on;
 	}
 
 }
