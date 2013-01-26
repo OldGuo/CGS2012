@@ -145,6 +145,13 @@ public abstract class GameLevel extends BasicGameState{
 			io.draw(g);
 		g.draw(cameraBox);
 		g.draw(player.getCollision());
+		for(int i=1;i<=3;i++){
+			if(i<=player.getHealth())
+				g.setColor(Color.red);
+			else
+				g.setColor(Color.gray);
+			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
+		}
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;

@@ -87,7 +87,7 @@ public class Characters extends AnimatedObject {
 		}
 		if(blinking){
 			time+=delta;
-			if(time>=500){
+			if(time>=1000){
 				blinking=false;
 				time=0;
 			}
