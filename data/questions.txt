@@ -1,0 +1,35 @@
+Who is the National President?	1	Nikitas Kanellakopoulos	Collin Porter	Jash Patel	Matthew Edgington
+Who is the National Secretary?	1	Rachel Ford 	CJ Severson	Bailey Morrison	Brent Comstock	Brendan Hopkins
+Who is the National Treasurer?	1	CJ Severson	Brendan Hopkins	Jash Patel	Collin Potter
+Who is the National Parliamentarian?	1	Brendan Hopkins	Rachel Ford	Bailey Morrison	Matthew Edgington
+Who is the Eastern Region VP?	1	Jash Patel	Nikitas Kanellakopoulos	Collin Potter	 Bailey Morrison
+Who is the Mountain Plains Region VP?	1	Brent Comstock	Rachel Ford	CJ Severson	Brendan Hopkins
+Who is the North Central Plains Region VP?	1	Bailey Morrison	Collin Potter	Jash Patel	Brent Comstock
+Southern Region VP?	1	Collin Potter	Rachel Ford	Matthew Edgington	Brent Comstock
+Western Region VP?	1	 Matthew Edgington	Nikitas Kanellakopoulos	Matthew Edgington	CJ Severson	Bailey Morrison
+Which of the following is NOT a fund-raising partner of FBLA?	1	Safeway, Inc.	Country Meats	Krispy Kreme FUNDraising	Ozark Delight Candy Company
+Which of the following is NOT a fund-raising Partner of FBLA?	1	Sears Holdings Corporation	DormCo.com	MarketPad.biz	Pride Distributors
+Which of the following is NOT a fund-raising Partner of FBLA?	1	Finish Line	Entertainment Fundraising	Otis Spunkmeyer	Schermer Pecans
+Which of the following is a fund-raising Partner of FBLA?	1	Tom-Wat Fundraising	Accenture	Credit Suisse	Barnes & Noble
+Which of the following is a fund-raising Partner of FBLA?	1	School Spirit Coffee	McGraw-Hill	Apress Media	Shapeways
+Which of the following is a fund-raising Partner of FBLA?	1	Zinch.com	Afinia	Parallax	Seeed Studio
+Which article states the purpose of FBLA?	1	Article II	Article I	Article III	Article V
+Which article describes FBLA membership?	1	Article III	Article II	Article IV	Article V
+Which article designates the dues and finance of FBLA?	1	Article IV	Article VI	Article VIII	Article IX
+Which article defines the organization of FBLA?	1	Article V	Article VI	Article X	Article IV
+Which article describes FBLA’s officers and elections?	1	Article VI	Article III	Article XII	Article XI
+Which article defines the committees of FBLA?	1	Article X	Article IX	Article XI	Article XII
+Which article explains the emblems and colors of FBLA?	1	Article XI	Article XII	Article XIII	Article IX
+When is the NFLC at Lake Grapevine?	1	Nov. 8-9	Nov. 15-16	Nov. 22-23	Nov. 1-2
+When is the NFLC at Cleveland?	1	Nov.15-16	Nov. 8-9	Nov. 22-23	Nov. 1-2
+When is the NFLC at Salt Lake City?	1	Nov. 22-23	Nov. 8-9	Nov.15-16	Nov. 1-2
+Where is the NLC in 2013?	1	Anaheim, CA	Nashville, TN	Chicago, IL	Atlanta, GA
+Where is the NLC in 2014?	1	Nashville, TN	Anaheim, CA	Chicago, IL	Atlanta, GA
+Where is the NLC in 2015?	1	Chicago, IL	Anaheim, CA	Nashville, TN	Atlanta, GA
+What is a framework for discussion called?	1	Agenda	Commit	Debate	Amend
+What is the person presiding over a meeting called?	1	Chair	Head	Secretary	Treasurer
+What are the motions that concern matters of immediate importance?	1	Privileged	Majority	Minutes	Significant
+What is the short intermission that does not close the meeting called?	1	Recess	Break	Intermission	Pause
+What is the discussion of the merits of a motion called?	1	Debate	Deliberation	Conversation	Examination
+Who prepares and reads the minutes of the meeting?	1	Secretary	Chair	Treasurer	Head
+What is the record of the proceedings of the meeting called?	1	Minutes	Proceedings	Actions	Notes
