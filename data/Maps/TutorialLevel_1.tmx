@@ -18,7 +18,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="284" height="45">
-  <object type="button" x="2515" y="519" width="16" height="16"/>
+  <object type="button" x="2511" y="508" width="16" height="16"/>
   <object type="movingPlatform" x="2551" y="467" width="64" height="16">
    <properties>
     <property name="image" value="3,0,0"/>

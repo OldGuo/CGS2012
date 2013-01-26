@@ -1,8 +1,10 @@
 package org.mvfbla.cgs2012;
 
-import java.util.Scanner;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class QuestionReader {
 	static ArrayList<String> questions=new ArrayList<String>();
@@ -13,19 +15,22 @@ public class QuestionReader {
 	private final File textFile;
 	public QuestionReader(String fileName){
 		textFile=new File(fileName);
+		processFile();
 	}
 	/*public static void main(String[]args) throws FileNotFoundException{
 		QuestionReader parser=new QuestionReader("data\\questions.txt");
 		parser.processFile();
 	}*/
-	public final void processFile() throws FileNotFoundException{
-		Scanner scanner=new Scanner(new FileReader(textFile));
+	public final void processFile(){
+		Scanner scanner = null;
 		try{
+			scanner=new Scanner(new FileReader(textFile));
 			while(scanner.hasNextLine()){
 				processLine(scanner.nextLine());
 			}
-		}
-		finally{
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		}finally{
 			scanner.close();
 		}
 	}

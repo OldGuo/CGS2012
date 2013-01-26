@@ -38,6 +38,7 @@ public class MainMenu extends BasicGameState{
 		g.drawString("Press 6 for Red Boss", 50, 200);
 		g.drawString("Press 7 for Yellow Boss", 50, 220);
 		g.drawString("Press 8 for Black Boss", 50, 240);
+		g.drawString("Press 9 for Question Screen", 50, 260);
 	}
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int g)throws SlickException {
