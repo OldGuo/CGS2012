@@ -8,7 +8,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -19,6 +18,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected CameraObject cameraBox;
 	protected Image background;
 	protected Boolean lost = false;
+
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
 		GameConstants.currMap = map;
@@ -58,6 +58,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public class TempListener implements ButtonListener {
+		@Override
 		public void buttonPressed(boolean state) {
 			GameConstants.platforms.get(0).setOn(state);
 		}
@@ -119,11 +120,10 @@ public abstract class GameLevel extends BasicGameState{
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
 				break;
-
 		}
 		return out;
 	}
-	public void draw(Graphics g) {
+	public void draw(Graphics g){
 		g.setColor(new Color(58,58,58));
 		for(int i = 0; i < bgNumRepeat; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
@@ -131,7 +131,6 @@ public abstract class GameLevel extends BasicGameState{
 		cameraBox.draw(g);
 		g.setColor(Color.white);
 		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
-		player.draw(g);
 		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 		for(Characters guy:GameConstants.enemies)
 			guy.draw(g);
@@ -140,11 +139,12 @@ public abstract class GameLevel extends BasicGameState{
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
 		for(Trigger t : GameConstants.triggers)
-			g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
+			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		g.draw(cameraBox);
-		g.draw(player.getCollision());
+		//g.draw(cameraBox);
+		//g.draw(player.getCollision());
+		player.draw(g);
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;

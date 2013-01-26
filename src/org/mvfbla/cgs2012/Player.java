@@ -123,7 +123,7 @@ public class Player extends Characters{
 	}
 	@Override
 	public void draw(Graphics g){
-		g.drawOval(this.getCenterX()-punchRange, this.getCenterY()-punchRange, punchRange*2, punchRange*2);
+		//g.drawOval(this.getCenterX()-punchRange, this.getCenterY()-punchRange, punchRange*2, punchRange*2);
 		super.draw(g);
 	}
 }
