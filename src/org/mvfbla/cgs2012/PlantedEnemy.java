@@ -23,6 +23,7 @@ public class PlantedEnemy extends Enemy{
 			super.setSpeed(0);
 			super.setDirection(0);
 		}else{
+			super.setSpeed(3*super.getEnemyDirection());
 			super.playAnimation("PlantedEnemy");
 		}
 		super.update(gc, delta);

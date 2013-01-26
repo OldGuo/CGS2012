@@ -16,3 +16,4 @@ public class RedBoss extends Boss{
 		super.update(gc, delta);
 	}
 }
+//nerf this guy

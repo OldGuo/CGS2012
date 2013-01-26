@@ -72,24 +72,41 @@ public abstract class GameLevel extends BasicGameState{
 			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
-			if(guy.getClass().toString().equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+			String name=guy.getClass().toString();
+			float hit=0;
+			if(player.collides(guy)){
+				if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+					if(Math.abs(tempX)<20)
+						player.setHealth(player.getHealth()-1);
+					if(tempX>0)
+						hit+=16;
+				}
+				else{
+					if(Math.abs(tempX)<40)
+						player.setHealth(player.getHealth()-1);
+				}
+			}
+			if(tempX>0)
+				hit+=(guy.getWidth());
+			else
+				hit+=(guy.getWidth()/8);
+			if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
 				if(totalDist<((PlantedEnemy)guy).getSight()){
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
 					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
+					System.out.println(((PlantedEnemy)guy).getSpeed());
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
 			}
-			if(player.isPunching()&&Math.abs(tempX)<Math.abs(player.getRange())&&-1*Math.signum(tempX)==Math.signum(player.getRange())){
-				guy.setHealth(guy.getHealth()-1);
+			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
+				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
+					guy.setHealth(guy.getHealth()-1);
 			}
-			if(player.collides(guy)){
-				player.setHealth(player.getHealth()-1);
-				/*if(!player.isAlive()){
-					System.out.println("GG");
-				}*/
-			}
+			/*if(!player.isAlive()){
+				System.out.println("GG");
+			}*/
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);

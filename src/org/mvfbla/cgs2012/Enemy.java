@@ -31,7 +31,7 @@ public class Enemy extends Characters{;
 		speed=howFast;
 		this.setVelX(speed);
 	}
-	public float getDirection(){
+	public float getEnemyDirection(){
 		return direction;
 	}
 	public void setDirection(float whichWay){

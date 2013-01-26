@@ -1,8 +1,10 @@
 package org.mvfbla.cgs2012;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
+import org.newdawn.slick.Graphics;
 
 public class Characters extends AnimatedObject {
 
@@ -10,7 +12,7 @@ public class Characters extends AnimatedObject {
 	protected Vector trans = new Vector();
 	private boolean alive, blinking;
 	private float health;
-	private int time;
+	private int time, blinkTime;
 
 	public Characters(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height-1);
@@ -19,6 +21,7 @@ public class Characters extends AnimatedObject {
 		blinking=false;
 		health=1;
 		time=0;
+		blinkTime=550;
 	}
 	public Vector doCollision(GameObject obj) {
 		Vector out = null;
@@ -87,7 +90,7 @@ public class Characters extends AnimatedObject {
 		}
 		if(blinking){
 			time+=delta;
-			if(time>=1000){
+			if(time>=blinkTime){
 				blinking=false;
 				time=0;
 			}
@@ -162,5 +165,16 @@ public class Characters extends AnimatedObject {
 	}
 	public boolean isAlive(){
 		return alive;
+	}
+	public void setBlink(int howLong){
+		blinkTime=howLong;
+	}
+	@Override
+	public void draw(Graphics g){
+		for(int i=1;i<=health;i++){
+			g.setColor(Color.red);
+			g.fillRect(this.getCenterX()+i*16-this.getWidth()/2,this.getCenterY()-this.getHeight()*3/4, 8, 8);
+		}
+		super.draw(g);
 	}
 }

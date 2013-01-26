@@ -14,7 +14,7 @@ public class Player extends Characters{
 	private static final float MAX_SPEED = 5;
 	private int punchTime=0;
 	AnimatedObject dust;
-	private float punchRange = 25; //if negative, means facing the other way
+	private float punchRange = 40; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;
@@ -32,6 +32,7 @@ public class Player extends Characters{
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
 
 		super.setHealth(3);
+		super.setBlink(2000);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
