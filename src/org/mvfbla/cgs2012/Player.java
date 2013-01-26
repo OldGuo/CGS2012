@@ -13,7 +13,6 @@ public class Player extends Characters{
 	private final float speed = 10f;
 	private static final float MAX_SPEED = 5;
 	private int punchTime=0;
-	AnimatedObject dust;
 	private float punchRange = 25; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
@@ -65,9 +64,16 @@ public class Player extends Characters{
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
-			if(getDirection(trans) == 1) {
-				trans = new Vector(0,0);
-				this.setVelY(-9);
+			if(GameConstants.getGrav() > 0 ){
+				if(getDirection(trans) == 1) {
+					trans = new Vector(0,0);
+					this.setVelY(-9);
+				}
+			}else{
+				if(getDirection(trans) == 3) {
+					trans = new Vector(0,0);
+					this.setVelY(9);
+				}
 			}
 		}
 		if(gc.getInput().isKeyDown(Input.KEY_SPACE)){

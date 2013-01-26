@@ -32,7 +32,6 @@ public class MotionSensorLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
 		updateMain(container, sbg, delta);
-
 	}
 
 	@Override

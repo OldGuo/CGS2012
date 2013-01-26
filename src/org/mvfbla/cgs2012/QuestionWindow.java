@@ -21,34 +21,31 @@ public class QuestionWindow{
 		randCorrect = (int)(Math.random()*4);
 
 		reader = new QuestionReader("data\\questions.txt");
-		button = new Image("data\\QuestionButton.png");
-		buttonHover = new Image("data\\QuestionButtonHover.png");
-		buttonClick = new Image("data\\QuestionButtonDown.png");
 
 		switch(randCorrect){
 			case 0: //first answer right
-				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),button,buttonHover,buttonClick,255,150,300,75,0));
-				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),button,buttonHover,buttonClick,255,230,300,75,1));
-				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),button,buttonHover,buttonClick,255,310,300,75,2));
-				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),button,buttonHover,buttonClick,255,390,300,75,3));
+				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),255,150,300,75,0));
+				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),255,230,300,75,1));
+				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),255,310,300,75,2));
+				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),255,390,300,75,3));
 				break;
 			case 1: //second answer right
-				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),button,buttonHover,buttonClick,255,150,300,75,0));
-				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),button,buttonHover,buttonClick,255,230,300,75,1));
-				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),button,buttonHover,buttonClick,255,310,300,75,2));
-				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),button,buttonHover,buttonClick,255,390,300,75,3));
+				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),255,150,300,75,0));
+				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),255,230,300,75,1));
+				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),255,310,300,75,2));
+				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),255,390,300,75,3));
 				break;
 			case 2: //third answer right
-				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),button,buttonHover,buttonClick,255,150,300,75,0));
-				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),button,buttonHover,buttonClick,255,230,300,75,1));
-				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),button,buttonHover,buttonClick,255,310,300,75,2));
-				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),button,buttonHover,buttonClick,255,390,300,75,3));
+				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),255,150,300,75,0));
+				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),255,230,300,75,1));
+				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),255,310,300,75,2));
+				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),255,390,300,75,3));
 				break;
 			case 3: //fourth answer right
-				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),button,buttonHover,buttonClick,255,150,300,75,0));
-				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),button,buttonHover,buttonClick,255,230,300,75,1));
-				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),button,buttonHover,buttonClick,255,310,300,75,2));
-				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),button,buttonHover,buttonClick,255,390,300,75,3));
+				questions.add(new QuestionButton(reader.getWrongAns1().get(randQuestion),255,150,300,75,0));
+				questions.add(new QuestionButton(reader.getWrongAns2().get(randQuestion),255,230,300,75,1));
+				questions.add(new QuestionButton(reader.getWrongAns3().get(randQuestion),255,310,300,75,2));
+				questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),255,390,300,75,3));
 				break;
 		}
 	}

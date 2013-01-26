@@ -27,11 +27,8 @@ public class TutorialLevel extends GameLevel {
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
 		enemy3 = new PlantedEnemy(2000,396);
-		cameraBox = new CameraObject(player,250,1000);
-		background = new Image("data\\Background.png");
+		cameraBox = new CameraObject(player,250,1300);
 	}
-
-
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
 		updateMain(container, sbg, delta);
@@ -43,7 +40,7 @@ public class TutorialLevel extends GameLevel {
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException  {
 		draw(g);
 		text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		question.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		//question.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 	}
 	@Override
 	public int getID(){

@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 public class QuestionButton {
 	private final Image buttonNormal,buttonHover,buttonClick;
@@ -14,16 +15,16 @@ public class QuestionButton {
 	private final int PADDING = 25;
 	private final String answerString;
 	private final int buttonID;
-	public QuestionButton(String answer,Image button,Image hover,Image click,int xPos,int yPos,int l, int h,int id){
+	public QuestionButton(String answer,int xPos,int yPos,int l, int h,int id) throws SlickException{
+		buttonNormal = new Image("data\\QuestionButton.png");
+		buttonHover = new Image("data\\QuestionButtonHover.png");
+		buttonClick = new Image("data\\QuestionButtonDown.png");
 		answerString = answer;
 		x = xPos;
 		y = yPos;
 		length = l;
 		height = h;
 		buttonID = id;
-		buttonNormal = button;
-		buttonHover = hover;
-		buttonClick = click;
 	}
 	public void draw(Graphics g,int offsetX,int offsetY){
 		if(getHover() == true)

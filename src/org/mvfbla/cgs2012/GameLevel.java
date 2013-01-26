@@ -51,13 +51,24 @@ public abstract class GameLevel extends BasicGameState{
 				});
 				GameConstants.triggers.add(t);
 			}
-			if(to.getType().equals("button")) {
-				Button b = new Button(to.getX(), to.getY(), new TempListener());
+			if(to.getType().equals("platformButton")) {
+				Button b = new Button(to.getX(), to.getY(), new PlatformListener());
+				GameConstants.interacts.add(b);
+			}
+			if(to.getType().equals("gravityButton")) {
+				Button b = new Button(to.getX(), to.getY(), new GravityListener());
 				GameConstants.interacts.add(b);
 			}
 		}
+		background = new Image("data\\Background.png");
 	}
-	public class TempListener implements ButtonListener {
+	public class GravityListener implements ButtonListener{
+		public void buttonPressed(boolean state){
+			//player.rotateAnimation();
+			GameConstants.flipGrav();
+		}
+	}
+	public class PlatformListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
 			GameConstants.platforms.get(0).setOn(state);
@@ -113,6 +124,8 @@ public abstract class GameLevel extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
+		if(player.getVelX() != 0)
+			System.out.println("IM MOVINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;

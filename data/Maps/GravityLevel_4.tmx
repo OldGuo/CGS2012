@@ -8,7 +8,11 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2bgQrCMAwFW7f9/y+rYKEUx5bO2mTvDkJEnzLW3MrA5ZRSftWDLtPhvixVrZOPBfrYPnXEe41zwuvIWNYarzXAax3wWge81sGj17PvO+96v+vR6zJ3an00nr1WAa91UPYaxuDRaxgDXuuA1zrgtQ54rQNe64DXOuC1DnitA17rgNc69Hp99v9s4Ider1nreLBf68B+rYPV63/8f8Y6d2r5Xqxe55369TFZ5sea97Z2V9Z6+1J7eNyvvZ1bb/ka61p7269Hex39ulGD17HyV849Xt87X3PF69nPPtDH9/J69rMP9PG9vG7fLzPQ1t7vkPef3/O93s/rIh87T2nUQslXew04mg3y/vPfPj8q8rHzVt/Jx8ufnY32u+Tj5c/Ox2rIkveZfwLacXYxfFYAAA==
+   H4sIAAAAAAAAC+2b0QqDMAxF2+n+/5e3PRRKsWjWZU2950CIbNchNkcRZk4p5Xc96DId7stW1T75WMCXzxrnhNcK4LUOeK0DXuuA1zpE9Hr2c+ddn3cjel3mTq17E9lrFfBaB2WvwYeIXoMPeK0DXuuA1zrgtQ54rQNe64DXOuC1DnitA17rgNc64LUOeK0DXutg9fof/5+xzp1a/lusXudO/fqYLPNjzUdbu5G1fh5Uj4j362jnNlq+xrrW0e7X3l6vft2oweu18iPnHq/vna8Z8Xr2uw90/162Z7/7QPfvZbv9vMxAW73fIR8/3/O9vp/XRX7tPKVRGyVf7TXgbDbIx88ffX9W5NfOW30nv17+6my0+5JfL391PnZDlnzM/AsqOnwofFYAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="123" height="45">
+  <object name="gravitybutton" type="gravityButton" x="197" y="414" width="16" height="16"/>
+  <object type="gravityButton" x="1731" y="35" width="16" height="16"/>
+ </objectgroup>
 </map>

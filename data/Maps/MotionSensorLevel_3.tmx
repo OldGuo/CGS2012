@@ -8,7 +8,10 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2a4a7CIAyFme6+/ytf/UFCmlIKDATOOUlT3XQM2q80ziuE8PrYRX+8f3/sDtTJinGOcafO1RXINYrINY7INY7INY7INY7INY7I9Tn6UywVuT5HnliT6zNErnFErnFErsdqhedWXk+u+xTXbQdPrnFErnFErnGEzvW3V/X2NLKv3U3oXHt6mnc4gwV0rpGEzjWSyDWOdufa01tFv3tv1avdua79/QhZu3NN+bU715Rf5BpHv+aavVW7rGfVmn7NNXurdrXEmvv1ntqNa2qeyDWOYpxTtunP9Okz2hX+E0U/zqfPaEf+p+2lWC7/VliXk/3I+hGvP8pWqI+r+BxH6fHWPJhpckzrvTVfbX7e8b3cXMZ4I3xaE3Pn5X3JPTy9hjbOaJudTz15qHGVW9MRY8uYppZjtmZOMdc98arh0uJ0Ro615KPGVbTe+7bWqXRcnrdiYh0vxWt0Lsv4y3qTqz+lz2k9q6du55iK8W5Zp5SpFlbkvT8ZhxXqeu67Wp3rqTc1c77F963Yl+JWk6/pnGfGQMsz67XFZmldvdey9rmevL4Vy91bS9w8e57MrafqbkscSnG0WLKOe88/me/e/cKbv1YulPIjt+987R+nLbrTfFYAAA==
+   H4sIAAAAAAAAC+2a4W7DIAyESZu9/yuv/YFkIWMMBArcnWR5S9aQcP4MWnOFEF6fuJiPz+9P3IE6WdHn6Dt1rq5ArlFErnFErnFErnFErnFErnFErs/RnxJS5Pocebwm12eIXOOIXOOIXI/VCt9beTO57lOctx0yucYRucYRucYROtfa3tWKnYXOtWdP8w5nsIDONZLQuUYSucbR7lwj7a16tTvXtf8/QtbuXFN+7c415Re5xtGvuebeql21c/Nrrrm3aleL11yv99RuXFPzRK5xFH2WbDOfmeV7Zyu8E8U8LsvvaEe+0/ZSIld/K8zLyXlk/4jXHxUr9MdVco4jeby1DmZGOqb1u/W82vN5x/dycxnjjciyJ+bOp/eVruHyGto4o2N2PfXUocZVbk5HjJ16KiPHbM0zxVr3+FXDpcXpjBprqUeNqxi9923NU+l4et7yxDpe8mt0Laf+p/0m139Kf6ftWT19O8dU9LtlniRTLayk9/6kDyv09dxntT7X029qnvlOPm95X/Ktpl7lM8/0QKsz62eLzdK8eq9lrXM9dX0rkbu3Ft88a15aW0/13RYfSj5aLFnHveefrHfveuGtX6sWSvWRW3e+8Q+qgAKHfFYAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="123" height="45">
+  <object name="motionSensor" type="motionSensor" x="479" y="444" width="18" height="17"/>
+ </objectgroup>
 </map>
