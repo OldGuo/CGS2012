@@ -102,7 +102,7 @@ public abstract class GameLevel extends BasicGameState{
 			else
 				hit+=(guy.getWidth()/8);
 			if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				if(totalDist<((PlantedEnemy)guy).getSight()){
+				if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
 					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
@@ -110,6 +110,16 @@ public abstract class GameLevel extends BasicGameState{
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
+			}
+			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
+				if(totalDist<((BlueBoss)guy).getSight()){
+					((BlueBoss)guy).changeSleep(true);
+					((BlueBoss)guy).setDirection(Math.signum(tempX));
+					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
+					System.out.println(((BlueBoss)guy).getSpeed());
+				}
+				else
+					((BlueBoss)guy).changeSleep(false);
 			}
 			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))

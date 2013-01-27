@@ -39,4 +39,7 @@ public class PlantedEnemy extends Enemy{
 	public float getSight(){
 		return sight;
 	}
+	public void setSight(int size){
+		sight = size;
+	}
 }

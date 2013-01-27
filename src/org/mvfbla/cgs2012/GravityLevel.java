@@ -10,13 +10,13 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GravityLevel extends GameLevel {
 
 	private int stateID = -1;
-
+	
 	public GravityLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
 
-	private Enemy BiggerEnemy;
+	private Enemy plantedEnemy;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
 
@@ -26,6 +26,7 @@ public class GravityLevel extends GameLevel {
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1000);
+		plantedEnemy = new PlantedEnemy(150,224);
 		background = new Image("data\\Background.png");
 	}
 
@@ -46,6 +47,7 @@ public class GravityLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
+		GameConstants.enemies.add(plantedEnemy);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
