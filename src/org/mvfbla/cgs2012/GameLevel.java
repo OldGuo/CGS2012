@@ -24,6 +24,7 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
+		int motionDelay = 0;
 		for(TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn"))
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
@@ -58,6 +59,11 @@ public abstract class GameLevel extends BasicGameState{
 			if(to.getType().equals("gravityButton")) {
 				Button b = new Button(to.getX(), to.getY(), new GravityListener());
 				GameConstants.interacts.add(b);
+			}
+			if(to.getType().equals("motionSensor")) {
+				MotionSensor ms = new MotionSensor(to, motionDelay);
+				motionDelay += 500;
+				GameConstants.sensors.add(ms);
 			}
 		}
 		background = new Image("data\\Background.png");
@@ -131,6 +137,8 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);
+		for(MotionSensor m : GameConstants.sensors)
+			m.update(container, delta);
 		cameraBox.update(container, delta);
 
 		//testing
@@ -176,9 +184,11 @@ public abstract class GameLevel extends BasicGameState{
 			guy.draw(g);
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
+		for(MotionSensor m : GameConstants.sensors)
+			m.draw(g);
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
-		for(Trigger t : GameConstants.triggers)
+		//for(Trigger t : GameConstants.triggers)
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);

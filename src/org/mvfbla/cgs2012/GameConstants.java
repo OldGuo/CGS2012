@@ -12,6 +12,7 @@ public class GameConstants {
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();
 	public static ArrayList<Characters> enemies = new ArrayList<Characters>();
 	public static ArrayList<InteractiveObject> interacts = new ArrayList<InteractiveObject>();
+	public static ArrayList<MotionSensor> sensors = new ArrayList<MotionSensor>();
 	public static void clear() {
 		collidableObjects.clear();
 		triggers.clear();
