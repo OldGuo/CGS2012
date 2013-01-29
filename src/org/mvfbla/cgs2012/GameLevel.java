@@ -124,9 +124,15 @@ public abstract class GameLevel extends BasicGameState{
 					((BlueBoss)guy).setDirection(Math.signum(tempX));
 					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
 					//System.out.println(((BlueBoss)guy).getSpeed());
-				}
-				else
+				}else{
 					((BlueBoss)guy).changeSleep(false);
+
+				}
+				if(player.getCenterX() >= ((BlueBoss)guy).getStompX() && player.getCenterX() <= ((BlueBoss)guy).getStompX() + 64){
+					if(player.getCenterY() >= ((BlueBoss)guy).getStompY() && player.getCenterY() <= ((BlueBoss)guy).getStompY() + 50){
+						player.setHealth(player.getHealth() - 1);
+					}
+				}
 			}
 			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))

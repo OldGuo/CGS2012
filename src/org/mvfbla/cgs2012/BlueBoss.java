@@ -8,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 
 public class BlueBoss extends Boss{
 	private boolean awake = false;
-	private final float sight = 450;
+	private final float sight = 600;
 	private final int ATTACK_DELAY = 1700;
 	private int time = ATTACK_DELAY;
 	private boolean stomping = false;
@@ -29,16 +29,19 @@ public class BlueBoss extends Boss{
 			time = ATTACK_DELAY;
 		}
 		if(stomping && super.getVelY() == 0){
-			stompX = (int) super.getX();
-			stompY =  (int) super.getY();
+			stompX = (int) super.getX() + 32;
+			stompY =  (int) super.getY() + 322;
 			stomping = false;
+		}else{
+			stompX = 0;
+			stompY = 0;
 		}
 	}
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
 		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
-		g.fillRect(stompX+32, stompY + 380, 64, 50);
+		g.fillRect(stompX, stompY, 64, 64);
 	}
 	public void stomp(){
 		stomping = true;
@@ -50,5 +53,11 @@ public class BlueBoss extends Boss{
 	}
 	public float getSight(){
 		return sight;
+	}
+	public int getStompX(){
+		return stompX;
+	}
+	public int getStompY(){
+		return stompY;
 	}
 }
