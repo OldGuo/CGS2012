@@ -69,6 +69,7 @@ public abstract class GameLevel extends BasicGameState{
 		background = new Image("data\\Background.png");
 	}
 	public class GravityListener implements ButtonListener{
+		@Override
 		public void buttonPressed(boolean state){
 			//player.rotateAnimation();
 			GameConstants.flipGrav();
@@ -112,7 +113,7 @@ public abstract class GameLevel extends BasicGameState{
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
 					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
-					System.out.println(((PlantedEnemy)guy).getSpeed());
+					//System.out.println(((PlantedEnemy)guy).getSpeed());
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
@@ -122,7 +123,7 @@ public abstract class GameLevel extends BasicGameState{
 					((BlueBoss)guy).changeSleep(true);
 					((BlueBoss)guy).setDirection(Math.signum(tempX));
 					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
-					System.out.println(((BlueBoss)guy).getSpeed());
+					//System.out.println(((BlueBoss)guy).getSpeed());
 				}
 				else
 					((BlueBoss)guy).changeSleep(false);
@@ -159,8 +160,6 @@ public abstract class GameLevel extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
-		if(player.getVelX() != 0)
-			System.out.println("IM MOVINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;

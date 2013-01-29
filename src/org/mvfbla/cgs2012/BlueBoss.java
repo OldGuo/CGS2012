@@ -8,11 +8,13 @@ import org.newdawn.slick.SpriteSheet;
 
 public class BlueBoss extends Boss{
 	private boolean awake = false;
-	private float sight = 450;
-	private final int ATTACK_DELAY = 2000;
+	private final float sight = 450;
+	private final int ATTACK_DELAY = 1700;
 	private int time = ATTACK_DELAY;
-	private int count = 0;
-	
+	private boolean stomping = false;
+	private int count;
+	private int stompX,stompY;
+
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
 		super.setHealth(1);
@@ -23,16 +25,25 @@ public class BlueBoss extends Boss{
 		super.update(gc, delta);
 		time -= delta;
 		if(time <= 0){
-			count++;
+			stomp();
 			time = ATTACK_DELAY;
 		}
+		if(stomping && super.getVelY() == 0){
+			stompX = (int) super.getX();
+			stompY =  (int) super.getY();
+			stomping = false;
+		}
 	}
+	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		for(int i = 0; i < count; i++){
-			g.fillRect(50*i,20,40,40);
-		}
 		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
+		g.fillRect(stompX+32, stompY + 380, 64, 50);
+	}
+	public void stomp(){
+		stomping = true;
+		trans = new Vector(0,0);
+		super.setVelY(-10);
 	}
 	public void changeSleep(boolean inSight){
 		awake=inSight;
