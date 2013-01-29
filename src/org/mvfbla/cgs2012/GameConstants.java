@@ -15,6 +15,7 @@ public class GameConstants {
 	public static ArrayList<MotionSensor> sensors = new ArrayList<MotionSensor>();
 	public static void clear() {
 		collidableObjects.clear();
+		sensors.clear();
 		triggers.clear();
 		platforms.clear();
 		enemies.clear();
