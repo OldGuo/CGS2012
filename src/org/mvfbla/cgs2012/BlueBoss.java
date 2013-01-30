@@ -55,9 +55,9 @@ public class BlueBoss extends Boss{
 		return sight;
 	}
 	public int getStompX(){
-		return stompX;
+		return stompX + 32;
 	}
 	public int getStompY(){
-		return stompY;
+		return stompY + 32;
 	}
 }

@@ -1,11 +1,8 @@
 package org.mvfbla.cgs2012;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -18,10 +15,9 @@ public class BlueBossLevel extends GameLevel {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Boss blueBoss;
+	private BlueBoss blueBoss;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
-
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -42,7 +38,6 @@ public class BlueBossLevel extends GameLevel {
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
 	}
-
 	@Override
 	public int getID() {
 		return stateID;

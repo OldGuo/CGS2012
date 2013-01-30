@@ -8,7 +8,12 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XjQrDIAyEbd3e/5XXMYQQoolSp1fu4LA/kU6/JMwjpXRcPgHHfPnVeI4ob22I0msp9+S0l8gJQ+SEIXLCEDlhiJwwRE4YIqff89XnWO839nLKRszqUUuupVx79fQWHtHs+ZJTuX5SPUU57S65lidx0n2CnPYTOWGInDBEThgiJwx5nKzz0tfyv3Er1hrl3HPA3nyPUxYxnkfOVrPc4iRjPFv7URvlt2a4xanERPbGytvaGGU/6mg9RfZmJ99ZT7tYc7J6ieee+BWcrPfR3NN5uCIva/V09zf+6Vo99ebKqhxr5Z7V73r2eQc+ukfIfvcBt6/pXUQlAAA=
+   H4sIAAAAAAAAC+2XgQrEIAxD3Xn//803OAQp1daxrY0kEHSusOlrCx6llOP0B3Csp7+TdURZe0OU3Et7JqdcIicMkROGyAlD5IQhcsIQOWGInP7r0fdY6x9XOVUlJnqU6vfS5jvVU5vvVE87cZK1tAMn2SfIKZ/ICUPkhCFywhA5YcjiJO9LHs/uOm/Y4lS7GMtX7lZPecapj7GsncdofJrbjFOL8ZyNlrej0cv+qr315DmbTL6znrJYctJ6ieWV+AhO2ntv7sk8jMjLUT3d/Y03Paqn1VyJyrFZ7mn9buWcM/CRPaLvdz/qODpfRCUAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="53" height="45">
+  <object name="pillar" type="pillar" x="112" y="320" width="48" height="224"/>
+  <object name="pillar" type="pillar" x="368" y="320" width="48" height="224"/>
+  <object name="pillar" type="pillar" x="624" y="320" width="48" height="224"/>
+ </objectgroup>
 </map>

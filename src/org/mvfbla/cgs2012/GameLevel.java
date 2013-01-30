@@ -34,7 +34,7 @@ public abstract class GameLevel extends BasicGameState{
 				GameConstants.collidableObjects.add(t);
 			}
 			if(to.getType().equals("trigger")) {
-				Trigger t = new Trigger(to, new TriggerListener() {
+					Trigger t = new Trigger(to, new TriggerListener() {
 					@Override
 					public void triggered(GameObject src) {
 						System.out.println("");
@@ -64,6 +64,10 @@ public abstract class GameLevel extends BasicGameState{
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
 				GameConstants.sensors.add(ms);
+			}
+			if(to.getType().equals("pillar")){
+				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
+				GameConstants.pillars.add(pillar);
 			}
 		}
 		background = new Image("data\\Background.png");
@@ -133,6 +137,15 @@ public abstract class GameLevel extends BasicGameState{
 						player.setHealth(player.getHealth() - 1);
 					}
 				}
+				for(int i = 0; i < GameConstants.pillars.size();i++){
+					if(((BlueBoss)guy).getStompX() > GameConstants.pillars.get(i).getX() &&
+							((BlueBoss)guy).getStompX() < GameConstants.pillars.get(i).getX() + GameConstants.pillars.get(i).getWidth()){
+						if(GameConstants.pillars.get(i).isBroken() == false)	{
+							((BlueBoss)guy).setHealth(((BlueBoss)guy).getHealth() - 1);
+							GameConstants.pillars.get(i).setBroken(true);
+						}
+					}
+				}
 			}
 			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
@@ -191,6 +204,8 @@ public abstract class GameLevel extends BasicGameState{
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
 			m.draw(g);
+		for(Pillar p : GameConstants.pillars)
+			p.draw(g);
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
 		//for(Trigger t : GameConstants.triggers)
