@@ -94,7 +94,7 @@ public abstract class GameLevel extends BasicGameState{
 		public void buttonPressed(boolean state){
 			//player.rotateAnimation();
 			GameConstants.flipGrav();
-		}
+		}	
 	}
 	public class PlatformListener implements ButtonListener {
 		@Override
