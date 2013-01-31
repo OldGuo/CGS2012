@@ -8,8 +8,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class BlueBossLevel extends GameLevel {
 
-	private int stateID = -1;
-
 	public BlueBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub

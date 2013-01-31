@@ -9,7 +9,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class GravityLevel extends GameLevel {
 
-	private int stateID = -1;
 	
 	public GravityLevel(int stateID) {
 		this.stateID = stateID;

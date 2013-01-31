@@ -18,6 +18,8 @@ public abstract class GameLevel extends BasicGameState{
 	protected CameraObject cameraBox;
 	protected Image background;
 	protected Boolean lost = false;
+	protected int stateID = -1;
+	protected boolean done = false;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -34,7 +36,7 @@ public abstract class GameLevel extends BasicGameState{
 				GameConstants.collidableObjects.add(t);
 			}
 			if(to.getType().equals("trigger")) {
-					Trigger t = new Trigger(to, new TriggerListener() {
+				Trigger t = new Trigger(to, new TriggerListener() {
 					@Override
 					public void triggered(GameObject src) {
 						System.out.println("");
@@ -69,8 +71,23 @@ public abstract class GameLevel extends BasicGameState{
 				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
 				GameConstants.pillars.add(pillar);
 			}
+			if(to.getType().equals("finish")) {
+				Trigger t = new Trigger(to, new FinishListener());
+				GameConstants.triggers.add(t);
+			}
 		}
 		background = new Image("data\\Background.png");
+	}
+	public class FinishListener implements TriggerListener {
+		public void onEnter(GameObject src) {
+			done = true;
+		}
+		public void onExit(GameObject src) {
+			
+		}
+		public void triggered(GameObject src) {
+			
+		}
 	}
 	public class GravityListener implements ButtonListener{
 		@Override
@@ -86,6 +103,8 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+		if(done && stateID != 8)
+			sbg.enterState(stateID + 1);
 		if(!lost)
 			player.update(container, delta);
 		for(Characters guy:GameConstants.enemies){

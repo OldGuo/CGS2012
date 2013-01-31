@@ -9,7 +9,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class RedBossLevel extends GameLevel {
 
-	private int stateID= -1;
 
 	public RedBossLevel(int stateID) {
 		this.stateID = stateID;

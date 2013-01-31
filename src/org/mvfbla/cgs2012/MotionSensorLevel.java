@@ -9,7 +9,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MotionSensorLevel extends GameLevel {
 
-	private int stateID = -1;
 	public MotionSensorLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub

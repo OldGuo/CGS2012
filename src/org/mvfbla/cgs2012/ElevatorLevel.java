@@ -9,7 +9,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class ElevatorLevel extends GameLevel {
 
-	private int stateID = -1;
 	public ElevatorLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub

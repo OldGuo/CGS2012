@@ -8,7 +8,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class TutorialLevel extends GameLevel {
 
-	private int stateID = -1;
 	private Enemy enemy3;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
