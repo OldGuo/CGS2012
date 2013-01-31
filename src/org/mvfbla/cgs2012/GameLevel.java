@@ -141,31 +141,7 @@ public abstract class GameLevel extends BasicGameState{
 				else
 					((PlantedEnemy)guy).changeSleep(false);
 			}
-			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
-				if(totalDist<((BlueBoss)guy).getSight()){
-					((BlueBoss)guy).changeSleep(true);
-					((BlueBoss)guy).setDirection(Math.signum(tempX));
-					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
-					//System.out.println(((BlueBoss)guy).getSpeed());
-				}else{
-					((BlueBoss)guy).changeSleep(false);
 
-				}
-				if(player.getCenterX() >= ((BlueBoss)guy).getStompX() && player.getCenterX() <= ((BlueBoss)guy).getStompX() + 64){
-					if(player.getCenterY() >= ((BlueBoss)guy).getStompY() && player.getCenterY() <= ((BlueBoss)guy).getStompY() + 50){
-						player.setHealth(player.getHealth() - 1);
-					}
-				}
-				for(int i = 0; i < GameConstants.pillars.size();i++){
-					if(((BlueBoss)guy).getStompX() > GameConstants.pillars.get(i).getX() &&
-							((BlueBoss)guy).getStompX() < GameConstants.pillars.get(i).getX() + GameConstants.pillars.get(i).getWidth()){
-						if(GameConstants.pillars.get(i).isBroken() == false)	{
-							((BlueBoss)guy).setHealth(((BlueBoss)guy).getHealth() - 1);
-							GameConstants.pillars.get(i).setBroken(true);
-						}
-					}
-				}
-			}
 			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
 					guy.setHealth(guy.getHealth()-1);
