@@ -8,12 +8,13 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2aUY7DIAxESZve/8rtfiAhyxgDgQVmRrK8TbYhYfxM1OQKIbx+cTEfn9+/uAN1sqLP0XfqXF2BXKOIXOOIXOOIXOOIXOOIXOOIXJ+jjxKpyPU58nhNrs8QucYRucYRuR6rFZ5beTO57lOctx0yucYRucYRucYRucYROteee5p3OIMFco0jdK6RRK5xRK5xtDvXtb8fIYtc42h3rim/yDWOyPW+sp5Va/pvrnlv1a4Wr8n1ntqNa2qeyDWOos8p28xn5vS9sxXeiWIel9NntCPfaXspkau/Febl5Dyyf8Tjj4oV+uMqOcdRur21DmaGHNP6bF2vdn3e8b3cXMZ4I3LaE3P75XnJNTw9hjbO6JhdTz11qHGVm9MRY0tP08gxW3NNsdY9ftVwaXE6o8Za6lHjKkbveVvzVNou91ueWNtLfo2uZem/7De5/lP6P+2e1dO3c0xFv1vmKWWqhRV57k/6sEJfz31X63M9/abmmm/xfcv7km819Zpe80wPtDqz/rbYLM2r91jWOtdT17cSuXNr8c2z5snaeqrvtvhQ8tFiydru3f9kvXvXC2/9WrVQqo/cuvMXX58nLil8VgAA
+   H4sIAAAAAAAAC+2a4W7DIAyESZu+/yu3+4GELGwMBAbcnWR5S9YQOH8mWnOFEF6/uJiPz+9f3IE6WdHn6Dt1rq5ArlFErnFErnFErnFErnFErnFErnFErnFErnFErnFErnFErvu0wvdW3kyu+xTXbYdMrnFErnFErnFErnGEzrXnmeYdzmCBXOMInWskkWsckWsc7c517f+PkEWucbQ715Rf5BpH5HpffUSU9N9c89mqXS1ek+s9tRvX1DyRaxxFn1O2mc/M6XtnK7wTxTwup9/Rjnyn7ZUJrf5WWJeT88j+Ea8/Klboj6tkjaP0eGsdzAw5pvW7Nd/c/Lzje7m5jPFG5LQnauflfck9PL1GbpzRMbueeuowx5W2piPGlp6moTFbM6dY6x6/ari0OJ1RYy31mOMqRu99W+tUOi7PW55Yx0t+ja5l6b/sN1r/Kf1d7pnV07c1pqLfLeuUMtXCirz3J31Yoa9rn831uZ5+UzPnW3ze8r7kW029pnOe6UGuzqyfLTZL6+q9lrXP9dT1nQnt3lp88+x5srae6rstPpR8tFiyjnvPP1nv3v3CW79WLZTqQ9t3/uILPxVvonxWAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object type="motionSensor" x="480" y="464" width="192" height="16"/>
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
+  <object type="finish" x="1822" y="142" width="112" height="80"/>
  </objectgroup>
 </map>

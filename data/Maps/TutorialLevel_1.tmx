@@ -25,5 +25,6 @@
     <property name="var" value="0,-270,2"/>
    </properties>
   </object>
+  <object type="finish" x="4335" y="174" width="112" height="80"/>
  </objectgroup>
 </map>

@@ -79,14 +79,17 @@ public abstract class GameLevel extends BasicGameState{
 		background = new Image("data\\Background.png");
 	}
 	public class FinishListener implements TriggerListener {
+		@Override
 		public void onEnter(GameObject src) {
+			//bring up question screen
 			done = true;
 		}
+		@Override
 		public void onExit(GameObject src) {
-			
+
 		}
+		@Override
 		public void triggered(GameObject src) {
-			
 		}
 	}
 	public class GravityListener implements ButtonListener{
@@ -94,7 +97,7 @@ public abstract class GameLevel extends BasicGameState{
 		public void buttonPressed(boolean state){
 			//player.rotateAnimation();
 			GameConstants.flipGrav();
-		}	
+		}
 	}
 	public class PlatformListener implements ButtonListener {
 		@Override
