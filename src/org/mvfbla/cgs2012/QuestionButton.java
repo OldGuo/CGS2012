@@ -15,6 +15,8 @@ public class QuestionButton {
 	private final int PADDING = 25;
 	private final String answerString;
 	private final int buttonID;
+	private boolean correct;
+
 	public QuestionButton(String answer,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		buttonNormal = new Image("data\\QuestionButton.png");
 		buttonHover = new Image("data\\QuestionButtonHover.png");
@@ -41,7 +43,9 @@ public class QuestionButton {
 				setClick(true);
 				if(correctAnswer == getID()){
 					System.out.println("UR A BEAST");
+					correct = true;
 				}else{
+					correct = false;
 					System.out.println("U SUK");
 				}
 			}else{
@@ -52,6 +56,12 @@ public class QuestionButton {
 			 setClick(false);
 			 setHover(false);
 		 }
+	}
+	public void setCorrect(boolean c){
+		correct = c;
+	}
+	public boolean isCorrect(){
+		return correct;
 	}
 	public Image getNormalButton(){
 		return buttonNormal;

@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
 	protected int bgOffsetX, bgNumRepeat;
+	protected QuestionWindow questions;
 	protected Map map;
 	protected Player player;
 	protected CameraObject cameraBox;
@@ -26,6 +27,8 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
+		questions = new QuestionWindow();
+		done = false;
 		int motionDelay = 0;
 		for(TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn"))
@@ -82,7 +85,7 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void onEnter(GameObject src) {
 			//bring up question screen
-			done = true;
+			questions.setAnswering(true);
 		}
 		@Override
 		public void onExit(GameObject src) {
@@ -90,6 +93,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		@Override
 		public void triggered(GameObject src) {
+			done = true;
 		}
 	}
 	public class GravityListener implements ButtonListener{
@@ -106,8 +110,9 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
-		if(done && stateID != 8)
+		if(done && questions.getAnswering() == false && stateID != 8)
 			sbg.enterState(stateID + 1);
+		questions.update(container);
 		if(!lost)
 			player.update(container, delta);
 		for(Characters guy:GameConstants.enemies){
@@ -218,6 +223,9 @@ public abstract class GameLevel extends BasicGameState{
 			else
 				g.setColor(Color.gray);
 			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
+		}
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 		player.draw(g);
 	}
