@@ -153,7 +153,6 @@ public abstract class GameLevel extends BasicGameState{
 					((PlantedEnemy)guy).changeSleep(true);
 					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
 					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
-					//System.out.println(((PlantedEnemy)guy).getSpeed());
 				}
 				else
 					((PlantedEnemy)guy).changeSleep(false);
