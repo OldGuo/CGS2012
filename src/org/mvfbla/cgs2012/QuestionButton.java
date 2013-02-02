@@ -27,6 +27,7 @@ public class QuestionButton {
 		length = l;
 		height = h;
 		buttonID = id;
+		correct = false;
 	}
 	public void draw(Graphics g,int offsetX,int offsetY){
 		if(getHover() == true)
@@ -39,14 +40,12 @@ public class QuestionButton {
 	}
 	public void update(GameContainer gc, Input input,int correctAnswer){
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
-			if(input.isMouseButtonDown(input.MOUSE_LEFT_BUTTON)){
+			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 				setClick(true);
 				if(correctAnswer == getID()){
-					System.out.println("UR A BEAST");
 					correct = true;
 				}else{
 					correct = false;
-					System.out.println("U SUK");
 				}
 			}else{
 				setClick(false);

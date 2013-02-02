@@ -85,15 +85,16 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void onEnter(GameObject src) {
 			//bring up question screen
+			done = true;
 			questions.setAnswering(true);
 		}
 		@Override
 		public void onExit(GameObject src) {
-
+			done = false;
+			questions.setAnswering(false);
 		}
 		@Override
 		public void triggered(GameObject src) {
-			done = true;
 		}
 	}
 	public class GravityListener implements ButtonListener{
@@ -215,8 +216,8 @@ public abstract class GameLevel extends BasicGameState{
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		g.draw(cameraBox);
-		g.draw(player.getCollision());
+		//g.draw(cameraBox);
+		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);

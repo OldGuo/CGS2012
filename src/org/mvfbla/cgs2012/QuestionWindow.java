@@ -14,16 +14,21 @@ public class QuestionWindow{
 	private final Color color = new Color(200,200,200,0.45f);
 	private boolean answering;
 	Image button,buttonHover,buttonClick;
-	ArrayList<QuestionButton> questions = new ArrayList<QuestionButton>(4);
+	ArrayList<QuestionButton> questions;
 	QuestionReader reader;
-	private final int randQuestion,randCorrect;
+	private int randQuestion;
+	private int randCorrect;
 
 
 	public QuestionWindow() throws SlickException{
+		init();
+	}
+	public void init() throws SlickException{
 		randQuestion = (int)(Math.random()*35);
 		randCorrect = (int)(Math.random()*4);
-
+		randCorrect = 0;
 		reader = new QuestionReader("data\\questions.txt");
+		questions = new ArrayList<QuestionButton>(4);
 
 		switch(randCorrect){
 			case 0: //first answer right
@@ -69,12 +74,6 @@ public class QuestionWindow{
 				 answering = false;
 			 }
 		 }
-	}
-	public void clear(){
-		answering = false;
-		for(int i = 0; i < questions.size(); i++){
-			questions.get(i).setCorrect(false);
-		}
 	}
 	public boolean getAnswering(){
 		return answering;
