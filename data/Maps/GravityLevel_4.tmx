@@ -8,11 +8,37 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2b0QqDMAxF2+n+/5e3PRRKsWjWZU2950CIbNchNkcRZk4p5Xc96DId7stW1T75WMCXzxrnhNcK4LUOeK0DXuuA1zpE9Hr2c+ddn3cjel3mTq17E9lrFfBaB2WvwYeIXoMPeK0DXuuA1zrgtQ54rQNe64DXOuC1DnitA17rgNc64LUOeK0DXutg9fof/5+xzp1a/lusXudO/fqYLPNjzUdbu5G1fh5Uj4j362jnNlq+xrrW0e7X3l6vft2oweu18iPnHq/vna8Z8Xr2uw90/162Z7/7QPfvZbv9vMxAW73fIR8/3/O9vp/XRX7tPKVRGyVf7TXgbDbIx88ffX9W5NfOW30nv17+6my0+5JfL391PnZDlnzM/AsqOnwofFYAAA==
+   H4sIAAAAAAAAC+2b0QqDMAxF2+n/f/O2h0IpK5qytKn3HAiR7Tpk5lgEzSml/KkXXabDczmqOhcfC/jyPcc54bUCeK0DXuuA1zrgtQ4RvV593/nU+92IXpe5U+veRPZaBbzWQdlr8CGi1+ADXuuA1zrgtQ54rQNe64DXOuC1DnitA17rgNc64LUOeK0DXuuA1zpYvZ7x/Ix17tTyo1i9zp369zFZ5seaj3buZp7raOt1tP82Wn6UiOu1t9e7XzdGwev1+ZnPFuL1XvlRWq9Xv/tA9+9le/W7D3T/Xrbbz8sMtNX7HfLx8z3f6/W8LvJ75ymNOij5aq8BV7NBPn7+1/dXRX7vvNV38vvl785Guy/5/fJ35+M0ZMnHzL8B4djymXxWAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object name="gravitybutton" type="gravityButton" x="197" y="414" width="16" height="16"/>
   <object type="gravityButton" x="1731" y="35" width="16" height="16"/>
+  <object type="finish" x="1824" y="464" width="112" height="80"/>
+  <object name="bigger" type="spawn" x="628" y="446" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="1012" y="447" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="1396" y="445" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="basic" type="spawn" x="831" y="478" width="64" height="64">
+   <properties>
+    <property name="var" value="BasicEnemy"/>
+   </properties>
+  </object>
+  <object name="basic" type="spawn" x="1225" y="478" width="64" height="64">
+   <properties>
+    <property name="var" value="BasicEnemy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

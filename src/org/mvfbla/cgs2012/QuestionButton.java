@@ -15,6 +15,8 @@ public class QuestionButton {
 	private final int PADDING = 25;
 	private final String answerString;
 	private final int buttonID;
+	private boolean correct;
+
 	public QuestionButton(String answer,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		buttonNormal = new Image("data\\QuestionButton.png");
 		buttonHover = new Image("data\\QuestionButtonHover.png");
@@ -25,6 +27,7 @@ public class QuestionButton {
 		length = l;
 		height = h;
 		buttonID = id;
+		correct = false;
 	}
 	public void draw(Graphics g,int offsetX,int offsetY){
 		if(getHover() == true)
@@ -37,12 +40,12 @@ public class QuestionButton {
 	}
 	public void update(GameContainer gc, Input input,int correctAnswer){
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
-			if(input.isMouseButtonDown(input.MOUSE_LEFT_BUTTON)){
+			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 				setClick(true);
 				if(correctAnswer == getID()){
-					System.out.println("UR A BEAST");
+					correct = true;
 				}else{
-					System.out.println("U SUK");
+					correct = false;
 				}
 			}else{
 				setClick(false);
@@ -52,6 +55,12 @@ public class QuestionButton {
 			 setClick(false);
 			 setHover(false);
 		 }
+	}
+	public void setCorrect(boolean c){
+		correct = c;
+	}
+	public boolean isCorrect(){
+		return correct;
 	}
 	public Image getNormalButton(){
 		return buttonNormal;

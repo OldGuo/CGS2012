@@ -10,7 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 /** @author davedes */
-public class TypeWriterTest{
+public class TypeWriter{
 
 	private int renderRow;
 	private int renderCol;
@@ -20,14 +20,14 @@ public class TypeWriterTest{
 	private boolean finished;
 	private Font font;
 	private List<String>lines;
-	private final String text;
+	private String text;
 	private final Color box;
 
-    public TypeWriterTest() {
+    public TypeWriter() {
         width = 720;
         text = "Language is one of the keys to being human. It allows use to communicate with other human beings and to leave a legacy of our thoughts and actions for future generations. The dominant temporal lobe helps to process sounds and written words into meaninful information.";
         //create a list of lines based on the above text
-        box = new Color(200,200,200,0.45f);
+        box = new Color(255,255,255,0.4f);
 
         renderRow = 0;
         renderCol = 0;
@@ -45,13 +45,18 @@ public class TypeWriterTest{
     public void setDelay(int d){
     	TYPE_DELAY = d;
     }
+    public void setText(String s){
+    	text = s;
+    }
 	public void draw(Graphics g,int xPos,int yPos) throws SlickException {
         if(!finished){
 			int x = 40 + xPos;
-	        int y = 55 + yPos;
-	        int pad = 25;
+	        int y = 45 + yPos;
+	        int pad = 10;
+	        g.setColor(Color.black);
+	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 70+pad*2+20);
 	        g.setColor(box);
-	        g.fillRect(x-pad, y-pad, width+pad*2, 200+pad*2);
+	        g.fillRect(x-pad, y-pad, width+pad*2, 70+pad*2);
 
 	        g.setColor(Color.white);
 	        int lineHeight = font.getLineHeight();

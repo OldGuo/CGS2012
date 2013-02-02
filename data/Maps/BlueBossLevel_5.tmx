@@ -8,7 +8,17 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XjQrDIAyE7dze/5VXGEII0Rj/093BYddFGv0SwSuEcN1+ORzj7XfhvUdpa/Movpb0G5zOEjj5EDj5EDj5EDj5EDj5EDj5EDj93u++x2o5WjlFIWb3yEXXkp61fvoQt2j2fMopPWv9dPqansqJ99ITOPFzApzG59Q7H5zW5NQ7H5zW5NQ7H5x8qIXT6fpHTtb7kvXuM8Map0hiNLfcrWa5xInGaJb2IzfO5ETzl/JKMTV7I9Vtbqxl3+rafqrZm5M8sp9OMecknSWaLfE7OEn/19Yer8MddZnrp9HfWOlcP1lrZVeNlWpPOu8s+3wCH35G0PPuC89FKjlEJQAA
+   H4sIAAAAAAAAC+2XgQrEIAxD3Xn//803OAQp1daxrY0kEHSusOlrCx6llOP0B3Csp7+TdURZe0OU3Et7JqdcIicMkROGyAlD5IQhcsIQOWGInP7r0fdY6x9XOVUlJnqU6vfS5jvVU5vvVE87cZK1tAMn2SfIKZ/ICUPkhCFywhA5YcjiJO9LHs/uOm/Y4lS7GMtX7lZPecapj7GsncdofJrbjFOL8ZyNlrej0cv+qr315DmbTL6znrJYctJ6ieWV+AhO2ntv7sk8jMjLUT3d/Y03Paqn1VyJyrFZ7mn9buWcM/CRPaLvdz/qODpfRCUAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="53" height="45">
+  <object name="pillar" type="pillar" x="112" y="320" width="48" height="224"/>
+  <object name="pillar" type="pillar" x="368" y="320" width="48" height="224"/>
+  <object name="pillar" type="pillar" x="624" y="320" width="48" height="224"/>
+  <object name="blueboss" type="spawn" x="326" y="157" width="128" height="128">
+   <properties>
+    <property name="var" value="BlueBoss"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

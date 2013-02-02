@@ -12,12 +12,16 @@ public class GameConstants {
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();
 	public static ArrayList<Characters> enemies = new ArrayList<Characters>();
 	public static ArrayList<InteractiveObject> interacts = new ArrayList<InteractiveObject>();
+	public static ArrayList<MotionSensor> sensors = new ArrayList<MotionSensor>();
+	public static ArrayList<Pillar> pillars = new ArrayList<Pillar>();
 	public static void clear() {
 		collidableObjects.clear();
+		sensors.clear();
 		triggers.clear();
 		platforms.clear();
 		enemies.clear();
 		interacts.clear();
+		pillars.clear();
 	}
 	public static void flipGrav(){
 		GRAVITY = -GRAVITY;

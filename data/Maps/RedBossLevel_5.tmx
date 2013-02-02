@@ -8,4 +8,11 @@
    H4sIAAAAAAAAC+2Z4QqAIAyELXv/Z64/ggw3Z1nu6A6OUVY4v81+uKWUtss7YMyXD+M+onq5IUrmUq7JKZbICUPkhCFywhA5YYicMEROGCInDJEThsgJQ+SEIXLCEDlh6I+c6hiRXZmTda4hOclxhJz+zCmnmD1W5mTlYvHxxNEzvRmu8/JyytV8LWflfSu+aY1TPd6z/JYVZ3LSrHEq45510fafVvSyf2JPP3nWJZpn9VMky3+r3Ft6Hnl+BafWmLf2ZB2uqstWP83+/tdu9dNorayssTucvOsSgY/G6QSOZoCoRCUAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="53" height="45">
+  <object name="redboss" type="spawn" x="331" y="411" width="128" height="128">
+   <properties>
+    <property name="var" value="RedBoss"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

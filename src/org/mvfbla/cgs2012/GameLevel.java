@@ -13,17 +13,25 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
 	protected int bgOffsetX, bgNumRepeat;
+	protected QuestionWindow questions;
 	protected Map map;
 	protected Player player;
 	protected CameraObject cameraBox;
 	protected Image background;
 	protected Boolean lost = false;
+	protected int stateID = -1;
+	private TypeWriter text;
+	protected boolean done = false;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
+		questions = new QuestionWindow();
+		text = new TypeWriter();
+		done = false;
+		int motionDelay = 0;
 		for(TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn"))
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
@@ -59,10 +67,40 @@ public abstract class GameLevel extends BasicGameState{
 				Button b = new Button(to.getX(), to.getY(), new GravityListener());
 				GameConstants.interacts.add(b);
 			}
+			if(to.getType().equals("motionSensor")) {
+				MotionSensor ms = new MotionSensor(to, motionDelay);
+				motionDelay += 500;
+				GameConstants.sensors.add(ms);
+			}
+			if(to.getType().equals("pillar")){
+				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
+				GameConstants.pillars.add(pillar);
+			}
+			if(to.getType().equals("finish")) {
+				Trigger t = new Trigger(to, new FinishListener());
+				GameConstants.triggers.add(t);
+			}
 		}
 		background = new Image("data\\Background.png");
 	}
+	public class FinishListener implements TriggerListener {
+		@Override
+		public void onEnter(GameObject src) {
+			//bring up question screen
+			done = true;
+			questions.setAnswering(true);
+		}
+		@Override
+		public void onExit(GameObject src) {
+			done = false;
+			questions.setAnswering(false);
+		}
+		@Override
+		public void triggered(GameObject src) {
+		}
+	}
 	public class GravityListener implements ButtonListener{
+		@Override
 		public void buttonPressed(boolean state){
 			//player.rotateAnimation();
 			GameConstants.flipGrav();
@@ -75,6 +113,10 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+		text.update(container,delta);
+		if(done && questions.getAnswering() == false && stateID != 8)
+			sbg.enterState(stateID + 1);
+		questions.update(container);
 		if(!lost)
 			player.update(container, delta);
 		for(Characters guy:GameConstants.enemies){
@@ -110,6 +152,7 @@ public abstract class GameLevel extends BasicGameState{
 				else
 					((PlantedEnemy)guy).changeSleep(false);
 			}
+
 			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
 					guy.setHealth(guy.getHealth()-1);
@@ -120,6 +163,8 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);
+		for(MotionSensor m : GameConstants.sensors)
+			m.update(container, delta);
 		cameraBox.update(container, delta);
 
 		//testing
@@ -140,14 +185,27 @@ public abstract class GameLevel extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
-		//if(player.getVelX() != 0)
-		//	System.out.println("IM MOVINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
 		switch(name) {
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
+				break;
+			case "PlantedEnemy" :
+				out = new PlantedEnemy(x, y);
+				break;
+			case "BiggerEnemy" :
+				out = new BiggerEnemy(x, y);
+				break;
+			case "RedBoss" :
+				out = new RedBoss(x, y);
+				break;
+			case "BlueBoss" :
+				out = new BlueBoss(x, y);
+				break;
+			case "YellowBoss" :
+				out = new YellowBoss(x, y);
 				break;
 		}
 		return out;
@@ -165,20 +223,32 @@ public abstract class GameLevel extends BasicGameState{
 			guy.draw(g);
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
+		for(MotionSensor m : GameConstants.sensors)
+			m.draw(g);
+		for(Pillar p : GameConstants.pillars)
+			p.draw(g);
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
-		for(Trigger t : GameConstants.triggers)
+		//for(Trigger t : GameConstants.triggers)
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		g.draw(cameraBox);
-		g.draw(player.getCollision());
+		//g.draw(cameraBox);
+		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);
 			else
 				g.setColor(Color.gray);
 			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
+		}
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
 		player.draw(g);
 	}

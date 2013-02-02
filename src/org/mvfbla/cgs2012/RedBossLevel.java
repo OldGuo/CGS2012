@@ -3,20 +3,16 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class RedBossLevel extends GameLevel {
 
-	private int stateID= -1;
 
 	public RedBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-
-	private Boss redBoss;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
 
@@ -25,7 +21,6 @@ public class RedBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
-		redBoss = new RedBoss(150,350);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
@@ -47,7 +42,6 @@ public class RedBossLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		GameConstants.enemies.add(redBoss);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

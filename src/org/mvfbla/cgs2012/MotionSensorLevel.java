@@ -3,28 +3,25 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MotionSensorLevel extends GameLevel {
 
-	private int stateID = -1;
 	public MotionSensorLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-
-	private Enemy BiggerEnemy;
+	private Image Notif;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 19);
+		Notif = new Image("data\\Maps\\MotionNotif.png");
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		player = new Player(300, 496);
-		BiggerEnemy = new BiggerEnemy(150,448);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
@@ -37,6 +34,7 @@ public class MotionSensorLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
+		Notif.draw(100,150);
 	}
 	@Override
 	public int getID(){
@@ -46,7 +44,6 @@ public class MotionSensorLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		GameConstants.enemies.add(BiggerEnemy);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

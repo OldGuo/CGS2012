@@ -64,7 +64,6 @@ public class BlackBoss extends Characters{
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_UP)) {
 			// Jump
-			System.out.println(getDirection(trans));
 			if(getDirection(trans) == 1) {
 				trans = new Vector(0,0);
 				this.setVelY(-9);
