@@ -10,7 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 /** @author davedes */
-public class TypeWriterTest{
+public class TypeWriter{
 
 	private int renderRow;
 	private int renderCol;
@@ -23,7 +23,7 @@ public class TypeWriterTest{
 	private final String text;
 	private final Color box;
 
-    public TypeWriterTest() {
+    public TypeWriter() {
         width = 720;
         text = "Language is one of the keys to being human. It allows use to communicate with other human beings and to leave a legacy of our thoughts and actions for future generations. The dominant temporal lobe helps to process sounds and written words into meaninful information.";
         //create a list of lines based on the above text

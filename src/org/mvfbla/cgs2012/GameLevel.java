@@ -20,6 +20,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected Image background;
 	protected Boolean lost = false;
 	protected int stateID = -1;
+	private TypeWriter text;
 	protected boolean done = false;
 
 	public void initStuff() throws SlickException {
@@ -28,6 +29,7 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		questions = new QuestionWindow();
+		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
 		for(TiledObject to : map.getObjects()) {
@@ -111,7 +113,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
-		System.out.println(player.getVelY());
+		text.update(container,delta);
 		if(done && questions.getAnswering() == false && stateID != 8)
 			sbg.enterState(stateID + 1);
 		questions.update(container);
@@ -243,6 +245,11 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
 		player.draw(g);
 	}
