@@ -1,5 +1,6 @@
 package org.mvfbla.cgs2012;
 
+import org.mvfbla.cgs2012.GameLevel.GravityListener;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -26,14 +27,25 @@ public class YellowBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
-		yellowBoss = new YellowBoss(150,150);
+		yellowBoss = new YellowBoss(330,100);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+		
 		updateMain(container, sbg, delta);
+	}
+	public class yellowBossListener implements ButtonListener{
+		int number;
+		public yellowBossListener(int platform){
+			number=platform;
+		}
+		@Override
+		public void buttonPressed(boolean state) {
+			((YellowBoss)yellowBoss).activate(number,state);
+		}
 	}
 
 	@Override
@@ -49,6 +61,12 @@ public class YellowBossLevel extends GameLevel {
 		System.out.println("Entering state " + getID());
 		initStuff();
 		GameConstants.enemies.add(yellowBoss);
+		Button b1 = new Button(125,500, new yellowBossListener(0));
+		Button b2 = new Button(360,500, new yellowBossListener(1));
+		Button b3 = new Button(595,500, new yellowBossListener(2));
+		GameConstants.interacts.add(b1);
+		GameConstants.interacts.add(b2);
+		GameConstants.interacts.add(b3);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
