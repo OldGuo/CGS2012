@@ -8,6 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 public class BiggerEnemy extends Enemy{
 	public BiggerEnemy (int x, int y) throws SlickException{
 		super(x, y, 96, 96);
+		addAnimation("BiggerEnemyInvert", new Animation(new SpriteSheet("data\\LargeEnemyInverted.png", 96, 96), 150));
 		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 96, 96), 150));
 		super.setSpeed(-1);
 		super.setHealth(2);
@@ -15,6 +16,10 @@ public class BiggerEnemy extends Enemy{
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
+		if(GameConstants.getGrav() > 0)
+			playAnimation("BiggerEnemy");
+		else
+			playAnimation("BiggerEnemyInvert");
 	}
 
 }
