@@ -21,6 +21,7 @@ public class PlantedEnemy extends Enemy{
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.playAnimation(current);
+
 		if(GameConstants.getGrav() > 0)
 			current = "PlantedEnemy";
 		else

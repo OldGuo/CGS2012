@@ -16,10 +16,11 @@ public class BiggerEnemy extends Enemy{
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
-		if(GameConstants.getGrav() > 0)
-			playAnimation("BiggerEnemy");
-		else
-			playAnimation("BiggerEnemyInvert");
+		if(isAlive()){
+			if(GameConstants.getGrav() > 0)
+				playAnimation("BiggerEnemy");
+			else
+				playAnimation("BiggerEnemyInvert");
+		}
 	}
-
 }

@@ -15,9 +15,11 @@ public class BasicEnemy extends Enemy{
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
-		if(GameConstants.getGrav() > 0)
-			playAnimation("BasicEnemy");
-		else
-			playAnimation("BasicEnemyInvert");
+		if(isAlive()){
+			if(GameConstants.getGrav() > 0)
+				playAnimation("BasicEnemy");
+			else
+				playAnimation("BasicEnemyInvert");
+		}
 	}
 }
