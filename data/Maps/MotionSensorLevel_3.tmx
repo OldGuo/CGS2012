@@ -15,7 +15,7 @@
   <object type="motionSensor" x="480" y="464" width="192" height="16"/>
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
-  <object type="finish" x="1822" y="142" width="112" height="80"/>
+  <object type="finish" x="1824" y="144" width="112" height="80"/>
   <object name="bigger" type="spawn" x="62" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
