@@ -8,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 
 public class BlueBoss extends Boss{
 	private boolean awake = false;
-	private final float sight = 600;
+	private final float sight = 1000;
 	private final int ATTACK_DELAY = 2500;
 	private int time = ATTACK_DELAY;
 	private boolean stomping = false;

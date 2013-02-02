@@ -32,7 +32,8 @@ public class BlueBossLevel extends GameLevel {
 			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
-			if(guy == blueBoss){
+			String name=guy.getClass().toString();
+			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
 				if(totalDist<((BlueBoss)guy).getSight()){
 					((BlueBoss)guy).changeSleep(true);
 					((BlueBoss)guy).setDirection(Math.signum(tempX));

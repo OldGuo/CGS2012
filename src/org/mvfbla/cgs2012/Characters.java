@@ -2,9 +2,9 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.Graphics;
 
 public class Characters extends AnimatedObject {
 
@@ -173,7 +173,7 @@ public class Characters extends AnimatedObject {
 	public void draw(Graphics g){
 		for(int i=1;i<=health;i++){
 			g.setColor(Color.red);
-			g.fillRect(this.getCenterX()+i*16-this.getWidth()/2,this.getCenterY()-this.getHeight()*3/4, 8, 8);
+			g.fillRect(this.getCenterX()+i*16-this.getWidth()*3/4,this.getCenterY()-this.getHeight()*3/4, 8, 8);
 		}
 		super.draw(g);
 	}
