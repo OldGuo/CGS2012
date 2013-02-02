@@ -111,6 +111,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+		System.out.println(player.getVelY());
 		if(done && questions.getAnswering() == false && stateID != 8)
 			sbg.enterState(stateID + 1);
 		questions.update(container);

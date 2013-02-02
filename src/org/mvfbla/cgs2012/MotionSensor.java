@@ -45,8 +45,9 @@ public class MotionSensor extends GameObject{
 		public void onExit(GameObject src) { }
 		@Override
 		public void triggered(GameObject src) {
-			if(state == 2 && ((Characters)src).getVelX() != 0) {
-				((Characters)src).setHealth(((Characters)src).getHealth()-1);
+			if(state == 2) { //motion sensor
+				if(Math.abs(((Characters)src).getVelY()) > GameConstants.getGrav() || ((Characters)src).getVelX() != 0)
+					((Characters)src).setHealth(((Characters)src).getHealth()-1);
 			}
 		}
 	}
