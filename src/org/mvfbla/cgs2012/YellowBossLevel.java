@@ -7,6 +7,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.Color;
 
 public class YellowBossLevel extends GameLevel {
 
@@ -16,9 +17,10 @@ public class YellowBossLevel extends GameLevel {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Boss yellowBoss;
+	private YellowBoss yellowBoss;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
+	private float fireX,fireY;
 
 
 	@Override
@@ -33,8 +35,15 @@ public class YellowBossLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
-		
 		updateMain(container, sbg, delta);
+		if(yellowBoss.isAiming())
+			yellowBoss.setReticle(player.getX());
+		else if(yellowBoss.isFiring()){
+			if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
+				if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
+					player.setHealth(player.getHealth()-1);
+			}
+		}
 	}
 	public class yellowBossListener implements ButtonListener{
 		int number;
@@ -50,6 +59,30 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
 		draw(g);
+	}
+	@Override
+	public void draw(Graphics g){
+		super.draw(g);
+		g.setColor(Color.red);
+		if(yellowBoss.isAiming()){
+			fireX=yellowBoss.getReticle();
+			fireY=player.getY();
+			g.drawOval(fireX,fireY, yellowBoss.getReticleWidth(), yellowBoss.getReticleWidth());
+			g.drawLine(fireX, fireY+yellowBoss.getReticleWidth()/2, fireX+yellowBoss.getReticleWidth(), fireY+yellowBoss.getReticleWidth()/2);
+			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
+			g.drawLine(yellowBoss.getCenterX(), yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()/2, fireY+player.getHeight()/2);
+		}
+		else if(yellowBoss.isCharging()){
+			g.drawOval(fireX, fireY, yellowBoss.getReticleWidth(), yellowBoss.getReticleWidth());
+			g.drawLine(fireX, fireY+yellowBoss.getReticleWidth()/2, fireX+yellowBoss.getReticleWidth(), fireY+yellowBoss.getReticleWidth()/2);
+			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
+		}
+		else if(yellowBoss.isFiring()){
+			for(float i=0;i<=8;i++){
+				g.drawLine(yellowBoss.getCenterX()-8, yellowBoss.getCenterY()-40, fireX+i, fireY+player.getHeight());
+				g.drawLine(yellowBoss.getCenterX()+8, yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()+i, fireY+player.getHeight());
+			}
+		}
 	}
 	@Override
 	public int getID(){
