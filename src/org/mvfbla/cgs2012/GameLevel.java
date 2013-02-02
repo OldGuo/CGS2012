@@ -190,6 +190,21 @@ public abstract class GameLevel extends BasicGameState{
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
 				break;
+			case "PlantedEnemy" :
+				out = new PlantedEnemy(x, y);
+				break;
+			case "BiggerEnemy" :
+				out = new BiggerEnemy(x, y);
+				break;
+			case "RedBoss" :
+				out = new RedBoss(x, y);
+				break;
+			case "BlueBoss" :
+				out = new BlueBoss(x, y);
+				break;
+			case "YellowBoss" :
+				out = new YellowBoss(x, y);
+				break;
 		}
 		return out;
 	}

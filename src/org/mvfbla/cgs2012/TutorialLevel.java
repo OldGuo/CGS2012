@@ -2,13 +2,11 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class TutorialLevel extends GameLevel {
 
-	private Enemy enemy3;
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
 	private TypeWriterTest text;
@@ -25,7 +23,6 @@ public class TutorialLevel extends GameLevel {
 		question = new QuestionWindow();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
-		enemy3 = new PlantedEnemy(2000,396);
 		cameraBox = new CameraObject(player,250,1300);
 	}
 	@Override
@@ -49,8 +46,6 @@ public class TutorialLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		GameConstants.enemies.add(enemy3);
-
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
