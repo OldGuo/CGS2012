@@ -51,12 +51,12 @@ public class TypeWriter{
 	public void draw(Graphics g,int xPos,int yPos) throws SlickException {
         if(!finished){
 			int x = 40 + xPos;
-	        int y = 55 + yPos;
-	        int pad = 25;
+	        int y = 45 + yPos;
+	        int pad = 10;
 	        g.setColor(Color.black);
-	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 75+pad*2+20);
+	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 70+pad*2+20);
 	        g.setColor(box);
-	        g.fillRect(x-pad, y-pad, width+pad*2, 75+pad*2);
+	        g.fillRect(x-pad, y-pad, width+pad*2, 70+pad*2);
 
 	        g.setColor(Color.white);
 	        int lineHeight = font.getLineHeight();
