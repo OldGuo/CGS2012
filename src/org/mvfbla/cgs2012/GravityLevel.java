@@ -3,13 +3,12 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class GravityLevel extends GameLevel {
 
-	
+
 	public GravityLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -22,7 +21,7 @@ public class GravityLevel extends GameLevel {
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,250,1000);
+		cameraBox = new CameraObject(player,250,1300);
 		background = new Image("data\\Background.png");
 	}
 
