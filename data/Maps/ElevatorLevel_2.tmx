@@ -13,5 +13,10 @@
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object type="finish" x="1823" y="462" width="112" height="80"/>
+  <object name="planted" type="spawn" x="261" y="219" width="64" height="64">
+   <properties>
+    <property name="var" value="PlantedEnemy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

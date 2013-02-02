@@ -12,9 +12,7 @@ public class BlueBossLevel extends GameLevel {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-
-	private BlueBoss blueBoss;
-	private final static int MAP_WIDTH = 780;
+	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
 
 	@Override
@@ -22,8 +20,7 @@ public class BlueBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
-		blueBoss = new BlueBoss(325,150);
-		cameraBox = new CameraObject(player,250,1000);
+		cameraBox = new CameraObject(player,250,1300);
 		background = new Image("data\\Background.png");
 	}
 
@@ -75,8 +72,6 @@ public class BlueBossLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		GameConstants.enemies.add(blueBoss);
-
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

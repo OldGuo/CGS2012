@@ -33,8 +33,8 @@ public class BlueBoss extends Boss{
 			stompY =  (int) super.getY() + 322;
 			stomping = false;
 		}else{
-			stompX = 0;
-			stompY = 0;
+			stompX = -100;
+			stompY = -100;
 		}
 	}
 	@Override

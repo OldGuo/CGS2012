@@ -16,9 +16,14 @@
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
   <object type="finish" x="1822" y="142" width="112" height="80"/>
-  <object type="spawn" x="197" y="306" width="16" height="16">
+  <object name="bigger" type="spawn" x="62" y="444" width="96" height="96">
    <properties>
-    <property name="var" value="RedBoss"/>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="1315" y="443" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
  </objectgroup>

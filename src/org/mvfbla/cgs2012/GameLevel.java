@@ -20,6 +20,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected Image background;
 	protected Boolean lost = false;
 	protected int stateID = -1;
+	private TypeWriter text;
 	protected boolean done = false;
 
 	public void initStuff() throws SlickException {
@@ -28,6 +29,7 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		questions = new QuestionWindow();
+		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
 		for(TiledObject to : map.getObjects()) {
@@ -85,15 +87,16 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void onEnter(GameObject src) {
 			//bring up question screen
+			done = true;
 			questions.setAnswering(true);
 		}
 		@Override
 		public void onExit(GameObject src) {
-
+			done = false;
+			questions.setAnswering(false);
 		}
 		@Override
 		public void triggered(GameObject src) {
-			done = true;
 		}
 	}
 	public class GravityListener implements ButtonListener{
@@ -110,6 +113,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+		text.update(container,delta);
 		if(done && questions.getAnswering() == false && stateID != 8)
 			sbg.enterState(stateID + 1);
 		questions.update(container);
@@ -189,8 +193,21 @@ public abstract class GameLevel extends BasicGameState{
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
 				break;
+			case "PlantedEnemy" :
+				out = new PlantedEnemy(x, y);
+				break;
+			case "BiggerEnemy" :
+				out = new BiggerEnemy(x, y);
+				break;
 			case "RedBoss" :
 				out = new RedBoss(x, y);
+				break;
+			case "BlueBoss" :
+				out = new BlueBoss(x, y);
+				break;
+			case "YellowBoss" :
+				out = new YellowBoss(x, y);
+				break;
 		}
 		return out;
 	}
@@ -228,6 +245,11 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
 		player.draw(g);
 	}

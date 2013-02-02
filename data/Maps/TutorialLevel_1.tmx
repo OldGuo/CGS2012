@@ -26,5 +26,20 @@
    </properties>
   </object>
   <object type="finish" x="4335" y="174" width="112" height="80"/>
+  <object name="planted" type="spawn" x="1879" y="479" width="64" height="64">
+   <properties>
+    <property name="var" value="PlantedEnemy"/>
+   </properties>
+  </object>
+  <object name="basic" type="spawn" x="3285" y="477" width="64" height="64">
+   <properties>
+    <property name="var" value="BasicEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="3767" y="444" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

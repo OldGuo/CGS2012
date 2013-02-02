@@ -15,5 +15,30 @@
   <object name="gravitybutton" type="gravityButton" x="197" y="414" width="16" height="16"/>
   <object type="gravityButton" x="1731" y="35" width="16" height="16"/>
   <object type="finish" x="1824" y="464" width="112" height="80"/>
+  <object name="bigger" type="spawn" x="628" y="446" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="1012" y="447" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="bigger" type="spawn" x="1396" y="445" width="96" height="96">
+   <properties>
+    <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="basic" type="spawn" x="831" y="478" width="64" height="64">
+   <properties>
+    <property name="var" value="BasicEnemy"/>
+   </properties>
+  </object>
+  <object name="basic" type="spawn" x="1225" y="478" width="64" height="64">
+   <properties>
+    <property name="var" value="BasicEnemy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
