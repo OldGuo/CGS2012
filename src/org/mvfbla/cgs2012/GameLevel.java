@@ -189,6 +189,8 @@ public abstract class GameLevel extends BasicGameState{
 			case "BasicEnemy" :
 				out = new BasicEnemy(x, y);
 				break;
+			case "RedBoss" :
+				out = new RedBoss(x, y);
 		}
 		return out;
 	}
@@ -215,8 +217,8 @@ public abstract class GameLevel extends BasicGameState{
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		g.draw(cameraBox);
-		g.draw(player.getCollision());
+		//g.draw(cameraBox);
+		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);
