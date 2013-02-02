@@ -6,16 +6,19 @@
  <tileset firstgid="5" name="Special" tilewidth="16" tileheight="16">
   <image source="collision.png" width="128" height="51"/>
  </tileset>
+ <tileset firstgid="29" name="Notif" tilewidth="16" tileheight="16">
+  <image source="MotionNotif.png" width="288" height="144"/>
+ </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2a4W7DIAyESZu+/yu3+4GELGwMBAbcnWR5S9YQOH8mWnOFEF6/uJiPz+9f3IE6WdHn6Dt1rq5ArlFErnFErnFErnFErnFErnFErnFErnFErnFErnFErnFErvu0wvdW3kyu+xTXbYdMrnFErnFErnFErnGEzrXnmeYdzmCBXOMInWskkWsckWsc7c517f+PkEWucbQ715Rf5BpH5HpffUSU9N9c89mqXS1ek+s9tRvX1DyRaxxFn1O2mc/M6XtnK7wTxTwup9/Rjnyn7ZUJrf5WWJeT88j+Ea8/Klboj6tkjaP0eGsdzAw5pvW7Nd/c/Lzje7m5jPFG5LQnauflfck9PL1GbpzRMbueeuowx5W2piPGlp6moTFbM6dY6x6/ari0OJ1RYy31mOMqRu99W+tUOi7PW55Yx0t+ja5l6b/sN1r/Kf1d7pnV07c1pqLfLeuUMtXCirz3J31Yoa9rn831uZ5+UzPnW3ze8r7kW029pnOe6UGuzqyfLTZL6+q9lrXP9dT1nQnt3lp88+x5srae6rstPpR8tFiyjnvPP1nv3v3CW79WLZTqQ9t3/uILPxVvonxWAAA=
+   H4sIAAAAAAAAC+3a5ZLbMBiFYWc3vYwyMzMzc7tlZmZmZmZmZuZeW9/+8IzHY8uSY2ft6Dszz6hNdpPI0rEz2RQcx6lCQcaKH6tRdCSVHHed3XWXVG4KjvTalkiv7Yn02p5Ir+2J9NqeSK/tifTanpj0ui7qoT4aoCEaoTGaoCmaoTlaoCVaoTXaoC3aJT0BiXZMet0eHdARndAZXdAV3dAdPdATvdAbfdAX/dAfA5KegEQ7Jr0eiEEYjCEYimEYjhEYiVEYjTEYi3EYjwmYiEmJz0CiG5NeT8YUTEUNpmE6ZmAmZmE25mAu5mE+FmAhFmFx0hOQaMek10uwFMuwHCuwEquwGmuwFuuwHhuwEZuwGVuwNfEZ1G6y8Hcr3dGk19uwHTuwE7uwG3uwF/uwHwdwEIdwGEdwFMdwXOsI5ifuccvDaNLrEziJUziNMziLcziPC7iIS7iMK7iKa7iOG7ipdwglKcSk17dwG3dwF/dwHw/wEI/wGE/wFM/wHC/wEq/wOukJSLRj0us3eIt3eI8P+IhP+Iwv+Ipv+I4f+Ilf+I0/+Jv4DCS6kc/N7Intn4frvKepdiqjC9Jre2J7r22K9NqeSK/tSd57bfr5kc2RXtuTvPdaoh/ptT2RXuc3dXyiUtu9lvdW8RNnraXX+Uzeei0pX6TX9sRdZ2+3ZazM0fu9syx8J0rG9Ebv32jT/E5bVYCw/ZeF41LJY5rnD/fx05KF82NWxrAeeW+Puw/Kyf+cqv+r5hs0P93n1+1NQfF8aYzec2LY/f7X5b+Gex8j6HnSVu79VMo+DOpV2DFN47n9a+oV1lmTObl7XWe9THqp6mk59lic/RjUK1epr1t1nKJu99+vWhPV7VHrlfZe9q+//3wTdv6J+rmg96w65+2wTrnrHec4eTsVpyv+157kOmThvB72u0HnuVLONyZzLvp+X7X2Uetmsl+9cy7nGgTtM9W/Vd2MOq66j6W6zpWyr4sBwl5bnHXTueb591ZS59046xC1jqouqW7XvT/J/a57vdDdv6q9ELU/wq47//0DZnNBr3xWAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object type="motionSensor" x="480" y="464" width="192" height="16"/>
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
-  <object type="finish" x="1822" y="142" width="112" height="80"/>
+  <object type="finish" x="1824" y="144" width="112" height="80"/>
   <object name="bigger" type="spawn" x="62" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
