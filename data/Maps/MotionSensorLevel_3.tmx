@@ -11,7 +11,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
@@ -29,5 +29,6 @@
     <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
+  <object type="motionButton" x="1760" y="464" width="32" height="32"/>
  </objectgroup>
 </map>

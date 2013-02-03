@@ -6,6 +6,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+
 public class MotionSensorLevel extends GameLevel {
 
 	public MotionSensorLevel(int stateID) {
@@ -41,6 +43,7 @@ public class MotionSensorLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
+		text.setText("OHMAHGERD ITS A MOTION SENSOR");
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

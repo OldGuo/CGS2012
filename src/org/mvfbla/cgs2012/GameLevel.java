@@ -10,8 +10,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public abstract class GameLevel extends BasicGameState{
 	protected int bgOffsetX, bgNumRepeat;
@@ -22,7 +20,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected Image background;
 	protected Boolean lost = false;
 	protected int stateID = -1;
-	private TypeWriter text;
+	protected TypeWriter text;
 	public boolean done = false;
 	public long transTime = 0;
 	private byte transState = 0;
@@ -72,6 +70,10 @@ public abstract class GameLevel extends BasicGameState{
 				Button b = new Button(to.getX(), to.getY(), new GravityListener());
 				GameConstants.interacts.add(b);
 			}
+			if(to.getType().equals("motionButton")) {
+				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
+				GameConstants.interacts.add(b);
+			}
 			if(to.getType().equals("motionSensor")) {
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
@@ -100,6 +102,17 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void buttonPressed(boolean state) {
 			GameConstants.platforms.get(0).setOn(state);
+		}
+	}
+	public class MotionButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state)
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 0);
+			else
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 1);
 		}
 	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
