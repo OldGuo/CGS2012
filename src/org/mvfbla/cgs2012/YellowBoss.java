@@ -2,7 +2,6 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -73,7 +72,10 @@ public class YellowBoss extends Boss{
 		teleporting=false;
 		time=0;
 		do{
-			location=(int)(Math.random()*3);
+			int temp = location;
+			do{
+				location=(int)(Math.random()*3);
+			}while(temp == location);
 		}while(activated[location]);
 	}
 	public void activate(int platform, boolean on){
