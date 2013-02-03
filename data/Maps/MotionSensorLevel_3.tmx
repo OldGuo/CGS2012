@@ -43,9 +43,14 @@
     <property name="var" value="turnOffSensor"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1254" y="144" width="67" height="80">
+  <object name="plot text" type="trigger" x="1568" y="144" width="67" height="80">
    <properties>
     <property name="var" value="beatMotionLevel"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1256" y="144" width="49" height="77">
+   <properties>
+    <property name="var" value="accomplishment"/>
    </properties>
   </object>
  </objectgroup>

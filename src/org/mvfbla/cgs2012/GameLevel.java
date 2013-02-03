@@ -23,6 +23,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected int stateID = -1;
 	private TypeWriter text;
 	protected boolean done = false;
+	protected boolean paused;
 	protected float time=0;
 	public long transTime = 0;
 	private byte transState = 0;
@@ -125,95 +126,110 @@ public abstract class GameLevel extends BasicGameState{
 	}
 	public void unlockElev() {}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
-		if(transState == 1) {
-			transTime += delta;
-			if(transTime >= transLength) {
-				transState = 0;
-				transTime = 2*transLength;
-			}
-		} else if(transState == 2) {
-			transTime -= delta;
-			if(transTime <= 0) {
-				sbg.enterState(stateID + 1);
-			}
-		}
-		if(done && questions.getAnswering() == false && stateID != 8) {
-			player.setHealth(0);
-			transState = 2;
-			//sbg.enterState(stateID + 1);
-		}
-		questions.update(container);
-		if(!lost)
-			player.update(container, delta);
-		for(Characters guy:GameConstants.enemies){
-			guy.update(container, delta);
-			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
-			double Xdist=Math.pow(tempX, 2);
-			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
-			float totalDist=(float)Math.sqrt(Xdist+Ydist);
-			String name=guy.getClass().toString();
-			float hit=0;
-			if(player.collides(guy)&&guy.isAlive()){
-				if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-					if(Math.abs(tempX)<20)
-						player.setHealth(player.getHealth()-1);
-					if(tempX>0)
-						hit+=16;
-				}
-				else{
-					if(Math.abs(tempX)<40)
-						player.setHealth(player.getHealth()-1);
-				}
-			}
-			if(tempX>0)
-				hit+=(guy.getWidth());
-			else
-				hit+=(guy.getWidth()/8);
-			if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
-				if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
-					((PlantedEnemy)guy).changeSleep(true);
-					((PlantedEnemy)guy).setDirection(Math.signum(tempX));
-					((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
-				}
-				else
-					((PlantedEnemy)guy).changeSleep(false);
-			}
-
-			if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
-				if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
-					guy.setHealth(guy.getHealth()-1);
-			}
-			/*if(!player.isAlive()){
-				System.out.println("GG");
-			}*/
-		}
-		for(MovingTile t : GameConstants.platforms)
-			t.update(container, delta);
-		for(MotionSensor m : GameConstants.sensors)
-			m.update(container, delta);
-		cameraBox.update(container, delta);
-
-		//testing
 		Input input = container.getInput();
-		if (input.isKeyDown(Input.KEY_0))
-			sbg.enterState(Game.MAIN_MENU_STATE);
-		if (input.isKeyDown(Input.KEY_1))
-			sbg.enterState(Game.TUTORIAL_STATE);
-		if (input.isKeyDown(Input.KEY_2))
-			sbg.enterState(Game.ELEVATOR_STATE);
-		if (input.isKeyDown(Input.KEY_3))
-			sbg.enterState(Game.MOTION_SENSOR_STATE);
-		if (input.isKeyDown(Input.KEY_4))
-			sbg.enterState(Game.GRAVITY_STATE);
-		if (input.isKeyDown(Input.KEY_5))
-			sbg.enterState(Game.BLUE_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_6))
-			sbg.enterState(Game.RED_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_7))
-			sbg.enterState(Game.YELLOW_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_8))
-			sbg.enterState(Game.BLACK_BOSS_STATE);
-		text.update(container,delta);
+		if(container.isPaused() == false){
+			if(transState == 1) {
+				transTime += delta;
+				if(transTime >= transLength) {
+					transState = 0;
+					transTime = 2*transLength;
+				}
+			} else if(transState == 2) {
+				transTime -= delta;
+				if(transTime <= 0) {
+					sbg.enterState(stateID + 1);
+				}
+			}
+			if(done && questions.getAnswering() == false && stateID != 8) {
+				player.setHealth(0);
+				transState = 2;
+				//sbg.enterState(stateID + 1);
+			}
+			questions.update(container);
+			if(!lost)
+				player.update(container, delta);
+			for(Characters guy:GameConstants.enemies){
+				guy.update(container, delta);
+				float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
+				double Xdist=Math.pow(tempX, 2);
+				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
+				float totalDist=(float)Math.sqrt(Xdist+Ydist);
+				String name=guy.getClass().toString();
+				float hit=0;
+				if(player.collides(guy)&&guy.isAlive()){
+					if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+						if(Math.abs(tempX)<20)
+							player.setHealth(player.getHealth()-1);
+						if(tempX>0)
+							hit+=16;
+					}
+					else{
+						if(Math.abs(tempX)<40)
+							player.setHealth(player.getHealth()-1);
+					}
+				}
+				if(tempX>0)
+					hit+=(guy.getWidth());
+				else
+					hit+=(guy.getWidth()/8);
+				if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
+						((PlantedEnemy)guy).changeSleep(true);
+						((PlantedEnemy)guy).setDirection(Math.signum(tempX));
+						((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
+					}
+					else
+						((PlantedEnemy)guy).changeSleep(false);
+				}
+
+				if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
+					if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
+						guy.setHealth(guy.getHealth()-1);
+				}
+				/*if(!player.isAlive()){
+					System.out.println("GG");
+				}*/
+			}
+			for(MovingTile t : GameConstants.platforms)
+				t.update(container, delta);
+			for(MotionSensor m : GameConstants.sensors)
+				m.update(container, delta);
+			cameraBox.update(container, delta);
+
+			//testing
+			if (input.isKeyDown(Input.KEY_0))
+				sbg.enterState(Game.MAIN_MENU_STATE);
+			if (input.isKeyDown(Input.KEY_1))
+				sbg.enterState(Game.TUTORIAL_STATE);
+			if (input.isKeyDown(Input.KEY_2))
+				sbg.enterState(Game.ELEVATOR_STATE);
+			if (input.isKeyDown(Input.KEY_3))
+				sbg.enterState(Game.MOTION_SENSOR_STATE);
+			if (input.isKeyDown(Input.KEY_4))
+				sbg.enterState(Game.GRAVITY_STATE);
+			if (input.isKeyDown(Input.KEY_5))
+				sbg.enterState(Game.BLUE_BOSS_STATE);
+			if (input.isKeyDown(Input.KEY_6))
+				sbg.enterState(Game.RED_BOSS_STATE);
+			if (input.isKeyDown(Input.KEY_7))
+				sbg.enterState(Game.YELLOW_BOSS_STATE);
+			if (input.isKeyDown(Input.KEY_8))
+				sbg.enterState(Game.BLACK_BOSS_STATE);
+			text.update(container,delta);
+		}else{
+			player.stopAnimation();
+			for(Characters guy:GameConstants.enemies){
+				if(guy.shouldDisplay())
+					guy.stopAnimation();
+			}
+		}
+		if(input.isKeyPressed(Input.KEY_ESCAPE)){
+			paused = !paused;
+		}
+		if(paused)
+			container.pause();
+		else
+			container.resume();
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
@@ -287,6 +303,8 @@ public abstract class GameLevel extends BasicGameState{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		if(paused)
+			g.drawString("PAUSED", 375, 300);
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;
@@ -296,79 +314,87 @@ public abstract class GameLevel extends BasicGameState{
 		String textString = null;
 		switch(textChoice){
 		case "intro":
-			textString ="I awoke to find myself in a sea of darkness. " +
-						 "I tried to recall the events prior, but every strand of thought escaped my grasps. " +
-						 "I knew nothing except that I must move forward." +
+			textString = "I saw nothing around me but darkness. " +
+						 "I try to recall the events prior, but every strand of thought escapes my grasps. " +
+						 "I know nothing except that I must move forward." +
 						 "                                       ";
 		break;
 		case "firstEnemy":
-			textString = "As I came into the bright light, I saw something ahead. " +
-						 "A furious rage built up inside me. Perhaps I should use [SPACE] to defeat" +
+			textString = "As I come into the bright light, I see something ahead. " +
+						 "A furious rage builds up inside me. I want to use [SPACE] to defeat" +
 						 " this enemy. " +
 						 "                                       ";
 			break;
 		case "firstTechnology":
-			textString = "A strange piece of technology lay in front of me. Although it seemed alien to me, a voice " +
-						 "in the back of my head told me to use [SPACE] to active the platform ahead. Strange." +
+			textString = "A strange piece of technology stands before of me. Although it seems alien to me, a voice " +
+						 "inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
+						 " for time but luckly I can press [ESC] to pause." +
 						 "                                       ";
 			break;
 		case "firstQuestion":
-			textString = "After clearing the ledge, I was filled with a strong sense of achievement." +
-						 "  The blur in my mind began to clear up a bit. " +
-						 "But this feeling of accomplishment was quickly drowned out by the pangs of regret. " +
+			textString = "After clearing the ledge, I am filled with a strong sense of achievement." +
+						 "  The blur in my mind begins to clear up a bit. " +
+						 "But this feeling of accomplishment is quickly drowned out by the pangs of regret. " +
 						 " Did I have to defeat that enemy? " +
 						 "Perhaps I should refrain from physical conflicts in the future." +
 						 "                                       ";
 			break;
 		case "firstJump":
-			textString = "Almost effortlessly, I made each first jump. " +
-						 "Amazed at the grace and ease of my actions, these jumps" +
-						 " almost seemed familiar to me. Like I had done them countless times in the past." +
+			textString = "Almost effortlessly, I make each jump. " +
+						 "These jumps almost seemed familiar to me. " +
+						 "Like I had done them countless times in the past." +
 						 "                                       ";
 			break;
 		case "longJump":
-			textString = "This jump was longer and wider than the previous.  I wanted to turn back." +
-						 " But a relenteless driving force drove me to push forward" +
-						 "  Clearing this jump required a leap of faith." +
+			textString = "The jump is longer and wider than the previous.  I want to turn back." +
+						 " But a relenteless force drives me to push forward" +
+						 "  Clearing this jump requires a leap of faith." +
 						 "                                       ";
 			break;
 		case "tutorialEnd":
-			textString = "Almost in disbelief, I looked down at my suit" +
-						 " and saw a badge.  EMPLOYEE NAME: it said. However the text below it seemed to " +
+			textString = "Almost in disbelief, I look down at my suit" +
+						 " and see a badge.  EMPLOYEE NAME: it says. However the text below it seems to " +
 						 "have been intentionally scratched out. " +
 						 "So many questions filled my mind, but all the answers lie ahead. " +
 						 "                                       ";
 			break;
 		case "elevatorLevelStart":
-			textString = "The elevator felt like it had brought me up a few floors. " +
-						 "Questions still left unasnwered.  Where am I? Who am I? Why am I here?" +
-						 " All I wanted were the answers. " +
+			textString = "The elevator feels like it has brought me up a few floors. " +
+						 "My head begins to spin.  I have so many questions.  " +
+						 "Where am I? Who am I? Why am I here?" +
+						 " All I want were the answers.  ...   ...   ..." +
 						 "                                       ";
 			break;
 		case "anotherEnemy":
-			textString = "There was a key up above, but another one of those enemies blocked my path.  " +
-						 "Something told me I didn't need that key, but I wanted it anyways. Perhaps" +
+			textString = "There is a key up above, but another one of those enemies blocks my path.  " +
+						 "Something tells me I don't need the key, but I desperately want it anyways. Perhaps" +
 						 " this time I should use the [UP] arrow key to jump over the enemy without harm." +
 						 "                                       ";
 			break;
 		case "lockedElevator":
-			textString = "Locked!? Seems like that key would be useful here. But I wondered about the " +
-						 " technology that lay beyond the elevator..." +
+			textString = "Locked!? It seems like that key would be useful here. But I wonder about the " +
+						 " technology beyond the elevator..." +
 						 "                                       ";
 			break;
 		case "motionLevelStart":
-			textString = "The elevator had brought me up another few floors. The haze in my mind" +
-						 " seemed to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
+			textString = "The elevator brings me up another few floors. The haze in my mind" +
+						 " seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
 						 "...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
 						 "                                       ";
 			break;
 		case "turnOffSensor":
 			textString = "It seems really dangerous up ahead, but something tells me whats beyond will pay off." +
-						 " It's either this or the motion sensors   ...   " +
+						 " It is either this or the motion sensors   ...   " +
+						 "                                       ";
+			break;
+		case "accomplishment":
+			textString = "I feel proud and accomplished having conquered the motion sensors." +
 						 "                                       ";
 			break;
 		case "beatMotionLevel":
-			textString = "But there I feel something up ahead.  " +
+			textString = "Something clicks inside my head as I see the elevator." +
+						 "  There I felt something up ahead. I have to keep going.  I have to" +
+						 " find the answers.  " +
 						 "                                       ";
 			break;
 		}
