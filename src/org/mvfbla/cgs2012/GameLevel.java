@@ -57,45 +57,8 @@ public abstract class GameLevel extends BasicGameState{
 					@Override
 					public void onEnter(GameObject src) {
 						textChoice = to.getProperty("var");
-						switch(textChoice){
-							case "intro":
-								text.setText("I awoke to find myself in a sea of darkness. " +
-											 "I tried to recall the events prior, but every strand of thought escaped my grasps. " +
-											 "I knew nothing except that I must move forward." +
-											 "                                       ");
-								text.restart();
-							break;
-							case "firstEnemy":
-								text.setText("As I came into the bright light, I saw something ahead. " +
-											 "A furious rage built up inside me. Perhaps I should use [SPACE] to defeat" +
-											 " this enemy. " +
-											 "                                       ");
-								text.restart();
-								break;
-							case "firstQuestion":
-								text.setText("After clearing the ledge, I was filled with a strong sense of achievement." +
-											 "  The blur in my mind began to clear up a bit. " +
-											 "My feeling of accomplishment was quickly drowned out by the pangs of regret. " +
-											 " Did I have to defeat that enemy? " +
-											 "Perhaps I should refrain from physical conflicts in the future.                    ");
-								text.restart();
-								break;
-							case "longJump":
-								text.setText("This jump was longer and wider than the previous.  I wanted to turn back." +
-											 " But a relenteless driving force drove me to push forward" +
-											 "  Clearing this jump required a leap of faith." +
-											 "                                       ");
-								text.restart();
-								break;
-							case "tutorialEnd":
-								text.setText("Almost in disbelief, I looked down at my suit" +
-											 " and saw a badge.  EMPLOYEE NAME: it said. However the text below it seemed to " +
-											 "have been intentionally scratched out. " +
-											 "So many questions filled my mind, but all the answers lie ahead. " +
-											 "                                      ");
-								text.restart();
-								break;
-						}
+						changeText(textChoice);
+
 					}
 					@Override
 					public void onExit(GameObject src) {}
@@ -223,7 +186,6 @@ public abstract class GameLevel extends BasicGameState{
 			/*if(!player.isAlive()){
 				System.out.println("GG");
 			}*/
-			text.update(container,delta);
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);
@@ -251,6 +213,7 @@ public abstract class GameLevel extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
+		text.update(container,delta);
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
@@ -328,5 +291,59 @@ public abstract class GameLevel extends BasicGameState{
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;
 		bgOffsetX = offset;
+	}
+	public void changeText(String textChoice){
+		String textString = null;
+		switch(textChoice){
+		case "intro":
+			textString ="I awoke to find myself in a sea of darkness. " +
+						 "I tried to recall the events prior, but every strand of thought escaped my grasps. " +
+						 "I knew nothing except that I must move forward." +
+						 "                                       ";
+		break;
+		case "firstEnemy":
+			textString = "As I came into the bright light, I saw something ahead. " +
+						 "A furious rage built up inside me. Perhaps I should use [SPACE] to defeat" +
+						 " this enemy. " +
+						 "                                       ";
+			break;
+		case "firstTechnology":
+			textString = "A strange piece of technology lay in front of me. Although it seemed alien to me, a voice " +
+						 "in the back of my head told me to use [SPACE] to active the platform ahead. Strange." +
+						 "                                       ";
+			break;
+		case "firstQuestion":
+			textString = "After clearing the ledge, I was filled with a strong sense of achievement." +
+						 "  The blur in my mind began to clear up a bit. " +
+						 "But this feeling of accomplishment was quickly drowned out by the pangs of regret. " +
+						 " Did I have to defeat that enemy? " +
+						 "Perhaps I should refrain from physical conflicts in the future." +
+						 "                                       ";
+			break;
+		case "firstJump":
+			textString = "Almost effortlessly, I made each first jump. " +
+						 "Amazed at the grace and ease of my actions, these jumps" +
+						 " almost seemed familiar to me. Like I had done them countless times in the past." +
+						 "                                       ";
+			break;
+		case "longJump":
+			textString = "This jump was longer and wider than the previous.  I wanted to turn back." +
+						 " But a relenteless driving force drove me to push forward" +
+						 "  Clearing this jump required a leap of faith." +
+						 "                                       ";
+			break;
+		case "tutorialEnd":
+			textString = "Almost in disbelief, I looked down at my suit" +
+						 " and saw a badge.  EMPLOYEE NAME: it said. However the text below it seemed to " +
+						 "have been intentionally scratched out. " +
+						 "So many questions filled my mind, but all the answers lie ahead. " +
+						 "                                       ";
+			break;
+		case "elevatorLevelStart":
+			textString = "The elevator had brought me up";
+			break;
+		}
+		text.setText(textString);
+		text.restart();
 	}
 }

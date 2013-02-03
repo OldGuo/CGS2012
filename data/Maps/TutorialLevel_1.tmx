@@ -72,6 +72,16 @@
     <property name="var" value="intro"/>
    </properties>
   </object>
+  <object name="plot text" type="trigger" x="2335" y="464" width="48" height="80">
+   <properties>
+    <property name="var" value="firstTechnology"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="3360" y="176" width="48" height="80">
+   <properties>
+    <property name="var" value="firstJump"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Tile Layer 2" width="284" height="45">
   <data encoding="base64" compression="gzip">
