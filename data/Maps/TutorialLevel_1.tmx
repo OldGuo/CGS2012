@@ -21,11 +21,11 @@
   </data>
  </layer>
  <objectgroup name="objects" width="284" height="45">
-  <object type="platformButton" x="2511" y="508" width="16" height="16"/>
-  <object type="movingPlatform" x="2551" y="467" width="64" height="16">
+  <object type="platformButton" x="2416" y="480" width="16" height="16"/>
+  <object type="movingPlatform" x="2544" y="464" width="64" height="16">
    <properties>
     <property name="image" value="3,0,0"/>
-    <property name="var" value="0,-270,2"/>
+    <property name="var" value="0,-206,2"/>
    </properties>
   </object>
   <object type="finish" x="4335" y="174" width="112" height="80"/>

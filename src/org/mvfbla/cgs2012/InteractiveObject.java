@@ -6,4 +6,5 @@ public interface InteractiveObject {
 	public abstract void interact(GameObject source);
 	public abstract boolean inRange(GameObject source);
 	public abstract void draw(Graphics g);
+	public abstract boolean isActive();
 }

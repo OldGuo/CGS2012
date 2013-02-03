@@ -8,15 +8,16 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2cAW7DIAxFkza9/5W7SkOyLGwIAWPwf5JFlqwJif3M1G47j+N4/cWJceuRboN9+eX4/R/X5LmAsZwk4PXewOs4wOs4wOs4wOs4wOs4wOs4wOs4lLz+kABrU/IaOd4HeB0HeB0HzWs4vRea1x82grWB13HgXlv9fgSwh3udcj56BPbgfbM4zHw/HH3dlpleo6/bgs+54oD1Og5evcZa3h+vXmMt749Xr0F/vHoN+rOi1yvO2QMrev0+1puzB+BIHFb0GrQBr+NAvZ79N/8Ybf6nQsq5xWfXGOeMaXvkdWhd0ZDqz8Nz2Xkc2T/S+UeFh/7oZZQ8ovtb68Ay+DW1r7X7zd1f7fVrvTmV640YaU+UjvN58TWcniN3ndFhXU9P6jDnlfRMR1yb55SG5Oyde0q1XpOvO15qnlrUWEs95rxK8XTe2nMq7efHtZxo+0v5Gl3LPP+830j9p/R9uZ9Za/q25FTKd8tzok61uMLn3jMPHvq69Npcn3vSb+7c88Ver+W+lLc79Urv2TIHuTrTtjU3S8+19lzaOvekrq9MSHNryVvNmsdrq1ffbclDKY+aS9r+2uM96712vaitX60WSvUhrTu/+AK7HPmsfFYAAA==
+   H4sIAAAAAAAAC+2cDW/EIAiG213//2/eLpkJIYLUKmJ5n4TY9XbVFh68ZB/ncRw/f3FifPVIj8F7+eb48x/X4rWAuZwk4PW7gdd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd54F57/X4E8Id7XXI+ewT+YL/Ow8r9Gn3dl5Veo6/7gs/hecB+nYeoXmMvH09Ur7GXjyeq12A8Ub0G49nR6x3XHIEdvf4c+605AnAkDzt6DfqA13mgXq/+m3+MPv9ToeTc42fXGNeM5XjmPLSuaEj1F+G5vHmc2T/K9WdFhP4YZZQ8oud768Az+Jza19r91u7POr/Vm1OZb8ZIe6L0Ol8X38PpNWrzzA7venpShzWvpGc6Y26eUxqSs3fuqdS6JV93vNQ89aixnnqseVXi6bq159Q6z1/XcqKdb+Vrdi3z/PN+I/Wf1vfVPrNa+rbkVMl3z3OiTvW4wtc+Mg8R+rr03lqfe9Jv7tzzxd6v5b6Vtzv1Su/ZMwe1OtOONTdbz9V6LW2fe1LXVyWktfXkzbLn8doa1Xd78tDKo+aSdt76+sh6t+4X1vrVaqFVH9K+841fCbFBoXxWAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
-  <object type="finish" x="1824" y="464" width="112" height="80"/>
+  <object type="finish" x="1600" y="464" width="80" height="80"/>
   <object name="planted" type="spawn" x="261" y="219" width="64" height="64">
    <properties>
     <property name="var" value="PlantedEnemy"/>
    </properties>
   </object>
+  <object type="key" x="80" y="224" width="64" height="64"/>
  </objectgroup>
 </map>

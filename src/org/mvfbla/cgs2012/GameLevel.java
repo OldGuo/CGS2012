@@ -25,6 +25,7 @@ public abstract class GameLevel extends BasicGameState{
 	public long transTime = 0;
 	private byte transState = 0;
 	public long transLength = 1200;
+	public Elevator elevator;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -79,6 +80,10 @@ public abstract class GameLevel extends BasicGameState{
 				motionDelay += 500;
 				GameConstants.sensors.add(ms);
 			}
+			if(to.getType().equals("key")) {
+				Key key = new Key(to, this);
+				GameConstants.interacts.add(key);
+			}
 			if(to.getType().equals("pillar")){
 				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
 				GameConstants.pillars.add(pillar);
@@ -86,6 +91,7 @@ public abstract class GameLevel extends BasicGameState{
 			if(to.getType().equals("finish")) {
 				Elevator e = new Elevator(to.getX(), to.getY(), this);
 				GameConstants.interacts.add(e);
+				elevator = e;
 			}
 		}
 		background = new Image("data\\Background.png");
@@ -115,6 +121,7 @@ public abstract class GameLevel extends BasicGameState{
 					ms.setState((byte) 1);
 		}
 	}
+	public void unlockElev() {}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
 		if(transState == 1) {
 			transTime += delta;
