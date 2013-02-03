@@ -9,9 +9,12 @@
  <tileset firstgid="29" name="Notif" tilewidth="16" tileheight="16">
   <image source="MotionNotif.png" width="288" height="144"/>
  </tileset>
+ <tileset firstgid="191" name="MotionNotifOff" tilewidth="16" tileheight="16">
+  <image source="MotionNotifOff.png" width="288" height="144"/>
+ </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3a5Y7jMBiF4XSmt7HMzMzMzMzMzMzMzMzMeG377o9IUZQ4dpqkaf0d6ZF325m2jn2SqtOC4zg1KMhY9WMtio6kmuOus7vukupNwZFe2xLptT2RXtsT6bU9kV7bE+m1PZFe2xOTXtdBXdRDfTRAQzRCYzRBUzRDc7RAS7RCa7RB26QnINGOSa/boT06oCM6oTO6oCu6oTt6oCd6oTf6oC/6oX/SE5Box6TXAzAQgzAYQzAUwzAcIzASozAaYzAW4zAeEzAx8RlIdGPS60mYjCmYimmYjhmYiVmYjTmYi3mYjwVYiEVYnPQEJNox6fUSLMUyLMcKrMQqrMYarMU6rMcGbMQmbMYWbE18BuVNHv5upTua9HobtmMHdmIXdmMP9mIf9uMADuIQDuMIjuIYjmsdwcqJe9wqYTTp9QmcxCmcxhmcxTmcxwVcxCVcxhVcxTVcxw3c1DuEkhRi0utbuI07uIt7uI8HeIhHeIwneIpneI4XeIlXeJ30BCTaMen1G7zFO7zHB3zEJ3zGF3zFN3zHD/zEL/zGH/xNfAYS3cjnZvbE9s/Ddd7T1DrV0QXptT2xvdc2RXptT6TX9qTSe236+ZHNkV7bk0rvtUQ/0mt7Ir22J+Xutby3yi7Sa3tS7l5Lsov02p646+zttozVOXq/d5aH70TJmN7o/Rttmt9pqwkQtv/ycFyqeUzz/OE+flrycH7MyxjWI+/tcfdBlvzPqfq/ar5B89N9ft3eFBTPl8boPSeG3e9/Xf5ruPcxgp4nbVnvp1L2YVCvwo5pGs/tX1OvsM6azMnd6zrrZdJLVU+z2GNx9mNQr1ylvm7VcYq63X+/ak1Ut0etV9p72b/+/vNN2Pkn6ueC3rPqnLfDOuWud5zj5O1UnK74X3uS65CH83rY7wad50o535jMuej7fdXaR62byX71zjnLNQjaZ6p/q7oZdVx1H0t1nStlXxcDhL22OOumc83z762kzrtx1iFqHVVdUt2ue3+S+133eqG7f1V7IWp/hF13/vsHO2KTzHxWAAA=
+   H4sIAAAAAAAAC+2a6w6DIAyF0fn+zzz3g4Q0tBQQhpxzkqYbTrm0XzHTI4Rw3nbQb+8/t12B2lkxzjHu1L46ArlGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnu0wrPrbyeXPcprtsbPLnGEbnGEbnGEbnGETrXnnuaT9iDBXKNI3SukUSucUSucfR2rmv/P0IWucbR27mm/CLXOCLXOPo317y3midyjaN/c03NE7nGUYxzyjb9nj5972yFd6Lox/n0Ge3Id9rOjGn5t8K67OxH1o94/VG2Qn1cxWscpe2teTDTZJ/Wd2u+ufl5+/dycxj9jfBpTdSOy3HJPTy9Rq6f0TY7n3ryMMeVtqYj+pYxTU1jtmZOMdc98arh0uJ0Ro615GOOq2i947bWqdQuj1sxsdpL8RqdyzL+st5o9af0u9w9q6dua0zFeLesU8pUCyty7E/GYYW6rp2bq3M99aZmzpc434p9KW41+ZrOeWYMcnlmfbbYLK2r91rWPteT11fGtLG1xM2z58nceqrutsShFEeLJavde/zJfPfuF978tXKhlB/avvOzL2IEvcF8VgAA
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
@@ -31,4 +34,9 @@
   </object>
   <object type="motionButton" x="1760" y="464" width="32" height="32"/>
  </objectgroup>
+ <layer name="Tile Layer 2" width="123" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RYw9fdxzG4XYdOturbdu27c62bXvFbLvd2tm2bdve2uHaS9jJcpZ/dn9yrmcn+d3Jt0qVlFJKKaWUUkoppZRSkWpQk1rUpg51qUd9GtCQRjSmCU1pRnNa0LLs0alQrWhNG9rSjvZ0oCOd6EwXutKN7vSgJ73oXfboVKg+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYwtfXUq0jjGM4GJTGIyU5jKNKYzg5nMYjabshmbs0XZo1OhtmQrtmYbtmU7tmcHdmQndmYXdmU3dmcP9mSv0lenIu3NPuzLfuzPARzIQRzMIRzKYRzOERzJURzNMWWPToU6luM4nhM4kZM4mVM4ldOYw1zmMZ/TOYMzOav01alIZ3MO53Ie53MBF3IRF3MJl3IZl3MFV3IVV3NN2aMrvLu5h3u5j/t5gAd5iId5hEd5jMd5gid5iqd5psC713Id17OAhdzAjSxiMTdxM7dwK7dxO3dwJ3cVePf/3LM8x/O8wIu8xMu8wqu8xuu8wZu8xdu8w7u8V/boVKj3+YAP+YiP+YRP+YzP+YIv+Yqv+YZv+Y7v+aH01alIP/ITP/MLv/IbS1jK7/zBn3//XNXHMlRjWZZj+ar/zfb0z1rBnaqzIiuxMquwKquxOmuwJmuxNuuwLuuxPhvk1hXRhu60ERuzCTWoSS1qU4e61KM+DWhIIxrThKa5dUXUzJ2a04KWtKI1bWhLO9rTgY50ojNd6Eo3uufWFVEPd+pJL3rTh770oz8DGMggBjOEoQxjOCMYmVtXRKPcaTRjGMs4xjOBiUxiMlOYyjSmM4OZzGJ2bp1SSimllFJKKaWUUkoppZRSSimllFL6F/sLx5ldvnxWAAA=
+  </data>
+ </layer>
 </map>
