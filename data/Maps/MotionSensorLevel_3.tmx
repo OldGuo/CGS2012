@@ -48,7 +48,7 @@
     <property name="var" value="beatMotionLevel"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1256" y="144" width="49" height="77">
+  <object name="plot text" type="trigger" x="1256" y="144" width="49" height="80">
    <properties>
     <property name="var" value="accomplishment"/>
    </properties>

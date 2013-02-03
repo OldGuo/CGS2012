@@ -42,7 +42,7 @@
     <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1600" y="464" width="48" height="80">
+  <object name="plot text" type="trigger" x="1606" y="23" width="52" height="518">
    <properties>
     <property name="var" value="firstEnemy"/>
    </properties>
@@ -52,32 +52,32 @@
     <property name="var" value="PlantedEnemy"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="2640" y="176" width="48" height="80">
+  <object name="plot text" type="trigger" x="2624" y="12" width="245" height="243">
    <properties>
     <property name="var" value="firstQuestion"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="3786" y="176" width="48" height="80">
+  <object name="plot text" type="trigger" x="3666" y="17" width="195" height="235">
    <properties>
     <property name="var" value="longJump"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="4142" y="176" width="48" height="80">
+  <object name="plot text" type="trigger" x="4094" y="17" width="357" height="236">
    <properties>
     <property name="var" value="tutorialEnd"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="277" y="464" width="48" height="80">
+  <object name="plot text" type="trigger" x="34" y="463" width="1564" height="82">
    <properties>
     <property name="var" value="intro"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="2335" y="464" width="48" height="80">
+  <object name="plot text" type="trigger" x="2335" y="12" width="287" height="529">
    <properties>
     <property name="var" value="firstTechnology"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="3360" y="176" width="48" height="80">
+  <object name="plot text" type="trigger" x="3337" y="17" width="200" height="235">
    <properties>
     <property name="var" value="firstJump"/>
    </properties>

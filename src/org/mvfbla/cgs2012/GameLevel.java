@@ -304,7 +304,7 @@ public abstract class GameLevel extends BasicGameState{
 			e.printStackTrace();
 		}
 		if(paused)
-			g.drawString("PAUSED", 375, 300);
+			g.drawString("PAUSED", 375-(int)cameraBox.getOffsetX(), 300);
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;
@@ -346,7 +346,7 @@ public abstract class GameLevel extends BasicGameState{
 						 "                                       ";
 			break;
 		case "longJump":
-			textString = "The jump is longer and wider than the previous.  I want to turn back." +
+			textString = "The next jump is longer and wider than the previous.  I want to turn back." +
 						 " But a relenteless force drives me to push forward" +
 						 "  Clearing this jump requires a leap of faith." +
 						 "                                       ";
@@ -395,6 +395,22 @@ public abstract class GameLevel extends BasicGameState{
 			textString = "Something clicks inside my head as I see the elevator." +
 						 "  There I felt something up ahead. I have to keep going.  I have to" +
 						 " find the answers.  " +
+						 "                                       ";
+			break;
+		case "gravityLevelStart":
+			textString = "Rising higher and higher in the buildling, I almost feel anxious. " +
+						 "My questions will soon be answered.  I can feel it.  " +
+						 "                                       ";
+			break;
+		case "flippedGrav":
+			textString = "A feeling of complete exhiliration comes over me.  All the enemies are on the other" +
+						 " side of that wall. I can almost feel their desperation as " +
+						 " they attempt to reach me.  I smile at my superior intellect." +
+						 "                                       ";
+			break;
+		case "beforeBoss":
+			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
+						 " The answers lie ahead   ...   ...   ...   ...   ..." +
 						 "                                       ";
 			break;
 		}
