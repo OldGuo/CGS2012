@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Trigger extends TiledObject{
 
 	private TriggerListener listener;
+	private boolean active = true;
 	private ArrayList<GameObject> contained = new ArrayList<GameObject>();
 	/**
 	 * @param x
@@ -50,5 +51,13 @@ public class Trigger extends TiledObject{
 	public boolean collides(GameObject test) {
 		GameObject go = new Tile(getX(), getY(), getWidth(), getHeight());
 		return test.collides(go) || go.contains(test.getCollision()) || test.getCollision().contains(go);
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

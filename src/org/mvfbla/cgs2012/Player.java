@@ -37,6 +37,8 @@ public class Player extends Characters{
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
+		if(!isAlive())
+			return;
 		boolean movePressed = false;
 		if(GameConstants.getGrav() > 0){
 			left = "walkLeft";

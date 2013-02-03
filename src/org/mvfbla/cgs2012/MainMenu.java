@@ -1,5 +1,7 @@
 package org.mvfbla.cgs2012;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,7 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MainMenu extends BasicGameState{
 	private int stateID = -1;
-
+	ArrayList<InteractButton> menuButtons;
+	
 	public MainMenu(int stateID){
 		this.stateID = stateID;
 	}
@@ -21,29 +24,30 @@ public class MainMenu extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException {
 		// TODO Auto-generated method stub
-
+		menuButtons = new ArrayList<InteractButton>();
+		menuButtons.add(new InteractButton("Play Game",255,220,300,75,0));
+		menuButtons.add(new InteractButton("Instructions",255,310,300,75,0));
+		menuButtons.add(new InteractButton("About",255,400,300,75,0));
+		menuButtons.add(new InteractButton("Quit",255,490,300,75,0));
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
 		// TODO Auto-generated method stub
-		g.setColor(Color.black);
+		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
-		g.setColor(Color.white);
-		g.drawString("MAIN MENU (TO MAKE PRETTY LATER)",250,30);
-		g.drawString("Press 1 for Tutorial", 50, 100);
-		g.drawString("Press 2 for Elevator", 50, 120);
-		g.drawString("Press 3 for Motion Sensor", 50, 140);
-		g.drawString("Press 4 for Gravity", 50, 160);
-		g.drawString("Press 5 for Blue Boss", 50, 180);
-		g.drawString("Press 6 for Red Boss", 50, 200);
-		g.drawString("Press 7 for Yellow Boss", 50, 220);
-		g.drawString("Press 8 for Black Boss", 50, 240);
-		g.drawString("Press 9 for Question Screen", 50, 260);
+		
+		for(int i = 0; i < menuButtons.size(); i++){
+			menuButtons.get(i).draw(g,0,0);
+		}
+		g.setColor(Color.black);
+		g.drawString("Insert Title Here",325,100);
 	}
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int g)throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
+		if (input.isKeyDown(Input.KEY_0))
+			sbg.enterState(Game.MAIN_MENU_STATE);
 		if (input.isKeyDown(Input.KEY_1))
 			sbg.enterState(Game.TUTORIAL_STATE);
 		if (input.isKeyDown(Input.KEY_2))
@@ -60,5 +64,23 @@ public class MainMenu extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
+		for(int i = 0; i < menuButtons.size(); i++){
+			menuButtons.get(i).update(gc,input);
+			if(menuButtons.get(i).getAction().equals("Play Game")){
+				menuButtons.get(i).clear();
+				sbg.enterState(Game.TUTORIAL_STATE);
+			}
+			if(menuButtons.get(i).getAction().equals("Instructions")){
+				menuButtons.get(i).clear();
+				sbg.enterState(Game.INSTRUCTIONS_STATE);
+			}
+			if(menuButtons.get(i).getAction().equals("About")){
+				menuButtons.get(i).clear();
+				sbg.enterState(Game.ABOUT_STATE);
+			}
+			if(menuButtons.get(i).getAction().equals("Quit")){
+				gc.exit();
+			}
+		}
 	}
 }

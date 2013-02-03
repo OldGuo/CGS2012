@@ -18,6 +18,9 @@ public class MotionSensor extends GameObject{
 		trigger = new Trigger(source, new MotionListener());
 		GameConstants.triggers.add(trigger);
 	}
+	public void setState(byte state) {
+		this.state = state;
+	}
 	@Override
 	public void update(GameContainer gc, int delta) {
 		counter += delta;
@@ -31,12 +34,17 @@ public class MotionSensor extends GameObject{
 	}
 	@Override
 	public void draw(Graphics g) {
+		Color c = g.getColor();
 		if(state == 2) {
-			Color c = g.getColor();
-			g.setColor(Color.red);
+			g.setColor(Color.blue);
 			g.fill(this);
-			g.setColor(c);
+		} else if(state == 1) {
+			Color sens = new Color(Color.blue);
+			sens.a = (counter/(float)delay)*0.2f;
+			g.setColor(sens);
+			g.fill(this);
 		}
+		g.setColor(c);
 	}
 	private class MotionListener implements TriggerListener {
 		@Override

@@ -6,16 +6,22 @@
  <tileset firstgid="5" name="Special" tilewidth="16" tileheight="16">
   <image source="collision.png" width="128" height="51"/>
  </tileset>
+ <tileset firstgid="29" name="Notif" tilewidth="16" tileheight="16">
+  <image source="MotionNotif.png" width="288" height="144"/>
+ </tileset>
+ <tileset firstgid="191" name="MotionNotifOff" tilewidth="16" tileheight="16">
+  <image source="MotionNotifOff.png" width="288" height="144"/>
+ </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2a4W7DIAyESZu+/yu3+4GELGwMBAbcnWR5S9YQOH8mWnOFEF6/uJiPz+9f3IE6WdHn6Dt1rq5ArlFErnFErnFErnFErnFErnFErnFErnFErnFErnFErnFErvu0wvdW3kyu+xTXbYdMrnFErnFErnFErnGEzrXnmeYdzmCBXOMInWskkWsckWsc7c517f+PkEWucbQ715Rf5BpH5HpffUSU9N9c89mqXS1ek+s9tRvX1DyRaxxFn1O2mc/M6XtnK7wTxTwup9/Rjnyn7ZUJrf5WWJeT88j+Ea8/Klboj6tkjaP0eGsdzAw5pvW7Nd/c/Lzje7m5jPFG5LQnauflfck9PL1GbpzRMbueeuowx5W2piPGlp6moTFbM6dY6x6/ari0OJ1RYy31mOMqRu99W+tUOi7PW55Yx0t+ja5l6b/sN1r/Kf1d7pnV07c1pqLfLeuUMtXCirz3J31Yoa9rn831uZ5+UzPnW3ze8r7kW029pnOe6UGuzqyfLTZL6+q9lrXP9dT1nQnt3lp88+x5srae6rstPpR8tFiyjnvPP1nv3v3CW79WLZTqQ9t3/uILPxVvonxWAAA=
+   H4sIAAAAAAAAC+2a6w6DIAyF0fn+zzz3g4Q0tBQQhpxzkqYbTrm0XzHTI4Rw3nbQb+8/t12B2lkxzjHu1L46ArlGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnu0wrPrbyeXPcprtsbPLnGEbnGEbnGEbnGETrXnnuaT9iDBXKNI3SukUSucUSucfR2rmv/P0IWucbR27mm/CLXOCLXOPo317y3midyjaN/c03NE7nGUYxzyjb9nj5972yFd6Lox/n0Ge3Id9rOjGn5t8K67OxH1o94/VG2Qn1cxWscpe2teTDTZJ/Wd2u+ufl5+/dycxj9jfBpTdSOy3HJPTy9Rq6f0TY7n3ryMMeVtqYj+pYxTU1jtmZOMdc98arh0uJ0Ro615GOOq2i947bWqdQuj1sxsdpL8RqdyzL+st5o9af0u9w9q6dua0zFeLesU8pUCyty7E/GYYW6rp2bq3M99aZmzpc434p9KW41+ZrOeWYMcnlmfbbYLK2r91rWPteT11fGtLG1xM2z58nceqrutsShFEeLJavde/zJfPfuF978tXKhlB/avvOzL2IEvcF8VgAA
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object type="motionSensor" x="480" y="464" width="192" height="16"/>
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
-  <object type="finish" x="1822" y="142" width="112" height="80"/>
+  <object type="finish" x="1824" y="144" width="112" height="80"/>
   <object name="bigger" type="spawn" x="62" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
@@ -26,5 +32,11 @@
     <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
+  <object type="motionButton" x="1760" y="464" width="32" height="32"/>
  </objectgroup>
+ <layer name="Tile Layer 2" width="123" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RYw9fdxzG4XYdOturbdu27c62bXvFbLvd2tm2bdve2uHaS9jJcpZ/dn9yrmcn+d3Jt0qVlFJKKaWUUkoppZRSkWpQk1rUpg51qUd9GtCQRjSmCU1pRnNa0LLs0alQrWhNG9rSjvZ0oCOd6EwXutKN7vSgJ73oXfboVKg+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYwtfXUq0jjGM4GJTGIyU5jKNKYzg5nMYjabshmbs0XZo1OhtmQrtmYbtmU7tmcHdmQndmYXdmU3dmcP9mSv0lenIu3NPuzLfuzPARzIQRzMIRzKYRzOERzJURzNMWWPToU6luM4nhM4kZM4mVM4ldOYw1zmMZ/TOYMzOav01alIZ3MO53Ie53MBF3IRF3MJl3IZl3MFV3IVV3NN2aMrvLu5h3u5j/t5gAd5iId5hEd5jMd5gid5iqd5psC713Id17OAhdzAjSxiMTdxM7dwK7dxO3dwJ3cVePf/3LM8x/O8wIu8xMu8wqu8xuu8wZu8xdu8w7u8V/boVKj3+YAP+YiP+YRP+YzP+YIv+Yqv+YZv+Y7v+aH01alIP/ITP/MLv/IbS1jK7/zBn3//XNXHMlRjWZZj+ar/zfb0z1rBnaqzIiuxMquwKquxOmuwJmuxNuuwLuuxPhvk1hXRhu60ERuzCTWoSS1qU4e61KM+DWhIIxrThKa5dUXUzJ2a04KWtKI1bWhLO9rTgY50ojNd6Eo3uufWFVEPd+pJL3rTh770oz8DGMggBjOEoQxjOCMYmVtXRKPcaTRjGMs4xjOBiUxiMlOYyjSmM4OZzGJ2bp1SSimllFJKKaWUUkoppZRSSimllFL6F/sLx5ldvnxWAAA=
+  </data>
+ </layer>
 </map>

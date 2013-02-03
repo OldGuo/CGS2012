@@ -13,9 +13,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
 	protected int bgOffsetX, bgNumRepeat;
-	protected QuestionWindow questions;
+	public QuestionWindow questions;
 	protected Map map;
-	protected Player player;
+	public Player player;
 	protected CameraObject cameraBox;
 	protected Image background;
 	protected Boolean lost = false;
@@ -23,6 +23,9 @@ public abstract class GameLevel extends BasicGameState{
 	private TypeWriter text;
 	protected boolean done = false;
 	protected float time=0;
+	public long transTime = 0;
+	private byte transState = 0;
+	public long transLength = 1200;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -68,6 +71,10 @@ public abstract class GameLevel extends BasicGameState{
 				Button b = new Button(to.getX(), to.getY(), new GravityListener());
 				GameConstants.interacts.add(b);
 			}
+			if(to.getType().equals("motionButton")) {
+				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
+				GameConstants.interacts.add(b);
+			}
 			if(to.getType().equals("motionSensor")) {
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
@@ -78,27 +85,12 @@ public abstract class GameLevel extends BasicGameState{
 				GameConstants.pillars.add(pillar);
 			}
 			if(to.getType().equals("finish")) {
-				Trigger t = new Trigger(to, new FinishListener());
-				GameConstants.triggers.add(t);
+				Elevator e = new Elevator(to.getX(), to.getY(), this);
+				GameConstants.interacts.add(e);
 			}
 		}
 		background = new Image("data\\Background.png");
-	}
-	public class FinishListener implements TriggerListener {
-		@Override
-		public void onEnter(GameObject src) {
-			//bring up question screen
-			done = true;
-			questions.setAnswering(true);
-		}
-		@Override
-		public void onExit(GameObject src) {
-			done = false;
-			questions.setAnswering(false);
-		}
-		@Override
-		public void triggered(GameObject src) {
-		}
+		transState = 1;
 	}
 	public class GravityListener implements ButtonListener{
 		@Override
@@ -113,11 +105,37 @@ public abstract class GameLevel extends BasicGameState{
 			GameConstants.platforms.get(0).setOn(state);
 		}
 	}
+	public class MotionButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state)
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 0);
+			else
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 1);
+		}
+	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+		if(transState == 1) {
+			transTime += delta;
+			if(transTime >= transLength) {
+				transState = 0;
+				transTime = 2*transLength;
+			}
+		} else if(transState == 2) {
+			transTime -= delta;
+			if(transTime <= 0) {
+				sbg.enterState(stateID + 1);
+			}
+		}
 		text.update(container,delta);
-		if(done && questions.getAnswering() == false && stateID != 8)
-			sbg.enterState(stateID + 1);
-		questions.update(container);
+		if(done && questions.getAnswering() == false && stateID != 8) {
+			player.setHealth(0);
+			transState = 2;
+			//sbg.enterState(stateID + 1);
+		}
+		questions.update(container); 	
 		if(!lost)
 			player.update(container, delta);
 		for(Characters guy:GameConstants.enemies){
@@ -170,6 +188,8 @@ public abstract class GameLevel extends BasicGameState{
 
 		//testing
 		Input input = container.getInput();
+		if (input.isKeyDown(Input.KEY_0))
+			sbg.enterState(Game.MAIN_MENU_STATE);
 		if (input.isKeyDown(Input.KEY_1))
 			sbg.enterState(Game.TUTORIAL_STATE);
 		if (input.isKeyDown(Input.KEY_2))
@@ -253,8 +273,12 @@ public abstract class GameLevel extends BasicGameState{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		if(player.shouldDisplay())
+		if(transState != 2&&player.shouldDisplay())
 			player.draw(g);
+		if(transState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;

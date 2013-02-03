@@ -5,12 +5,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Button extends AnimatedObject implements InteractiveObject {
-	private final Trigger trigger;
-	private final AnimatedObject notif;
-	private final ButtonListener listener;
+	protected Trigger trigger;
+	protected AnimatedObject notif;
+	protected ButtonListener listener;
 	private long lastPress = 0;
-	private final long cooldown = 500;
+	private long cooldown = 500;
 	private boolean on;
+	protected Button(int x, int y) throws SlickException {
+		super(x, y, 96, 85);
+	}
 	public Button(int x, int y, ButtonListener bl) throws SlickException {
 		super(x, y, 32, 32);
 		listener = bl;
@@ -45,7 +48,7 @@ public class Button extends AnimatedObject implements InteractiveObject {
 		}
 	}
 
-	private class myListener implements TriggerListener {
+	protected class myListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {
 			notif.playAnimation("far");
