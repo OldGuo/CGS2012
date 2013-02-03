@@ -33,22 +33,22 @@
    </properties>
   </object>
   <object type="motionButton" x="1760" y="464" width="32" height="32"/>
-  <object name="plot text" type="trigger" x="255" y="448" width="96" height="97">
+  <object name="plot text" type="trigger" x="32" y="17" width="442" height="529">
    <properties>
     <property name="var" value="motionLevelStart"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1185" y="512" width="62" height="31">
+  <object name="plot text" type="trigger" x="1184" y="337" width="751" height="205">
    <properties>
     <property name="var" value="turnOffSensor"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1568" y="144" width="67" height="80">
+  <object name="plot text" type="trigger" x="1587" y="12" width="349" height="210">
    <properties>
     <property name="var" value="beatMotionLevel"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1256" y="144" width="49" height="80">
+  <object name="plot text" type="trigger" x="1246" y="15" width="337" height="204">
    <properties>
     <property name="var" value="accomplishment"/>
    </properties>

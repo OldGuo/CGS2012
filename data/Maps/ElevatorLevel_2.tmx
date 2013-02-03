@@ -22,17 +22,17 @@
    </properties>
   </object>
   <object type="key" x="80" y="224" width="64" height="64"/>
-  <object name="plot text" type="trigger" x="275" y="464" width="48" height="80">
+  <object name="plot text" type="trigger" x="32" y="319" width="414" height="224">
    <properties>
     <property name="var" value="elevatorLevelStart"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="637" y="464" width="45" height="77">
+  <object name="plot text" type="trigger" x="579" y="428" width="106" height="113">
    <properties>
     <property name="var" value="anotherEnemy"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="1495" y="448" width="57" height="96">
+  <object name="plot text" type="trigger" x="1461" y="12" width="478" height="533">
    <properties>
     <property name="var" value="lockedElevator"/>
    </properties>
