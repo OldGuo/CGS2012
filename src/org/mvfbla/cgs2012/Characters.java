@@ -10,14 +10,14 @@ public class Characters extends AnimatedObject {
 
 	private Vector force;
 	protected Vector trans = new Vector();
-	private boolean alive, blinking;
+	private boolean alive, blinking, display;
 	private float health;
 	private int time, blinkTime;
 
 	public Characters(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height-1);
 		force = new Vector(0,0);
-		alive=true;
+		alive=display=true;
 		blinking=false;
 		health=1;
 		time=0;
@@ -66,17 +66,18 @@ public class Characters extends AnimatedObject {
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
-
-		float xChange = this.getVelX();
-		int direction = getDirection(trans);
-		if(direction == 3 || direction == 1) {
-			this.setForce(new Vector(this.getForce().getX(), 0));
+		if(alive){
+			float xChange = this.getVelX();
+			int direction = getDirection(trans);
+			if(direction == 3 || direction == 1) {
+				this.setForce(new Vector(this.getForce().getX(), 0));
+			}
+			if(direction != 1)
+				this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
+			float yChange = this.getVelY();
+			this.setX(this.getX() + xChange);
+			this.setY(this.getY() + yChange);
 		}
-		if(direction != 1)
-			this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
-		float yChange = this.getVelY();
-		this.setX(this.getX() + xChange);
-		this.setY(this.getY() + yChange);
 		trans = checkCollision();
 		for(Trigger t : GameConstants.triggers) {
 			if(t.collides(this))
@@ -90,8 +91,24 @@ public class Characters extends AnimatedObject {
 		}
 		if(blinking){
 			time+=delta;
+			for(int i=0;i<=blinkTime;i+=220){
+				if(time>=i&&time<=i+110){
+					display=false;
+					break;
+				}
+			}
+			for(int i=110;i<=blinkTime;i+=220){
+				if(time>=i&&time<=i+110){
+					display=true;
+					break;
+				}
+			}
 			if(time>=blinkTime){
 				blinking=false;
+				if(alive)
+					display=true;
+				else
+					display=false;
 				time=0;
 			}
 		}
@@ -157,6 +174,9 @@ public class Characters extends AnimatedObject {
 	public float getHealth(){
 		return health;
 	}
+	public void setInitialHealth(float howHealthy){
+		health=howHealthy;
+	}
 	public void setHealth(float howHealthy){
 		if(/*howHealth<health&&*/!blinking){
 			health=howHealthy;
@@ -168,6 +188,12 @@ public class Characters extends AnimatedObject {
 	}
 	public void setBlink(int howLong){
 		blinkTime=howLong;
+	}
+	public boolean isBlinking(){
+		return blinking;
+	}
+	public boolean shouldDisplay(){
+		return display;
 	}
 	@Override
 	public void draw(Graphics g){
