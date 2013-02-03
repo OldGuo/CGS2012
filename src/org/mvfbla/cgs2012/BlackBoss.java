@@ -25,7 +25,7 @@ public class BlackBoss extends Characters{
 		addObject(arm);
 		arm.stopAnimation();
 
-		super.setHealth(3);
+		super.setInitialHealth(3);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {

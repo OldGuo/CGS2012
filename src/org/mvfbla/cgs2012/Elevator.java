@@ -11,7 +11,7 @@ public class Elevator extends Button {
 	private Trigger end;
 	public Elevator(int x, int y, GameLevel level) throws SlickException {
 		super(x, y);
-		end = new Trigger((int)x, (int)y, 96, 80, new FinishListener());
+		end = new Trigger((int)x+40, (int)y, 6, 80, new FinishListener());
 		end.setActive(false);
 		GameConstants.triggers.add(end);
 		this.level = level;

@@ -31,7 +31,7 @@ public class Player extends Characters{
 		arm.stopAnimation();
 
 		current = "walkRight";
-		super.setHealth(3);
+		super.setInitialHealth(3);
 		super.setBlink(2000);
 	}
 	@Override
@@ -91,7 +91,7 @@ public class Player extends Characters{
 		if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
 			boolean interacting = false;
 			for(InteractiveObject io : GameConstants.interacts) {
-				if(io.inRange(this)) {
+				if(io.inRange(this) && io.isActive()) {
 					interacting = true;
 					io.interact(this);
 				}

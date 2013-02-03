@@ -6,6 +6,9 @@ import org.newdawn.slick.SpriteSheet;
 
 public class Button extends AnimatedObject implements InteractiveObject {
 	protected Trigger trigger;
+	public Trigger getTrigger() {
+		return trigger;
+	}
 	protected AnimatedObject notif;
 	protected ButtonListener listener;
 	private long lastPress = 0;
@@ -74,6 +77,10 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	}
 	public boolean getState() {
 		return on;
+	}
+	@Override
+	public boolean isActive() {
+		return trigger.isActive();
 	}
 
 }

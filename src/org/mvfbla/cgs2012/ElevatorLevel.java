@@ -25,6 +25,10 @@ public class ElevatorLevel extends GameLevel {
 		background = new Image("data\\Background.png");
 	}
 
+	@Override 
+	public void unlockElev() {
+		elevator.getTrigger().setActive(true);
+	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
@@ -42,6 +46,7 @@ public class ElevatorLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
+		elevator.getTrigger().setActive(false);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

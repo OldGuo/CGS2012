@@ -23,6 +23,7 @@ public class Enemy extends Characters{;
 		else{
 			super.resetAnimation();
 			super.stopAnimation();
+			super.update(gc, delta);
 		}
 	}
 	public float getSpeed(){
