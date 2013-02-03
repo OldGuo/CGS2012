@@ -26,7 +26,7 @@ public class QuestionWindow{
 	public void init() throws SlickException{
 		randQuestion = (int)(Math.random()*35);
 		randCorrect = (int)(Math.random()*4);
-		randCorrect = 0;
+		//randCorrect = 0;
 		reader = new QuestionReader("data\\questions.txt");
 		questions = new ArrayList<QuestionButton>(4);
 
