@@ -28,6 +28,7 @@ public abstract class GameLevel extends BasicGameState{
 	private byte transState = 0;
 	public long transLength = 1200;
 	public Elevator elevator;
+	private String textChoice = " ";
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -38,9 +39,10 @@ public abstract class GameLevel extends BasicGameState{
 		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
-		for(TiledObject to : map.getObjects()) {
-			if(to.getType().equals("spawn"))
+		for(final TiledObject to : map.getObjects()) {
+			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
+			}
 			if(to.getType().equals("BlackBoss"))
 				GameConstants.enemies.add(new BlackBoss(to.getX(), to.getY()));
 			if(to.getType().equals("movingPlatform")) {
@@ -51,19 +53,52 @@ public abstract class GameLevel extends BasicGameState{
 			if(to.getType().equals("trigger")) {
 				Trigger t = new Trigger(to, new TriggerListener() {
 					@Override
-					public void triggered(GameObject src) {
-						System.out.println("");
-					}
-
+					public void triggered(GameObject src) {}
 					@Override
 					public void onEnter(GameObject src) {
-						System.out.println("I WAS ENTEREDDDD");
+						textChoice = to.getProperty("var");
+						switch(textChoice){
+							case "intro":
+								text.setText("I awoke to find myself in a sea of darkness. " +
+											 "I tried to recall the events prior, but every strand of thought escaped my grasps. " +
+											 "I knew nothing except that I must move forward." +
+											 "                                       ");
+								text.restart();
+							break;
+							case "firstEnemy":
+								text.setText("As I came into the bright light, I saw something ahead. " +
+											 "A furious rage built up inside me. Perhaps I should use [SPACE] to defeat" +
+											 " this enemy. " +
+											 "                                       ");
+								text.restart();
+								break;
+							case "firstQuestion":
+								text.setText("After clearing the ledge, I was filled with a strong sense of achievement." +
+											 "  The blur in my mind began to clear up a bit. " +
+											 "My feeling of accomplishment was quickly drowned out by the pangs of regret. " +
+											 " Did I have to defeat that enemy? " +
+											 "Perhaps I should refrain from physical conflicts in the future.                    ");
+								text.restart();
+								break;
+							case "longJump":
+								text.setText("This jump was longer and wider than the previous.  I wanted to turn back." +
+											 " But a relenteless driving force drove me to push forward" +
+											 "  Clearing this jump required a leap of faith." +
+											 "                                       ");
+								text.restart();
+								break;
+							case "tutorialEnd":
+								text.setText("Almost in disbelief, I looked down at my suit" +
+											 " and saw a badge.  EMPLOYEE NAME: it said. However the text below it seemed to " +
+											 "have been intentionally scratched out. " +
+											 "So many questions filled my mind, but all the answers lie ahead. " +
+											 "                                      ");
+								text.restart();
+								break;
+						}
 					}
-
 					@Override
-					public void onExit(GameObject src) {
-						System.out.println("I WAS EXITTEDDDDD");
-					}
+					public void onExit(GameObject src) {}
 				});
 				GameConstants.triggers.add(t);
 			}
@@ -139,13 +174,12 @@ public abstract class GameLevel extends BasicGameState{
 				sbg.enterState(stateID + 1);
 			}
 		}
-		//text.update(container,delta);
 		if(done && questions.getAnswering() == false && stateID != 8) {
 			player.setHealth(0);
 			transState = 2;
 			//sbg.enterState(stateID + 1);
 		}
-		questions.update(container); 	
+		questions.update(container);
 		if(!lost)
 			player.update(container, delta);
 		for(Characters guy:GameConstants.enemies){
@@ -189,6 +223,7 @@ public abstract class GameLevel extends BasicGameState{
 			/*if(!player.isAlive()){
 				System.out.println("GG");
 			}*/
+			text.update(container,delta);
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.update(container, delta);
@@ -266,7 +301,7 @@ public abstract class GameLevel extends BasicGameState{
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		g.draw(cameraBox);
+		//g.draw(cameraBox);
 		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
@@ -278,17 +313,16 @@ public abstract class GameLevel extends BasicGameState{
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
-		/*try {
-			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		} catch (SlickException e) {
-			e.printStackTrace();
-<<<<<<< HEAD
-		}*/
 		if(transState != 2&&player.shouldDisplay())
 			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
+		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		} catch (SlickException e) {
+			e.printStackTrace();
 		}
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){

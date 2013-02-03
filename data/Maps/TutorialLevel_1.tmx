@@ -32,11 +32,6 @@
    </properties>
   </object>
   <object type="finish" x="4335" y="174" width="112" height="80"/>
-  <object name="planted" type="spawn" x="1879" y="479" width="64" height="64">
-   <properties>
-    <property name="var" value="PlantedEnemy"/>
-   </properties>
-  </object>
   <object name="basic" type="spawn" x="3285" y="477" width="64" height="64">
    <properties>
     <property name="var" value="BasicEnemy"/>
@@ -45,6 +40,36 @@
   <object name="bigger" type="spawn" x="3767" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1600" y="464" width="48" height="80">
+   <properties>
+    <property name="var" value="firstEnemy"/>
+   </properties>
+  </object>
+  <object name="planted" type="spawn" x="2016" y="480" width="64" height="64">
+   <properties>
+    <property name="var" value="PlantedEnemy"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="2640" y="176" width="48" height="80">
+   <properties>
+    <property name="var" value="firstQuestion"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="3786" y="176" width="48" height="80">
+   <properties>
+    <property name="var" value="longJump"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="4142" y="176" width="48" height="80">
+   <properties>
+    <property name="var" value="tutorialEnd"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="277" y="464" width="48" height="80">
+   <properties>
+    <property name="var" value="intro"/>
    </properties>
   </object>
  </objectgroup>
