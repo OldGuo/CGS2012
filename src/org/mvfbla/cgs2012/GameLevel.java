@@ -187,6 +187,8 @@ public abstract class GameLevel extends BasicGameState{
 
 		//testing
 		Input input = container.getInput();
+		if (input.isKeyDown(Input.KEY_0))
+			sbg.enterState(Game.MAIN_MENU_STATE);
 		if (input.isKeyDown(Input.KEY_1))
 			sbg.enterState(Game.TUTORIAL_STATE);
 		if (input.isKeyDown(Input.KEY_2))

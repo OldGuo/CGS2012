@@ -16,13 +16,15 @@ public class Game extends StateBasedGame{
 	static final int RED_BOSS_STATE             = 6;
 	static final int YELLOW_BOSS_STATE          = 7;
 	static final int BLACK_BOSS_STATE           = 8;
+	static final int ABOUT_STATE                = 9;
+	static final int INSTRUCTIONS_STATE         = 10;
 
 	public Game(){
 		super("FBLA CGS 2012");
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());
-	//	app.setShowFPS(false);
+		app.setShowFPS(false);
 		app.setTargetFrameRate(60);
         app.setDisplayMode(800, 600, false);
         app.start();
@@ -38,5 +40,7 @@ public class Game extends StateBasedGame{
 		this.addState(new RedBossLevel(RED_BOSS_STATE));
 		this.addState(new YellowBossLevel(YELLOW_BOSS_STATE));
 		this.addState(new BlackBossLevel(BLACK_BOSS_STATE));
+		this.addState(new AboutPage(ABOUT_STATE));
+		this.addState(new InstructionPage(INSTRUCTIONS_STATE));
 	}
 }
