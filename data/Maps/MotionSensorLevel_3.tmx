@@ -14,7 +14,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2a6w6DIAyF0fn+zzz3g4Q0tBQQhpxzkqYbTrm0XzHTI4Rw3nbQb+8/t12B2lkxzjHu1L46ArlGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnGEbnu0wrPrbyeXPcprtsbPLnGEbnGEbnGEbnGETrXnnuaT9iDBXKNI3SukUSucUSucfR2rmv/P0IWucbR27mm/CLXOCLXOPo317y3midyjaN/c03NE7nGUYxzyjb9nj5972yFd6Lox/n0Ge3Id9rOjGn5t8K67OxH1o94/VG2Qn1cxWscpe2teTDTZJ/Wd2u+ufl5+/dycxj9jfBpTdSOy3HJPTy9Rq6f0TY7n3ryMMeVtqYj+pYxTU1jtmZOMdc98arh0uJ0Ro615GOOq2i947bWqdQuj1sxsdpL8RqdyzL+st5o9af0u9w9q6dua0zFeLesU8pUCyty7E/GYYW6rp2bq3M99aZmzpc434p9KW41+ZrOeWYMcnlmfbbYLK2r91rWPteT11fGtLG1xM2z58nceqrutsShFEeLJavde/zJfPfuF978tXKhlB/avvOzL2IEvcF8VgAA
+   H4sIAAAAAAAAC+2a6w6DIAyFcfP9n3nbDxLS0FK5DTjnJE03nSJtv2KmVwjh9bWL/nj//todqJMV8xzzTp2rK5BrFJFrHJFrHJFrHJFrHJFrHJFrHJFrHJFrHJFrHJFrHJHrNq3w3MrryXWbYtx28OQaR+QaR+QaR+QaR+hce+5p3uEMFsg1jtC5RhK5xhG5xtHuXD/9/whZ5BpHu3NN+UWucUSucfRvrne/t+oVtxnxJ9dt6hW3GfH/N9e7q1eOyPX62pHrlG36M3363tkK70TRj/PpM9qR77S9MqbV3wpxOdmP7B/x/KNshf64itc4SrfX1sFMk2Na36355ubnHd/LzWWMN8KnPVHbL69LruHpOXLjjLbZ9dRShzmutJiOGFvmNDWN2SdzirXuydcTLi1OZ9RYTT3muIrWet1WnErb5X4rJ9b2Ur5G17LMv+w3Wv8p/S53z+rp2xpTMd81cUqZqmFFXnvPPKzQ17Vjc32upd88mfMtjrdyX8rbk3pN5zwzB7k6sz5bbJbi6j2Xtc611PWdMe3aavLmWfNkbfXquzV5KOXRYsna7t3fs96964W3fq1aKNWHtu787ANvIFIUfFYAAA==
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
@@ -22,17 +22,32 @@
   <object type="motionSensor" x="736" y="384" width="192" height="16"/>
   <object type="motionSensor" x="992" y="304" width="192" height="16"/>
   <object type="finish" x="1824" y="144" width="112" height="80"/>
-  <object name="bigger" type="spawn" x="62" y="444" width="96" height="96">
+  <object name="bigger" type="spawn" x="1305" y="445" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
-  <object name="bigger" type="spawn" x="1315" y="443" width="96" height="96">
+  <object name="bigger" type="spawn" x="1413" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
    </properties>
   </object>
   <object type="motionButton" x="1760" y="464" width="32" height="32"/>
+  <object name="plot text" type="trigger" x="255" y="448" width="96" height="97">
+   <properties>
+    <property name="var" value="motionLevelStart"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1185" y="512" width="62" height="31">
+   <properties>
+    <property name="var" value="turnOffSensor"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1254" y="144" width="67" height="80">
+   <properties>
+    <property name="var" value="beatMotionLevel"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Tile Layer 2" width="123" height="45">
   <data encoding="base64" compression="gzip">

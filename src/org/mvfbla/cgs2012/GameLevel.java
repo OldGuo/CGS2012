@@ -340,7 +340,36 @@ public abstract class GameLevel extends BasicGameState{
 						 "                                       ";
 			break;
 		case "elevatorLevelStart":
-			textString = "The elevator had brought me up";
+			textString = "The elevator felt like it had brought me up a few floors. " +
+						 "Questions still left unasnwered.  Where am I? Who am I? Why am I here?" +
+						 " All I wanted were the answers. " +
+						 "                                       ";
+			break;
+		case "anotherEnemy":
+			textString = "There was a key up above, but another one of those enemies blocked my path.  " +
+						 "Something told me I didn't need that key, but I wanted it anyways. Perhaps" +
+						 " this time I should use the [UP] arrow key to jump over the enemy without harm." +
+						 "                                       ";
+			break;
+		case "lockedElevator":
+			textString = "Locked!? Seems like that key would be useful here. But I wondered about the " +
+						 " technology that lay beyond the elevator..." +
+						 "                                       ";
+			break;
+		case "motionLevelStart":
+			textString = "The elevator had brought me up another few floors. The haze in my mind" +
+						 " seemed to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
+						 "...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
+						 "                                       ";
+			break;
+		case "turnOffSensor":
+			textString = "It seems really dangerous up ahead, but something tells me whats beyond will pay off." +
+						 " It's either this or the motion sensors   ...   " +
+						 "                                       ";
+			break;
+		case "beatMotionLevel":
+			textString = "But there I feel something up ahead.  " +
+						 "                                       ";
 			break;
 		}
 		text.setText(textString);
