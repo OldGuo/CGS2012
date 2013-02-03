@@ -11,7 +11,7 @@ public class BiggerEnemy extends Enemy{
 		addAnimation("BiggerEnemyInvert", new Animation(new SpriteSheet("data\\LargeEnemyInverted.png", 96, 96), 150));
 		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 96, 96), 150));
 		super.setSpeed(-1);
-		super.setHealth(2);
+		super.setInitialHealth(2);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){

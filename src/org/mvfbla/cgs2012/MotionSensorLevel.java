@@ -43,7 +43,7 @@ public class MotionSensorLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		text.setText("OHMAHGERD ITS A MOTION SENSOR");
+		//text.setText("OHMAHGERD ITS A MOTION SENSOR");
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

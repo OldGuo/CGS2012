@@ -20,8 +20,9 @@ public abstract class GameLevel extends BasicGameState{
 	protected Image background;
 	protected Boolean lost = false;
 	protected int stateID = -1;
-	protected TypeWriter text;
-	public boolean done = false;
+	private TypeWriter text;
+	protected boolean done = false;
+	protected float time=0;
 	public long transTime = 0;
 	private byte transState = 0;
 	public long transLength = 1200;
@@ -152,7 +153,7 @@ public abstract class GameLevel extends BasicGameState{
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
 			String name=guy.getClass().toString();
 			float hit=0;
-			if(player.collides(guy)){
+			if(player.collides(guy)&&guy.isAlive()){
 				if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
 					if(Math.abs(tempX)<20)
 						player.setHealth(player.getHealth()-1);
@@ -246,8 +247,10 @@ public abstract class GameLevel extends BasicGameState{
 		g.setColor(Color.white);
 		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
 		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
-		for(Characters guy:GameConstants.enemies)
-			guy.draw(g);
+		for(Characters guy:GameConstants.enemies){
+			if(guy.shouldDisplay())
+				guy.draw(g);
+		}
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
@@ -277,7 +280,7 @@ public abstract class GameLevel extends BasicGameState{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		if(transState != 2)
+		if(transState != 2&&player.shouldDisplay())
 			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));

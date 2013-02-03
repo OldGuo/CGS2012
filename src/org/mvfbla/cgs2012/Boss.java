@@ -8,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 public class Boss extends Enemy{
 	public Boss (int x, int y) throws SlickException{
 		super(x,y,128,128);
-		super.setHealth(3);
+		super.setInitialHealth(3);
 	}
 	@Override
 	public void update(GameContainer gc, int delta){

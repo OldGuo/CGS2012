@@ -6,9 +6,12 @@
  <tileset firstgid="5" name="collision" tilewidth="16" tileheight="16">
   <image source="collision.png" width="128" height="51"/>
  </tileset>
+ <tileset firstgid="29" name="GravityNotif" tilewidth="16" tileheight="16">
+  <image source="GravityNotif.png" width="288" height="144"/>
+ </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2b0QqDMAxF2+n/f/O2h0IpK5qytKn3HAiR7Tpk5lgEzSml/KkXXabDczmqOhcfC/jyPcc54bUCeK0DXuuA1zrgtQ4RvV593/nU+92IXpe5U+veRPZaBbzWQdlr8CGi1+ADXuuA1zrgtQ54rQNe64DXOuC1DnitA17rgNc64LUOeK0DXuuA1zpYvZ7x/Ix17tTyo1i9zp369zFZ5seaj3buZp7raOt1tP82Wn6UiOu1t9e7XzdGwev1+ZnPFuL1XvlRWq9Xv/tA9+9le/W7D3T/Xrbbz8sMtNX7HfLx8z3f6/W8LvJ75ymNOij5aq8BV7NBPn7+1/dXRX7vvNV38vvl785Guy/5/fJ35+M0ZMnHzL8B4djymXxWAAA=
+   H4sIAAAAAAAAC+2b0QqDMAxF2+n/f/O2h0IpK5qytKn3HAiR7Tpk5lhkM6eU8qdedJkOz+Wo6lx8LODL9xznhNcK4LUOeK0DXuuA1zpE9Hr1fedT73cjel3mTq17E9lrFfBaB7zWAa91wGsd8FoHvNYBr3VQ9hp8iOg1+IDXOuC1DnitA17rgNc64LUOeK0DXutg9XrG/2esc6eWH8Xqde7Uv4/JMj/WfLRzN/NcR1uvo3230fKjRFyvvb3e/boxCl6vz8/8TROv98qP0nq9+tkHun8v26uffaD797Ldvl5moK3e55CPn+/5Xq/ndZHfO09p1EHJV3sNuJoN8vHzv96/KvJ7562+k98vf3c22n3J75e/Ox+nIUs+Zv4No3zu5HxWAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="123" height="45">
@@ -41,4 +44,9 @@
    </properties>
   </object>
  </objectgroup>
+ <layer name="Tile Layer 2" width="123" height="45">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQ5KYYQBF0d5IbNu2bdu2badj20461tpy1vAN/srg3aozvzU1KaWUUkoppZRSSqm0etSnAQ1pRGOa0JRmNKcFLWlFa9rQlna0r3o6FdWBjnSiM13oSje604Oe9KI3fehLP/ozgIFVT6eiBjGYIQxlGMMZwUhGMZoxjGUc45nARCYxufLrVNIUpjKN6cxgJrOYzRzmMo/5LGAhi1jMEpZWPZ2KWsZyVrCSVaxmDWtZx3o2sJFNbGYLW9nG9sqvU0k72MkudrOHvexjPwc4yCEOc4SjHOM4JzhZ9XQq6hSnOcNZznGeC1yklktc5gpXucZ1bnCTW5Vfp5Juc4e73OM+D3jIIx7zhKc84zkveMkrXvOm6ulU1Fve8Z4PfOQTdXzmC1/5xnd+8JNf/OYPfyu/TimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSiml/79/tcWZDHxWAAA=
+  </data>
+ </layer>
 </map>

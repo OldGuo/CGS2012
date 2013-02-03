@@ -32,7 +32,7 @@ public class Player extends Characters{
 		arm.stopAnimation();
 
 		current = "walkRight";
-		super.setHealth(3);
+		super.setInitialHealth(3);
 		super.setBlink(2000);
 	}
 	@Override

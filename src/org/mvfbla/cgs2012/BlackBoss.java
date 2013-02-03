@@ -30,7 +30,7 @@ public class BlackBoss extends Characters{
 		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
 		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
 
-		super.setHealth(3);
+		super.setInitialHealth(3);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
