@@ -9,7 +9,7 @@ import org.newdawn.slick.SpriteSheet;
 public class YellowBoss extends Boss{
 	int time, location;
 	boolean[]activated;
-	boolean aiming, firing, charging;
+	boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
@@ -19,7 +19,7 @@ public class YellowBoss extends Boss{
 		location=1;
 		reticle=0;
 		reticleWidth=48;
-		aiming=firing=charging=false;
+		aiming=firing=charging=teleporting=false;
 		activated=new boolean[3];
 		for(int i=0;i<3;i++)
 			activated[i]=false;
@@ -45,9 +45,15 @@ public class YellowBoss extends Boss{
 					firing=true;
 				else
 					firing=false;
+				if(time>=4500&&time<=5000)
+					teleporting=true;
+				else
+					teleporting=false;
 			}
 			else
 				teleport();
+			if(!teleporting&&activated[location])
+				time=4500;
 			if(location==0){
 				this.setX(95);
 				this.setY(160);
@@ -64,7 +70,7 @@ public class YellowBoss extends Boss{
 		}
 	}
 	public void teleport(){
-		//animate
+		teleporting=false;
 		time=0;
 		do{
 			location=(int)(Math.random()*3);
@@ -72,6 +78,9 @@ public class YellowBoss extends Boss{
 	}
 	public void activate(int platform, boolean on){
 		activated[platform]=on;
+	}
+	public boolean isActivated(int platform){
+		return activated[platform];
 	}
 	public boolean isAiming(){
 		return aiming;
@@ -82,6 +91,9 @@ public class YellowBoss extends Boss{
 	public boolean isFiring(){
 		return firing;
 	}
+	public boolean isTeleporting(){
+		return teleporting;
+	}
 	public float getReticle(){
 		return reticle;
 	}
@@ -90,6 +102,9 @@ public class YellowBoss extends Boss{
 	}
 	public float getReticleWidth(){
 		return reticleWidth;
+	}
+	public int getTime(){
+		return time;
 	}
 }
 

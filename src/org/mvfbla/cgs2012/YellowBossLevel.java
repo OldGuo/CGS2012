@@ -83,6 +83,21 @@ public class YellowBossLevel extends GameLevel {
 				g.drawLine(yellowBoss.getCenterX()+8, yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()+i, fireY+player.getHeight());
 			}
 		}
+		else if(yellowBoss.isTeleporting()){
+			float opacity=(float)((yellowBoss.getTime()-4500)*.002);
+			g.setColor(new Color(0,255,0,opacity));
+			g.fillOval(yellowBoss.getCenterX()-yellowBoss.getHeight()/2, yellowBoss.getCenterY()-yellowBoss.getWidth()/2, yellowBoss.getHeight(), yellowBoss.getWidth());
+		}
+		g.setColor(Color.green);
+		if(yellowBoss.isActivated(0)){
+			g.fillRect(96,288,128,32);
+		}
+		if(yellowBoss.isActivated(1)){
+			g.fillRect(320,224,144,32);
+		}
+		if(yellowBoss.isActivated(2)){
+			g.fillRect(560,288,128,32);
+		}
 	}
 	@Override
 	public int getID(){
