@@ -32,11 +32,6 @@
    </properties>
   </object>
   <object type="finish" x="4335" y="174" width="112" height="80"/>
-  <object name="planted" type="spawn" x="1879" y="479" width="64" height="64">
-   <properties>
-    <property name="var" value="PlantedEnemy"/>
-   </properties>
-  </object>
   <object name="basic" type="spawn" x="3285" y="477" width="64" height="64">
    <properties>
     <property name="var" value="BasicEnemy"/>
@@ -45,6 +40,46 @@
   <object name="bigger" type="spawn" x="3767" y="444" width="96" height="96">
    <properties>
     <property name="var" value="BiggerEnemy"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1606" y="23" width="52" height="518">
+   <properties>
+    <property name="var" value="firstEnemy"/>
+   </properties>
+  </object>
+  <object name="planted" type="spawn" x="2016" y="480" width="64" height="64">
+   <properties>
+    <property name="var" value="PlantedEnemy"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="2624" y="12" width="245" height="243">
+   <properties>
+    <property name="var" value="firstQuestion"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="3666" y="17" width="195" height="235">
+   <properties>
+    <property name="var" value="longJump"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="4094" y="17" width="357" height="236">
+   <properties>
+    <property name="var" value="tutorialEnd"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="34" y="463" width="1564" height="82">
+   <properties>
+    <property name="var" value="intro"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="2335" y="12" width="287" height="529">
+   <properties>
+    <property name="var" value="firstTechnology"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="3337" y="17" width="200" height="235">
+   <properties>
+    <property name="var" value="firstJump"/>
    </properties>
   </object>
  </objectgroup>
