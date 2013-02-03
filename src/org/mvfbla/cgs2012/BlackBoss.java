@@ -9,11 +9,9 @@ import org.newdawn.slick.SpriteSheet;
 
 public class BlackBoss extends Characters{
 
-	private final float speed = 10f;
 	private static final float MAX_SPEED = 5;
 	private int punchTime=0;
-	AnimatedObject dust;
-	private float punchRange = 25; //if negative, means facing the other way
+	private float punchRange = 40; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;
@@ -26,9 +24,6 @@ public class BlackBoss extends Characters{
 		arm.addAnimation("left",new Animation(new SpriteSheet("data\\BlackBossAttackLeft.png", 48, 48), 750));
 		addObject(arm);
 		arm.stopAnimation();
-		//dust = new AnimatedObject(0, 0, 48, 48);
-		//dust.addAnimation("right", new Animation(new SpriteSheet("data\\DustRight.png", 48, 48), 150));
-		//dust.addAnimation("left", new Animation(new SpriteSheet("data\\DustLeft.png", 48, 48), 150));
 
 		super.setHealth(3);
 	}
@@ -43,7 +38,7 @@ public class BlackBoss extends Characters{
 				this.setVelX(-MAX_SPEED);
 			playAnimation("walkRight");
 		//	dust.playAnimation("left");
-			this.setRange(Math.abs(this.getRange())*-1);
+			this.setRange(Math.abs(this.getRange())*1);
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			movePressed = true;
@@ -52,7 +47,7 @@ public class BlackBoss extends Characters{
 				this.setVelX(MAX_SPEED);
 			playAnimation("walkLeft");
 			//dust.playAnimation("right");
-			this.setRange(Math.abs(this.getRange()));
+			this.setRange(Math.abs(this.getRange())*-1);
 		}
 		if (!movePressed) {
 			// Slow down the player
@@ -96,8 +91,6 @@ public class BlackBoss extends Characters{
 			arm.setFrame(0);
 			arm.stopAnimation();
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_S))
-			System.out.println("action");
 		super.update(gc, delta);
 	}
 	public float getRange(){
@@ -111,7 +104,6 @@ public class BlackBoss extends Characters{
 	}
 	@Override
 	public void draw(Graphics g){
-		g.drawOval(this.getCenterX()-punchRange, this.getCenterY()-punchRange, punchRange*2, punchRange*2);
 		super.draw(g);
 	}
 }

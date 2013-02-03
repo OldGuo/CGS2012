@@ -16,6 +16,7 @@ public abstract class GameLevel extends BasicGameState{
 	public QuestionWindow questions;
 	protected Map map;
 	public Player player;
+	public BlackBoss blackBoss;
 	protected CameraObject cameraBox;
 	protected Image background;
 	protected Boolean lost = false;
@@ -38,6 +39,8 @@ public abstract class GameLevel extends BasicGameState{
 		for(TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn"))
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
+			if(to.getType().equals("BlackBoss"))
+				GameConstants.enemies.add(new BlackBoss(to.getX(), to.getY()));
 			if(to.getType().equals("movingPlatform")) {
 				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
 				GameConstants.platforms.add(t);
@@ -128,7 +131,7 @@ public abstract class GameLevel extends BasicGameState{
 				sbg.enterState(stateID + 1);
 			}
 		}
-		text.update(container,delta);
+		//text.update(container,delta);
 		if(done && questions.getAnswering() == false && stateID != 8) {
 			player.setHealth(0);
 			transState = 2;
@@ -253,7 +256,7 @@ public abstract class GameLevel extends BasicGameState{
 			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		//g.draw(cameraBox);
+		g.draw(cameraBox);
 		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
@@ -265,11 +268,11 @@ public abstract class GameLevel extends BasicGameState{
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
-		try {
+		/*try {
 			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		} catch (SlickException e) {
 			e.printStackTrace();
-		}
+		}*/
 		if(transState != 2)
 			player.draw(g);
 		if(transState != 0) {

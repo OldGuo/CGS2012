@@ -5,7 +5,10 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2ZAQ7DIAhFa+v9z7w1qQkxIEX5zTog+dE1K6hP0Gxl27by1f7C9mCe0T7KCjAGndPZr5daH2UFGIP6fpITXUuk7yiciqOoSZw84kTkhLLMp3nfETl51ot+LT3rT3ROnpb5NO87Cqe8R9y3zKd538lpzX6FE+Iegag/0Tl52hP5RM+jf+BUBy3K0Jy03wHfdo84FY0TyjKf7L4jc3rTPSIyJ0/LfLL7lji1vYr6T6/FQvgfxdT25krbYiH8c8+0OrM7iHKakTQOid2hqDqIcpqRNA6NoXSueKkC/K3y4uR9NlvW8S4v6x70XHdtvLRPc4ruba71Xssn5mzlJI2/XyuP+sidN9bPXC2SajAn61xGY54RHUfPR6uXo+/ceWeUFyuie6ZvPwtuGOVEJQAA
+   H4sIAAAAAAAAC+2Zga7DIAhFte3/f/NmMhPCrojo1kIkuWlf0ylwKBpfTinltw6H1xM8o/eercZ3fVTvPVvxf3N6vm1OPixi36NsNqfnWkROdD9ROeVbPZq3M31zOm/1aN7Q+uSdE1qfvHNCfc87J9T3onGKEFNETmh9ihDT5vR8i7g+lTj4uZL3mEoctPdFiYmf+3mPqdZeJE40liiciv+IkyTpzPoA72uszsvnz+CZRoiTNaYLPNMYn8MaC4qt947mfwt0LO3ZRmucGWnH4n0S+XIwaYznQePvKk61T7Z0AWms1hodKwtazQn5zfdWVBqjOZPGuoNTKw9879Xak3G//8GJ5xJx6l1pj9TmclQrx5YYUpY93pL4d6fpW7P56Ylysqg1T69GrDU8Whsrx/sFL+mbtspSHxKv0Rpbmfeev/Ser4/SXmd1Lv8R8yinlv88V62+ZO1taH+h+Rv1olYPRhqNRfLZIuoH59Prl9I7mt9I38WMaM3w6wvhKiygRCUAAA==
   </data>
  </layer>
+ <objectgroup name="objects" width="53" height="45">
+  <object type="BlackBoss" x="736" y="16" width="16" height="16"/>
+ </objectgroup>
 </map>

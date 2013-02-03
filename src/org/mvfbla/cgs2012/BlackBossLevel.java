@@ -13,16 +13,13 @@ public class BlackBossLevel extends GameLevel {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-	private Characters BlackBoss;
-	private final static int MAP_HEIGHT = 600;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
 		player = new Player(33, 15);
-		BlackBoss = new BlackBoss(704,16);
-		cameraBox = new CameraObject(player,1000,1200);
+		cameraBox = new CameraObject(player,2000,2000);
 		background = new Image("data\\Background.png");
 	}
 
@@ -43,7 +40,6 @@ public class BlackBossLevel extends GameLevel {
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Entering state " + getID());
 		initStuff();
-		GameConstants.enemies.add(BlackBoss);
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {

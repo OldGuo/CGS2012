@@ -9,7 +9,6 @@ import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Characters{
 
-	private final float speed = 10f;
 	private static final float MAX_SPEED = 5;
 	private String left,right;
 	private String current;
@@ -128,8 +127,6 @@ public class Player extends Characters{
 			arm.setFrame(0);
 			arm.stopAnimation();
 		}
-		if(gc.getInput().isKeyDown(Input.KEY_S))
-			System.out.println("action");
 		super.update(gc, delta);
 	}
 	public float getRange(){
@@ -143,7 +140,6 @@ public class Player extends Characters{
 	}
 	@Override
 	public void draw(Graphics g){
-		//g.drawOval(this.getCenterX()-punchRange, this.getCenterY()-punchRange, punchRange*2, punchRange*2);
 		super.draw(g);
 	}
 }

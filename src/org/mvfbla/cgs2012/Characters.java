@@ -66,7 +66,6 @@ public class Characters extends AnimatedObject {
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
-
 		float xChange = this.getVelX();
 		int direction = getDirection(trans);
 		if(direction == 3 || direction == 1) {
