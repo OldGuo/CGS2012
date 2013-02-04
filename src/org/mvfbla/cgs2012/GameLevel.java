@@ -415,7 +415,7 @@ public abstract class GameLevel extends BasicGameState{
 		case "notBlackBoss":
 			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
 					"I wanted to ask it so many questions. I wanted to understand.  A stream of " +
-					"questions streamed from my mouth.  But there was no answer, this only" +
+					"questions poured from my mouth.  But there was no answer, this only" +
 					" seemed to infuriate the figure...   ...   ...   ...   ...   " +
 					"                                       ";
 			break;
