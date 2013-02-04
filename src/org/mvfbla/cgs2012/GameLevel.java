@@ -52,18 +52,9 @@ public abstract class GameLevel extends BasicGameState{
 				GameConstants.collidableObjects.add(t);
 			}
 			if(to.getType().equals("trigger")) {
-				Trigger t = new Trigger(to, new TriggerListener() {
-					@Override
-					public void triggered(GameObject src) {}
-					@Override
-					public void onEnter(GameObject src) {
-						textChoice = to.getProperty("var");
-						changeText(textChoice);
-
-					}
-					@Override
-					public void onExit(GameObject src) {}
-				});
+				PlotListener pl = new PlotListener();
+				Trigger t = new Trigger(to, pl);
+				pl.init(t, to.getProperty("var"));
 				GameConstants.triggers.add(t);
 			}
 			if(to.getType().equals("platformButton")) {
@@ -87,6 +78,10 @@ public abstract class GameLevel extends BasicGameState{
 				Key key = new Key(to, this);
 				GameConstants.interacts.add(key);
 			}
+			if(to.getType().equals("elevButton")) {
+				Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
+				GameConstants.interacts.add(b);
+			}
 			if(to.getType().equals("pillar")){
 				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
 				GameConstants.pillars.add(pillar);
@@ -100,6 +95,23 @@ public abstract class GameLevel extends BasicGameState{
 		background = new Image("data\\Background.png");
 		transState = 1;
 	}
+	public class PlotListener implements TriggerListener {
+		private Trigger parent;
+		private String choice;
+		public void init(Trigger t, String choice) {
+			parent = t;
+			this.choice = choice;
+		}
+		public void onEnter(GameObject src) {
+			if(src == player) {
+				textChoice = choice;
+				changeText(textChoice);
+				parent.setActive(false);
+			}
+		}
+		public void onExit(GameObject src) {}
+		public void triggered(GameObject src) {}
+	}
 	public class GravityListener implements ButtonListener{
 		@Override
 		public void buttonPressed(boolean state){
@@ -111,6 +123,15 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void buttonPressed(boolean state) {
 			GameConstants.platforms.get(0).setOn(state);
+		}
+	}
+	public class ElevButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state) {
+				questions.setAnswering(true);
+				unlockElev();
+			}
 		}
 	}
 	public class MotionButtonListener implements ButtonListener {
@@ -234,24 +255,24 @@ public abstract class GameLevel extends BasicGameState{
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
 		switch(name) {
-			case "BasicEnemy" :
-				out = new BasicEnemy(x, y);
-				break;
-			case "PlantedEnemy" :
-				out = new PlantedEnemy(x, y);
-				break;
-			case "BiggerEnemy" :
-				out = new BiggerEnemy(x, y);
-				break;
-			case "RedBoss" :
-				out = new RedBoss(x, y);
-				break;
-			case "BlueBoss" :
-				out = new BlueBoss(x, y);
-				break;
-			case "YellowBoss" :
-				out = new YellowBoss(x, y);
-				break;
+		case "BasicEnemy" :
+			out = new BasicEnemy(x, y);
+			break;
+		case "PlantedEnemy" :
+			out = new PlantedEnemy(x, y);
+			break;
+		case "BiggerEnemy" :
+			out = new BiggerEnemy(x, y);
+			break;
+		case "RedBoss" :
+			out = new RedBoss(x, y);
+			break;
+		case "BlueBoss" :
+			out = new BlueBoss(x, y);
+			break;
+		case "YellowBoss" :
+			out = new YellowBoss(x, y);
+			break;
 		}
 		return out;
 	}
@@ -280,7 +301,7 @@ public abstract class GameLevel extends BasicGameState{
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
 		//for(Trigger t : GameConstants.triggers)
-			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
+		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
 		//g.draw(cameraBox);
@@ -318,103 +339,103 @@ public abstract class GameLevel extends BasicGameState{
 		switch(textChoice){
 		case "intro":
 			textString = "I saw nothing around me but darkness. " +
-						 "I try to recall the events prior, but every strand of thought escapes my grasps. " +
-						 "I know nothing except that I must move forward." +
-						 "                                       ";
-		break;
+					"I try to recall the events prior, but every strand of thought escapes my grasps. " +
+					"I know nothing except that I must move forward." +
+					"                                       ";
+			break;
 		case "firstEnemy":
 			textString = "As I come into the bright light, I see something ahead. " +
-						 "A furious rage builds up inside me. I want to use [SPACE] to defeat" +
-						 " this enemy. " +
-						 "                                       ";
+					"A furious rage builds up inside me. I want to use [SPACE] to defeat" +
+					" this enemy. " +
+					"                                       ";
 			break;
 		case "firstTechnology":
 			textString = "A strange piece of technology stands before of me. Although it seems alien to me, a voice " +
-						 "inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
-						 " for time but luckly I can press [ESC] to pause." +
-						 "                                       ";
+					"inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
+					" for time but luckly I can press [ESC] to pause." +
+					"                                       ";
 			break;
 		case "firstQuestion":
 			textString = "After clearing the ledge, I am filled with a strong sense of achievement." +
-						 "  The blur in my mind begins to clear up a bit. " +
-						 "But this feeling of accomplishment is quickly drowned out by the pangs of regret. " +
-						 " Did I have to defeat that enemy? " +
-						 "Perhaps I should refrain from physical conflicts in the future." +
-						 "                                       ";
+					"  The blur in my mind begins to clear up a bit. " +
+					"But this feeling of accomplishment is quickly drowned out by the pangs of regret. " +
+					" Did I have to defeat that enemy? " +
+					"Perhaps I should refrain from physical conflicts in the future." +
+					"                                       ";
 			break;
 		case "firstJump":
 			textString = "Almost effortlessly, I make each jump. " +
-						 "These jumps almost seemed familiar to me. " +
-						 "Like I had done them countless times in the past." +
-						 "                                       ";
+					"These jumps almost seemed familiar to me. " +
+					"Like I had done them countless times in the past." +
+					"                                       ";
 			break;
 		case "longJump":
 			textString = "The next jump is longer and wider than the previous.  I want to turn back." +
-						 " But a relenteless force drives me to push forward" +
-						 "  Clearing this jump requires a leap of faith." +
-						 "                                       ";
+					" But a relenteless force drives me to push forward" +
+					"  Clearing this jump requires a leap of faith." +
+					"                                       ";
 			break;
 		case "tutorialEnd":
 			textString = "Almost in disbelief, I look down at my suit" +
-						 " and see a badge.  EMPLOYEE NAME: it says. However the text below it seems to " +
-						 "have been intentionally scratched out. " +
-						 "So many questions filled my mind, but all the answers lie ahead. " +
-						 "                                       ";
+					" and see a badge.  EMPLOYEE NAME: it says. However the text below it seems to " +
+					"have been intentionally scratched out. " +
+					"So many questions filled my mind, but all the answers lie ahead. " +
+					"                                       ";
 			break;
 		case "elevatorLevelStart":
 			textString = "The elevator feels like it has brought me up a few floors. " +
-						 "My head begins to spin.  I have so many questions.  " +
-						 "Where am I? Who am I? Why am I here?" +
-						 " All I want were the answers.  ...   ...   ..." +
-						 "                                       ";
+					"My head begins to spin.  I have so many questions.  " +
+					"Where am I? Who am I? Why am I here?" +
+					" All I want were the answers.  ...   ...   ..." +
+					"                                       ";
 			break;
 		case "anotherEnemy":
 			textString = "There is a key up above, but another one of those enemies blocks my path.  " +
-						 "Something tells me I don't need the key, but I desperately want it anyways. Perhaps" +
-						 " this time I should use the [UP] arrow key to jump over the enemy without harm." +
-						 "                                       ";
+					"Something tells me I don't need the key, but I desperately want it anyways. Perhaps" +
+					" this time I should use the [UP] arrow key to jump over the enemy without harm." +
+					"                                       ";
 			break;
 		case "lockedElevator":
 			textString = "Locked!? It seems like that key would be useful here. But I wonder about the " +
-						 " technology beyond the elevator..." +
-						 "                                       ";
+					" technology beyond the elevator..." +
+					"                                       ";
 			break;
 		case "motionLevelStart":
 			textString = "The elevator brings me up another few floors. The haze in my mind" +
-						 " seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
-						 "...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
-						 "                                       ";
+					" seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
+					"...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
+					"                                       ";
 			break;
 		case "turnOffSensor":
 			textString = "It seems really dangerous up ahead, but something tells me whats beyond will pay off." +
-						 " It is either this or the motion sensors   ...   " +
-						 "                                       ";
+					" It is either this or the motion sensors   ...   " +
+					"                                       ";
 			break;
 		case "accomplishment":
 			textString = "I feel proud and accomplished having conquered the motion sensors." +
-						 "                                       ";
+					"                                       ";
 			break;
 		case "beatMotionLevel":
 			textString = "Something clicks inside my head as I see the elevator." +
-						 "  There I felt something up ahead. I have to keep going.  I have to" +
-						 " find the answers.  " +
-						 "                                       ";
+					"  There I felt something up ahead. I have to keep going.  I have to" +
+					" find the answers.  " +
+					"                                       ";
 			break;
 		case "gravityLevelStart":
 			textString = "Rising higher and higher in the buildling, I almost feel anxious. " +
-						 "My questions will soon be answered.  I can feel it.  " +
-						 "                                       ";
+					"My questions will soon be answered.  I can feel it.  " +
+					"                                       ";
 			break;
 		case "flippedGrav":
 			textString = "A feeling of complete exhiliration comes over me.  All the enemies are on the other" +
-						 " side of that wall. I can almost feel their desperation as " +
-						 " they attempt to reach me.  I smile at my superior intellect." +
-						 "                                       ";
+					" side of that wall. I can almost feel their desperation as " +
+					" they attempt to reach me.  I smile at my superior intellect." +
+					"                                       ";
 			break;
 		case "beforeBoss":
 			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
-						 " The answers lie ahead   ...   ...   ...   ...   ..." +
-						 "                                       ";
+					" The answers lie ahead   ...   ...   ...   ...   ..." +
+					"                                       ";
 			break;
 		case "notBlackBoss":
 			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +

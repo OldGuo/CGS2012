@@ -14,6 +14,7 @@ public class ElevatorLevel extends GameLevel {
 	}
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
+	private boolean waiting;
 
 
 	@Override
@@ -27,11 +28,17 @@ public class ElevatorLevel extends GameLevel {
 
 	@Override 
 	public void unlockElev() {
-		elevator.getTrigger().setActive(true);
+		waiting = true;
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(waiting) {
+			if(!questions.getAnswering()) {
+				waiting = false;
+				elevator.getTrigger().setActive(true);
+			}
+		}
 	}
 
 	@Override

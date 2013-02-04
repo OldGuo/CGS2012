@@ -3,6 +3,7 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -86,6 +87,13 @@ public class Elevator extends Button {
 			g.setColor(Color.gray);
 			g.fillRect(5, 5, 43, 75);
 			g.fillRect(48, 5, 43, 75);
+			if(!isActive()) {
+				try {
+					g.drawImage(new Image("data\\lock.png"), 27, 25);
+				} catch (SlickException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		g.setColor(orig);
 		for(GameObject obj : objects) {

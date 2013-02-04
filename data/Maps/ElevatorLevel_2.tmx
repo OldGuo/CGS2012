@@ -37,5 +37,6 @@
     <property name="var" value="lockedElevator"/>
    </properties>
   </object>
+  <object type="elevButton" x="1760" y="496" width="16" height="16"/>
  </objectgroup>
 </map>
