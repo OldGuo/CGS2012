@@ -87,18 +87,21 @@ public class YellowBossLevel extends GameLevel {
 			buttons[0].setStateNum(2);
 		} else {
 			buttons[0].setStateNum(0);
+			buttons[0].notif.playAnimation("near");
 		}
 		if(yellowBoss.isActivated(1)){
 			g.fillRect(320,224,144,32);
 			buttons[1].setStateNum(2);
 		} else {
 			buttons[1].setStateNum(0);
+			buttons[1].notif.playAnimation("near");
 		}
 		if(yellowBoss.isActivated(2)){
 			g.fillRect(560,288,128,32);
 			buttons[2].setStateNum(2);
 		} else {
 			buttons[2].setStateNum(0);
+			buttons[2].notif.playAnimation("near");
 		}
 		buttons[yellowBoss.location].setStateNum(1);
 	}
