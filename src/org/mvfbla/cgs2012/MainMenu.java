@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -12,8 +13,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MainMenu extends BasicGameState{
 	private int stateID = -1;
+	private Image background;
 	ArrayList<InteractButton> menuButtons;
-	
+
 	public MainMenu(int stateID){
 		this.stateID = stateID;
 	}
@@ -25,17 +27,20 @@ public class MainMenu extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException {
 		// TODO Auto-generated method stub
 		menuButtons = new ArrayList<InteractButton>();
-		menuButtons.add(new InteractButton("Play Game",255,220,300,75,0));
-		menuButtons.add(new InteractButton("Instructions",255,310,300,75,0));
-		menuButtons.add(new InteractButton("About",255,400,300,75,0));
-		menuButtons.add(new InteractButton("Quit",255,490,300,75,0));
+		menuButtons.add(new InteractButton("Play Game",255,190,300,75,0));
+		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
+		menuButtons.add(new InteractButton("About",255,370,300,75,0));
+		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
+		background = new Image("data\\background.png");
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
 		// TODO Auto-generated method stub
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
-		
+		for(int i = 0; i < 10; i++)
+			background.draw(100*i,-120);
+
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).draw(g,0,0);
 		}
