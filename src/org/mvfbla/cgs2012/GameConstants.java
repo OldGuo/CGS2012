@@ -15,6 +15,8 @@ public class GameConstants {
 	public static ArrayList<InteractiveObject> interacts = new ArrayList<InteractiveObject>();
 	public static ArrayList<MotionSensor> sensors = new ArrayList<MotionSensor>();
 	public static ArrayList<Pillar> pillars = new ArrayList<Pillar>();
+	public static int enemiesKilled = 0;
+	public static int techUsed = 0;
 	public static void clear() {
 		collidableObjects.clear();
 		sensors.clear();

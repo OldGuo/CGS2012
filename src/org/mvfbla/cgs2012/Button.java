@@ -17,6 +17,7 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	private long lastPress = 0;
 	private long cooldown = 500;
 	private boolean on;
+	protected boolean used = false;
 	protected Button(int x, int y) throws SlickException {
 		super(x, y, 96, 85);
 	}
@@ -41,6 +42,10 @@ public class Button extends AnimatedObject implements InteractiveObject {
 
 	@Override
 	public void interact(GameObject source) {
+		if(!used) {
+			GameConstants.techUsed++;
+		}
+		used = true;
 		long time = System.currentTimeMillis();
 		if(time-lastPress >= cooldown) {
 			lastPress = time;

@@ -112,15 +112,10 @@ public abstract class GameLevel extends BasicGameState{
 	public class ElevatorKeyListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {
-			System.out.println("I used the key!");
 			elevator.getTrigger().setActive(true);
 		}
 		public void onExit(GameObject src) {}
 		public void triggered(GameObject src) {}
-		@Override
-		public String toString() {
-			return "ekl";
-		}
 	}
 	public class PlotListener implements TriggerListener {
 		private Trigger parent;
@@ -195,7 +190,17 @@ public abstract class GameLevel extends BasicGameState{
 			} else if(transState == 2) {
 				transTime -= delta;
 				if(transTime <= 0) {
-					sbg.enterState(stateID + 1);
+					if(stateID == 4) {
+						if(GameConstants.enemiesKilled == 0) {
+							sbg.enterState(5);
+						} else if(GameConstants.enemiesKilled > GameConstants.techUsed) {
+							sbg.enterState(6);
+						} else {
+							sbg.enterState(7);
+						}
+					} else {
+						sbg.enterState(stateID + 1);
+					}
 				}
 			}
 			if(!player.isAlive() && done == false) {
@@ -208,10 +213,9 @@ public abstract class GameLevel extends BasicGameState{
 					enter(container, sbg);
 				}
 			}
-			if(done && questions.getAnswering() == false && stateID != 8 && questionCount >= 4) {
+			if(done && questions.getAnswering() == false && questionCount >= 4) {
 				player.setHealth(0);
 				transState = 2;
-				//sbg.enterState(stateID + 1);
 			}
 			questions.update(container);
 			if(!lost){
