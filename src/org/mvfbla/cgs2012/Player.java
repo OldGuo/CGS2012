@@ -17,6 +17,7 @@ public class Player extends Characters{
 	private int punchTime=0;
 	private boolean punching = false;
 	private boolean cooldown = false;
+	private boolean wasMovingRight = true;
 	private final AnimatedObject arm;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
@@ -49,10 +50,18 @@ public class Player extends Characters{
 		}
 		if(getVelX() < 0){
 			current = left;
+			wasMovingRight = false;
 		}else if(getVelX() > 0){
 			current = right;
+			wasMovingRight = true;
 		}
-		playAnimation(current);
+		if(getVelX() == 0){
+			if(wasMovingRight)
+				current = right;
+			else
+				current = left;
+		}
+		super.playAnimation(current);
 		// Moving left/right/up
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
 			movePressed = true;
