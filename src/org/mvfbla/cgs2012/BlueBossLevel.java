@@ -44,26 +44,27 @@ public class BlueBossLevel extends GameLevel {
 			float totalDist=(float)Math.sqrt(Xdist+Ydist);
 			String name=guy.getClass().toString();
 			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
-				if(totalDist<((BlueBoss)guy).getSight()){
-					((BlueBoss)guy).changeSleep(true);
-					((BlueBoss)guy).setDirection(Math.signum(tempX));
-					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
-					//System.out.println(((BlueBoss)guy).getSpeed());
+				BlueBoss boss = (BlueBoss)guy;
+				if(totalDist<boss.getSight()){
+					boss.changeSleep(true);
+					boss.setDirection(Math.signum(tempX));
+					boss.setSpeed(1*Math.signum(tempX));
+					//System.out.println(boss.getSpeed());
 				}else{
-					((BlueBoss)guy).changeSleep(false);
+					boss.changeSleep(false);
 
 				}
-				if(player.getCenterX() >= ((BlueBoss)guy).getStompX() && player.getCenterX() <= ((BlueBoss)guy).getStompX() + 64){
-					if(player.getCenterY() >= ((BlueBoss)guy).getStompY() && player.getCenterY() <= ((BlueBoss)guy).getStompY() + 50){
+				if(player.getCenterX() >= boss.getStompX() && player.getCenterX() <= boss.getStompX() + 64){
+					if(player.getCenterY() >= boss.getStompY() && player.getCenterY() <= boss.getStompY() + 50){
 						player.setHealth(player.getHealth() - 1);
 					}
 				}
 				brokenCount = 0;
 				for(int i = 0; i < GameConstants.pillars.size();i++){
-					if(((BlueBoss)guy).getStompX() > GameConstants.pillars.get(i).getX() &&
-							((BlueBoss)guy).getStompX() < GameConstants.pillars.get(i).getX() + GameConstants.pillars.get(i).getWidth()){
+					if(boss.getStompX() > GameConstants.pillars.get(i).getX() &&
+							boss.getStompX() < GameConstants.pillars.get(i).getX() + GameConstants.pillars.get(i).getWidth()){
 						if(GameConstants.pillars.get(i).isBroken() == false)	{
-							((BlueBoss)guy).setHealth(((BlueBoss)guy).getHealth() - 1);
+							boss.setHealth(boss.getHealth() - 1);
 							GameConstants.pillars.get(i).setBroken(true);
 						}
 					}
@@ -76,7 +77,8 @@ public class BlueBossLevel extends GameLevel {
 				if(platformBroken == true){
 					platform.setY(-100);
 					platform.setX(-100);
-					((BlueBoss)guy).setFalling(true);
+					boss.setFalling(true);
+					transState = 2;
 				}
 			}
 		}

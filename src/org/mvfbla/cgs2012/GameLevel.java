@@ -26,11 +26,11 @@ public abstract class GameLevel extends BasicGameState{
 	protected boolean paused;
 	protected float time=0;
 	public long transTime = 0;
-	private byte transState = 0;
+	protected byte transState = 0;
 	public long transLength = 1200;	
 	public Elevator elevator;
 	private String textChoice = " ";
-	private long deathTime = 0;
+	protected long deathTime = 0;
 	private long deathDur = 1000;
 	private long deathDelay = 2000;
 	public int questionCount = 0;
@@ -198,8 +198,10 @@ public abstract class GameLevel extends BasicGameState{
 						} else {
 							sbg.enterState(7);
 						}
-					} else {
+					} else if(stateID < 4) {
 						sbg.enterState(stateID + 1);
+					} else if(stateID > 4 && stateID <=7) {
+						sbg.enterState(Game.MAIN_MENU_STATE);
 					}
 				}
 			}
