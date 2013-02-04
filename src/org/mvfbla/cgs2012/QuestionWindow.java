@@ -58,7 +58,7 @@ public class QuestionWindow{
 	}
 	public void draw(Graphics g,int x,int y){
 		g.setColor(color);
-		g.fillRect(0,0,800 + x,600 + y);
+		g.fillRect(-300,-300,1100 + x,900 + y);
 		g.setColor(Color.black);
 		g.drawString(reader.getQuestions().get(randQuestion),250 + x ,100 + y);
 		for(int i = 0; i < questions.size(); i++){
