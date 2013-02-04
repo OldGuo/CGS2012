@@ -7,6 +7,9 @@ public class GameConstants {
 	//public static Game game;
 	// The acceleration of gravity
 	public static float GRAVITY = 0.37f;
+	public static boolean bossSync = true;
+	public static boolean paused = false;
+
 	public static ArrayList<GameObject> collidableObjects = new ArrayList<GameObject>();
 	public static ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();
@@ -14,6 +17,9 @@ public class GameConstants {
 	public static ArrayList<InteractiveObject> interacts = new ArrayList<InteractiveObject>();
 	public static ArrayList<MotionSensor> sensors = new ArrayList<MotionSensor>();
 	public static ArrayList<Pillar> pillars = new ArrayList<Pillar>();
+	public static int enemiesKilled = 0;
+	public static int techUsed = 0;
+	public static int bossesDefeated = 0b000;
 	public static void clear() {
 		collidableObjects.clear();
 		sensors.clear();
@@ -22,6 +28,21 @@ public class GameConstants {
 		enemies.clear();
 		interacts.clear();
 		pillars.clear();
+		paused = false;
+		bossSync = true;
+		GRAVITY = 0.37f;
+	}
+	public static void flipPaused(){
+		paused = !paused;
+	}
+	public static boolean getPaused(){
+		return paused;
+	}
+	public static void flipSync(){
+		bossSync = !bossSync;
+	}
+	public static boolean getSync(){
+		return bossSync;
 	}
 	public static void flipGrav(){
 		GRAVITY = -GRAVITY;

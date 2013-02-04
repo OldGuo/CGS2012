@@ -16,7 +16,7 @@ public class Key extends AnimatedObject implements InteractiveObject {
 		int[] two = {1,0};
 		int[] dur = {150};
 		addAnimation("off",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
-		addAnimation("on",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), two, dur));
+		addAnimation("on",new Animation(new SpriteSheet("data\\key.png", 32, 40), one, dur));
 		playAnimation("on");
 	}
 
@@ -25,7 +25,7 @@ public class Key extends AnimatedObject implements InteractiveObject {
 		public void onEnter(GameObject src) {
 			if(src == level.player) {
 				playAnimation("off");
-				level.unlockElev();
+				level.unlockElev(0);
 			}
 		}
 		public void onExit(GameObject src) {}

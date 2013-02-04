@@ -3,6 +3,7 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -37,7 +38,6 @@ public class Elevator extends Button {
 		Color orig = g.getColor();
 		if(level.done && level.questions.getAnswering() == false) {
 			boolean behind = true;
-			boolean move = true;
 			float prog = (level.transTime/(float)level.transLength);
 			if(prog >= 1) {
 				g.setColor(Color.black);
@@ -47,7 +47,6 @@ public class Elevator extends Button {
 				g.fillRect(5, 5, 86, 75);
 				g.setColor(Color.gray);
 				prog -= 1;
-				move = false;
 				if(prog > 0.5) {
 					prog = 1-prog;
 					behind = false;
@@ -86,11 +85,18 @@ public class Elevator extends Button {
 			g.setColor(Color.gray);
 			g.fillRect(5, 5, 43, 75);
 			g.fillRect(48, 5, 43, 75);
+			if(!isActive()) {
+				try {
+					g.drawImage(new Image("data\\lock.png"), 27, 25);
+				} catch (SlickException e) {
+					e.printStackTrace();
+				}
+			}
+			for(GameObject obj : objects) {
+				obj.draw(g);
+			}
 		}
 		g.setColor(orig);
-		for(GameObject obj : objects) {
-			obj.draw(g);
-		}
 		g.translate(-x, -y);
 	}
 	private class FinishListener implements TriggerListener {

@@ -5,10 +5,16 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Zga7DIAhFte3/f/NmMhPCrojo1kIkuWlf0ylwKBpfTinltw6H1xM8o/eercZ3fVTvPVvxf3N6vm1OPixi36NsNqfnWkROdD9ROeVbPZq3M31zOm/1aN7Q+uSdE1qfvHNCfc87J9T3onGKEFNETmh9ihDT5vR8i7g+lTj4uZL3mEoctPdFiYmf+3mPqdZeJE40liiciv+IkyTpzPoA72uszsvnz+CZRoiTNaYLPNMYn8MaC4qt947mfwt0LO3ZRmucGWnH4n0S+XIwaYznQePvKk61T7Z0AWms1hodKwtazQn5zfdWVBqjOZPGuoNTKw9879Xak3G//8GJ5xJx6l1pj9TmclQrx5YYUpY93pL4d6fpW7P56Ylysqg1T69GrDU8Whsrx/sFL+mbtspSHxKv0Rpbmfeev/Ser4/SXmd1Lv8R8yinlv88V62+ZO1taH+h+Rv1olYPRhqNRfLZIuoH59Prl9I7mt9I38WMaM3w6wvhKiygRCUAAA==
+   H4sIAAAAAAAAC+1Zjc7DIAi0s+//zPuazOTCTkHKuuFXEtKfWASOHeq2Usr2p4+E10re4X1mafHtL233meXw/8bp9+XGKYesyHuIzY3T78qKOOF6ouG0fdWj81LLO071qx6dF9afsuPE+lN2nBjvZceJ8d5qOK0Q04o4sf60Qkz/BSd5VjES6xi0iXNG2Ga8IHGqxb7+s45BmzhnhG3JC/JcKXvtHXFgjKvEJM/9ssfUau8TOM3sLyP3ohhLNE4z+8vIvehhi+E00tGZ9YOMtwj2EPx2I+8synDyxrSTdxaRc3hjYbFpYyz/LWCePGrNrdVXC0ZaTL0ajM5tlK3Gkz3dhVbyrGEv96dMo3GSfms+W3Ih12hafq/EafSdpszvK3DS/KuGK3KkNZezGmlbqy+sMctYpvJ3Z+Gts/nRFHHyaG8erUa8NTxbG5H2PoGXt8ee5QKJ2wiv2RqLzLvmL97L/jha60Tn8oqYZ3Hq+S9z1eMlL7ex9YXlmXGR1ufl2JlYRj57FP2Q+Gh8qa3lPHw8893IXq/mntlpR8BEJQAA
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
-  <object type="BlackBoss" x="736" y="16" width="16" height="16"/>
+  <object type="motionSensor" x="336" y="448" width="144" height="32"/>
+  <object type="trigger" x="-93" y="-53" width="1025" height="855">
+   <properties>
+    <property name="var" value="blackBoss"/>
+   </properties>
+  </object>
+  <object type="blackBossButton" x="392" y="272" width="32" height="32"/>
  </objectgroup>
 </map>

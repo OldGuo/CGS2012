@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Trigger extends TiledObject{
 
-	private TriggerListener listener;
+	private final TriggerListener listener;
 	private boolean active = true;
-	private ArrayList<GameObject> contained = new ArrayList<GameObject>();
+	private final ArrayList<GameObject> contained = new ArrayList<GameObject>();
 	/**
 	 * @param x
 	 * @param y
@@ -35,7 +35,7 @@ public class Trigger extends TiledObject{
 	}
 
 	public void hit(GameObject source) {
-		listener.triggered(source);	
+		listener.triggered(source);
 		if(!contains(source)) {
 			contained.add(source);
 			listener.onEnter(source);

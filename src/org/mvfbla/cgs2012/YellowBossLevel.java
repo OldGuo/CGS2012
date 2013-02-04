@@ -1,13 +1,11 @@
 package org.mvfbla.cgs2012;
 
-import org.mvfbla.cgs2012.GameLevel.GravityListener;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.Color;
 
 public class YellowBossLevel extends GameLevel {
 
@@ -36,6 +34,9 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(!yellowBoss.isAlive()) {
+			transState = 2;
+		}
 		if(yellowBoss.isAiming())
 			yellowBoss.setReticle(player.getX());
 		else if(yellowBoss.isFiring()){

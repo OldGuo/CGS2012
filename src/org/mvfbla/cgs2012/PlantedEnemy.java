@@ -38,7 +38,7 @@ public class PlantedEnemy extends Enemy{
 	}
 	@Override
 	public void draw(Graphics g){
-		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
+		//g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
 		super.draw(g);
 	}
 	public void changeSleep(boolean inSight){

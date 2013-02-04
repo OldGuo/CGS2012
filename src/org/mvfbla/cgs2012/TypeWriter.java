@@ -25,14 +25,13 @@ public class TypeWriter{
 
     public TypeWriter() {
         width = 720;
-        text = "Language is one of the keys to being human. It allows use to communicate with other human beings and to leave a legacy of our thoughts and actions for future generations. The dominant temporal lobe helps to process sounds and written words into meaninful information.";
-        //create a list of lines based on the above text
+        text = " ";
         box = new Color(255,255,255,0.4f);
 
         renderRow = 0;
         renderCol = 0;
 
-        TYPE_DELAY = 25;
+        TYPE_DELAY = 30;
         time = TYPE_DELAY;
         finished = false;
     }
@@ -54,9 +53,9 @@ public class TypeWriter{
 	        int y = 45 + yPos;
 	        int pad = 10;
 	        g.setColor(Color.black);
-	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 70+pad*2+20);
+	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 80+pad*2+20);
 	        g.setColor(box);
-	        g.fillRect(x-pad, y-pad, width+pad*2, 70+pad*2);
+	        g.fillRect(x-pad, y-pad, width+pad*2, 80+pad*2);
 
 	        g.setColor(Color.white);
 	        int lineHeight = font.getLineHeight();

@@ -6,6 +6,9 @@
  <tileset firstgid="5" name="Special" tilewidth="16" tileheight="16">
   <image source="collision.png" width="128" height="51"/>
  </tileset>
+ <tileset firstgid="29" name="Black" tilewidth="16" tileheight="16">
+  <image source="Black.png" width="16" height="16"/>
+ </tileset>
  <layer name="Tile Layer 1" width="123" height="45">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2cDW/EIAiG213//2/eLpkJIYLUKmJ5n4TY9XbVFh68ZB/ncRw/f3FifPVIj8F7+eb48x/X4rWAuZwk4PW7gdd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd5gNd54F57/X4E8Id7XXI+ewT+YL/Ow8r9Gn3dl5Veo6/7gs/hecB+nYeoXmMvH09Ur7GXjyeq12A8Ub0G49nR6x3XHIEdvf4c+605AnAkDzt6DfqA13mgXq/+m3+MPv9ToeTc42fXGNeM5XjmPLSuaEj1F+G5vHmc2T/K9WdFhP4YZZQ8oud768Az+Jza19r91u7POr/Vm1OZb8ZIe6L0Ol8X38PpNWrzzA7venpShzWvpGc6Y26eUxqSs3fuqdS6JV93vNQ89aixnnqseVXi6bq159Q6z1/XcqKdb+Vrdi3z/PN+I/Wf1vfVPrNa+rbkVMl3z3OiTvW4wtc+Mg8R+rr03lqfe9Jv7tzzxd6v5b6Vtzv1Su/ZMwe1OtOONTdbz9V6LW2fe1LXVyWktfXkzbLn8doa1Xd78tDKo+aSdt76+sh6t+4X1vrVaqFVH9K+841fCbFBoXxWAAA=
@@ -13,11 +16,27 @@
  </layer>
  <objectgroup name="objects" width="123" height="45">
   <object type="finish" x="1600" y="464" width="80" height="80"/>
-  <object name="planted" type="spawn" x="261" y="219" width="64" height="64">
+  <object name="planted" type="spawn" x="206" y="224" width="64" height="64">
    <properties>
     <property name="var" value="PlantedEnemy"/>
    </properties>
   </object>
   <object type="key" x="80" y="224" width="64" height="64"/>
+  <object name="plot text" type="trigger" x="32" y="319" width="414" height="224">
+   <properties>
+    <property name="var" value="elevatorLevelStart"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="579" y="428" width="106" height="113">
+   <properties>
+    <property name="var" value="anotherEnemy"/>
+   </properties>
+  </object>
+  <object name="plot text" type="trigger" x="1461" y="12" width="478" height="533">
+   <properties>
+    <property name="var" value="lockedElevator"/>
+   </properties>
+  </object>
+  <object type="elevButton" x="1760" y="496" width="16" height="16"/>
  </objectgroup>
 </map>

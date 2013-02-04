@@ -14,8 +14,9 @@ public class InteractButton {
 	private final int height;
 	private boolean hover, clickDown;
 	private final int PADDING = 30;
-	private String words,action;
-	
+	private final String words;
+	private String action;
+
 	public InteractButton(String text,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		words = text;
 		action = " ";
@@ -51,6 +52,10 @@ public class InteractButton {
 					action = "Quit";
 				}else if(getText().equals("Back")){
 					action = "Back";
+				}else if(getText().equals("Resume")){
+					action = "Resume";
+				}else if(getText().equals("Main Menu")){
+					action = "Main Menu";
 				}
 			}else{
 				setClick(false);

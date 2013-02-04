@@ -2,6 +2,7 @@ package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -19,13 +20,17 @@ public class Game extends StateBasedGame{
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
 
-	public Game(){
+	public final Music music;
+	public Game() throws SlickException{
 		super("FBLA CGS 2012");
+		music = new Music("data\\Maps\\Outdated.ogg");
+		music.loop();
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());
 		app.setShowFPS(false);
 		app.setTargetFrameRate(30);
+		app.setVSync(true);
         app.setDisplayMode(800, 600, false);
         app.start();
 	}

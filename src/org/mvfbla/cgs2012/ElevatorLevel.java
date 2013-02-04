@@ -14,6 +14,7 @@ public class ElevatorLevel extends GameLevel {
 	}
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
+	private boolean waiting;
 
 
 	@Override
@@ -26,12 +27,24 @@ public class ElevatorLevel extends GameLevel {
 	}
 
 	@Override 
-	public void unlockElev() {
-		elevator.getTrigger().setActive(true);
+	public void unlockElev(int source) {
+		if(source == 1)
+			waiting = true;
+		else {
+			elevatorKeyTrigger.setActive(true);
+		}
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(waiting) {
+			if(!questions.getAnswering()) {
+				waiting = false;
+				questionButton.getTrigger().setActive(false);
+				questionButton.getTrigger().exit(null);
+				elevator.getTrigger().setActive(true);
+			}
+		}
 	}
 
 	@Override
@@ -52,5 +65,4 @@ public class ElevatorLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
-
 }

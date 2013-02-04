@@ -28,6 +28,15 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		for(Characters guy : GameConstants.enemies) {
+			String name=guy.getClass().toString();
+			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+				RedBoss boss = (RedBoss)guy;
+				if(!boss.isAlive()){
+					transState = 2;
+				}
+			}
+		}
 	}
 
 	@Override

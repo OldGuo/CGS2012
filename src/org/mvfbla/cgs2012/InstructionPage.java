@@ -13,6 +13,10 @@ public class InstructionPage extends BasicGameState{
 	private int stateID = -1;
 	private Image instructions;
 	private InteractButton back;
+	private long fadeDur = 400;
+	private long fadeTime = 0;
+	private int fadeState = 0;
+	
 	public InstructionPage(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -21,6 +25,7 @@ public class InstructionPage extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		back = new InteractButton("Back",255,490,300,75,0);
 		instructions = new Image("data\\Instructions.png");
+		fadeState = 1;
 	}
 
 	@Override
@@ -28,18 +33,36 @@ public class InstructionPage extends BasicGameState{
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		g.setColor(Color.black);
-		back.draw(g,0,0);
 		instructions.draw();
+		back.draw(g,0,0);
+		if(fadeState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)throws SlickException {
+		if(fadeState == 2) {
+			fadeTime -= delta;
+			if(fadeTime <= 0) {
+				fadeState = 1;
+				back.clear();
+				sbg.enterState(Game.MAIN_MENU_STATE);
+			}
+			return;
+		} else if(fadeState == 1) {
+			fadeTime += delta;
+			if(fadeTime >= fadeDur) {
+				fadeState = 0;
+			}
+			return;
+		}
 		Input input = gc.getInput();
 		back.update(gc,input);
 		if(back.getAction().equals("Back")){
-			back.clear();
-			sbg.enterState(Game.MAIN_MENU_STATE);
-		}	
+			fadeState = 2;
+		}
 	}
 
 	@Override

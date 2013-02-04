@@ -11,4 +11,11 @@
    H4sIAAAAAAAAC+2ZwQ6EIAxEQff/v3m9kJAGSotQnd2ZZFKjSIU3nMwppXz5AKzn5Y9yH1GjNSOq8OhVRJEThsgJQ+SEIXLCEDlhKIpTmU/2yGl9ryhOZT7Z40zre/E8YUhmW2ZeGx/F1dtTZltmXhsfxdXb08sJQV5OCKr5/BInmU9yep/ICUPkhCFywhA5YegfObWea9X7T2+HR5zK82xwa65R3WWNU73GkVv70as7OR2NnvV1GWPZm1Zue9XK/o4t52nk3d/o8erz9AZbmFjm8YyP5CTXN5M9+f5TudS+adW+RVtymsnKExnz5HBmn9/Cp+cvM8v0/EQlAAA=
   </data>
  </layer>
+ <objectgroup name="objects" width="53" height="45">
+  <object type="trigger" x="25" y="13" width="782" height="591">
+   <properties>
+    <property name="var" value="notBlackBoss"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

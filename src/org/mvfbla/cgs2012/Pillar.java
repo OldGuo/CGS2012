@@ -1,17 +1,21 @@
 package org.mvfbla.cgs2012;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Pillar extends GameObject {
 
 	private boolean broken = false;
+	private final Image unbrokenPillar;
+	private final Image brokenPillar;
 
 	public Pillar(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
 		broken = false;
+		unbrokenPillar = new Image("data\\Maps\\pillarUnbroken.png");
+		brokenPillar = new Image("data\\Maps\\pillarBroken.png");
 	}
 	public boolean isBroken(){
 		return broken;
@@ -22,11 +26,10 @@ public class Pillar extends GameObject {
 	@Override
 	public void draw(Graphics g){
 		if(broken){
-			g.setColor(Color.red);
+			brokenPillar.draw(getX()-24,getY());
 		}else{
-			g.setColor(Color.white);
+			unbrokenPillar.draw(getX(),getY());
 		}
-		g.fillRect(getX(),getY(),getWidth(),getHeight());
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {

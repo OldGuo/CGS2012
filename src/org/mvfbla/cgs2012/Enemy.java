@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 public class Enemy extends Characters{;
 	private float speed, direction;
 	private float lastX;
+	private boolean died = false;
 	public Enemy (int x, int y, int width, int height) throws SlickException{
 		super(x, y, width, height);
 		speed=direction=-1;
@@ -19,8 +20,10 @@ public class Enemy extends Characters{;
 			}//if something reduces its speed (collision), change direction
 			lastX = getX();
 			super.update(gc, delta);
-		}
-		else{
+		} else {
+			if(!died)
+				GameConstants.enemiesKilled++;
+			died = true;
 			super.resetAnimation();
 			super.stopAnimation();
 			super.update(gc, delta);

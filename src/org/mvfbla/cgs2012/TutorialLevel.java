@@ -9,7 +9,6 @@ public class TutorialLevel extends GameLevel {
 
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
-	private QuestionWindow question;
 
 	public TutorialLevel(int stateID) {
 		this.stateID = stateID;
@@ -18,7 +17,6 @@ public class TutorialLevel extends GameLevel {
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(1600, 29);
-		question = new QuestionWindow();
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1300);
@@ -26,7 +24,6 @@ public class TutorialLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
 		updateMain(container, sbg, delta);
-		question.update(container);
 	}
 
 	@Override
