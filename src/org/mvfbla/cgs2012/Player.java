@@ -15,7 +15,7 @@ public class Player extends Characters{
 	private String left,right;
 	private String current;
 	private int punchTime=0;
-	private float punchRange = 40; //if negative, means facing the other way
+	private float punchRange = 125; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;

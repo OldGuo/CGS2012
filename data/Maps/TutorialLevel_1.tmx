@@ -62,7 +62,7 @@
     <property name="var" value="longJump"/>
    </properties>
   </object>
-  <object name="plot text" type="trigger" x="4094" y="17" width="357" height="236">
+  <object name="plot text" type="trigger" x="4120" y="18" width="357" height="236">
    <properties>
     <property name="var" value="tutorialEnd"/>
    </properties>

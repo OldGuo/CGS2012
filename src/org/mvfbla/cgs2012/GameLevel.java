@@ -223,7 +223,8 @@ public abstract class GameLevel extends BasicGameState{
 				player.setHealth(0);
 				transState = 2;
 			}
-			questions.update(container);
+			if(questions.getAnswering())
+				questions.update(container);
 			if(!lost){
 				player.update(container, delta);
 			}
@@ -305,7 +306,8 @@ public abstract class GameLevel extends BasicGameState{
 		if(input.isKeyPressed(Input.KEY_ESCAPE)){
 			GameConstants.flipPaused();
 		}
-		pauseWindow.update(container,sbg);
+		if(GameConstants.getPaused())
+			pauseWindow.update(container,sbg);
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
