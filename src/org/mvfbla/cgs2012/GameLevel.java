@@ -30,6 +30,9 @@ public abstract class GameLevel extends BasicGameState{
 	public long transLength = 1200;
 	public Elevator elevator;
 	private String textChoice = " ";
+	private long deathTime = 0;
+	private long deathDur = 1500;
+	private long deathDelay = 500;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -157,7 +160,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void unlockElev() {}
-	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) {
+	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		Input input = container.getInput();
 		if(container.isPaused() == false){
 			if(transState == 1) {
@@ -170,6 +173,15 @@ public abstract class GameLevel extends BasicGameState{
 				transTime -= delta;
 				if(transTime <= 0) {
 					sbg.enterState(stateID + 1);
+				}
+			}
+			if(!player.isAlive()) {
+				deathTime += delta;
+				if(deathTime >= deathDur) {
+					transTime = 0;
+					deathTime = 0;
+					init(container, sbg);
+					enter(container, sbg);
 				}
 			}
 			if(done && questions.getAnswering() == false && stateID != 8) {
@@ -342,6 +354,17 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		if(paused)
 			g.drawString("PAUSED", 375-(int)cameraBox.getOffsetX(), 300);
+		if(deathTime > 0) {
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
+		}
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;
