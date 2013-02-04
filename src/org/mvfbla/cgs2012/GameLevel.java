@@ -31,8 +31,9 @@ public abstract class GameLevel extends BasicGameState{
 	public Elevator elevator;
 	private String textChoice = " ";
 	private long deathTime = 0;
-	private long deathDur = 1500;
-	private long deathDelay = 500;
+	private long deathDur = 1000;
+	private long deathDelay = 2000;
+	private int questionCount = 0;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -180,11 +181,12 @@ public abstract class GameLevel extends BasicGameState{
 				if(deathTime >= deathDur) {
 					transTime = 0;
 					deathTime = 0;
+					questionCount = 0;
 					init(container, sbg);
 					enter(container, sbg);
 				}
 			}
-			if(done && questions.getAnswering() == false && stateID != 8) {
+			if(done && questions.getAnswering() == false && stateID != 8 && questionCount >= 5) {
 				player.setHealth(0);
 				transState = 2;
 				//sbg.enterState(stateID + 1);
