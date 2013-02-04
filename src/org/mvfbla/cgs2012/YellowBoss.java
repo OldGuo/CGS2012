@@ -43,7 +43,7 @@ public class YellowBoss extends Boss{
 					firing=true;
 				else
 					firing=false;
-				if(time>=4500&&time<=5000)
+				if(time>=4500)
 					teleporting=true;
 				else
 					teleporting=false;

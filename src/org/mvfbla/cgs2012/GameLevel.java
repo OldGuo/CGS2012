@@ -252,18 +252,13 @@ public abstract class GameLevel extends BasicGameState{
 					if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
 						if(Math.abs(tempX)<20)
 							player.setHealth(player.getHealth()-1);
-						if(tempX>0)
-							hit+=16;
 					}
 					else{
 						if(Math.abs(tempX)<40)
 							player.setHealth(player.getHealth()-1);
 					}
 				}
-				if(tempX>0)
-					hit+=(guy.getWidth());
-				else
-					hit+=(guy.getWidth()/8);
+				hit+=(guy.getWidth()/2);
 				if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 						((PlantedEnemy)guy).changeSleep(true);
@@ -275,8 +270,9 @@ public abstract class GameLevel extends BasicGameState{
 				}
 
 				if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
-					if(Math.abs(tempX)<Math.abs(player.getRange()+hit) && guy.isAlive()) {
-						guy.setHealth(guy.getHealth()-1);
+					if(Math.abs(tempX)<(Math.abs(player.getRange())+hit)){
+						if(guy.isAlive())
+							guy.setHealth(guy.getHealth()-1);
 					}
 				}
 				/*if(!player.isAlive()){
@@ -354,8 +350,10 @@ public abstract class GameLevel extends BasicGameState{
 		cameraBox.draw(g);
 		g.setColor(Color.white);
 		for(Characters guy:GameConstants.enemies){
-			if(guy.shouldDisplay())
+			if(guy.shouldDisplay()){
 				guy.draw(g);
+				g.drawLine(guy.getCenterX()-guy.getWidth()/2-Math.abs(player.getRange()),guy.getCenterY(),guy.getCenterX()+guy.getWidth()/2+Math.abs(player.getRange()),guy.getCenterY());
+			}
 		}
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
