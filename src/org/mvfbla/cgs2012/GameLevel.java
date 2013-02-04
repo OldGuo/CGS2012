@@ -78,6 +78,10 @@ public abstract class GameLevel extends BasicGameState{
 				Key key = new Key(to, this);
 				GameConstants.interacts.add(key);
 			}
+			if(to.getType().equals("elevButton")) {
+				Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
+				GameConstants.interacts.add(b);
+			}
 			if(to.getType().equals("pillar")){
 				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
 				GameConstants.pillars.add(pillar);
@@ -119,6 +123,15 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void buttonPressed(boolean state) {
 			GameConstants.platforms.get(0).setOn(state);
+		}
+	}
+	public class ElevButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state) {
+				questions.setAnswering(true);
+				unlockElev();
+			}
 		}
 	}
 	public class MotionButtonListener implements ButtonListener {
