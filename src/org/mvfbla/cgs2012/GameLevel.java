@@ -147,13 +147,18 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void buttonPressed(boolean state){
 			//player.rotateAnimation();
-			GameConstants.flipGrav();
+			buttonQuestion = true;
+			questions.setAnswering(true);
+			//Blargh using random method
+			unlockElev(0);
 		}
 	}
 	public class PlatformListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
-			GameConstants.platforms.get(0).setOn(state);
+			buttonQuestion = true;
+			questions.setAnswering(true);
+			unlockElev(0);
 		}
 	}
 	public class ElevButtonListener implements ButtonListener {
@@ -169,10 +174,12 @@ public abstract class GameLevel extends BasicGameState{
 	public class MotionButtonListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
-			if(state)
+			if(state) {
+				buttonQuestion = true;
+				questions.setAnswering(true);
 				for(MotionSensor ms : GameConstants.sensors)
 					ms.setState((byte) 0);
-			else
+			} else
 				for(MotionSensor ms : GameConstants.sensors)
 					ms.setState((byte) 1);
 		}
@@ -201,7 +208,12 @@ public abstract class GameLevel extends BasicGameState{
 					} else if(stateID < 4) {
 						sbg.enterState(stateID + 1);
 					} else if(stateID > 4 && stateID <=7) {
-						sbg.enterState(Game.MAIN_MENU_STATE);
+						if(GameConstants.playNum >= 2) {
+							sbg.enterState(Game.BLACK_BOSS_STATE);
+						} else {
+							GameConstants.playNum++;
+							sbg.enterState(Game.MAIN_MENU_STATE);
+						}
 					}
 				}
 			}
@@ -258,8 +270,9 @@ public abstract class GameLevel extends BasicGameState{
 				}
 
 				if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
-					if(Math.abs(tempX)<Math.abs(player.getRange()+hit))
+					if(Math.abs(tempX)<Math.abs(player.getRange()+hit) && guy.isAlive()) {
 						guy.setHealth(guy.getHealth()-1);
+					}
 				}
 				/*if(!player.isAlive()){
 					System.out.println("GG");
@@ -355,7 +368,7 @@ public abstract class GameLevel extends BasicGameState{
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
 		//for(Trigger t : GameConstants.triggers)
-			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
+		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
 		//g.draw(cameraBox);
@@ -505,17 +518,17 @@ public abstract class GameLevel extends BasicGameState{
 			break;
 		case "notBlackBoss":
 			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
-						 "I wanted to ask it so many questions. I wanted to understand.  A stream of " +
-						 "questions streamed from my mouth.  But there was no answer, this only" +
-						 " seemed to infuriate the figure...   ...   ...   ...   ...   " +
-						 "                                       ";
+					"I wanted to ask it so many questions. I wanted to understand.  A stream of " +
+					"questions streamed from my mouth.  But there was no answer, this only" +
+					" seemed to infuriate the figure...   ...   ...   ...   ...   " +
+					"                                       ";
 			break;
 		case "blackBoss":
 			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
-						 "A figure stands before me.  It copies my every move down to a wire. " +
-						 "Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
-						 "                      \"I am Perfection\"" +
-						 "                                                                              ";
+					"A figure stands before me.  It copies my every move down to a wire. " +
+					"Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
+					"                      \"I am Perfection\"" +
+					"                                                                              ";
 			break;
 		}
 		text.setText(textString);

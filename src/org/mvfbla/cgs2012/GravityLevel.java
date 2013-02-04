@@ -15,6 +15,7 @@ public class GravityLevel extends GameLevel {
 	}
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
+	private boolean waiting;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -25,9 +26,16 @@ public class GravityLevel extends GameLevel {
 		background = new Image("data\\Background.png");
 	}
 
+	public void unlockElev(int src) {
+		waiting = true;
+	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(waiting && !questions.getAnswering()) {
+			waiting = false;
+			GameConstants.flipGrav();
+		}
 	}
 
 	@Override

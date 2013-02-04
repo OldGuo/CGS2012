@@ -27,6 +27,9 @@ public class InteractButton {
 		length = l;
 		height = h;
 	}
+	public void setText(String text) {
+		words = text;
+	}
 	public void draw(Graphics g,int offsetX,int offsetY){
 		if(getHover() == true)
 			g.drawImage(buttonHover,getX() + offsetX,getY() + offsetY);
@@ -41,7 +44,7 @@ public class InteractButton {
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
 			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 				setClick(true);
-				if(getText().equals("Play Game")){
+				if(getText().matches("New Game[+]*")){
 					action = "Play Game";
 				}else if(getText().equals("Instructions")){
 					action = "Instructions";

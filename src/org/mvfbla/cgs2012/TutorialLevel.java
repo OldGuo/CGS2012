@@ -9,6 +9,7 @@ public class TutorialLevel extends GameLevel {
 
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
+	private boolean waiting;
 
 	public TutorialLevel(int stateID) {
 		this.stateID = stateID;
@@ -20,10 +21,20 @@ public class TutorialLevel extends GameLevel {
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1300);
+		GameConstants.enemiesKilled = -1;
+		GameConstants.techUsed = -1;
 	}
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(waiting && !questions.getAnswering()) {
+			waiting = false;
+			GameConstants.platforms.get(0).setOn(!GameConstants.platforms.get(0).isOn());
+		}
+	}
+
+	public void unlockElev(int src) {
+		waiting = true;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class MainMenu extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException {
 		// TODO Auto-generated method stub
 		menuButtons = new ArrayList<InteractButton>();
-		menuButtons.add(new InteractButton("Play Game",255,190,300,75,0));
+		menuButtons.add(new InteractButton("New Game",255,190,300,75,0));
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
@@ -74,6 +74,12 @@ public class MainMenu extends BasicGameState{
 			}
 			return;
 		}
+		if(GameConstants.playNum == 2)
+			menuButtons.get(0).setText("New Game++");
+		else if(GameConstants.playNum == 1)
+			menuButtons.get(0).setText("New Game+");
+		else if(GameConstants.playNum == 0)
+			menuButtons.get(0).setText("New Game");
 		Input input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_0))
 			sbg.enterState(Game.MAIN_MENU_STATE);

@@ -79,6 +79,7 @@ public class BlueBossLevel extends GameLevel {
 					platform.setX(-100);
 					boss.setFalling(true);
 					transState = 2;
+					GameConstants.bossesDefeated |= 0b100;
 				}
 			}
 		}

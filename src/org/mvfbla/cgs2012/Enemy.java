@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 public class Enemy extends Characters{;
 	private float speed, direction;
 	private float lastX;
-	private boolean died = false;
+	public boolean died = false;
 	public Enemy (int x, int y, int width, int height) throws SlickException{
 		super(x, y, width, height);
 		speed=direction=-1;
