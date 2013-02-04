@@ -35,7 +35,7 @@ public class BlueBossLevel extends GameLevel {
 		updateMain(container, sbg, delta);
 		GameConstants.collidableObjects.add(platform);
 		if(platformBroken){
-			fallY+=5;
+			fallY+=7;
 		}
 		for(Characters guy : GameConstants.enemies) {
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
@@ -47,7 +47,7 @@ public class BlueBossLevel extends GameLevel {
 				if(totalDist<((BlueBoss)guy).getSight()){
 					((BlueBoss)guy).changeSleep(true);
 					((BlueBoss)guy).setDirection(Math.signum(tempX));
-					((BlueBoss)guy).setSpeed(4*Math.signum(tempX));
+					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
 					//System.out.println(((BlueBoss)guy).getSpeed());
 				}else{
 					((BlueBoss)guy).changeSleep(false);
@@ -89,8 +89,8 @@ public class BlueBossLevel extends GameLevel {
 		if(platformBroken == false)
 			g.fillRect(5*16,18*16,16*39,16*2);
 		else{
-			g.fillRect(5*16, fallY, 7*39, 16*2);
-			g.fillRect(26*16, fallY, 7*39, 16*2);
+			g.fillRect(5*16, fallY, 6*39, 16*2);
+			g.fillRect(27*16, fallY, 6*39, 16*2);
 		}
 	}
 	@Override
