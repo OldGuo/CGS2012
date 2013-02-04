@@ -8,6 +8,8 @@ public class GameConstants {
 	// The acceleration of gravity
 	public static float GRAVITY = 0.37f;
 	public static boolean bossSync = true;
+	public static boolean paused = false;
+
 	public static ArrayList<GameObject> collidableObjects = new ArrayList<GameObject>();
 	public static ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();
@@ -28,6 +30,15 @@ public class GameConstants {
 		enemies.clear();
 		interacts.clear();
 		pillars.clear();
+		paused = false;
+		bossSync = true;
+		GRAVITY = 0.37f;
+	}
+	public static void flipPaused(){
+		paused = !paused;
+	}
+	public static boolean getPaused(){
+		return paused;
 	}
 	public static void flipSync(){
 		bossSync = !bossSync;

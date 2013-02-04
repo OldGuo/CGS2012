@@ -14,6 +14,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class GameLevel extends BasicGameState{
 	protected int bgOffsetX, bgNumRepeat;
 	public QuestionWindow questions;
+	public PauseWindow pauseWindow;
 	protected Map map;
 	public Player player;
 	public BlackBoss blackBoss;
@@ -23,16 +24,15 @@ public abstract class GameLevel extends BasicGameState{
 	protected int stateID = -1;
 	private TypeWriter text;
 	protected boolean done = false;
-	protected boolean paused;
 	protected float time=0;
 	public long transTime = 0;
 	protected byte transState = 0;
-	public long transLength = 1200;	
+	public long transLength = 1200;
 	public Elevator elevator;
 	private String textChoice = " ";
 	protected long deathTime = 0;
-	private long deathDur = 1000;
-	private long deathDelay = 2000;
+	private final long deathDur = 1000;
+	private final long deathDelay = 2000;
 	public int questionCount = 0;
 	public boolean buttonQuestion = false;
 	protected Button questionButton;
@@ -44,6 +44,8 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		questions = new QuestionWindow(this);
+		pauseWindow = new PauseWindow();
+		pauseWindow.init();
 		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
@@ -114,7 +116,9 @@ public abstract class GameLevel extends BasicGameState{
 		public void onEnter(GameObject src) {
 			elevator.getTrigger().setActive(true);
 		}
+		@Override
 		public void onExit(GameObject src) {}
+		@Override
 		public void triggered(GameObject src) {}
 	}
 	public class PlotListener implements TriggerListener {
@@ -185,9 +189,9 @@ public abstract class GameLevel extends BasicGameState{
 		}
 	}
 	public void unlockElev(int source) {}
-	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
-		if(container.isPaused() == false){
+		if(GameConstants.getPaused() == false){
 			if(transState == 1) {
 				transTime += delta;
 				if(transTime >= transLength) {
@@ -231,7 +235,8 @@ public abstract class GameLevel extends BasicGameState{
 				player.setHealth(0);
 				transState = 2;
 			}
-			questions.update(container);
+			if(questions.getAnswering())
+				questions.update(container);
 			if(!lost){
 				player.update(container, delta);
 			}
@@ -312,12 +317,10 @@ public abstract class GameLevel extends BasicGameState{
 			}
 		}
 		if(input.isKeyPressed(Input.KEY_ESCAPE)){
-			paused = !paused;
+			GameConstants.flipPaused();
 		}
-		if(paused)
-			container.pause();
-		else
-			container.resume();
+		if(GameConstants.getPaused())
+			pauseWindow.update(container,sbg);
 	}
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
@@ -350,15 +353,10 @@ public abstract class GameLevel extends BasicGameState{
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		cameraBox.draw(g);
 		g.setColor(Color.white);
-		//g.drawRect(player.getX(),player.getY(),player.getWidth(),player.getHeight());
-		//g.drawRect(cameraBox.getX(),cameraBox.getY(),cameraBox.getWidth(),cameraBox.getHeight());
 		for(Characters guy:GameConstants.enemies){
 			if(guy.shouldDisplay())
 				guy.draw(g);
 		}
-		//for(GameObject t : GameConstants.collidableObjects){
-		//	g.draw(t.getCollision());
-		//}
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
@@ -371,8 +369,6 @@ public abstract class GameLevel extends BasicGameState{
 		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		//g.draw(cameraBox);
-		//g.draw(player.getCollision());
 		for(int i=1;i<=3;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);
@@ -395,8 +391,6 @@ public abstract class GameLevel extends BasicGameState{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		if(paused)
-			g.drawString("PAUSED", 375-(int)cameraBox.getOffsetX(), 300);
 		if(deathTime > 0) {
 			player.stopAnimation();
 			player.draw(g);
@@ -407,6 +401,9 @@ public abstract class GameLevel extends BasicGameState{
 			Color c = new Color(0, 0, 0, prog);
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
 	public void setBackgroundInfo(int offset, int numRepeat){

@@ -85,7 +85,7 @@ public class YellowBossLevel extends GameLevel {
 			}
 		}
 		else if(yellowBoss.isTeleporting()){
-			float opacity=(float)((yellowBoss.getTime()-4500)*.002);
+			float opacity=(float)((yellowBoss.getTime()-4500)*.001);
 			g.setColor(new Color(0,255,0,opacity));
 			g.fillOval(yellowBoss.getCenterX()-yellowBoss.getHeight()/2, yellowBoss.getCenterY()-yellowBoss.getWidth()/2, yellowBoss.getHeight(), yellowBoss.getWidth());
 		}
