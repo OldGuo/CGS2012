@@ -1,8 +1,10 @@
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -48,7 +50,7 @@ public class Player extends Characters{
 		}
 		if(getVelX() < 0){
 			current = left;
-		}else{
+		}else if(getVelX() > 0){
 			current = right;
 		}
 		playAnimation(current);
@@ -141,5 +143,21 @@ public class Player extends Characters{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		if(punchTime > 0) {
+			float prog = punchTime/300f;
+			g.translate(getX(), getY());
+			try {
+				Color c = new Color(Color.white);
+				c.a = 1-prog;
+				if(current.equals(right)) {
+					g.drawImage(new Image("data\\punchright.png"), 23 + (punchRange*prog), 10, c);
+				} else if(current.equals(left)) {
+					g.drawImage(new Image("data\\punchleft.png"), -6 + (punchRange*prog), 10, c);
+				}
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			g.translate(-getX(), -getY());
+		}
 	}
 }
