@@ -20,6 +20,8 @@ public class GameConstants {
 	public static int enemiesKilled = 0;
 	public static int techUsed = 0;
 	public static int bossesDefeated = 0b000;
+	public static int playNum = 0;
+	public static int punchRange = 36;
 	public static void clear() {
 		collidableObjects.clear();
 		sensors.clear();

@@ -34,6 +34,7 @@ public class RedBossLevel extends GameLevel {
 				RedBoss boss = (RedBoss)guy;
 				if(!boss.isAlive()){
 					transState = 2;
+					GameConstants.bossesDefeated |= 0b010;
 				}
 			}
 		}

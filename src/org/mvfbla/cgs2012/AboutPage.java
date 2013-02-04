@@ -61,8 +61,7 @@ public class AboutPage extends BasicGameState{
 		Input input = gc.getInput();
 		back.update(gc, input);
 		if(back.getAction().equals("Back")){
-			back.clear();
-			sbg.enterState(Game.MAIN_MENU_STATE);
+			fadeState = 2;
 		}
 	}
 

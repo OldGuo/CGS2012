@@ -14,7 +14,7 @@ public class InteractButton {
 	private final int height;
 	private boolean hover, clickDown;
 	private final int PADDING = 30;
-	private final String words;
+	private String words;
 	private String action;
 
 	public InteractButton(String text,int xPos,int yPos,int l, int h,int id) throws SlickException{
@@ -27,6 +27,9 @@ public class InteractButton {
 		y = yPos;
 		length = l;
 		height = h;
+	}
+	public void setText(String text) {
+		words = text;
 	}
 	public void draw(Graphics g,int offsetX,int offsetY){
 		if(getHover() == true)
@@ -42,7 +45,7 @@ public class InteractButton {
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
 			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 				setClick(true);
-				if(getText().equals("Play Game")){
+				if(getText().matches("New Game[+]*")){
 					action = "Play Game";
 				}else if(getText().equals("Instructions")){
 					action = "Instructions";

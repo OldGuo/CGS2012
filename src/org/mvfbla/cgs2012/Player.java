@@ -15,7 +15,6 @@ public class Player extends Characters{
 	private String left,right;
 	private String current;
 	private int punchTime=0;
-	private float punchRange = 36; //if negative, means facing the other way
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;
@@ -102,7 +101,7 @@ public class Player extends Characters{
 			if(!interacting&&!cooldown&&!punching) {
 				punching=true;
 				punchTime=0;
-				if(punchRange > 0)
+				if(GameConstants.punchRange > 0)
 					arm.playAnimation("right");
 				else
 					arm.playAnimation("left");
@@ -132,10 +131,10 @@ public class Player extends Characters{
 		super.update(gc, delta);
 	}
 	public float getRange(){
-		return punchRange;
+		return GameConstants.punchRange;
 	}
 	public void setRange(float whatRange){
-		punchRange=whatRange;
+		GameConstants.punchRange=(int) whatRange;
 	}
 	public boolean isPunching(){
 		return punching;
@@ -150,9 +149,9 @@ public class Player extends Characters{
 				Color c = new Color(Color.white);
 				c.a = 1-prog;
 				if(current.equals(right)) {
-					g.drawImage(new Image("data\\punchright.png"), 23 + (punchRange*prog), 10, c);
+					g.drawImage(new Image("data\\punchright.png"), 23 + ((GameConstants.punchRange-24)*prog), 10, c);
 				} else if(current.equals(left)) {
-					g.drawImage(new Image("data\\punchleft.png"), -6 + (punchRange*prog), 10, c);
+					g.drawImage(new Image("data\\punchleft.png"), -6 + ((GameConstants.punchRange-24)*prog), 10, c);
 				}
 			} catch (SlickException e) {
 				e.printStackTrace();
