@@ -8,7 +8,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2XgQrEIAxD3Xn//803OAQp1daxrY0kEHSusOlrCx6llOP0B3Csp7+TdURZe0OU3Et7JqdcIicMkROGyAlD5IQhcsIQOWGInP7r0fdY6x9XOVUlJnqU6vfS5jvVU5vvVE87cZK1tAMn2SfIKZ/ICUPkhCFywhA5YcjiJO9LHs/uOm/Y4lS7GMtX7lZPecapj7GsncdofJrbjFOL8ZyNlrej0cv+qr315DmbTL6znrJYctJ6ieWV+AhO2ntv7sk8jMjLUT3d/Y03Paqn1VyJyrFZ7mn9buWcM/CRPaLvdz/qODpfRCUAAA==
+   H4sIAAAAAAAAC+2ZwQ7EIAhEdd3//+btxcQQBNy0lTEzyQTb2jTygEtrKaVe/gDGdvlr3EeUdzZEybP0a3LKJXLCEDlhiJwwRE4YIicMkROGyAlDp3Pq65M49TU55dN4lpM4yTlBTvlEThgiJwyRE4bICUMep6qsPVv/8N6wx6kNezw38V4kPmWL07jHs5aPWXyam8Wp74nkRqvbWYyy/9fRforkJpPv7Kcslpy0WeJ5Zf8OTtrzaO3JOtxRl7N+uvsbb3rWT6u1sqvGrNrT5t1KnjPwkTNinHc/98XKbEQlAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
@@ -18,6 +18,11 @@
   <object name="blueboss" type="spawn" x="326" y="157" width="128" height="128">
    <properties>
     <property name="var" value="BlueBoss"/>
+   </properties>
+  </object>
+  <object type="trigger" x="33" y="16" width="720" height="528">
+   <properties>
+    <property name="var" value="notBlackBoss"/>
    </properties>
   </object>
  </objectgroup>

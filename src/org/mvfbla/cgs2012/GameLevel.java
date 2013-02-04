@@ -44,8 +44,6 @@ public abstract class GameLevel extends BasicGameState{
 			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
 			}
-			if(to.getType().equals("BlackBoss"))
-				GameConstants.enemies.add(new BlackBoss(to.getX(), to.getY()));
 			if(to.getType().equals("movingPlatform")) {
 				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
 				GameConstants.platforms.add(t);
@@ -102,6 +100,7 @@ public abstract class GameLevel extends BasicGameState{
 			parent = t;
 			this.choice = choice;
 		}
+		@Override
 		public void onEnter(GameObject src) {
 			if(src == player) {
 				textChoice = choice;
@@ -109,7 +108,9 @@ public abstract class GameLevel extends BasicGameState{
 				parent.setActive(false);
 			}
 		}
+		@Override
 		public void onExit(GameObject src) {}
+		@Override
 		public void triggered(GameObject src) {}
 	}
 	public class GravityListener implements ButtonListener{
@@ -167,8 +168,9 @@ public abstract class GameLevel extends BasicGameState{
 				//sbg.enterState(stateID + 1);
 			}
 			questions.update(container);
-			if(!lost)
+			if(!lost){
 				player.update(container, delta);
+			}
 			for(Characters guy:GameConstants.enemies){
 				guy.update(container, delta);
 				float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
@@ -289,6 +291,9 @@ public abstract class GameLevel extends BasicGameState{
 			if(guy.shouldDisplay())
 				guy.draw(g);
 		}
+		//for(GameObject t : GameConstants.collidableObjects){
+		//	g.draw(t.getCollision());
+		//}
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
@@ -313,8 +318,9 @@ public abstract class GameLevel extends BasicGameState{
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
-		if(transState != 2&&player.shouldDisplay())
+		if(transState != 2&&player.shouldDisplay()){
 			player.draw(g);
+		}
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
@@ -433,6 +439,13 @@ public abstract class GameLevel extends BasicGameState{
 			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
 					" The answers lie ahead   ...   ...   ...   ...   ..." +
 					"                                       ";
+			break;
+		case "notBlackBoss":
+			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
+						 "I wanted to ask it so many questions. I wanted to understand.  A stream of " +
+						 "questions streamed from my mouth.  But there was no answer, this only" +
+						 " seemed to infuriate the figure...   ...   ...   ...   ...   " +
+						 "                                       ";
 			break;
 		}
 		text.setText(textString);

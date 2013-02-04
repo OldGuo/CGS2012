@@ -14,5 +14,10 @@
     <property name="var" value="RedBoss"/>
    </properties>
   </object>
+  <object type="trigger" x="-5" y="-8" width="885" height="745">
+   <properties>
+    <property name="var" value="notBlackBoss"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

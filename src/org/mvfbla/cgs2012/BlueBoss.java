@@ -10,21 +10,23 @@ public class BlueBoss extends Boss{
 	private boolean awake = false;
 	private final float sight = 1000;
 	private final int ATTACK_DELAY = 2500;
-	private int time = ATTACK_DELAY;
+	private int time = 12000;
+	//private int time = ATTACK_DELAY;
 	private boolean stomping = false;
 	private int count;
 	private int stompX,stompY;
+	private boolean falling;
 
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
-		super.setInitialHealth(3);
+		super.setInitialHealth(4);
 		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\BlueBossWalking.png", 128, 128), 150));
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
 		time -= delta;
-		if(time <= 0){
+		if(time <= 0 && !falling){
 			stomp();
 			time = ATTACK_DELAY;
 		}
@@ -35,6 +37,9 @@ public class BlueBoss extends Boss{
 		}else{
 			stompX = -100;
 			stompY = -100;
+		}
+		if(getY() > 400 && isAlive()){
+			setHealth(getHealth() - 1);
 		}
 	}
 	@Override
@@ -59,5 +64,11 @@ public class BlueBoss extends Boss{
 	}
 	public int getStompY(){
 		return stompY + 32;
+	}
+	public void setFalling(boolean f){
+		falling = f;
+	}
+	public boolean getFalling(){
+		return falling;
 	}
 }
