@@ -36,6 +36,7 @@ public class ElevatorLevel extends GameLevel {
 		if(waiting) {
 			if(!questions.getAnswering()) {
 				waiting = false;
+				
 				elevator.getTrigger().setActive(true);
 			}
 		}

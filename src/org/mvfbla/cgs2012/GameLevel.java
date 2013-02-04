@@ -189,7 +189,7 @@ public abstract class GameLevel extends BasicGameState{
 					enter(container, sbg);
 				}
 			}
-			if(done && questions.getAnswering() == false && stateID != 8 && questionCount >= 5) {
+			if(done && questions.getAnswering() == false && stateID != 8 && questionCount >= 4) {
 				player.setHealth(0);
 				transState = 2;
 				//sbg.enterState(stateID + 1);

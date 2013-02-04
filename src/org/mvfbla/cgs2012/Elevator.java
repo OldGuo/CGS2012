@@ -38,7 +38,6 @@ public class Elevator extends Button {
 		Color orig = g.getColor();
 		if(level.done && level.questions.getAnswering() == false) {
 			boolean behind = true;
-			boolean move = true;
 			float prog = (level.transTime/(float)level.transLength);
 			if(prog >= 1) {
 				g.setColor(Color.black);
@@ -48,7 +47,6 @@ public class Elevator extends Button {
 				g.fillRect(5, 5, 86, 75);
 				g.setColor(Color.gray);
 				prog -= 1;
-				move = false;
 				if(prog > 0.5) {
 					prog = 1-prog;
 					behind = false;
