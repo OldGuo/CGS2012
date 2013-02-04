@@ -15,6 +15,11 @@ public class MainMenu extends BasicGameState{
 	private int stateID = -1;
 	private Image background;
 	ArrayList<InteractButton> menuButtons;
+	private long fadeDur = 400;
+	private long fadeTime = 0;
+	private int fadeState = 0;
+	private int nextState = 0;
+	private int nextStateLoc = 0;
 
 	public MainMenu(int stateID){
 		this.stateID = stateID;
@@ -32,6 +37,7 @@ public class MainMenu extends BasicGameState{
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
 		background = new Image("data\\background.png");
+		fadeState = 1;
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
@@ -46,10 +52,28 @@ public class MainMenu extends BasicGameState{
 		}
 		g.setColor(Color.black);
 		g.drawString("Insert Title Here",325,100);
+		if(fadeState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
 	}
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int g)throws SlickException {
-		// TODO Auto-generated method stub
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)throws SlickException {
+		if(fadeState == 2) {
+			fadeTime -= delta;
+			if(fadeTime <= 0) {
+				fadeState = 1;
+				menuButtons.get(nextStateLoc).clear();
+				sbg.enterState(nextState);
+			}
+			return;
+		} else if(fadeState == 1) {
+			fadeTime += delta;
+			if(fadeTime >= fadeDur) {
+				fadeState = 0;
+			}
+			return;
+		}
 		Input input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_0))
 			sbg.enterState(Game.MAIN_MENU_STATE);
@@ -72,16 +96,19 @@ public class MainMenu extends BasicGameState{
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).update(gc,input);
 			if(menuButtons.get(i).getAction().equals("Play Game")){
-				menuButtons.get(i).clear();
-				sbg.enterState(Game.TUTORIAL_STATE);
+				nextStateLoc = i;
+				fadeState = 2;
+				nextState = Game.TUTORIAL_STATE;
 			}
 			if(menuButtons.get(i).getAction().equals("Instructions")){
-				menuButtons.get(i).clear();
-				sbg.enterState(Game.INSTRUCTIONS_STATE);
+				nextStateLoc = i;
+				fadeState = 2;
+				nextState = Game.INSTRUCTIONS_STATE;
 			}
 			if(menuButtons.get(i).getAction().equals("About")){
-				menuButtons.get(i).clear();
-				sbg.enterState(Game.ABOUT_STATE);
+				nextStateLoc = i;
+				fadeState = 2;
+				nextState = Game.ABOUT_STATE;
 			}
 			if(menuButtons.get(i).getAction().equals("Quit")){
 				gc.exit();
