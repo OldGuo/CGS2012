@@ -3,6 +3,7 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -11,7 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class AboutPage extends BasicGameState{
 	private int stateID = -1;
 	private InteractButton back;
-	
+	private Image about;
+
 	public AboutPage(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -19,6 +21,7 @@ public class AboutPage extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		back = new InteractButton("Back",255,490,300,75,0);
+		about = new Image("data\\About.png");
 	}
 
 	@Override
@@ -26,7 +29,7 @@ public class AboutPage extends BasicGameState{
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		g.setColor(Color.black);
-		g.drawString("About",100,100);
+		about.draw();
 		back.draw(g,0,0);
 	}
 

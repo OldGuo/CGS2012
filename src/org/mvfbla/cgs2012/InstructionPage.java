@@ -28,8 +28,8 @@ public class InstructionPage extends BasicGameState{
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		g.setColor(Color.black);
-		back.draw(g,0,0);
 		instructions.draw();
+		back.draw(g,0,0);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class InstructionPage extends BasicGameState{
 		if(back.getAction().equals("Back")){
 			back.clear();
 			sbg.enterState(Game.MAIN_MENU_STATE);
-		}	
+		}
 	}
 
 	@Override
