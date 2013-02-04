@@ -170,6 +170,5 @@ public class Player extends Characters{
 			}
 			g.translate(-getCenterX(), -getCenterY());
 		}
-		g.drawOval(getCenterX()-GameConstants.punchRange, getCenterY()-GameConstants.punchRange, GameConstants.punchRange*2, GameConstants.punchRange*2);
 	}
 }
