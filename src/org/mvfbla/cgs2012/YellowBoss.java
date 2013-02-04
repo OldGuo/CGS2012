@@ -7,7 +7,7 @@ import org.newdawn.slick.SpriteSheet;
 
 public class YellowBoss extends Boss{
 	int time, location;
-	boolean[]activated;
+	boolean[] activated;
 	boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
 	public YellowBoss (int x, int y) throws SlickException{
@@ -26,8 +26,7 @@ public class YellowBoss extends Boss{
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(activated[0]&&activated[1]&&activated[2]){
-			super.setHealth(0);
-			System.out.println("GG");
+			//super.setHealth(0);
 		}
 		else{
 			if(time<5000){
@@ -78,8 +77,9 @@ public class YellowBoss extends Boss{
 			}while(temp == location);
 		}while(activated[location]);
 	}
-	public void activate(int platform, boolean on){
-		activated[platform]=on;
+	public void activate(int platform){
+		setHealth(getHealth()-1);
+		activated[platform]=true;
 	}
 	public boolean isActivated(int platform){
 		return activated[platform];

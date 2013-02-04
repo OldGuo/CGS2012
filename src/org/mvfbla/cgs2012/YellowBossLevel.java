@@ -1,10 +1,12 @@
 package org.mvfbla.cgs2012;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
@@ -19,7 +21,7 @@ public class YellowBossLevel extends GameLevel {
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
 	private float fireX,fireY;
-
+	private YellowButton[] buttons = new YellowButton[3];
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -44,16 +46,6 @@ public class YellowBossLevel extends GameLevel {
 				if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
 					player.setHealth(player.getHealth()-1);
 			}
-		}
-	}
-	public class yellowBossListener implements ButtonListener{
-		int number;
-		public yellowBossListener(int platform){
-			number=platform;
-		}
-		@Override
-		public void buttonPressed(boolean state) {
-			((YellowBoss)yellowBoss).activate(number,state);
 		}
 	}
 
@@ -92,12 +84,62 @@ public class YellowBossLevel extends GameLevel {
 		g.setColor(Color.green);
 		if(yellowBoss.isActivated(0)){
 			g.fillRect(96,288,128,32);
+			buttons[0].setStateNum(2);
+		} else {
+			buttons[0].setStateNum(0);
 		}
 		if(yellowBoss.isActivated(1)){
 			g.fillRect(320,224,144,32);
+			buttons[1].setStateNum(2);
+		} else {
+			buttons[1].setStateNum(0);
 		}
 		if(yellowBoss.isActivated(2)){
 			g.fillRect(560,288,128,32);
+			buttons[2].setStateNum(2);
+		} else {
+			buttons[2].setStateNum(0);
+		}
+		buttons[yellowBoss.location].setStateNum(1);
+	}
+	public class YellowButton extends Button {
+		public int number;
+		private int state;
+		protected YellowButton(int x, int y, int num) throws SlickException {
+			super(x, y, null);
+			number = num;
+			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
+		}
+		@Override
+		public void interact(GameObject source) {
+			long time = System.currentTimeMillis();
+			if(time-lastPress >= cooldown) {
+				lastPress = time;
+				if(state == 1) {
+					setStateNum(2);
+					yellowBoss.activate(number);
+					playAnimation("broke");
+				}
+			}
+		}
+		public int getStateNum() {
+			return state;
+		}
+		public void setStateNum(int state) {
+			if(state == 2) {
+				trigger.setActive(false);
+				notif.playAnimation("near");
+				playAnimation("broke");
+			}
+			if(state == 1) {
+				trigger.setActive(true);
+				playAnimation("on");
+			}
+			if(state == 0) {
+				trigger.setActive(false);
+				playAnimation("off");
+			}
+			this.state = state;
 		}
 	}
 	@Override
@@ -109,9 +151,12 @@ public class YellowBossLevel extends GameLevel {
 		System.out.println("Entering state " + getID());
 		initStuff();
 		GameConstants.enemies.add(yellowBoss);
-		Button b1 = new Button(125,500, new yellowBossListener(0));
-		Button b2 = new Button(360,500, new yellowBossListener(1));
-		Button b3 = new Button(595,500, new yellowBossListener(2));
+		YellowButton b1 = new YellowButton(125,500, 0);
+		buttons[0] = b1;
+		YellowButton b2 = new YellowButton(360,500, 1);
+		buttons[1] = b2;
+		YellowButton b3 = new YellowButton(595,500, 2);
+		buttons[2] = b3;
 		GameConstants.interacts.add(b1);
 		GameConstants.interacts.add(b2);
 		GameConstants.interacts.add(b3);

@@ -14,9 +14,9 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	public void setListener(ButtonListener listener) {
 		this.listener = listener;
 	}
-	private long lastPress = 0;
-	private long cooldown = 500;
-	private boolean on;
+	protected long lastPress = 0;
+	protected long cooldown = 500;
+	protected boolean on;
 	protected boolean used = false;
 	protected Button(int x, int y) throws SlickException {
 		super(x, y, 96, 85);
