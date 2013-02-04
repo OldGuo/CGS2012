@@ -79,6 +79,7 @@ public class QuestionWindow{
 				}
 				if(level.questionCount >= 4 || level.buttonQuestion) {
 					level.buttonQuestion = false;
+					level.questionCount++;
 					answering = false;
 				} else {
 					level.questionCount++;

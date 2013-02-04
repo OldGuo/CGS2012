@@ -92,11 +92,11 @@ public class Elevator extends Button {
 					e.printStackTrace();
 				}
 			}
+			for(GameObject obj : objects) {
+				obj.draw(g);
+			}
 		}
 		g.setColor(orig);
-		for(GameObject obj : objects) {
-			obj.draw(g);
-		}
 		g.translate(-x, -y);
 	}
 	private class FinishListener implements TriggerListener {

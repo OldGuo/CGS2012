@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -35,6 +36,8 @@ public abstract class GameLevel extends BasicGameState{
 	private long deathDelay = 2000;
 	public int questionCount = 0;
 	public boolean buttonQuestion = false;
+	protected Button questionButton;
+	protected Trigger elevatorKeyTrigger;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -84,10 +87,14 @@ public abstract class GameLevel extends BasicGameState{
 			if(to.getType().equals("key")) {
 				Key key = new Key(to, this);
 				GameConstants.interacts.add(key);
+				Trigger keyTrigger = new Trigger((int)elevator.getX(), (int)elevator.getY(), (int)elevator.getWidth(), (int)elevator.getHeight(), new ElevatorKeyListener());
+				keyTrigger.setActive(false);
+				elevatorKeyTrigger = keyTrigger;
+				GameConstants.triggers.add(keyTrigger);
 			}
 			if(to.getType().equals("elevButton")) {
 				Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
-				
+				questionButton = b;
 				GameConstants.interacts.add(b);
 			}
 			if(to.getType().equals("pillar")){
@@ -102,6 +109,19 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
+	}
+	public class ElevatorKeyListener implements TriggerListener {
+		@Override
+		public void onEnter(GameObject src) {
+			System.out.println("I used the key!");
+			elevator.getTrigger().setActive(true);
+		}
+		public void onExit(GameObject src) {}
+		public void triggered(GameObject src) {}
+		@Override
+		public String toString() {
+			return "ekl";
+		}
 	}
 	public class PlotListener implements TriggerListener {
 		private Trigger parent;
@@ -148,7 +168,7 @@ public abstract class GameLevel extends BasicGameState{
 			if(state) {
 				buttonQuestion = true;
 				questions.setAnswering(true);
-				unlockElev();
+				unlockElev(1);
 			}
 		}
 	}
@@ -163,7 +183,7 @@ public abstract class GameLevel extends BasicGameState{
 					ms.setState((byte) 1);
 		}
 	}
-	public void unlockElev() {}
+	public void unlockElev(int source) {}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		Input input = container.getInput();
 		if(container.isPaused() == false){
@@ -330,7 +350,7 @@ public abstract class GameLevel extends BasicGameState{
 		//for(GameObject go : GameConstants.collidableObjects)
 		//	g.draw(go);
 		//for(Trigger t : GameConstants.triggers)
-		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
+			//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
 		//g.draw(cameraBox);
