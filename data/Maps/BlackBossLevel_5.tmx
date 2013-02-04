@@ -5,10 +5,10 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Zga7DIAhFte3/f/NmMhPCrojo1kIkuWlf0ylwKBpfTinltw6H1xM8o/eercZ3fVTvPVvxf3N6vm1OPixi36NsNqfnWkROdD9ROeVbPZq3M31zOm/1aN7Q+uSdE1qfvHNCfc87J9T3onGKEFNETmh9ihDT5vR8i7g+lTj4uZL3mEoctPdFiYmf+3mPqdZeJE40liiciv+IkyTpzPoA72uszsvnz+CZRoiTNaYLPNMYn8MaC4qt947mfwt0LO3ZRmucGWnH4n0S+XIwaYznQePvKk61T7Z0AWms1hodKwtazQn5zfdWVBqjOZPGuoNTKw9879Xak3G//8GJ5xJx6l1pj9TmclQrx5YYUpY93pL4d6fpW7P56Ylysqg1T69GrDU8Whsrx/sFL+mbtspSHxKv0Rpbmfeev/Ser4/SXmd1Lv8R8yinlv88V62+ZO1taH+h+Rv1olYPRhqNRfLZIuoH59Prl9I7mt9I38WMaM3w6wvhKiygRCUAAA==
+   H4sIAAAAAAAAC+1Ziw7DIAjU2f//5s1kJoSdgujaQkpy6SNWOY6C63JKKX/wcngs4B4992yN3/FFO/ds1f9Hp/vbo5MPi1j3qDaPTve1iDrR/UTTKV/q0bqV9KtTudSjdUP9ybtOqD951wnVPe86oboXTacInCLqhPpTBE6PTve3iP2p8uDflbxzqjxo7YvCiX/3886p5V4knSiXKDpV/5FOI4y+Wb/AeI21dfn6GdzTAOlk5XSAexrja1i5IG7SGM1/CzROFmhjq/VVo5HEqZeDu2O7a65WJ3s4GAq4lrTnv08RduvE/ZZ81sSC79Gk+J6p0+g5CcjvM3SS/CuKI62R2ljOYufcUn7RHNOMReDvnaZurcZHAtXJgt46Uo5Yc3g2N3bO9w+9rD12tRZw3UZ6zebYzrhL/tJz3h9He53dsTyD86xOPf95rHp1yVrb0P5Cc41qkdTn+dgZLiOfLaB+cH2keint5Sz1eOa50Xy9nHsDECSoF0QlAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
-  <object type="BlackBoss" x="736" y="16" width="16" height="16"/>
+  <object type="motionSensor" x="336" y="448" width="144" height="32"/>
  </objectgroup>
 </map>

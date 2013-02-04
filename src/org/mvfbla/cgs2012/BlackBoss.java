@@ -26,9 +26,12 @@ public class BlackBoss extends Characters{
 		arm.stopAnimation();
 
 		super.setInitialHealth(3);
+		super.setBlink(2000);
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
+		if(!isAlive())
+			return;
 		boolean movePressed = false;
 		// Moving left/right/up
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
