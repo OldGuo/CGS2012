@@ -25,7 +25,7 @@ public class Key extends AnimatedObject implements InteractiveObject {
 		public void onEnter(GameObject src) {
 			if(src == level.player) {
 				playAnimation("off");
-				level.unlockElev();
+				level.unlockElev(0);
 			}
 		}
 		public void onExit(GameObject src) {}

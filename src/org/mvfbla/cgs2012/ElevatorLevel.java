@@ -27,8 +27,12 @@ public class ElevatorLevel extends GameLevel {
 	}
 
 	@Override 
-	public void unlockElev() {
-		waiting = true;
+	public void unlockElev(int source) {
+		if(source == 1)
+			waiting = true;
+		else {
+			elevatorKeyTrigger.setActive(true);
+		}
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
@@ -36,7 +40,8 @@ public class ElevatorLevel extends GameLevel {
 		if(waiting) {
 			if(!questions.getAnswering()) {
 				waiting = false;
-				
+				questionButton.getTrigger().setActive(false);
+				questionButton.getTrigger().exit(null);
 				elevator.getTrigger().setActive(true);
 			}
 		}
@@ -60,5 +65,4 @@ public class ElevatorLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
-
 }
