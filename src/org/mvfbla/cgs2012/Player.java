@@ -144,19 +144,24 @@ public class Player extends Characters{
 		super.draw(g);
 		if(punchTime > 0) {
 			float prog = punchTime/300f;
-			g.translate(getX(), getY());
+			g.translate(getCenterX(), getCenterY());
 			try {
 				Color c = new Color(Color.white);
 				c.a = 1-prog;
 				if(current.equals(right)) {
-					g.drawImage(new Image("data\\punchright.png"), 23 + ((GameConstants.punchRange-24)*prog), 10, c);
+					int off = -1;
+					g.drawImage(new Image("data\\punchright.png"), off + ((GameConstants.punchRange+off-32)*prog), -13, c);
 				} else if(current.equals(left)) {
-					g.drawImage(new Image("data\\punchleft.png"), -6 + ((GameConstants.punchRange-24)*prog), 10, c);
+					int off = -30;
+					g.drawImage(new Image("data\\punchleft.png"), off + ((GameConstants.punchRange-off)*prog), -13, c);
 				}
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-			g.translate(-getX(), -getY());
+			g.translate(-getCenterX(), -getCenterY());
 		}
+		//g.drawOval(getCenterX()-GameConstants.punchRange, getCenterY()-GameConstants.punchRange, GameConstants.punchRange*2, GameConstants.punchRange*2);
+		//g.setColor(Color.blue);
+		//g.fillOval(getCenterX()-4, getCenterY()-4, 8, 8);
 	}
 }
