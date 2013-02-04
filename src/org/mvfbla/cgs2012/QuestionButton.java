@@ -9,15 +9,21 @@ import org.newdawn.slick.SlickException;
 public class QuestionButton extends InteractButton{
 	private final int PADDING = 25;
 	private final int buttonID;
-	private boolean correct;
+	private final Image buttonWrong;
+	private boolean correct,wrongPressed;
 
 	public QuestionButton(String answer,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		super(answer,xPos,yPos,l,h,id);
 		buttonID = id;
 		correct = false;
+		buttonWrong = new Image("data\\QuestionButtonWrong.png");
 	}
+	@Override
 	public void draw(Graphics g,int offsetX,int offsetY){
 		super.draw(g,offsetX,offsetY);
+		if(pressedAndWrong() == true){
+			g.drawImage(buttonWrong,getX() + offsetX,getY() + offsetY);
+		}
 	}
 	public void update(GameContainer gc, Input input,int correctAnswer){
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
@@ -28,6 +34,7 @@ public class QuestionButton extends InteractButton{
 					System.out.println("correct");
 				}else{
 					correct = false;
+					wrongPressed = true;
 					System.out.println("wrong");
 				}
 			}else{
@@ -47,5 +54,8 @@ public class QuestionButton extends InteractButton{
 	}
 	public int getID(){
 		return buttonID;
+	}
+	public boolean pressedAndWrong(){
+		return wrongPressed;
 	}
 }

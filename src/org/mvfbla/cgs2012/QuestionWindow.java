@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -13,12 +12,11 @@ import org.newdawn.slick.SlickException;
 public class QuestionWindow{
 	private final Color color = new Color(200,200,200,0.45f);
 	private boolean answering;
-	Image button,buttonHover,buttonClick;
 	ArrayList<QuestionButton> questions;
 	QuestionReader reader;
 	private int randQuestion;
 	private int randCorrect;
-	private GameLevel level;
+	private final GameLevel level;
 
 	public QuestionWindow(GameLevel level) throws SlickException{
 		this.level = level;
