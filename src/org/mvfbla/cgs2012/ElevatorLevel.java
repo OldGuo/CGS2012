@@ -65,4 +65,42 @@ public class ElevatorLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+
+		if(to.getType().equals("key")) {
+			Key key = new Key(to, this);
+			GameConstants.interacts.add(key);
+			Trigger keyTrigger = new Trigger((int)elevator.getX(), (int)elevator.getY(), (int)elevator.getWidth(), (int)elevator.getHeight(), new ElevatorKeyListener());
+			keyTrigger.setActive(false);
+			elevatorKeyTrigger = keyTrigger;
+			GameConstants.triggers.add(keyTrigger);
+		}
+		if(to.getType().equals("elevButton")) {
+			Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
+			questionButton = b;
+			GameConstants.interacts.add(b);
+		}		
+	}
+	public class ElevButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state) {
+				buttonQuestion = true;
+				questions.setAnswering(true);
+				unlockElev(1);
+			}
+		}
+	}
+	public class ElevatorKeyListener implements TriggerListener {
+		@Override
+		public void onEnter(GameObject src) {
+			elevator.getTrigger().setActive(true);
+		}
+		@Override
+		public void onExit(GameObject src) {}
+		@Override
+		public void triggered(GameObject src) {}
+	}
 }

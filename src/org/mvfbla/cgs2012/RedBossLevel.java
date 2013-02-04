@@ -11,7 +11,6 @@ public class RedBossLevel extends GameLevel {
 
 	public RedBossLevel(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
@@ -56,5 +55,11 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
+	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+		// TODO Auto-generated method stub
+		
 	}
 }

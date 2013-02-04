@@ -48,15 +48,9 @@ public abstract class GameLevel extends BasicGameState{
 		pauseWindow.init();
 		text = new TypeWriter();
 		done = false;
-		int motionDelay = 0;
 		for(final TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
-			}
-			if(to.getType().equals("movingPlatform")) {
-				MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
-				GameConstants.platforms.add(t);
-				GameConstants.collidableObjects.add(t);
 			}
 			if(to.getType().equals("trigger")) {
 				PlotListener pl = new PlotListener();
@@ -64,63 +58,17 @@ public abstract class GameLevel extends BasicGameState{
 				pl.init(t, to.getProperty("var"));
 				GameConstants.triggers.add(t);
 			}
-			if(to.getType().equals("platformButton")) {
-				Button b = new Button(to.getX(), to.getY(), new PlatformListener());
-				GameConstants.interacts.add(b);
-			}
-			if(to.getType().equals("gravityButton")) {
-				Button b = new Button(to.getX(), to.getY(), new GravityListener());
-				GameConstants.interacts.add(b);
-			}
-			if(to.getType().equals("motionButton")) {
-				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
-				GameConstants.interacts.add(b);
-			}
-			if(to.getType().equals("blackBossButton")) {
-				Button b = new Button(to.getX(), to.getY(), new bossSyncListener());
-				GameConstants.interacts.add(b);
-			}
-			if(to.getType().equals("motionSensor")) {
-				MotionSensor ms = new MotionSensor(to, motionDelay);
-				motionDelay += 500;
-				GameConstants.sensors.add(ms);
-			}
-			if(to.getType().equals("key")) {
-				Key key = new Key(to, this);
-				GameConstants.interacts.add(key);
-				Trigger keyTrigger = new Trigger((int)elevator.getX(), (int)elevator.getY(), (int)elevator.getWidth(), (int)elevator.getHeight(), new ElevatorKeyListener());
-				keyTrigger.setActive(false);
-				elevatorKeyTrigger = keyTrigger;
-				GameConstants.triggers.add(keyTrigger);
-			}
-			if(to.getType().equals("elevButton")) {
-				Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
-				questionButton = b;
-				GameConstants.interacts.add(b);
-			}
-			if(to.getType().equals("pillar")){
-				Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
-				GameConstants.pillars.add(pillar);
-			}
 			if(to.getType().equals("finish")) {
 				Elevator e = new Elevator(to.getX(), to.getY(), this);
 				GameConstants.interacts.add(e);
 				elevator = e;
 			}
+			initObject(to);
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
 	}
-	public class ElevatorKeyListener implements TriggerListener {
-		@Override
-		public void onEnter(GameObject src) {
-			elevator.getTrigger().setActive(true);
-		}
-		@Override
-		public void onExit(GameObject src) {}
-		@Override
-		public void triggered(GameObject src) {}
-	}
+	public abstract void initObject(TiledObject to) throws SlickException;
 	public class PlotListener implements TriggerListener {
 		private Trigger parent;
 		private String choice;
@@ -140,53 +88,6 @@ public abstract class GameLevel extends BasicGameState{
 		public void onExit(GameObject src) {}
 		@Override
 		public void triggered(GameObject src) {}
-	}
-	public class bossSyncListener implements ButtonListener{
-		@Override
-		public void buttonPressed(boolean state){
-			GameConstants.flipSync();
-		}
-	}
-	public class GravityListener implements ButtonListener{
-		@Override
-		public void buttonPressed(boolean state){
-			//player.rotateAnimation();
-			buttonQuestion = true;
-			questions.setAnswering(true);
-			//Blargh using random method
-			unlockElev(0);
-		}
-	}
-	public class PlatformListener implements ButtonListener {
-		@Override
-		public void buttonPressed(boolean state) {
-			buttonQuestion = true;
-			questions.setAnswering(true);
-			unlockElev(0);
-		}
-	}
-	public class ElevButtonListener implements ButtonListener {
-		@Override
-		public void buttonPressed(boolean state) {
-			if(state) {
-				buttonQuestion = true;
-				questions.setAnswering(true);
-				unlockElev(1);
-			}
-		}
-	}
-	public class MotionButtonListener implements ButtonListener {
-		@Override
-		public void buttonPressed(boolean state) {
-			if(state) {
-				buttonQuestion = true;
-				questions.setAnswering(true);
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 0);
-			} else
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 1);
-		}
 	}
 	public void unlockElev(int source) {}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{

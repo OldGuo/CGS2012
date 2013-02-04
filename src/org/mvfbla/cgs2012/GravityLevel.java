@@ -25,7 +25,12 @@ public class GravityLevel extends GameLevel {
 		cameraBox = new CameraObject(player,250,1300);
 		background = new Image("data\\Background.png");
 	}
-
+	public void initObject(TiledObject to) throws SlickException {
+		if(to.getType().equals("gravityButton")) {
+			Button b = new Button(to.getX(), to.getY(), new GravityListener());
+			GameConstants.interacts.add(b);
+		}
+	}
 	public void unlockElev(int src) {
 		waiting = true;
 	}
@@ -54,5 +59,15 @@ public class GravityLevel extends GameLevel {
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
+	}
+	public class GravityListener implements ButtonListener{
+		@Override
+		public void buttonPressed(boolean state){
+			//player.rotateAnimation();
+			buttonQuestion = true;
+			questions.setAnswering(true);
+			//Blargh using random method
+			unlockElev(0);
+		}
 	}
 }

@@ -50,4 +50,18 @@ public class BlackBossLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+		if(to.getType().equals("blackBossButton")) {
+			Button b = new Button(to.getX(), to.getY(), new bossSyncListener());
+			GameConstants.interacts.add(b);
+		}
+	}
+	public class bossSyncListener implements ButtonListener{
+		@Override
+		public void buttonPressed(boolean state){
+			GameConstants.flipSync();
+		}
+	}
 }

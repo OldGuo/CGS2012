@@ -109,4 +109,12 @@ public class BlueBossLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+		if(to.getType().equals("pillar")){
+			Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
+			GameConstants.pillars.add(pillar);
+		}
+	}
 }

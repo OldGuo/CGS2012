@@ -14,7 +14,6 @@ public class YellowBossLevel extends GameLevel {
 
 	public YellowBossLevel(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
 
 	private YellowBoss yellowBoss;
@@ -167,5 +166,11 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
+	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+		// TODO Auto-generated method stub
+		
 	}
 }

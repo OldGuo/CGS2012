@@ -55,4 +55,26 @@ public class TutorialLevel extends GameLevel {
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
 	}
+
+	@Override
+	public void initObject(TiledObject to) throws SlickException {
+
+		if(to.getType().equals("movingPlatform")) {
+			MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
+			GameConstants.platforms.add(t);
+			GameConstants.collidableObjects.add(t);
+		}
+		if(to.getType().equals("platformButton")) {
+			Button b = new Button(to.getX(), to.getY(), new PlatformListener());
+			GameConstants.interacts.add(b);
+		}
+	}
+	public class PlatformListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			buttonQuestion = true;
+			questions.setAnswering(true);
+			unlockElev(0);
+		}
+	}
 }
