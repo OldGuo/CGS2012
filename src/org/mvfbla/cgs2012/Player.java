@@ -3,6 +3,7 @@ package org.mvfbla.cgs2012;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -141,5 +142,15 @@ public class Player extends Characters{
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
+		if(punchTime > 0) {
+			float prog = punchTime/300f;
+			g.translate(getX(), getY());
+			try {
+				g.drawImage(new Image("data\\punch.png"), 10 + (30*prog), 10);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			g.translate(-getX(), -getY());
+		}
 	}
 }
