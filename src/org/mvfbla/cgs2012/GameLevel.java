@@ -43,12 +43,14 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
+		GameConstants.level = this;
 		questions = new QuestionWindow(this);
 		pauseWindow = new PauseWindow();
 		pauseWindow.init();
 		text = new TypeWriter();
 		done = false;
-		for(final TiledObject to : map.getObjects()) {
+		int motionDelay = 0;
+		for(TiledObject to : map.getObjects()) {
 			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
 			}
@@ -63,10 +65,30 @@ public abstract class GameLevel extends BasicGameState{
 				GameConstants.interacts.add(e);
 				elevator = e;
 			}
+			if(to.getType().equals("motionButton")) {
+				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
+				GameConstants.interacts.add(b);
+			}
+			if(to.getType().equals("motionSensor")) {
+				MotionSensor ms = new MotionSensor(to, motionDelay);
+				motionDelay += 500;
+				GameConstants.sensors.add(ms);
+			}
 			initObject(to);
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
+	}
+	public class MotionButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state) {
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 0);
+			} else
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 1);
+		}
 	}
 	public abstract void initObject(TiledObject to) throws SlickException;
 	public class PlotListener implements TriggerListener {
@@ -136,8 +158,11 @@ public abstract class GameLevel extends BasicGameState{
 				player.setHealth(0);
 				transState = 2;
 			}
-			if(questions.getAnswering())
+			if(questions.getAnswering()) {
 				questions.update(container);
+				player.setControl(false);
+			} else
+				player.setControl(true);
 			if(!lost){
 				player.update(container, delta);
 			}

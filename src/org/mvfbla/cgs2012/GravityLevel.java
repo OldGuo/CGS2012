@@ -65,8 +65,6 @@ public class GravityLevel extends GameLevel {
 	public class GravityListener implements ButtonListener{
 		@Override
 		public void buttonPressed(boolean state){
-			buttonQuestion = true;
-			questions.setAnswering(true);
 			//Blargh using random method
 			unlockElev(0);
 		}

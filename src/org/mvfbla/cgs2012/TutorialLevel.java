@@ -72,8 +72,6 @@ public class TutorialLevel extends GameLevel {
 	public class PlatformListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
-			buttonQuestion = true;
-			questions.setAnswering(true);
 			unlockElev(0);
 		}
 	}

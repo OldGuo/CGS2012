@@ -10,6 +10,7 @@ public class GameConstants {
 	public static boolean bossSync = true;
 	public static boolean paused = false;
 
+	public static GameLevel level;
 	public static ArrayList<GameObject> collidableObjects = new ArrayList<GameObject>();
 	public static ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();
@@ -33,6 +34,7 @@ public class GameConstants {
 		paused = false;
 		bossSync = true;
 		GRAVITY = 0.37f;
+		level = null;
 	}
 	public static void flipPaused(){
 		paused = !paused;

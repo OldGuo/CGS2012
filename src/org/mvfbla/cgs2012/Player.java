@@ -19,6 +19,7 @@ public class Player extends Characters{
 	private boolean cooldown = false;
 	private boolean wasMovingRight = true;
 	private final AnimatedObject arm;
+	private boolean control;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
 		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150));
@@ -40,6 +41,10 @@ public class Player extends Characters{
 	public void update(GameContainer gc, int delta) {
 		if(!isAlive())
 			return;
+		if(!getControl()) {
+			super.update(gc, delta);
+			return;
+		}
 		boolean movePressed = false;
 		if(GameConstants.getGrav() > 0){
 			left = "walkLeft";
@@ -170,5 +175,11 @@ public class Player extends Characters{
 			}
 			g.translate(-getCenterX(), -getCenterY());
 		}
+	}
+	public boolean getControl() {
+		return control;
+	}
+	public void setControl(boolean control) {
+		this.control = control;
 	}
 }
