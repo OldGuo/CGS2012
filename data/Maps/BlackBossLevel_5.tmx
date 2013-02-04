@@ -5,10 +5,16 @@
  </tileset>
  <layer name="Tile Layer 1" width="53" height="45">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+1Ziw7DIAjU2f//5s1kJoSdgujaQkpy6SNWOY6C63JKKX/wcngs4B4992yN3/FFO/ds1f9Hp/vbo5MPi1j3qDaPTve1iDrR/UTTKV/q0bqV9KtTudSjdUP9ybtOqD951wnVPe86oboXTacInCLqhPpTBE6PTve3iP2p8uDflbxzqjxo7YvCiX/3886p5V4knSiXKDpV/5FOI4y+Wb/AeI21dfn6GdzTAOlk5XSAexrja1i5IG7SGM1/CzROFmhjq/VVo5HEqZeDu2O7a65WJ3s4GAq4lrTnv08RduvE/ZZ81sSC79Gk+J6p0+g5CcjvM3SS/CuKI62R2ljOYufcUn7RHNOMReDvnaZurcZHAtXJgt46Uo5Yc3g2N3bO9w+9rD12tRZw3UZ6zebYzrhL/tJz3h9He53dsTyD86xOPf95rHp1yVrb0P5Cc41qkdTn+dgZLiOfLaB+cH2keint5Sz1eOa50Xy9nHsDECSoF0QlAAA=
+   H4sIAAAAAAAAC+1Zjc7DIAi0s+//zPuazOTCTkHKuuFXEtKfWASOHeq2Usr2p4+E10re4X1mafHtL233meXw/8bp9+XGKYesyHuIzY3T78qKOOF6ouG0fdWj81LLO071qx6dF9afsuPE+lN2nBjvZceJ8d5qOK0Q04o4sf60Qkz/BSd5VjES6xi0iXNG2Ga8IHGqxb7+s45BmzhnhG3JC/JcKXvtHXFgjKvEJM/9ssfUau8TOM3sLyP3ohhLNE4z+8vIvehhi+E00tGZ9YOMtwj2EPx2I+8synDyxrSTdxaRc3hjYbFpYyz/LWCePGrNrdVXC0ZaTL0ajM5tlK3Gkz3dhVbyrGEv96dMo3GSfms+W3Ih12hafq/EafSdpszvK3DS/KuGK3KkNZezGmlbqy+sMctYpvJ3Z+Gts/nRFHHyaG8erUa8NTxbG5H2PoGXt8ee5QKJ2wiv2RqLzLvmL97L/jha60Tn8oqYZ3Hq+S9z1eMlL7ex9YXlmXGR1ufl2JlYRj57FP2Q+Gh8qa3lPHw8893IXq/mntlpR8BEJQAA
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
   <object type="motionSensor" x="336" y="448" width="144" height="32"/>
+  <object type="trigger" x="-93" y="-53" width="1025" height="855">
+   <properties>
+    <property name="var" value="blackBoss"/>
+   </properties>
+  </object>
+  <object type="blackBossButton" x="392" y="272" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -67,6 +67,10 @@ public abstract class GameLevel extends BasicGameState{
 				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
 				GameConstants.interacts.add(b);
 			}
+			if(to.getType().equals("blackBossButton")) {
+				Button b = new Button(to.getX(), to.getY(), new bossSyncListener());
+				GameConstants.interacts.add(b);
+			}
 			if(to.getType().equals("motionSensor")) {
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
@@ -112,6 +116,12 @@ public abstract class GameLevel extends BasicGameState{
 		public void onExit(GameObject src) {}
 		@Override
 		public void triggered(GameObject src) {}
+	}
+	public class bossSyncListener implements ButtonListener{
+		@Override
+		public void buttonPressed(boolean state){
+			GameConstants.flipSync();
+		}
 	}
 	public class GravityListener implements ButtonListener{
 		@Override
@@ -446,6 +456,13 @@ public abstract class GameLevel extends BasicGameState{
 						 "questions streamed from my mouth.  But there was no answer, this only" +
 						 " seemed to infuriate the figure...   ...   ...   ...   ...   " +
 						 "                                       ";
+			break;
+		case "blackBoss":
+			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
+						 "A figure stands before me.  It copies my every move down to a wire. " +
+						 "Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
+						 "                      \"I am Perfection\"" +
+						 "                                                                              ";
 			break;
 		}
 		text.setText(textString);

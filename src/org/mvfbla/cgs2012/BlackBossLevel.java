@@ -22,7 +22,7 @@ public class BlackBossLevel extends GameLevel {
 		player = new Player(17, 416);
 		cameraBox = new CameraObject(player,2000,2000);
 		background = new Image("data\\Background.png");
-		blackBoss = new BlackBoss(736,416);
+		blackBoss = new BlackBoss(735,416);
 	}
 
 	@Override
