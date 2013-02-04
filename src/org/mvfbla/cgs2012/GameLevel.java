@@ -268,6 +268,9 @@ public abstract class GameLevel extends BasicGameState{
 			if(guy.shouldDisplay())
 				guy.draw(g);
 		}
+		//for(GameObject t : GameConstants.collidableObjects){
+		//	g.draw(t.getCollision());
+		//}
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
@@ -411,6 +414,13 @@ public abstract class GameLevel extends BasicGameState{
 		case "beforeBoss":
 			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
 						 " The answers lie ahead   ...   ...   ...   ...   ..." +
+						 "                                       ";
+			break;
+		case "notBlackBoss":
+			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
+						 "I wanted to ask it so many questions. I wanted to understand.  A stream of " +
+						 "questions streamed from my mouth.  But there was no answer, this only" +
+						 " seemed to infuriate the figure...   ...   ...   ...   ...   " +
 						 "                                       ";
 			break;
 		}

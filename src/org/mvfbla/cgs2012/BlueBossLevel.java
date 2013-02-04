@@ -1,5 +1,6 @@
 package org.mvfbla.cgs2012;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,6 +9,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class BlueBossLevel extends GameLevel {
 
+	private int brokenCount = 3;
+	private boolean platformBroken;
+	private Tile platform;
+	private int fallY =18*16;
 	public BlueBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -22,11 +27,16 @@ public class BlueBossLevel extends GameLevel {
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1300);
 		background = new Image("data\\Background.png");
+		platform = new Tile(5*16,18*16,16*39,16*2);
 	}
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		GameConstants.collidableObjects.add(platform);
+		if(platformBroken){
+			fallY+=5;
+		}
 		for(Characters guy : GameConstants.enemies) {
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
@@ -37,7 +47,7 @@ public class BlueBossLevel extends GameLevel {
 				if(totalDist<((BlueBoss)guy).getSight()){
 					((BlueBoss)guy).changeSleep(true);
 					((BlueBoss)guy).setDirection(Math.signum(tempX));
-					((BlueBoss)guy).setSpeed(1*Math.signum(tempX));
+					((BlueBoss)guy).setSpeed(4*Math.signum(tempX));
 					//System.out.println(((BlueBoss)guy).getSpeed());
 				}else{
 					((BlueBoss)guy).changeSleep(false);
@@ -48,6 +58,7 @@ public class BlueBossLevel extends GameLevel {
 						player.setHealth(player.getHealth() - 1);
 					}
 				}
+				brokenCount = 0;
 				for(int i = 0; i < GameConstants.pillars.size();i++){
 					if(((BlueBoss)guy).getStompX() > GameConstants.pillars.get(i).getX() &&
 							((BlueBoss)guy).getStompX() < GameConstants.pillars.get(i).getX() + GameConstants.pillars.get(i).getWidth()){
@@ -56,6 +67,16 @@ public class BlueBossLevel extends GameLevel {
 							GameConstants.pillars.get(i).setBroken(true);
 						}
 					}
+					if(GameConstants.pillars.get(i).isBroken())
+						brokenCount++;
+					if(brokenCount == 3){
+						platformBroken = true;
+					}
+				}
+				if(platformBroken == true){
+					platform.setY(-100);
+					platform.setX(-100);
+					((BlueBoss)guy).setFalling(true);
 				}
 			}
 		}
@@ -64,6 +85,13 @@ public class BlueBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
+		g.setColor(Color.black);
+		if(platformBroken == false)
+			g.fillRect(5*16,18*16,16*39,16*2);
+		else{
+			g.fillRect(5*16, fallY, 7*39, 16*2);
+			g.fillRect(26*16, fallY, 7*39, 16*2);
+		}
 	}
 	@Override
 	public int getID() {
