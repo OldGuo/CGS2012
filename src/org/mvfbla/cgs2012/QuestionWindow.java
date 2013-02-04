@@ -18,9 +18,10 @@ public class QuestionWindow{
 	QuestionReader reader;
 	private int randQuestion;
 	private int randCorrect;
+	private GameLevel level;
 
-
-	public QuestionWindow() throws SlickException{
+	public QuestionWindow(GameLevel level) throws SlickException{
+		this.level = level;
 		init();
 	}
 	public void init() throws SlickException{
@@ -71,11 +72,16 @@ public class QuestionWindow{
 		for(int i = 0; i < questions.size(); i++){
 			questions.get(i).update(container,input,randCorrect);
 			if(questions.get(i).isCorrect() == true){
-				answering = false;
 				try {
 					init();
 				} catch (SlickException e) {
 					e.printStackTrace();
+				}
+				if(level.questionCount >= 4 || level.buttonQuestion) {
+					level.buttonQuestion = false;
+					answering = false;
+				} else {
+					level.questionCount++;
 				}
 			}
 		}

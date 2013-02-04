@@ -27,20 +27,21 @@ public abstract class GameLevel extends BasicGameState{
 	protected float time=0;
 	public long transTime = 0;
 	private byte transState = 0;
-	public long transLength = 1200;
+	public long transLength = 1200;	
 	public Elevator elevator;
 	private String textChoice = " ";
 	private long deathTime = 0;
 	private long deathDur = 1000;
 	private long deathDelay = 2000;
-	private int questionCount = 0;
+	public int questionCount = 0;
+	public boolean buttonQuestion = false;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
-		questions = new QuestionWindow();
+		questions = new QuestionWindow(this);
 		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
@@ -86,6 +87,7 @@ public abstract class GameLevel extends BasicGameState{
 			}
 			if(to.getType().equals("elevButton")) {
 				Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
+				
 				GameConstants.interacts.add(b);
 			}
 			if(to.getType().equals("pillar")){
@@ -144,6 +146,7 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void buttonPressed(boolean state) {
 			if(state) {
+				buttonQuestion = true;
 				questions.setAnswering(true);
 				unlockElev();
 			}
@@ -176,7 +179,7 @@ public abstract class GameLevel extends BasicGameState{
 					sbg.enterState(stateID + 1);
 				}
 			}
-			if(!player.isAlive()) {
+			if(!player.isAlive() && done == false) {
 				deathTime += delta;
 				if(deathTime >= deathDur) {
 					transTime = 0;

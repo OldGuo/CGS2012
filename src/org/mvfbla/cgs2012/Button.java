@@ -11,6 +11,9 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	}
 	protected AnimatedObject notif;
 	protected ButtonListener listener;
+	public void setListener(ButtonListener listener) {
+		this.listener = listener;
+	}
 	private long lastPress = 0;
 	private long cooldown = 500;
 	private boolean on;
