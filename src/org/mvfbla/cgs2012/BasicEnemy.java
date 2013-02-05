@@ -1,3 +1,5 @@
+//BasicEnemy class, extends Enemy
+//takes one hit to defeat, speed is medium
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
@@ -16,7 +18,7 @@ public class BasicEnemy extends Enemy{
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
 		if(isAlive()){
-			if(GameConstants.getGrav() > 0)
+			if(GameConstants.getGrav() > 0) //flips for gravity level
 				playAnimation("BasicEnemy");
 			else
 				playAnimation("BasicEnemyInvert");

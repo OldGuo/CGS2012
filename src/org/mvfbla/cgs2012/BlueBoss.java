@@ -1,3 +1,6 @@
+//BlueBoss class, extends Boss
+//jumps and stomps on the ground, causing explosions
+//explosions will destroy pillars
 package org.mvfbla.cgs2012;
 
 
