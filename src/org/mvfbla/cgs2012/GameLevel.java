@@ -22,7 +22,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected Image background;
 	protected Boolean lost = false;
 	protected int stateID = -1;
-	private TypeWriter text;
+	protected TypeWriter text;
 	protected boolean done = false;
 	protected float time=0;
 	public long transTime = 0;
@@ -140,8 +140,11 @@ public abstract class GameLevel extends BasicGameState{
 						if(GameConstants.bossesDefeated == 7) {
 							sbg.enterState(Game.BLACK_BOSS_STATE);
 						} else {
-							sbg.enterState(Game.MAIN_MENU_STATE);
+							sbg.enterState(Game.PLOT_STATE);
 						}
+					} else if(stateID == 8) {
+						GameConstants.bossesDefeated |= 0b1000;
+						sbg.enterState(Game.PLOT_STATE);
 					}
 					init(container, sbg);
 					enter(container, sbg);
