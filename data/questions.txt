@@ -7,12 +7,12 @@ National Officers - Who is the Mountain Plains Region VP?	1	Brent Comstock	Rache
 National Officers - Who is the North Central Plains Region VP?	1	Bailey Morrison	Collin Potter	Jash Patel	Brent Comstock
 National Officers - Who is the Southern Region VP?	1	Collin Potter	Rachel Ford	Matthew Edgington	Brent Comstock
 National Officers - Who is the Western Region VP?	1	 Matthew Edgington	Nikitas Kanellakopoulos	Bailey Morrison	CJ Severson
-Fund-raising Partners - Which of the following is NOT a fund-raising partner of FBLA?	1	Safeway, Inc.	Country Meats	Krispy Kreme FUNDraising	Ozark Delight Candy Company
-Fund-raising Partners - Which of the following is NOT a fund-raising Partner of FBLA?	1	Sears Holdings Corporation	DormCo.com	MarketPad.biz	Pride Distributors
-Fund-raising Partners - Which of the following is NOT a fund-raising Partner of FBLA?	1	Finish Line	Entertainment Fundraising	Otis Spunkmeyer	Schermer Pecans
-Fund-raising Partners - Which of the following is a fund-raising Partner of FBLA?	1	Tom-Wat Fundraising	Accenture	Credit Suisse	Barnes & Noble
-Fund-raising Partners - Which of the following is a fund-raising Partner of FBLA?	1	School Spirit Coffee	McGraw-Hill	Apress Media	Shapeways
-Fund-raising Partners - Which of the following is a fund-raising Partner of FBLA?	1	Zinch.com	Afinia	Parallax	Seeed Studio
+Fund-raising Partners - Which is NOT a fund-raising partner of FBLA?	1	Safeway, Inc.	Country Meats	Krispy Kreme FUNDraising	Ozark Delight Candy Company
+Fund-raising Partners - Which is NOT a fund-raising Partner of FBLA?	1	Sears Holdings Corporation	DormCo.com	MarketPad.biz	Pride Distributors
+Fund-raising Partners - Which is NOT a fund-raising Partner of FBLA?	1	Finish Line	Entertainment Fundraising	Otis Spunkmeyer	Schermer Pecans
+Fund-raising Partners - Which is a fund-raising Partner of FBLA?	1	Tom-Wat Fundraising	Accenture	Credit Suisse	Barnes & Noble
+Fund-raising Partners - Which is a fund-raising Partner of FBLA?	1	School Spirit Coffee	McGraw-Hill	Apress Media	Shapeways
+Fund-raising Partners - Which is a fund-raising Partner of FBLA?	1	Zinch.com	Afinia	Parallax	Seeed Studio
 FBLA Bylaws - Which article states the purpose of FBLA?	1	Article II	Article I	Article III	Article V
 FBLA Bylaws - Which article describes FBLA membership?	1	Article III	Article II	Article IV	Article V
 FBLA Bylaws - Which article designates the dues and finance of FBLA?	1	Article IV	Article VI	Article VIII	Article IX
