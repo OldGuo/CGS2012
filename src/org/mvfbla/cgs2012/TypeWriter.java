@@ -47,6 +47,9 @@ public class TypeWriter{
     public void setText(String s){
     	text = s;
     }
+    public boolean isFinished(){
+    	return finished;
+    }
 	public void draw(Graphics g,int xPos,int yPos) throws SlickException {
         if(!finished){
 			int x = 40 + xPos;

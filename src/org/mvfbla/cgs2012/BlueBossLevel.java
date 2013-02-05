@@ -25,7 +25,7 @@ public class BlueBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,250,1300);
+		cameraBox = new CameraObject(player,2000,1300);
 		background = new Image("data\\Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
 	}

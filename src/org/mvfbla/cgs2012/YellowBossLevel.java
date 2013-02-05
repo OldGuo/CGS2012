@@ -20,7 +20,7 @@ public class YellowBossLevel extends GameLevel {
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
 	private float fireX,fireY;
-	private YellowButton[] buttons = new YellowButton[3];
+	private final YellowButton[] buttons = new YellowButton[3];
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -28,7 +28,7 @@ public class YellowBossLevel extends GameLevel {
 		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
 		yellowBoss = new YellowBoss(330,100);
-		cameraBox = new CameraObject(player,250,1000);
+		cameraBox = new CameraObject(player,2000,1000);
 		background = new Image("data\\Background.png");
 	}
 

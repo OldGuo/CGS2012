@@ -9,14 +9,9 @@
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
-  <object name="redboss" type="spawn" x="331" y="411" width="128" height="128">
+  <object name="redboss" type="spawn" x="336" y="416" width="128" height="128">
    <properties>
     <property name="var" value="RedBoss"/>
-   </properties>
-  </object>
-  <object type="trigger" x="-5" y="-8" width="885" height="745">
-   <properties>
-    <property name="var" value="notBlackBoss"/>
    </properties>
   </object>
  </objectgroup>

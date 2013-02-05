@@ -162,9 +162,9 @@ public abstract class GameLevel extends BasicGameState{
 			if(questions.getAnswering()) {
 				questions.update(container);
 				player.setControl(false);
-			} else
+			}else{
 				player.setControl(true);
-			if(!lost){
+			}if(!lost){
 				player.update(container, delta);
 			}
 			for(Characters guy:GameConstants.enemies){
@@ -439,9 +439,7 @@ public abstract class GameLevel extends BasicGameState{
 					"                                       ";
 			break;
 		case "notBlackBoss":
-			textString = "The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
-					"I wanted to ask it so many questions. I wanted to understand.  A stream of " +
-					"questions poured from my mouth.  But there was no answer, this only" +
+			textString = "But there was no answer, this only" +
 					" seemed to infuriate the figure...   ...   ...   ...   ...   " +
 					"                                       ";
 			break;
