@@ -3,8 +3,6 @@ package org.mvfbla.cgs2012;
 import java.util.ArrayList;
 
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.tiled.TileSet;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Map {

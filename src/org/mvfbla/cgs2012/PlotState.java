@@ -30,7 +30,7 @@ public class PlotState extends BasicGameState{
 			throws SlickException {
 		text.setDelay(100);
 		fadeState = 1;
-		if((GameConstants.bossesDefeated & 0b1000) == 0b1000){
+		if((GameConstants.bossesDefeated & 8) == 8){
 			finalPlot = "\"I am proud of you Alex\"" +
 					"\n\"I am sorry if I have hurt you.\"\n\"I am sorry.\"\n\"I am sorry.\"" +
 					"\n\"You are here because you are part of an experiment.\n\"Our goal: discover the extent of the" +
@@ -59,13 +59,13 @@ public class PlotState extends BasicGameState{
 					 "I have done it again." +
 					 " Countless new questions fill my mind, none of my previous questions answered. I sit and weep.  " +
 					 "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ";
-			if((GameConstants.bossesDefeated & 0b010) == 0){
+			if((GameConstants.bossesDefeated & 2) == 0){
 				finalPlot += " Perhaps if I had defeated more enemies...   ";
 			}
-			if((GameConstants.bossesDefeated & 0b100) == 0){
+			if((GameConstants.bossesDefeated & 4) == 0){
 				finalPlot += " Perhaps if I refrained from killing eniemies...   ";
 			}
-			if((GameConstants.bossesDefeated & 0b001) == 0){
+			if((GameConstants.bossesDefeated & 1) == 0){
 				finalPlot += " Perhaps if I had used more technology...   ";
 			}
 			finalPlot += "...   ...   ...   ...   ...   ... There is nothing around me but a sea of darkness...   ...   ...   " +
@@ -92,7 +92,7 @@ public class PlotState extends BasicGameState{
 			fadeTime -= delta;
 			if(fadeTime <= 0) {
 				fadeState = 1;
-				if((GameConstants.bossesDefeated & 0b1000) == 0b1000) {
+				if((GameConstants.bossesDefeated & 8) == 8) {
 					GameConstants.bossesDefeated = 0;
 					GameConstants.playNum = 0;
 				}
