@@ -304,17 +304,17 @@ public abstract class GameLevel extends BasicGameState{
 		if(transState != 2&&player.shouldDisplay()){
 			player.draw(g);
 		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
-		}
-		try {
-			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		} catch (SlickException e) {
-			e.printStackTrace();
 		}
 		if(deathTime > 0) {
 			player.stopAnimation();
