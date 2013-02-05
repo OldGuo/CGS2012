@@ -200,12 +200,12 @@ public class Characters extends AnimatedObject {
 	}
 	@Override
 	public void draw(Graphics g){
-		Color orig = g.getColor();
+		/*Color orig = g.getColor();
 		for(int i=1;i<=health;i++){
 			g.setColor(Color.red);
 			g.fillRect(this.getCenterX()+i*16-this.getWidth()*3/4,this.getCenterY()-this.getHeight()*3/4, 8, 8);
 		}
-		g.setColor(orig);
+		g.setColor(orig);*/
 		super.draw(g);
 	}
 }
