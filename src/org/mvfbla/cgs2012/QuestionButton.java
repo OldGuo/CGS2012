@@ -37,11 +37,9 @@ public class QuestionButton extends InteractButton{
 				setClick(true);
 				if(correctAnswer == getID()){
 					correct = true;
-					System.out.println("correct");
 				}else{
 					correct = false;
 					wrongPressed = true;
-					System.out.println("wrong");
 				}
 			}else{
 				setClick(false);

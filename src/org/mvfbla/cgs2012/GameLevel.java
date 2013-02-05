@@ -423,7 +423,7 @@ public abstract class GameLevel extends BasicGameState{
 			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
 					"A figure stands before me.  It copies my every move down to a wire. " +
 					"Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
-					"                      \"I am Perfection\"" +
+					"                  \"I am Perfection\"" +
 					"                                                                              ";
 			break;
 		}
