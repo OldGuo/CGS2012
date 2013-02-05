@@ -28,9 +28,17 @@ public class PlotState extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		text.setDelay(100);
 		fadeState = 1;
 		if((GameConstants.bossesDefeated & 0b1000) == 0b1000){
-			finalPlot = "";
+			finalPlot = "\"I am proud of you Alex\"" +
+					"\n\"I am sorry if I have hurt you.\"\n\"I am sorry.\"\n\"I am sorry.\"" +
+					"\n\"You are here because you are part of an experiment.\n\"Our goal: discover the extent of the" +
+					"deeply rooted teachings of FBLA in an individual.\"\n\"Your memory was cleared to allow you to " +
+					"discover things on your own. To explore the crevices of your conscience.\"\n" +
+					"\n\"You were able to conquer every floor of this building unharmed, and defeat me.\"" +
+					"                                 \"You are Perfect\"" +
+					"                                                                                         ";
 		}else{
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
@@ -45,7 +53,7 @@ public class PlotState extends BasicGameState{
 			if(GameConstants.lastBoss == 3){ //yellow
 				finalPlot = "As the yellow figure falls to the floor, it utters a few final words," +
 							"                                                \"Be Wise Alex\"                            " +
-							"Strangely, I alreayd feel wiser.";
+							"Strangely, I already feel wiser.";
 			}
 			finalPlot += "Suddenly my mind is pounded with waves of guilt. " +
 					 "I have done it again." +
