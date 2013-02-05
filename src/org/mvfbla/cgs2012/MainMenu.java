@@ -15,7 +15,7 @@ public class MainMenu extends BasicGameState{
 	private int stateID = -1;
 	private Image background;
 	ArrayList<InteractButton> menuButtons;
-	private final long fadeDur = 400;
+	private long fadeDur = 400;
 	private long fadeTime = 0;
 	private int fadeState = 0;
 	private int nextState = 0;
@@ -31,12 +31,18 @@ public class MainMenu extends BasicGameState{
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException {
 		// TODO Auto-generated method stub
+		GameConstants.mainMenu = this;
 		menuButtons = new ArrayList<InteractButton>();
 		menuButtons.add(new InteractButton("New Game",255,190,300,75,0));
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
 		background = new Image("data\\background.png");
+		fadeTime = 0;
+		fadeState = 0;
+		nextState = 0;
+		nextStateLoc = 0;
+		fadeDur = 400;
 		fadeState = 1;
 	}
 	@Override

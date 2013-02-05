@@ -105,7 +105,7 @@ public class RedBossLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
 		draw(g);
 		if(player.shouldDisplay())
 			player.draw(g);

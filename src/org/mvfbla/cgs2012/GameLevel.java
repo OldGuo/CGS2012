@@ -39,7 +39,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected Button questionButton;
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
-	
+
 	//Initialize used questions variable.
 	private final boolean[] used=new boolean [35];
 	public GameLevel(){
@@ -159,6 +159,7 @@ public abstract class GameLevel extends BasicGameState{
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
 		if(GameConstants.getPaused() == false){
+			text.update(container,delta);
 			// Do transitions
 			if(transState == 1) {
 				transTime += delta;
@@ -286,6 +287,7 @@ public abstract class GameLevel extends BasicGameState{
 				sbg.enterState(Game.YELLOW_BOSS_STATE);
 			if (input.isKeyDown(Input.KEY_8))
 				sbg.enterState(Game.BLACK_BOSS_STATE);
+
 			// Update the text box
 			text.update(container,delta);
 		}else{
