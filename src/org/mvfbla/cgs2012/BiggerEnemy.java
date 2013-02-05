@@ -1,3 +1,5 @@
+//BiggerEnemy class, extends Enemy
+//bigger, slower, takes 2 hits to defeat
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
@@ -17,7 +19,7 @@ public class BiggerEnemy extends Enemy{
 	public void update(GameContainer gc, int delta){
 		super.update(gc, delta);
 		if(isAlive()){
-			if(GameConstants.getGrav() > 0)
+			if(GameConstants.getGrav() > 0) //flips for gravity level
 				playAnimation("BiggerEnemy");
 			else
 				playAnimation("BiggerEnemyInvert");
