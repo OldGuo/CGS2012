@@ -62,7 +62,7 @@ public class QuestionWindow{
 		String[] split = question.split(" - ");
 		g.drawString(split[0], 400 + x - g.getFont().getWidth(split[0])/2,60 + y);
 		int questionLength = g.getFont().getWidth(split[1]);
-		g.drawString(reader.getQuestions().get(randQuestion),340 + x - questionLength/2,100 + y);
+		g.drawString(split[1],400 + x - questionLength/2,100 + y);
 		for(int i = 0; i < questions.size(); i++){
 			questions.get(i).draw(g,x,y);
 		}
