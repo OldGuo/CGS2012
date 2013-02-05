@@ -168,7 +168,8 @@ public abstract class GameLevel extends BasicGameState{
 				questions.update(container);
 				player.setControl(false);
 			}else{
-				player.setControl(true);
+				if(stateID < 5 || stateID > 8)
+					player.setControl(true);
 			}if(!lost){
 				player.update(container, delta);
 			}

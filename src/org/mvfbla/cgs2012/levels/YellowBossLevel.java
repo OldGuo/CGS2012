@@ -59,7 +59,6 @@ public class YellowBossLevel extends GameLevel {
 		updateMain(container, sbg, delta);
 		if(!afterQuestions){
 			GameConstants.level.player.setControl(false);
-			System.out.println("OK WHY AM I MOVING OK");
 		}
 		if(!yellowBoss.isAlive()) {
 			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
