@@ -15,7 +15,7 @@ public class MainMenu extends BasicGameState{
 	private int stateID = -1;
 	private Image background;
 	ArrayList<InteractButton> menuButtons;
-	private long fadeDur = 400;
+	private final long fadeDur = 400;
 	private long fadeTime = 0;
 	private int fadeState = 0;
 	private int nextState = 0;
@@ -99,6 +99,8 @@ public class MainMenu extends BasicGameState{
 			sbg.enterState(Game.YELLOW_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_8))
 			sbg.enterState(Game.BLACK_BOSS_STATE);
+		if (input.isKeyDown(Input.KEY_9))
+			sbg.enterState(Game.PLOT_STATE);
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).update(gc,input);
 			if(menuButtons.get(i).getAction().equals("Play Game")){

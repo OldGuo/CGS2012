@@ -119,7 +119,7 @@ public class RedBossLevel extends GameLevel {
 		}
 		if(beforeQuestions == true || afterQuestions == true){
 			try {
-				text.draw(g,0,0);
+				text.draw(g,0,0,720,80);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}

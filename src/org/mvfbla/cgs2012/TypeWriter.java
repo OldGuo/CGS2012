@@ -16,15 +16,18 @@ public class TypeWriter{
 	private int renderCol;
 	private int TYPE_DELAY;
 	private int time;
-	private final int width;
+	private int width;
+	private int height;
 	private boolean finished;
 	private Font font;
 	private List<String>lines;
 	private String text;
 	private final Color box;
+	private int x,y;
 
     public TypeWriter() {
         width = 720;
+        height = 80;
         text = " ";
         box = new Color(255,255,255,0.4f);
 
@@ -50,15 +53,17 @@ public class TypeWriter{
     public boolean isFinished(){
     	return finished;
     }
-	public void draw(Graphics g,int xPos,int yPos) throws SlickException {
+	public void draw(Graphics g,int xPos,int yPos,int w,int h) throws SlickException {
         if(!finished){
-			int x = 40 + xPos;
-	        int y = 45 + yPos;
+			x = 40 + xPos;
+	        y = 45 + yPos;
+	        width = w;
+	        height = h;
 	        int pad = 10;
 	        g.setColor(Color.black);
-	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, 80+pad*2+20);
+	        g.fillRect(x-pad-10, y-pad-10, width+pad*2+20, height+pad*2+20);
 	        g.setColor(box);
-	        g.fillRect(x-pad, y-pad, width+pad*2, 80+pad*2);
+	        g.fillRect(x-pad, y-pad, width+pad*2, height+pad*2);
 
 	        g.setColor(Color.white);
 	        int lineHeight = font.getLineHeight();
@@ -113,7 +118,6 @@ public class TypeWriter{
         }
         finished = true;
     }
-
     //restarts typewriting effect
     public void restart() {
         renderCol = 0;

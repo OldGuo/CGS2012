@@ -307,7 +307,7 @@ public abstract class GameLevel extends BasicGameState{
 			player.draw(g);
 		}
 		try {
-			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -341,7 +341,7 @@ public abstract class GameLevel extends BasicGameState{
 		String textString = null;
 		switch(textChoice){
 		case "intro":
-			textString = "I saw nothing around me but darkness. " +
+			textString = "I saw nothing around me but a sea of darkness. " +
 					"I try to recall the events prior, but every strand of thought escapes my grasps. " +
 					"I know nothing except that I must move forward." +
 					"                                       ";

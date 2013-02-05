@@ -59,4 +59,7 @@ public class GameConstants {
 	public static int playerMaxSpeed = 5;
 	public static int wrongCountMax = 5;
 	public static int lastBoss = -1;
+	//1 blue
+	//2 red
+	//3 yellow
 }
