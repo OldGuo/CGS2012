@@ -162,7 +162,8 @@ public class BlueBossLevel extends GameLevel {
 			g.fillRect(5*16, fallY, 6*39, 16*2);
 			g.fillRect(27*16, fallY, 6*39, 16*2);
 		}
-		player.draw(g);
+		if(player.shouldDisplay())
+			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);

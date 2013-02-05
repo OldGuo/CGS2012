@@ -49,7 +49,7 @@ public class BlackBossLevel extends GameLevel {
 		draw(g);
 		if(blackBoss.shouldDisplay())
 			blackBoss.draw(g);
-		if(!blackBoss.isAlive())
+		if(!blackBoss.isAlive()&&player.shouldDisplay())
 			player.draw(g);
 	}
 	@Override
