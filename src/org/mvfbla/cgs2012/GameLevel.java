@@ -39,9 +39,9 @@ public abstract class GameLevel extends BasicGameState{
 	protected Button questionButton;
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
-	private boolean[] used=new boolean [35];
 	
 	//Initialize used questions variable.
+	private final boolean[] used=new boolean [35];
 	public GameLevel(){
 		for(int i=0;i<35;i++)
 			used[i]=false;
@@ -267,7 +267,7 @@ public abstract class GameLevel extends BasicGameState{
 			// Update camera location
 			cameraBox.update(container, delta);
 
-			/*testing
+			//testing
 			if (input.isKeyDown(Input.KEY_0))
 				sbg.enterState(Game.MAIN_MENU_STATE);
 			if (input.isKeyDown(Input.KEY_1))
@@ -285,7 +285,7 @@ public abstract class GameLevel extends BasicGameState{
 			if (input.isKeyDown(Input.KEY_7))
 				sbg.enterState(Game.YELLOW_BOSS_STATE);
 			if (input.isKeyDown(Input.KEY_8))
-				sbg.enterState(Game.BLACK_BOSS_STATE);*/
+				sbg.enterState(Game.BLACK_BOSS_STATE);
 			// Update the text box
 			text.update(container,delta);
 		}else{
@@ -421,19 +421,19 @@ public abstract class GameLevel extends BasicGameState{
 			textString = "I saw nothing around me but a sea of darkness. " +
 					"I try to recall the events prior, but every strand of thought escapes my grasps. " +
 					"I know nothing except that I must move forward." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "firstEnemy":
 			textString = "As I come into the bright light, I see something ahead. " +
 					"A furious rage builds up inside me. I want to use [SPACE] to defeat" +
 					" this enemy. " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "firstTechnology":
 			textString = "A strange piece of technology stands before of me. Although it seems alien to me, a voice " +
 					"inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
 					" for time but luckly I can press [ESC] to pause." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "firstQuestion":
 			textString = "After clearing the ledge, I am filled with a strong sense of achievement." +
@@ -441,93 +441,93 @@ public abstract class GameLevel extends BasicGameState{
 					"But this feeling of accomplishment is quickly drowned out by the pangs of regret. " +
 					" Did I have to defeat that enemy? " +
 					"Perhaps I should refrain from physical conflicts in the future." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "firstJump":
 			textString = "Almost effortlessly, I make each jump. " +
 					"These jumps almost seemed familiar to me. " +
 					"Like I had done them countless times in the past." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "longJump":
 			textString = "The next jump is longer and wider than the previous.  I want to turn back." +
 					" But a relenteless force drives me to push forward" +
 					"  Clearing this jump requires a leap of faith." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "tutorialEnd":
 			textString = "Almost in disbelief, I look down at my suit" +
 					" and see a badge.  EMPLOYEE NAME: it says. However the text below it seems to " +
 					"have been intentionally scratched out. " +
 					"So many questions filled my mind, but all the answers lie ahead. " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "elevatorLevelStart":
 			textString = "The elevator feels like it has brought me up a few floors. " +
 					"My head begins to spin.  I have so many questions.  " +
 					"Where am I? Who am I? Why am I here?" +
 					" All I want were the answers.  ...   ...   ..." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "anotherEnemy":
 			textString = "There is a key up above, but another one of those enemies blocks my path.  " +
 					"Something tells me I don't need the key, but I desperately want it anyways. Perhaps" +
 					" this time I should use the [UP] arrow key to jump over the enemy without harm." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "lockedElevator":
 			textString = "Locked!? It seems like that key would be useful here. But I wonder about the " +
 					" technology beyond the elevator..." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "motionLevelStart":
 			textString = "The elevator brings me up another few floors. The haze in my mind" +
 					" seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
 					"...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "turnOffSensor":
 			textString = "It seems really dangerous up ahead, but something tells me whats beyond will pay off." +
 					" It is either this or the motion sensors   ...   " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "accomplishment":
 			textString = "I feel proud and accomplished having conquered the motion sensors." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "beatMotionLevel":
 			textString = "Something clicks inside my head as I see the elevator." +
 					"  There I felt something up ahead. I have to keep going.  I have to" +
 					" find the answers.  " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "gravityLevelStart":
 			textString = "Rising higher and higher in the buildling, I almost feel anxious. " +
 					"My questions will soon be answered.  I can feel it.  " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "flippedGrav":
 			textString = "A feeling of complete exhiliration comes over me.  All the enemies are on the other" +
 					" side of that wall. I can almost feel their desperation as " +
 					" they attempt to reach me.  I smile at my superior intellect." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "beforeBoss":
 			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
 					" The answers lie ahead   ...   ...   ...   ...   ..." +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "notBlackBoss":
 			textString = "But there was no answer, this only" +
 					" seemed to infuriate the figure...   ...   ...   ...   ...   " +
-					"                                       ";
+					"                                                                                       ";
 			break;
 		case "blackBoss":
 			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
 					"A figure stands before me.  It copies my every move down to a wire. " +
 					"Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
 					"                  \"I am Perfection\"" +
-					"                                                                              ";
+					"                                                                                                                              ";
 			break;
 		}
 		text.setText(textString);
