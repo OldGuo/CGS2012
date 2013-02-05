@@ -53,6 +53,9 @@ public class BlueBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(!afterQuestions){
+			GameConstants.level.player.setControl(false);
+		}
 		GameConstants.collidableObjects.add(platform);
 		if(platformBroken){
 			fallY+=7;
