@@ -59,7 +59,7 @@ public class QuestionWindow{
 		g.fillRect(-300,-300,1100 + x,900 + y);
 		g.setColor(Color.black);
 		int questionLength = reader.getQuestions().get(randQuestion).length();
-		g.drawString(reader.getQuestions().get(randQuestion),120 + x - questionLength*10 ,100 + y);
+		g.drawString(reader.getQuestions().get(randQuestion),325 + x - questionLength*2,100 + y);
 		for(int i = 0; i < questions.size(); i++){
 			questions.get(i).draw(g,x,y);
 		}
