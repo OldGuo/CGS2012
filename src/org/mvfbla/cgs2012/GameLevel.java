@@ -21,7 +21,7 @@ public abstract class GameLevel extends BasicGameState{
 	public BlackBoss blackBoss;
 	protected CameraObject cameraBox;
 	protected Image background;
-	protected Boolean lost = false;
+	protected boolean lost = false;
 	protected int stateID = -1;
 	protected TypeWriter text;
 	protected boolean done = false;
