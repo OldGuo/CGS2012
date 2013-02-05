@@ -55,6 +55,7 @@ public class PauseWindow{
 			}
 			if(pauseButtons.get(i).getAction().equals("Main Menu")){
 				pauseButtons.get(i).clear();
+				GameConstants.level.reset();
 				GameConstants.clear();
 				sbg.enterState(Game.MAIN_MENU_STATE);
 			}
