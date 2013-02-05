@@ -6,6 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class RedBoss extends Boss{
+	private boolean attacking;
+
 	public RedBoss (int x, int y) throws SlickException{
 		super(x,y);
 		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\RedBossWalking.png", 128, 128), 150));
@@ -13,7 +15,14 @@ public class RedBoss extends Boss{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
-		super.update(gc, delta);
+		if(attacking)
+			super.update(gc, delta);
+	}
+	public void setAttacking(boolean a){
+		attacking = a;
+	}
+	public boolean getAttacking(){
+		return attacking;
 	}
 }
 //nerf this guy

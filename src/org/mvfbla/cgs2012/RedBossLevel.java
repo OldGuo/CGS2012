@@ -10,7 +10,7 @@ public class RedBossLevel extends GameLevel {
 
 	private TypeWriter text;
 	private QuestionWindow questions;
-	private boolean beforeFight;
+	private boolean beforeQuestions,needRestart,afterQuestions;
 
 	public RedBossLevel(int stateID) {
 		this.stateID = stateID;
@@ -21,7 +21,7 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
-		beforeFight = true;
+		beforeQuestions = true;
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,2000,1000);
@@ -43,35 +43,58 @@ public class RedBossLevel extends GameLevel {
 				}
 			}
 		}
-		if(beforeFight){
-			text.setText("The moment I entered, I sensed the air of superiority emanating from the figure in the room. " +
-						 "I wanted to ask it so many questions. I wanted to understand.  A stream of " +
-						 "questions poured from my mouth. But it only responded with questions of its own." +
+		if(beforeQuestions){
+			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
+						 "I want to ask it so many questions. I want to understand.  A stream of " +
+						 "questions pour from my mouth. But it only respond with questions of its own." +
 						 "                                       ");
-			if(text.isFinished()){
-				beforeFight = false;
-
-				text.setText("I was done with its games. I wanted answers now. Who am I? Why am I here?" +
-						 " But there is no answer, this only" +
-						 " seems to infuriate the figure...   ...   ...   ...   ...   " +
-						 "                                       ");
-				text.restart();
+			if(text.isFinished() && beforeQuestions){
+				beforeQuestions = false;
+				needRestart = true;
+				questions.setAnswering(true);
 			}
 		}
-		questions.update(container);
-		text.update(container, delta);
+		if(questions.getAnswering() == false && !beforeQuestions){
+			afterQuestions = true;
+		}
+		if(afterQuestions == true){
+			text.setText("I was done with its games. I want answers now. Who am I? Why am I here?" +
+					 " But there is no answer, this only" +
+					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
+					 "                                       ");
+			if(needRestart){
+				text.restart();
+				needRestart = false;
+			}
+		}
+		if(beforeQuestions == true || afterQuestions == true)
+			text.update(container, delta);
+		if(questions.getAnswering()){
+			questions.update(container);
+		}
+		for(Characters guy : GameConstants.enemies) {
+			String name=guy.getClass().toString();
+			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+				RedBoss boss = (RedBoss)guy;
+				if(afterQuestions == true){
+					boss.setAttacking(true);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
-		if(beforeFight){
+		if(beforeQuestions == true || afterQuestions == true){
 			try {
 				text.draw(g,0,0);
 			} catch (SlickException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		if(questions.getAnswering() == true){
+			questions.draw(g,0,0);
 		}
 	}
 	@Override
