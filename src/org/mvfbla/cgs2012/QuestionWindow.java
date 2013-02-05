@@ -94,4 +94,7 @@ public class QuestionWindow{
 	public void setAnswering(boolean a){
 		answering = a;
 	}
+	public int whichQuestion(){
+		return randQuestion;
+	}
 }

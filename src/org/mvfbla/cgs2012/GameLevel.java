@@ -38,14 +38,29 @@ public abstract class GameLevel extends BasicGameState{
 	protected Button questionButton;
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
-
+	private boolean[] used=new boolean [35];
+	public GameLevel(){
+		for(int i=0;i<35;i++)
+			used[i]=false;
+	}
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		GameConstants.level = this;
-		questions = new QuestionWindow();
+		boolean flag=false;
+		for(int i=0;i<35;i++){
+			if(!used[i])
+				flag=true;
+		}
+		if(!flag){
+			for(int i=0;i<35;i++)
+				used[i]=false;
+		}
+		do{
+			questions=new QuestionWindow();
+		}while(used[questions.whichQuestion()]);
 		pauseWindow = new PauseWindow();
 		pauseWindow.init();
 		text = new TypeWriter();
