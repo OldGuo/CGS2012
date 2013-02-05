@@ -57,6 +57,10 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
+		if(!afterQuestions){
+			GameConstants.level.player.setControl(false);
+			System.out.println("OK WHY AM I MOVING OK");
+		}
 		if(!yellowBoss.isAlive()) {
 			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
 			transState = 2;
@@ -104,7 +108,6 @@ public class YellowBossLevel extends GameLevel {
 			text.update(container, delta);
 		if(questions.getAnswering()){
 			questions.update(container);
-			GameConstants.level.player.setControl(false);
 		}
 		for(Characters guy : GameConstants.enemies) {
 			String name=guy.getClass().toString();
