@@ -1,3 +1,8 @@
+//BlackBoss class, extends Characters
+//this boss is unique because it mirrors the player
+//code is taken from Player class
+//reached when all 3 other bosses have been defeated
+//defeated by deactivating the mirror motion, and forcing it into the motion sensor
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;

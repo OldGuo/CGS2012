@@ -1,3 +1,6 @@
+//YellowBoss class, extends Boss
+//targets player, charges laser, shoots, then teleports
+//defeated by activating all 3 platforms
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
@@ -30,35 +33,35 @@ public class YellowBoss extends Boss{
 		if(attacking){
 			if(activated[0]&&activated[1]&&activated[2]){
 				if(isAlive() && getHealth() == 0) {
-					GameConstants.wrongCountMax+=2;
+					GameConstants.wrongCountMax+=2; //defeating this boss grants more allowed incorrect answers when answering questions
 				}
 				alive = false;
 			}
 			else{
-				if(time<5000){
+				if(time<5000){ //cycles every 5 seconds
 					time+=delta;
-					if(time>=1000&&time<=2000)
+					if(time>=1000&&time<=2000) //between 1st and 2nd second, it aims laser
 						aiming=true;
 					else
 						aiming=false;
-					if(time>=2000&&time<=2500)
+					if(time>=2000&&time<=2500) //between 2nd and 2.5 seconds, it charges laser
 						charging=true;
 					else
 						charging=false;
-					if(time>=2500&&time<=3500)
+					if(time>=2500&&time<=3500) //between 2.5 and 3.5 seconds, it fires laser
 						firing=true;
 					else
 						firing=false;
-					if(time>=4500)
+					if(time>=4500) //between 4.5 and 5 seconds, it teleports
 						teleporting=true;
 					else
 						teleporting=false;
 				}
 				else
 					teleport();
-				if(!teleporting&&activated[location])
+				if(!teleporting&&activated[location]) //if you activate the platform, a teleport is forced
 					time=4500;
-				if(location==0){
+				if(location==0){ //locations of the 3 platforms to teleport between
 					this.setX(95);
 					this.setY(160);
 				}
@@ -80,42 +83,42 @@ public class YellowBoss extends Boss{
 	public void teleport(){
 		teleporting=false;
 		time=0;
-		do{
+		do{ //chooses another random platform to teleport to
 			int temp = location;
 			do{
 				location=(int)(Math.random()*3);
 			}while(temp == location);
 		}while(activated[location]);
 	}
-	public void activate(int platform){
+	public void activate(int platform){ //activates a platform
 		setHealth(getHealth()-1);
 		activated[platform]=true;
 	}
-	public boolean isActivated(int platform){
+	public boolean isActivated(int platform){ //returns if a platform is activated
 		return activated[platform];
 	}
-	public boolean isAiming(){
+	public boolean isAiming(){ //returns if it's aiming
 		return aiming;
 	}
-	public boolean isCharging(){
+	public boolean isCharging(){ //returns if it's charging
 		return charging;
 	}
-	public boolean isFiring(){
+	public boolean isFiring(){ //returns if it's firing
 		return firing;
 	}
-	public boolean isTeleporting(){
+	public boolean isTeleporting(){ //returns if it's teleporting
 		return teleporting;
 	}
-	public float getReticle(){
+	public float getReticle(){ //returns x coordinate of aiming reticle
 		return reticle;
 	}
-	public void setReticle(float xValue){
+	public void setReticle(float xValue){ //sets x coordinate of reticle
 		reticle=xValue;
 	}
-	public float getReticleWidth(){
+	public float getReticleWidth(){ //returns width of reticle
 		return reticleWidth;
 	}
-	public int getTime(){
+	public int getTime(){ //returns time elapsed during cycle
 		return time;
 	}
 	public void setAttacking(boolean a){
@@ -126,4 +129,4 @@ public class YellowBoss extends Boss{
 	}
 }
 
-//locations: (330,100) (95,160) (565,160)
+//locations of platforms: (330,100) (95,160) (565,160)

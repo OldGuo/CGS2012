@@ -50,11 +50,11 @@ public class RedBossLevel extends GameLevel {
 				RedBoss boss = (RedBoss)guy;
 				if(!boss.isAlive()){
 					transState = 2;
-					if((GameConstants.bossesDefeated & 0b010) != 0b010) {
+					if((GameConstants.bossesDefeated & 2) != 2) {
 						GameConstants.playNum++;
 					}
 					GameConstants.lastBoss = 2;
-					GameConstants.bossesDefeated |= 0b010;
+					GameConstants.bossesDefeated |= 2;
 				}
 			}
 		}

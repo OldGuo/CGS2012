@@ -99,11 +99,11 @@ public class BlueBossLevel extends GameLevel {
 					platform.setX(-100);
 					boss.setFalling(true);
 					transState = 2;
-					if((GameConstants.bossesDefeated & 0b100) != 0b100) {
+					if((GameConstants.bossesDefeated & 4) != 4) {
 						GameConstants.playNum++;
 					}
 					GameConstants.lastBoss = 1;
-					GameConstants.bossesDefeated |= 0b100;
+					GameConstants.bossesDefeated |= 4;
 				}
 			}
 		}
@@ -151,6 +151,7 @@ public class BlueBossLevel extends GameLevel {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
+		draw(g);
 		g.setColor(Color.black);
 		if(platformBroken == false)
 			g.fillRect(5*16,18*16,16*39,16*2);
@@ -175,7 +176,6 @@ public class BlueBossLevel extends GameLevel {
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
 		}
-		draw(g);
 		if(beforeQuestions == true || afterQuestions == true){
 			try {
 				text.draw(g,0,0,720,80);
@@ -185,6 +185,10 @@ public class BlueBossLevel extends GameLevel {
 		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,0,0);
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
 	@Override
