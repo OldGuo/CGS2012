@@ -37,6 +37,7 @@ public abstract class GameLevel extends BasicGameState{
 	public boolean buttonQuestion = false;
 	protected Button questionButton;
 	protected Trigger elevatorKeyTrigger;
+	public int wrongCount = 0;
 
 	public void initStuff() throws SlickException {
 		GameConstants.clear();
@@ -44,7 +45,7 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.collidableObjects.addAll(map.getBoxes());
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		GameConstants.level = this;
-		questions = new QuestionWindow(this);
+		questions = new QuestionWindow();
 		pauseWindow = new PauseWindow();
 		pauseWindow.init();
 		text = new TypeWriter();
@@ -144,7 +145,7 @@ public abstract class GameLevel extends BasicGameState{
 					}
 				}
 			}
-			if(!player.isAlive() && done == false) {
+			if(!player.isAlive()) {
 				deathTime += delta;
 				if(deathTime >= deathDur) {
 					transTime = 0;
@@ -155,7 +156,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 			}
 			if(done && questions.getAnswering() == false && questionCount >= 4) {
-				player.setHealth(0);
+				player.setControl(false);
 				transState = 2;
 			}
 			if(questions.getAnswering()) {
@@ -278,7 +279,7 @@ public abstract class GameLevel extends BasicGameState{
 		for(Characters guy:GameConstants.enemies){
 			if(guy.shouldDisplay()){
 				guy.draw(g);
-				g.drawLine(guy.getCenterX()-guy.getWidth()/2-Math.abs(player.getRange()),guy.getCenterY(),guy.getCenterX()+guy.getWidth()/2+Math.abs(player.getRange()),guy.getCenterY());
+				//g.drawLine(guy.getCenterX()-guy.getWidth()/2-Math.abs(player.getRange()),guy.getCenterY(),guy.getCenterX()+guy.getWidth()/2+Math.abs(player.getRange()),guy.getCenterY());
 			}
 		}
 		for(MovingTile t : GameConstants.platforms)
@@ -300,11 +301,11 @@ public abstract class GameLevel extends BasicGameState{
 				g.setColor(Color.gray);
 			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
 		}
-		if(questions.getAnswering() == true){
-			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		}
 		if(transState != 2&&player.shouldDisplay()){
 			player.draw(g);
+		}
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));

@@ -16,10 +16,8 @@ public class QuestionWindow{
 	QuestionReader reader;
 	private int randQuestion;
 	private int randCorrect;
-	private final GameLevel level;
 
-	public QuestionWindow(GameLevel level) throws SlickException{
-		this.level = level;
+	public QuestionWindow() throws SlickException{
 		init();
 	}
 	public void init() throws SlickException{
@@ -75,12 +73,12 @@ public class QuestionWindow{
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}
-				if(level.questionCount >= 4 || level.buttonQuestion) {
-					level.buttonQuestion = false;
-					level.questionCount++;
+				if(GameConstants.level.questionCount >= 4 || GameConstants.level.buttonQuestion) {
+					GameConstants.level.buttonQuestion = false;
+					GameConstants.level.questionCount++;
 					answering = false;
 				} else {
-					level.questionCount++;
+					GameConstants.level.questionCount++;
 				}
 			}
 		}
