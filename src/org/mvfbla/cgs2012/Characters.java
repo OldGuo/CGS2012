@@ -76,6 +76,10 @@ public class Characters extends AnimatedObject {
 			}
 			if(direction != 1)
 				this.setForce(this.getForce().add(new Vector(0, GameConstants.GRAVITY)));
+			if(getVelY() > 9)
+				setVelY(9);
+			if(getVelY() < -9)
+				setVelY(-9);
 			float yChange = this.getVelY();
 			this.setX(this.getX() + xChange);
 			this.setY(this.getY() + yChange);
