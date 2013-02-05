@@ -125,7 +125,7 @@ public class YellowBossLevel extends GameLevel {
 		draw(g);
 	}
 	@Override
-	public void draw(Graphics g) throws SlickException{
+	public void draw(Graphics g){
 		super.draw(g);
 		g.setColor(Color.red);
 		if(yellowBoss.isAiming()){

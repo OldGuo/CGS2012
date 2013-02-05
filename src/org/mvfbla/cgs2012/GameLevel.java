@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
+	// Initialize lots of variables
 	protected int bgOffsetX, bgNumRepeat;
 	public QuestionWindow questions;
 	public PauseWindow pauseWindow;
@@ -38,12 +39,15 @@ public abstract class GameLevel extends BasicGameState{
 	protected Button questionButton;
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
+
+	//Initialize used questions variable.
 	private final boolean[] used=new boolean [35];
 	public GameLevel(){
 		for(int i=0;i<35;i++)
 			used[i]=false;
 	}
 	public void initStuff() throws SlickException {
+		// Clears constants
 		GameConstants.clear();
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
@@ -58,6 +62,7 @@ public abstract class GameLevel extends BasicGameState{
 			for(int i=0;i<35;i++)
 				used[i]=false;
 		}
+		// Make questions and pause window
 		do{
 			questions=new QuestionWindow();
 		}while(used[questions.whichQuestion()]);
@@ -66,36 +71,45 @@ public abstract class GameLevel extends BasicGameState{
 		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
+		// Initialize the Tiled objects
 		for(TiledObject to : map.getObjects()) {
+			// Enemy spawns
 			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
 			}
+			// Trigger for plot text
 			if(to.getType().equals("trigger")) {
 				PlotListener pl = new PlotListener();
 				Trigger t = new Trigger(to, pl);
 				pl.init(t, to.getProperty("var"));
 				GameConstants.triggers.add(t);
 			}
+			// Trigger for level finish
 			if(to.getType().equals("finish")) {
 				Elevator e = new Elevator(to.getX(), to.getY(), this);
 				GameConstants.interacts.add(e);
 				elevator = e;
 			}
+			// Button to toggle motion sensor
 			if(to.getType().equals("motionButton")) {
 				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
 				GameConstants.interacts.add(b);
 			}
+			// Initialize motion sensors
 			if(to.getType().equals("motionSensor")) {
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
 				GameConstants.sensors.add(ms);
 			}
+			// Call each GameLevel's own object initialization methods
 			initObject(to);
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
+		// Reset player hp
 		player.setInitialHealth(GameConstants.playerMaxHealth);
 	}
+	// Listener for the motion sensor button
 	public class MotionButtonListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
@@ -107,7 +121,9 @@ public abstract class GameLevel extends BasicGameState{
 					ms.setState((byte) 1);
 		}
 	}
+	// Method for every class to initialize the tiled objects
 	public abstract void initObject(TiledObject to) throws SlickException;
+	// Listener for plot text
 	public class PlotListener implements TriggerListener {
 		private Trigger parent;
 		private String choice;
@@ -128,7 +144,9 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void triggered(GameObject src) {}
 	}
+	// Unused method
 	public void unlockElev(int source) {}
+	// Reset the level
 	public void reset() {
 		try {
 			init(null, null);
@@ -137,10 +155,12 @@ public abstract class GameLevel extends BasicGameState{
 			e.printStackTrace();
 		}
 	}
+	// Main update method every level calls every frame
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
 		if(GameConstants.getPaused() == false){
 			text.update(container,delta);
+			// Do transitions
 			if(transState == 1) {
 				transTime += delta;
 				if(transTime >= transLength) {
@@ -149,6 +169,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 			} else if(transState == 2) {
 				transTime -= delta;
+				// Transition to next state
 				if(transTime <= 0) {
 					if(stateID == 4) {
 						if(GameConstants.enemiesKilled == 0) {
@@ -174,6 +195,7 @@ public abstract class GameLevel extends BasicGameState{
 					enter(container, sbg);
 				}
 			}
+			// Handle player death
 			if(!player.isAlive()) {
 				deathTime += delta;
 				if(deathTime >= deathDur) {
@@ -183,10 +205,12 @@ public abstract class GameLevel extends BasicGameState{
 					reset();
 				}
 			}
+			// Finish the level
 			if(done && questions.getAnswering() == false && questionCount >= 4) {
 				player.setControl(false);
 				transState = 2;
 			}
+			// Disable player controls while answering questions
 			if(questions.getAnswering()) {
 				questions.update(container);
 				player.setControl(false);
@@ -196,8 +220,10 @@ public abstract class GameLevel extends BasicGameState{
 			}if(!lost){
 				player.update(container, delta);
 			}
+			// Handle the enemies
 			for(Characters guy:GameConstants.enemies){
 				guy.update(container, delta);
+				// Calculate player taking damage
 				float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 				double Xdist=Math.pow(tempX, 2);
 				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
@@ -214,6 +240,7 @@ public abstract class GameLevel extends BasicGameState{
 							player.setHealth(player.getHealth()-1);
 					}
 				}
+				// Make PlantedEnemy walk towards the player
 				hit+=(guy.getWidth()/2);
 				if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
@@ -224,21 +251,21 @@ public abstract class GameLevel extends BasicGameState{
 					else
 						((PlantedEnemy)guy).changeSleep(false);
 				}
-
+				// Handle the punches
 				if(player.isPunching()&&-1*Math.signum(tempX)==Math.signum(player.getRange())&&Math.abs(player.getCenterY()-guy.getCenterY())<guy.getHeight()){
 					if(Math.abs(tempX)<(Math.abs(player.getRange())+hit)){
 						if(guy.isAlive())
 							guy.setHealth(guy.getHealth()-1);
 					}
 				}
-				/*if(!player.isAlive()){
-					System.out.println("GG");
-				}*/
 			}
+			// Update moving platforms
 			for(MovingTile t : GameConstants.platforms)
 				t.update(container, delta);
+			// Update motion sensors
 			for(MotionSensor m : GameConstants.sensors)
 				m.update(container, delta);
+			// Update camera location
 			cameraBox.update(container, delta);
 
 			//testing
@@ -260,19 +287,35 @@ public abstract class GameLevel extends BasicGameState{
 				sbg.enterState(Game.YELLOW_BOSS_STATE);
 			if (input.isKeyDown(Input.KEY_8))
 				sbg.enterState(Game.BLACK_BOSS_STATE);
+
+			// Update the text box
+			text.update(container,delta);
 		}else{
+			// Stop player and enemy animations is paused
 			player.stopAnimation();
 			for(Characters guy:GameConstants.enemies){
 				if(guy.shouldDisplay())
 					guy.stopAnimation();
 			}
 		}
+		if(!container.hasFocus()) {
+			GameConstants.paused = true;
+		}
+		// Pause the game
 		if(input.isKeyPressed(Input.KEY_ESCAPE)){
 			GameConstants.flipPaused();
 		}
 		if(GameConstants.getPaused())
 			pauseWindow.update(container,sbg);
 	}
+	/**
+	 * Returns an Enemy object from a given name
+	 * @param name - Name of enemy to be generated
+	 * @param x - X location of enemy
+	 * @param y - Y location of enemy
+	 * @return An enemy from the given name
+	 * @throws SlickException
+	 */
 	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
 		Enemy out = null;
 		switch(name) {
@@ -297,31 +340,34 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		return out;
 	}
-	public void draw(Graphics g) throws SlickException{
+	/**
+	 * Main draw method of every level
+	 * @param g - Graphics object
+	 */
+	public void draw(Graphics g){
 		g.setColor(new Color(58,58,58));
+		// Draw background
 		for(int i = 0; i < bgNumRepeat; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
 		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
 		cameraBox.draw(g);
+		// Draw enemies
 		g.setColor(Color.white);
 		for(Characters guy:GameConstants.enemies){
 			if(guy.shouldDisplay()){
 				guy.draw(g);
-				//g.drawLine(guy.getCenterX()-guy.getWidth()/2-Math.abs(player.getRange()),guy.getCenterY(),guy.getCenterX()+guy.getWidth()/2+Math.abs(player.getRange()),guy.getCenterY());
 			}
 		}
+		// Draw Tiled objects
 		for(MovingTile t : GameConstants.platforms)
 			t.draw(g);
 		for(MotionSensor m : GameConstants.sensors)
 			m.draw(g);
 		for(Pillar p : GameConstants.pillars)
 			p.draw(g);
-		//for(GameObject go : GameConstants.collidableObjects)
-		//	g.draw(go);
-		//for(Trigger t : GameConstants.triggers)
-		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
+		// Draw Player health bar
 		for(int i=1;i<=GameConstants.playerMaxHealth;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);
@@ -329,17 +375,25 @@ public abstract class GameLevel extends BasicGameState{
 				g.setColor(Color.gray);
 			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
 		}
+		// Make sure player needs to be draw
 		if(transState != 2&&player.shouldDisplay()){
 			player.draw(g);
 		}
-		text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		// Draw question qindow if needed
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
+		// Draw transition if needed
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
 		}
+		// Draw death transition if needed
 		if(deathTime > 0) {
 			player.stopAnimation();
 			player.draw(g);
@@ -351,14 +405,17 @@ public abstract class GameLevel extends BasicGameState{
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
 		}
+		// Draw pause window if needed
 		if(GameConstants.getPaused() == true){
 			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
+	// Sets the length of the background, and offset
 	public void setBackgroundInfo(int offset, int numRepeat){
 		bgNumRepeat = numRepeat;
 		bgOffsetX = offset;
 	}
+	// Changes the plot text based on player locations
 	public void changeText(String textChoice){
 		String textString = null;
 		switch(textChoice){
