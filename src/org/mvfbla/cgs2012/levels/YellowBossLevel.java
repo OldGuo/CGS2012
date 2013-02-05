@@ -55,6 +55,7 @@ public class YellowBossLevel extends GameLevel {
 				System.out.println(GameConstants.playNum);
 			}
 			GameConstants.bossesDefeated |= 0b001;
+			GameConstants.wrongCountMax += 2;
 		}
 		if(yellowBoss.isAiming())
 			yellowBoss.setReticle(player.getX());

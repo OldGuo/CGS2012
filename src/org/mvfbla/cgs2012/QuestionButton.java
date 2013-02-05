@@ -41,7 +41,7 @@ public class QuestionButton extends InteractButton{
 					correct = false;
 					wrongPressed = true;
 					GameConstants.level.wrongCount++;
-					if(GameConstants.level.wrongCount % 3 == 0) {
+					if(GameConstants.level.wrongCount % GameConstants.wrongCountMax == 0) {
 						GameConstants.level.player.setHealth(GameConstants.level.player.getHealth()-1);
 					}
 				}

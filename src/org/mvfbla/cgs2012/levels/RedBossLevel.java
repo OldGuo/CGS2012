@@ -44,6 +44,7 @@ public class RedBossLevel extends GameLevel {
 					if((GameConstants.bossesDefeated & 0b010) != 0b010) {
 						GameConstants.playNum++;
 					}
+					GameConstants.playerMaxHealth++;
 					GameConstants.bossesDefeated |= 0b010;
 				}
 			}
@@ -53,6 +54,7 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
+		player.draw(g);
 	}
 	@Override
 	public int getID(){

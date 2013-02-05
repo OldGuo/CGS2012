@@ -10,8 +10,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Characters{
-
-	private static final float MAX_SPEED = 5;
 	private String left,right;
 	private String current;
 	private int punchTime=0;
@@ -34,7 +32,7 @@ public class Player extends Characters{
 		arm.stopAnimation();
 
 		current = "walkRight";
-		super.setInitialHealth(3);
+		super.setInitialHealth(GameConstants.playerMaxHealth);
 		super.setBlink(2000);
 	}
 	@Override
@@ -72,17 +70,17 @@ public class Player extends Characters{
 		// Moving left/right/up
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
 			movePressed = true;
-			setVelX(-MAX_SPEED);
-			if(this.getVelX() < -MAX_SPEED)
-				this.setVelX(-MAX_SPEED);
+			setVelX(-GameConstants.playerMaxSpeed);
+			if(this.getVelX() < -GameConstants.playerMaxSpeed)
+				this.setVelX(-GameConstants.playerMaxSpeed);
 			//playAnimation(left);
 			this.setRange(Math.abs(this.getRange())*-1);
 		}
 		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
 			movePressed = true;
-			this.setVelX(MAX_SPEED);
-			if(this.getVelX() > MAX_SPEED)
-				this.setVelX(MAX_SPEED);
+			this.setVelX(GameConstants.playerMaxSpeed);
+			if(this.getVelX() > GameConstants.playerMaxSpeed)
+				this.setVelX(GameConstants.playerMaxSpeed);
 			//playAnimation(right);
 			this.setRange(Math.abs(this.getRange()));
 		}

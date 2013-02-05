@@ -142,6 +142,8 @@ public abstract class GameLevel extends BasicGameState{
 							sbg.enterState(Game.MAIN_MENU_STATE);
 						}
 					}
+					init(container, sbg);
+					enter(container, sbg);
 				}
 			}
 			if(!player.isAlive()) {
