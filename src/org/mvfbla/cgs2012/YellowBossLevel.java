@@ -36,11 +36,12 @@ public class YellowBossLevel extends GameLevel {
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
 		if(!yellowBoss.isAlive()) {
+			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
 			transState = 2;
 		}
 		if(yellowBoss.isAiming())
 			yellowBoss.setReticle(player.getX());
-		else if(yellowBoss.isFiring()){
+		else if(yellowBoss.isFiring()) {
 			if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
 				if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
 					player.setHealth(player.getHealth()-1);
@@ -85,24 +86,44 @@ public class YellowBossLevel extends GameLevel {
 			g.fillRect(96,288,128,32);
 			buttons[0].setStateNum(2);
 		} else {
-			buttons[0].setStateNum(0);
-			buttons[0].notif.playAnimation("near");
+			handleButton(0);
 		}
 		if(yellowBoss.isActivated(1)){
 			g.fillRect(320,224,144,32);
 			buttons[1].setStateNum(2);
 		} else {
-			buttons[1].setStateNum(0);
-			buttons[1].notif.playAnimation("near");
+			handleButton(1);
 		}
 		if(yellowBoss.isActivated(2)){
 			g.fillRect(560,288,128,32);
 			buttons[2].setStateNum(2);
 		} else {
-			buttons[2].setStateNum(0);
-			buttons[2].notif.playAnimation("near");
+			handleButton(2);
 		}
-		buttons[yellowBoss.location].setStateNum(1);
+		player.draw(g);
+		if(transState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(deathTime > 0) {
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
+		}
+	}
+	public void handleButton(int id) {
+		if(yellowBoss.location == id)
+			buttons[id].setStateNum(1);
+		else {
+			buttons[id].setStateNum(0);
+			buttons[id].notif.playAnimation("near");
+		}
 	}
 	public class YellowButton extends Button {
 		public int number;
@@ -171,6 +192,6 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

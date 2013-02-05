@@ -42,6 +42,8 @@ public class Player extends Characters{
 		if(!isAlive())
 			return;
 		if(!getControl()) {
+			setVelX(0);
+			stopAnimation();
 			super.update(gc, delta);
 			return;
 		}
