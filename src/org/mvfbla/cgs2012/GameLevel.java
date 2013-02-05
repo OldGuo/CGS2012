@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
+	// Initialize lots of variables
 	protected int bgOffsetX, bgNumRepeat;
 	public QuestionWindow questions;
 	public PauseWindow pauseWindow;
@@ -39,11 +40,14 @@ public abstract class GameLevel extends BasicGameState{
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
 	private boolean[] used=new boolean [35];
+	
+	//Initialize used questions variable.
 	public GameLevel(){
 		for(int i=0;i<35;i++)
 			used[i]=false;
 	}
 	public void initStuff() throws SlickException {
+		// Clears constants
 		GameConstants.clear();
 		GameConstants.currMap = map;
 		GameConstants.collidableObjects.addAll(map.getBoxes());
@@ -58,6 +62,7 @@ public abstract class GameLevel extends BasicGameState{
 			for(int i=0;i<35;i++)
 				used[i]=false;
 		}
+		// Make questions and pause window
 		do{
 			questions=new QuestionWindow();
 		}while(used[questions.whichQuestion()]);
@@ -66,36 +71,45 @@ public abstract class GameLevel extends BasicGameState{
 		text = new TypeWriter();
 		done = false;
 		int motionDelay = 0;
+		// Initialize the Tiled objects
 		for(TiledObject to : map.getObjects()) {
+			// Enemy spawns
 			if(to.getType().equals("spawn")){
 				GameConstants.enemies.add(enemyFromName(to.getProperty("var"), to.getX(), to.getY()));
 			}
+			// Trigger for plot text
 			if(to.getType().equals("trigger")) {
 				PlotListener pl = new PlotListener();
 				Trigger t = new Trigger(to, pl);
 				pl.init(t, to.getProperty("var"));
 				GameConstants.triggers.add(t);
 			}
+			// Trigger for level finish
 			if(to.getType().equals("finish")) {
 				Elevator e = new Elevator(to.getX(), to.getY(), this);
 				GameConstants.interacts.add(e);
 				elevator = e;
 			}
+			// Button to toggle motion sensor
 			if(to.getType().equals("motionButton")) {
 				Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
 				GameConstants.interacts.add(b);
 			}
+			// Initialize motion sensors
 			if(to.getType().equals("motionSensor")) {
 				MotionSensor ms = new MotionSensor(to, motionDelay);
 				motionDelay += 500;
 				GameConstants.sensors.add(ms);
 			}
+			// Call each GameLevel's own object initialization methods
 			initObject(to);
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
+		// Reset player hp
 		player.setInitialHealth(GameConstants.playerMaxHealth);
 	}
+	// Listener for the motion sensor button
 	public class MotionButtonListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
@@ -107,7 +121,9 @@ public abstract class GameLevel extends BasicGameState{
 					ms.setState((byte) 1);
 		}
 	}
+	// Method for every class to initialize the tiled objects
 	public abstract void initObject(TiledObject to) throws SlickException;
+	// Listener for plot text
 	public class PlotListener implements TriggerListener {
 		private Trigger parent;
 		private String choice;
@@ -128,7 +144,9 @@ public abstract class GameLevel extends BasicGameState{
 		@Override
 		public void triggered(GameObject src) {}
 	}
+	// Unused method
 	public void unlockElev(int source) {}
+	// Reset the level
 	public void reset() {
 		try {
 			init(null, null);
@@ -137,9 +155,11 @@ public abstract class GameLevel extends BasicGameState{
 			e.printStackTrace();
 		}
 	}
+	// Main update method every level calls every frame
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
 		if(GameConstants.getPaused() == false){
+			// Do transitions
 			if(transState == 1) {
 				transTime += delta;
 				if(transTime >= transLength) {
@@ -148,6 +168,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 			} else if(transState == 2) {
 				transTime -= delta;
+				// Transition to next state
 				if(transTime <= 0) {
 					if(stateID == 4) {
 						if(GameConstants.enemiesKilled == 0) {
@@ -173,6 +194,7 @@ public abstract class GameLevel extends BasicGameState{
 					enter(container, sbg);
 				}
 			}
+			// Handle player death
 			if(!player.isAlive()) {
 				deathTime += delta;
 				if(deathTime >= deathDur) {
@@ -182,6 +204,7 @@ public abstract class GameLevel extends BasicGameState{
 					reset();
 				}
 			}
+			// Finish the level
 			if(done && questions.getAnswering() == false && questionCount >= 4) {
 				player.setControl(false);
 				transState = 2;
