@@ -14,7 +14,6 @@ public class MotionSensorLevel extends GameLevel {
 	}
 	private final static int MAP_WIDTH = 800;
 	private final static int MAP_HEIGHT = 600;
-	private int motionDelay = 0;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -52,27 +51,6 @@ public class MotionSensorLevel extends GameLevel {
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
 
-		if(to.getType().equals("motionButton")) {
-			Button b = new Button(to.getX(), to.getY(), new MotionButtonListener());
-			GameConstants.interacts.add(b);
-		}
-		if(to.getType().equals("motionSensor")) {
-			MotionSensor ms = new MotionSensor(to, motionDelay);
-			motionDelay += 500;
-			GameConstants.sensors.add(ms);
-		}
-	}
-	public class MotionButtonListener implements ButtonListener {
-		@Override
-		public void buttonPressed(boolean state) {
-			if(state) {
-				buttonQuestion = true;
-				questions.setAnswering(true);
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 0);
-			} else
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 1);
-		}
+
 	}
 }

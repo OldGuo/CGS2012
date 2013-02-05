@@ -40,6 +40,10 @@ public class QuestionButton extends InteractButton{
 				}else{
 					correct = false;
 					wrongPressed = true;
+					GameConstants.level.wrongCount++;
+					if(GameConstants.level.wrongCount % 3 == 0) {
+						GameConstants.level.player.setHealth(GameConstants.level.player.getHealth()-1);
+					}
 				}
 			}else{
 				setClick(false);

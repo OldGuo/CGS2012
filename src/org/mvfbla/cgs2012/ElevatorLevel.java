@@ -87,8 +87,6 @@ public class ElevatorLevel extends GameLevel {
 		@Override
 		public void buttonPressed(boolean state) {
 			if(state) {
-				buttonQuestion = true;
-				questions.setAnswering(true);
 				unlockElev(1);
 			}
 		}

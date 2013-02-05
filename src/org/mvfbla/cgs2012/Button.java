@@ -44,6 +44,8 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	public void interact(GameObject source) {
 		if(!used) {
 			GameConstants.techUsed++;
+			GameConstants.level.buttonQuestion = true;
+			GameConstants.level.questions.setAnswering(true);
 		}
 		used = true;
 		long time = System.currentTimeMillis();

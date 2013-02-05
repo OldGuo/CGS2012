@@ -25,6 +25,8 @@ public class YellowBoss extends Boss{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
+		if(!isAlive())
+			System.out.println("oh noes");
 		if(activated[0]&&activated[1]&&activated[2]){
 			//super.setHealth(0);
 		}
