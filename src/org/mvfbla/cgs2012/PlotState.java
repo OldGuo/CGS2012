@@ -26,7 +26,7 @@ public class PlotState extends BasicGameState{
 		finalPlot = " ";
 		text = new TypeWriter();
 		if(killedBlackBoss){
-			finalPlot = " ";
+			finalPlot = "YO U WIN L 0 L GG HAX";
 		}else{
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
