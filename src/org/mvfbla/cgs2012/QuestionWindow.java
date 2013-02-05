@@ -59,10 +59,14 @@ public class QuestionWindow{
 		g.fillRect(-300,-300,1100 + x,900 + y);
 		g.setColor(Color.black);
 		int questionLength = reader.getQuestions().get(randQuestion).length();
-		g.drawString(reader.getQuestions().get(randQuestion),325 + x - questionLength*2,100 + y);
+		g.drawString(reader.getQuestions().get(randQuestion),315 + x - questionLength*2,100 + y);
 		for(int i = 0; i < questions.size(); i++){
 			questions.get(i).draw(g,x,y);
 		}
+		g.setColor(Color.black);
+		int max = GameConstants.wrongCountMax;
+		int current = GameConstants.level.wrongCount;
+		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160,500);
 	}
 	public void update(GameContainer container){
 		Input input = container.getInput();
