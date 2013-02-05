@@ -1,6 +1,8 @@
 package org.mvfbla.cgs2012;
 
+
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -18,6 +20,8 @@ public class BlueBoss extends Boss{
 	private int stompX,stompY;
 	private final Image stomp;
 	private boolean falling;
+	private long animLength = 500;
+	private long animTime = -1;
 
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
@@ -39,21 +43,36 @@ public class BlueBoss extends Boss{
 		if(stomping && super.getVelY() == 0){
 			stompX = (int) super.getX() + 32;
 			stompY =  (int) super.getY() + 320;
+			animTime = 0;
 			stomping = false;
 		}else{
-			stompX = -100;
-			stompY = -100;
+			if(animTime < 0) {
+				stompX = -100;
+				stompY = -100;
+			}
 		}
 		if(getY() > 400 && isAlive()){
 			setHealth(getHealth() - 1);
 		}
+		if(animTime >= 0)
+			animTime+=delta;
+		if(animTime >= animLength)
+			animTime = -1;
 	}
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
 		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
 		//g.fillRect(stompX, stompY, 64, 64);
-		stomp.draw(stompX,stompY);
+		if(animTime >= 0) {
+			float prog = animTime/(float)animLength;
+			float scale = prog+1f;
+			Color alpha = new Color(Color.white);
+			alpha.a = 1-prog;
+			int x = (int) (stompX-(((stomp.getWidth()*scale)-stomp.getWidth())/2));
+			int y = (int) (stompY-(((stomp.getHeight()*scale)-stomp.getHeight())/2));
+			stomp.getScaledCopy(scale).draw(x,y, alpha);
+		}
 	}
 	public void stomp(){
 		stomping = true;

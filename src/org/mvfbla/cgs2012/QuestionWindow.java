@@ -66,7 +66,7 @@ public class QuestionWindow{
 		g.setColor(Color.black);
 		int max = GameConstants.wrongCountMax;
 		int current = GameConstants.level.wrongCount;
-		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160,500);
+		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160+x,500+y);
 	}
 	public void update(GameContainer container){
 		Input input = container.getInput();
