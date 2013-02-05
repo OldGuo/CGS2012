@@ -6,9 +6,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class YellowBoss extends Boss{
-	int time, location;
+	int time;
+	public int location;
 	boolean[] activated;
-	boolean aiming, firing, charging, teleporting;
+	public boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
