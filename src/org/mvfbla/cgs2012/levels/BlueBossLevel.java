@@ -190,6 +190,10 @@ public class BlueBossLevel extends GameLevel {
 		if(questions.getAnswering() == true){
 			questions.draw(g,0,0);
 		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
 	}
 	@Override
 	public int getID() {
