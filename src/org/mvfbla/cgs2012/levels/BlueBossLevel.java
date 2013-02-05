@@ -1,13 +1,11 @@
 package org.mvfbla.cgs2012.levels;
 
 import org.mvfbla.cgs2012.BlueBoss;
-import org.mvfbla.cgs2012.CameraObject;
 import org.mvfbla.cgs2012.Characters;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
 import org.mvfbla.cgs2012.Pillar;
-import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.Tile;
 import org.mvfbla.cgs2012.TiledObject;
@@ -43,8 +41,6 @@ public class BlueBossLevel extends GameLevel {
 		afterQuestions = false;
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
-		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,2000,1300);
 		background = new Image("data\\Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
 		text = new TypeWriter();

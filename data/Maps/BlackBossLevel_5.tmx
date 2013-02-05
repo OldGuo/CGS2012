@@ -16,5 +16,6 @@
    </properties>
   </object>
   <object type="blackBossButton" x="392" y="272" width="32" height="32"/>
+  <object name="playerBoss" type="playerBoss" x="32" y="400" width="48" height="48"/>
  </objectgroup>
 </map>

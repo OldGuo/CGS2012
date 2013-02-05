@@ -1,3 +1,5 @@
+//Player class, extends Characters
+//sprite controlled by user
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
@@ -19,8 +21,8 @@ public class Player extends Characters{
 	private final AnimatedObject arm;
 	private boolean control;
 	public Player(int x, int y) throws SlickException {
-		super(x, y, 48, 48);
-		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150));
+		super(x, y, 48, 48); //loads sprite sheets for animations of actions
+		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150)); 
 		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\PlayerRightInverted.png", 48, 48), 150));
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
@@ -33,20 +35,20 @@ public class Player extends Characters{
 
 		current = "walkRight";
 		super.setInitialHealth(GameConstants.playerMaxHealth);
-		super.setBlink(2000);
+		super.setBlink(2000); //when hit, invulnerable for 2 seconds
 	}
 	@Override
-	public void update(GameContainer gc, int delta) {
-		if(!isAlive())
+	public void update(GameContainer gc, int delta) { 
+		if(!isAlive()) 
 			return;
-		if(!getControl()) {
+		if(!getControl()) { //during some parts of the game, the player cannot move
 			setVelX(0);
 			stopAnimation();
 			super.update(gc, delta);
 			return;
 		}
 		boolean movePressed = false;
-		if(GameConstants.getGrav() > 0){
+		if(GameConstants.getGrav() > 0){ //when gravity is flipped, so are controls for symmetry
 			left = "walkLeft";
 			right = "walkRight";
 		}else{
@@ -123,12 +125,12 @@ public class Player extends Characters{
 				arm.stopAnimation();
 			}
 		}
-		if(punching){
+		if(punching){ //punching has a set duration
 			punchTime+=delta;
 			arm.setFrame(1);
 			arm.stopAnimation();
 		}
-		if(cooldown){
+		if(cooldown){ //after punching, player cannot punch for a certain time to avoid spamming
 			punchTime-=delta;
 		}
 		if(punchTime<=-500){
@@ -144,19 +146,19 @@ public class Player extends Characters{
 		}
 		super.update(gc, delta);
 	}
-	public float getRange(){
+	public float getRange(){ //returns range of punching
 		return GameConstants.punchRange;
 	}
-	public void setRange(float whatRange){
+	public void setRange(float whatRange){ //sets range of punching
 		GameConstants.punchRange=(int) whatRange;
 	}
-	public boolean isPunching(){
+	public boolean isPunching(){ //returns if player is punching
 		return punching;
 	}
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		if(punchTime > 0) {
+		if(punchTime > 0) { //draws the arm punching
 			float prog = punchTime/300f;
 			g.translate(getCenterX(), getCenterY());
 			try {
@@ -176,10 +178,10 @@ public class Player extends Characters{
 			g.translate(-getCenterX(), -getCenterY());
 		}
 	}
-	public boolean getControl() {
+	public boolean getControl() { //returns if the player is controllable
 		return control;
 	}
-	public void setControl(boolean control) {
+	public void setControl(boolean control) { //sets controls on or off
 		this.control = control;
 	}
 }

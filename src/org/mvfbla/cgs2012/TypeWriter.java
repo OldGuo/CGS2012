@@ -34,7 +34,7 @@ public class TypeWriter{
         renderRow = 0;
         renderCol = 0;
 
-        TYPE_DELAY = 30;
+        TYPE_DELAY = 25;
         time = TYPE_DELAY;
         finished = false;
     }

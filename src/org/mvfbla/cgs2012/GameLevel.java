@@ -21,7 +21,7 @@ public abstract class GameLevel extends BasicGameState{
 	public BlackBoss blackBoss;
 	protected CameraObject cameraBox;
 	protected Image background;
-	protected Boolean lost = false;
+	protected boolean lost = false;
 	protected int stateID = -1;
 	protected TypeWriter text;
 	protected boolean done = false;
@@ -101,6 +101,14 @@ public abstract class GameLevel extends BasicGameState{
 				motionDelay += 500;
 				GameConstants.sensors.add(ms);
 			}
+			if(to.getType().equals("player")) {
+				player = new Player(to.getX(),to.getY());
+				cameraBox = new CameraObject(player,250,1300);
+			}
+			if(to.getType().equals("playerBoss")) {
+				player = new Player(to.getX(),to.getY());
+				cameraBox = new CameraObject(player,2000,1300);
+			}
 			// Call each GameLevel's own object initialization methods
 			initObject(to);
 		}
@@ -149,8 +157,9 @@ public abstract class GameLevel extends BasicGameState{
 	// Reset the level
 	public void reset() {
 		try {
-			init(null, null);
-			enter(null, null);
+			initStuff();
+			GameConstants.level.init(null, null);
+			//enter(null, null);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

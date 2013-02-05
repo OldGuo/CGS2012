@@ -1,9 +1,7 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.CameraObject;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.TiledObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -24,8 +22,6 @@ public class MotionSensorLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
-		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
 	}
 
