@@ -9,8 +9,8 @@ import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.RedBoss;
 import org.mvfbla.cgs2012.TiledObject;
-import org.newdawn.slick.Color;
 import org.mvfbla.cgs2012.TypeWriter;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -61,7 +61,7 @@ public class RedBossLevel extends GameLevel {
 		if(beforeQuestions){
 			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
 						 "I want to ask it so many questions. I want to understand.  A stream of " +
-						 "questions pour from my mouth. But it only respond with questions of its own." +
+						 "questions pour from my mouth. But it only responds with questions of its own." +
 						 "                                       ");
 			if(text.isFinished() && beforeQuestions){
 				beforeQuestions = false;
