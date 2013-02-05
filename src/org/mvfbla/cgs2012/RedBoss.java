@@ -13,6 +13,9 @@ public class RedBoss extends Boss{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
+		if(!died && !isAlive()) {
+			GameConstants.playerMaxHealth++;
+		}
 		super.update(gc, delta);
 	}
 }

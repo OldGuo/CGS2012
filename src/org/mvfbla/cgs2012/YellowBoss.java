@@ -27,6 +27,9 @@ public class YellowBoss extends Boss{
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(activated[0]&&activated[1]&&activated[2]){
+			if(isAlive() && getHealth() == 0) {
+				GameConstants.wrongCountMax+=2;
+			}
 			alive = false;
 		}
 		else{
