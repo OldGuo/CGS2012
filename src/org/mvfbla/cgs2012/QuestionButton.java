@@ -33,7 +33,7 @@ public class QuestionButton extends InteractButton{
 	}
 	public void update(GameContainer gc, Input input,int correctAnswer){
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
-			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
+			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON) && wrongPressed == false){
 				setClick(true);
 				if(correctAnswer == getID()){
 					correct = true;
