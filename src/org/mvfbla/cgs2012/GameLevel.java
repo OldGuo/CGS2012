@@ -136,13 +136,14 @@ public abstract class GameLevel extends BasicGameState{
 					} else if(stateID < 4) {
 						sbg.enterState(stateID + 1);
 					} else if(stateID > 4 && stateID <=7) {
-						if(GameConstants.playNum >= 2) {
+						if(GameConstants.bossesDefeated == 7) {
 							sbg.enterState(Game.BLACK_BOSS_STATE);
 						} else {
-							GameConstants.playNum++;
 							sbg.enterState(Game.MAIN_MENU_STATE);
 						}
 					}
+					init(container, sbg);
+					enter(container, sbg);
 				}
 			}
 			if(!player.isAlive()) {
