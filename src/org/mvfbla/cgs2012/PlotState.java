@@ -28,8 +28,6 @@ public class PlotState extends BasicGameState{
 		if(killedBlackBoss){
 			finalPlot = "";
 		}else{
-			finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
-					"                                                \"Be Quick Alex\"";
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
 						"                                                \"Be Quick Alex\"";
