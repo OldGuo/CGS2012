@@ -32,7 +32,7 @@ public abstract class GameLevel extends BasicGameState{
 	private String textChoice = " ";
 	protected long deathTime = 0;
 	private final long deathDur = 1000;
-	private final long deathDelay = 2000;
+	protected final long deathDelay = 2000;
 	public int questionCount = 0;
 	public boolean buttonQuestion = false;
 	protected Button questionButton;

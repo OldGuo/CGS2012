@@ -10,7 +10,9 @@ public class Characters extends AnimatedObject {
 
 	private Vector force;
 	protected Vector trans = new Vector();
-	private boolean alive, blinking, display;
+	protected boolean alive;
+	private boolean blinking;
+	private boolean display;
 	private float health;
 	private int time, blinkTime;
 
