@@ -54,6 +54,11 @@ public class PauseWindow{
 				GameConstants.flipPaused();
 			}
 			if(pauseButtons.get(i).getAction().equals("Main Menu")){
+				try {
+					GameConstants.mainMenu.init(gc, sbg);
+				} catch (SlickException e) {
+					e.printStackTrace();
+				}
 				pauseButtons.get(i).clear();
 				GameConstants.level.reset();
 				GameConstants.clear();

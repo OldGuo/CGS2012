@@ -11,6 +11,7 @@ public class GameConstants {
 	public static boolean paused = false;
 
 	public static GameLevel level;
+	public static MainMenu mainMenu;
 	public static ArrayList<GameObject> collidableObjects = new ArrayList<GameObject>();
 	public static ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 	public static ArrayList<MovingTile> platforms = new ArrayList<MovingTile>();

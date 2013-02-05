@@ -154,8 +154,7 @@ public class BlueBossLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
-		draw(g);
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
 		g.setColor(Color.black);
 		if(platformBroken == false)
 			g.fillRect(5*16,18*16,16*39,16*2);
@@ -180,6 +179,7 @@ public class BlueBossLevel extends GameLevel {
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
 		}
+		draw(g);
 		if(beforeQuestions == true || afterQuestions == true){
 			try {
 				text.draw(g,0,0,720,80);

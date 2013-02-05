@@ -35,7 +35,7 @@ public class MotionSensorLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
 		draw(g);
 	}
 	@Override
