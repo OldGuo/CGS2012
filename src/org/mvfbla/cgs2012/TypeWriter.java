@@ -120,7 +120,7 @@ public class TypeWriter{
     }
 
     //Wraps the given string into a list of split lines based on the width
-    private List<String> wrap(String text, Font font, int width) {
+    public static List<String> wrap(String text, Font font, int width) {
         //A less accurate but more efficient wrap would be to specify the max
         //number of columns (e.g. using the width of the 'M' character or something).
         //The below method will look nicer in the end, though.
