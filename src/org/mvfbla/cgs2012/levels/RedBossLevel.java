@@ -86,6 +86,7 @@ public class RedBossLevel extends GameLevel {
 			text.update(container, delta);
 		if(questions.getAnswering()){
 			questions.update(container);
+			GameConstants.level.player.setControl(false);
 		}
 		for(Characters guy : GameConstants.enemies) {
 			String name=guy.getClass().toString();
@@ -93,6 +94,7 @@ public class RedBossLevel extends GameLevel {
 				RedBoss boss = (RedBoss)guy;
 				if(afterQuestions == true){
 					boss.setAttacking(true);
+					GameConstants.level.player.setControl(true);
 				}
 			}
 		}

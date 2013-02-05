@@ -1,11 +1,18 @@
 package org.mvfbla.cgs2012;
 
+import org.mvfbla.cgs2012.levels.BlackBossLevel;
+import org.mvfbla.cgs2012.levels.BlueBossLevel;
+import org.mvfbla.cgs2012.levels.ElevatorLevel;
+import org.mvfbla.cgs2012.levels.GravityLevel;
+import org.mvfbla.cgs2012.levels.MotionSensorLevel;
+import org.mvfbla.cgs2012.levels.RedBossLevel;
+import org.mvfbla.cgs2012.levels.TutorialLevel;
+import org.mvfbla.cgs2012.levels.YellowBossLevel;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import org.mvfbla.cgs2012.levels.*;
 
 public class Game extends StateBasedGame{
 
