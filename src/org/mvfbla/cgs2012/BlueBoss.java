@@ -13,15 +13,16 @@ public class BlueBoss extends Boss{
 	private boolean awake = false;
 	private final float sight = 1000;
 	private final int ATTACK_DELAY = 2500;
-	private int time = 12000;
+	private int time = 1000;
 	//private int time = ATTACK_DELAY;
 	private boolean stomping = false;
 	private int count;
 	private int stompX,stompY;
 	private final Image stomp;
 	private boolean falling;
-	private long animLength = 500;
+	private final long animLength = 500;
 	private long animTime = -1;
+	private boolean attacking;
 
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
@@ -34,30 +35,34 @@ public class BlueBoss extends Boss{
 		if(!died && !isAlive()) {
 			GameConstants.playerMaxSpeed++;
 		}
-		super.update(gc, delta);
-		time -= delta;
-		if(time <= 0 && !falling){
-			stomp();
-			time = ATTACK_DELAY;
-		}
-		if(stomping && super.getVelY() == 0){
-			stompX = (int) super.getX() + 32;
-			stompY =  (int) super.getY() + 320;
-			animTime = 0;
-			stomping = false;
-		}else{
-			if(animTime < 0) {
-				stompX = -100;
-				stompY = -100;
+		if(attacking){
+			super.update(gc, delta);
+			time -= delta;
+			if(time <= 0 && !falling){
+				stomp();
+				time = ATTACK_DELAY;
 			}
+			if(stomping && super.getVelY() == 0){
+				stompX = (int) super.getX() + 32;
+				stompY =  (int) super.getY() + 320;
+				animTime = 0;
+				stomping = false;
+			}else{
+				if(animTime < 0) {
+					stompX = -100;
+					stompY = -100;
+				}
+			}
+			if(getY() > 400 && isAlive()){
+				setHealth(getHealth() - 1);
+			}
+			if(animTime >= 0)
+				animTime+=delta;
+			if(animTime >= animLength)
+				animTime = -1;
+		}if(!attacking){
+			super.setHealth(3);
 		}
-		if(getY() > 400 && isAlive()){
-			setHealth(getHealth() - 1);
-		}
-		if(animTime >= 0)
-			animTime+=delta;
-		if(animTime >= animLength)
-			animTime = -1;
 	}
 	@Override
 	public void draw(Graphics g){
@@ -96,5 +101,11 @@ public class BlueBoss extends Boss{
 	}
 	public boolean getFalling(){
 		return falling;
+	}
+	public void setAttacking(boolean a){
+		attacking = a;
+	}
+	public boolean getAttacking(){
+		return attacking;
 	}
 }

@@ -11,6 +11,7 @@ public class YellowBoss extends Boss{
 	boolean[] activated;
 	public boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
+	private boolean attacking;
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
 		addAnimation("YellowBoss", new Animation(new SpriteSheet("data\\YellowBossWalking.png", 128, 128), 150));
@@ -26,49 +27,54 @@ public class YellowBoss extends Boss{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
-		if(activated[0]&&activated[1]&&activated[2]){
-			if(isAlive() && getHealth() == 0) {
-				GameConstants.wrongCountMax+=2;
+		if(attacking){
+			if(activated[0]&&activated[1]&&activated[2]){
+				if(isAlive() && getHealth() == 0) {
+					GameConstants.wrongCountMax+=2;
+				}
+				alive = false;
 			}
-			alive = false;
-		}
-		else{
-			if(time<5000){
-				time+=delta;
-				if(time>=1000&&time<=2000)
-					aiming=true;
+			else{
+				if(time<5000){
+					time+=delta;
+					if(time>=1000&&time<=2000)
+						aiming=true;
+					else
+						aiming=false;
+					if(time>=2000&&time<=2500)
+						charging=true;
+					else
+						charging=false;
+					if(time>=2500&&time<=3500)
+						firing=true;
+					else
+						firing=false;
+					if(time>=4500)
+						teleporting=true;
+					else
+						teleporting=false;
+				}
 				else
-					aiming=false;
-				if(time>=2000&&time<=2500)
-					charging=true;
-				else
-					charging=false;
-				if(time>=2500&&time<=3500)
-					firing=true;
-				else
-					firing=false;
-				if(time>=4500)
-					teleporting=true;
-				else
-					teleporting=false;
+					teleport();
+				if(!teleporting&&activated[location])
+					time=4500;
+				if(location==0){
+					this.setX(95);
+					this.setY(160);
+				}
+				else if(location==1){
+					this.setX(330);
+					this.setY(100);
+				}
+				else if(location==2){
+					this.setX(565);
+					this.setY(160);
+				}
+				super.update(gc, delta);
 			}
-			else
-				teleport();
-			if(!teleporting&&activated[location])
-				time=4500;
-			if(location==0){
-				this.setX(95);
-				this.setY(160);
+			if(!attacking){
+				super.setHealth(3);
 			}
-			else if(location==1){
-				this.setX(330);
-				this.setY(100);
-			}
-			else if(location==2){
-				this.setX(565);
-				this.setY(160);
-			}
-			super.update(gc, delta);
 		}
 	}
 	public void teleport(){
@@ -111,6 +117,12 @@ public class YellowBoss extends Boss{
 	}
 	public int getTime(){
 		return time;
+	}
+	public void setAttacking(boolean a){
+		attacking = a;
+	}
+	public boolean getAttacking(){
+		return attacking;
 	}
 }
 

@@ -38,6 +38,10 @@ public class BlackBossLevel extends GameLevel {
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
 		blackBoss.update(container,delta);
+		if(!blackBoss.isAlive()) {
+			done = true;
+			transState = 2;
+		}
 	}
 
 	@Override
@@ -45,6 +49,8 @@ public class BlackBossLevel extends GameLevel {
 		draw(g);
 		if(blackBoss.shouldDisplay())
 			blackBoss.draw(g);
+		if(!blackBoss.isAlive())
+			player.draw(g);
 	}
 	@Override
 	public int getID(){
