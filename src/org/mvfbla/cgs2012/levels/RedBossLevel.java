@@ -32,6 +32,7 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
+		afterQuestions = false;
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
@@ -106,7 +107,8 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
-		player.draw(g);
+		if(player.shouldDisplay())
+			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);

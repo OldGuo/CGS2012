@@ -42,6 +42,7 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
+		afterQuestions = false;
 		beforeQuestions = true;
 		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
@@ -170,7 +171,8 @@ public class YellowBossLevel extends GameLevel {
 		} else {
 			handleButton(2);
 		}
-		player.draw(g);
+		if(player.shouldDisplay())
+			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);

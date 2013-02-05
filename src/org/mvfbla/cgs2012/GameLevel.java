@@ -129,6 +129,14 @@ public abstract class GameLevel extends BasicGameState{
 		public void triggered(GameObject src) {}
 	}
 	public void unlockElev(int source) {}
+	public void reset() {
+		try {
+			init(null, null);
+			enter(null, null);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
 		if(GameConstants.getPaused() == false){
@@ -171,8 +179,7 @@ public abstract class GameLevel extends BasicGameState{
 					transTime = 0;
 					deathTime = 0;
 					questionCount = 0;
-					init(container, sbg);
-					enter(container, sbg);
+					reset();
 				}
 			}
 			if(done && questions.getAnswering() == false && questionCount >= 4) {
