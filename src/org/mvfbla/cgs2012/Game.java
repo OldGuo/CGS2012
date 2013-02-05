@@ -25,8 +25,8 @@ public class Game extends StateBasedGame{
 	public Music music;
 	public Game() throws SlickException{
 		super("FBLA CGS 2012");
-		/*music = new Music("data\\Maps\\Outdated.ogg");
-		music.loop();*/
+		music = new Music("data\\Maps\\Outdated.ogg");
+		music.loop();
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());

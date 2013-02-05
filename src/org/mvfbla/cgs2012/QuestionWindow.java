@@ -58,8 +58,11 @@ public class QuestionWindow{
 		g.setColor(color);
 		g.fillRect(-300,-300,1100 + x,900 + y);
 		g.setColor(Color.black);
-		int questionLength = reader.getQuestions().get(randQuestion).length();
-		g.drawString(reader.getQuestions().get(randQuestion),315 + x - questionLength*2,100 + y);
+		String question = reader.getQuestions().get(randQuestion);
+		String[] split = question.split(" - ");
+		g.drawString(split[0], 400 + x - g.getFont().getWidth(split[0])/2,60 + y);
+		int questionLength = g.getFont().getWidth(split[1]);
+		g.drawString(reader.getQuestions().get(randQuestion),340 + x - questionLength/2,100 + y);
 		for(int i = 0; i < questions.size(); i++){
 			questions.get(i).draw(g,x,y);
 		}
