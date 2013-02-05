@@ -15,7 +15,7 @@
   <object name="pillar" type="pillar" x="112" y="320" width="48" height="224"/>
   <object name="pillar" type="pillar" x="368" y="320" width="48" height="224"/>
   <object name="pillar" type="pillar" x="624" y="320" width="48" height="224"/>
-  <object name="blueboss" type="spawn" x="326" y="157" width="128" height="128">
+  <object name="blueboss" type="spawn" x="326" y="160" width="128" height="128">
    <properties>
     <property name="var" value="BlueBoss"/>
    </properties>

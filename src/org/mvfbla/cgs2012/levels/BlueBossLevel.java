@@ -8,8 +8,10 @@ import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
 import org.mvfbla.cgs2012.Pillar;
 import org.mvfbla.cgs2012.Player;
+import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.Tile;
 import org.mvfbla.cgs2012.TiledObject;
+import org.mvfbla.cgs2012.TypeWriter;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,8 +24,12 @@ public class BlueBossLevel extends GameLevel {
 	private int brokenCount = 3;
 	private boolean platformBroken;
 	private Tile platform;
-	private int fallY =18*16;
-	
+	private int fallY = 18*16;
+
+	private TypeWriter text;
+	private QuestionWindow questions;
+	private boolean beforeQuestions,needRestart,afterQuestions;
+
 	public BlueBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -34,11 +40,14 @@ public class BlueBossLevel extends GameLevel {
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
+		beforeQuestions = true;
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1300);
 		background = new Image("data\\Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
+		text = new TypeWriter();
+		questions = new QuestionWindow();
 	}
 
 	@Override
@@ -98,6 +107,44 @@ public class BlueBossLevel extends GameLevel {
 				}
 			}
 		}
+		if(beforeQuestions){
+			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
+						 "I want to ask it so many questions. I want to understand.  A stream of " +
+						 "questions pour from my mouth. But it only responds with questions of its own." +
+						 "                                       ");
+			if(text.isFinished() && beforeQuestions){
+				beforeQuestions = false;
+				needRestart = true;
+				questions.setAnswering(true);
+			}
+		}
+		if(questions.getAnswering() == false && !beforeQuestions){
+			afterQuestions = true;
+		}
+		if(afterQuestions == true){
+			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
+					 " But there is no answer, this only" +
+					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
+					 "                                       ");
+			if(needRestart){
+				text.restart();
+				needRestart = false;
+			}
+		}
+		if(beforeQuestions == true || afterQuestions == true)
+			text.update(container, delta);
+		if(questions.getAnswering()){
+			questions.update(container);
+		}
+		for(Characters guy : GameConstants.enemies) {
+			String name=guy.getClass().toString();
+			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
+				BlueBoss boss = (BlueBoss)guy;
+				if(afterQuestions == true){
+					boss.setAttacking(true);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -125,6 +172,16 @@ public class BlueBossLevel extends GameLevel {
 			Color c = new Color(0, 0, 0, prog);
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(beforeQuestions == true || afterQuestions == true){
+			try {
+				text.draw(g,0,0,720,80);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+		}
+		if(questions.getAnswering() == true){
+			questions.draw(g,0,0);
 		}
 	}
 	@Override

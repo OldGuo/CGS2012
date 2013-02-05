@@ -26,21 +26,24 @@ public class PlotState extends BasicGameState{
 		finalPlot = " ";
 		text = new TypeWriter();
 		if(killedBlackBoss){
-			finalPlot = "";
+			finalPlot = " ";
 		}else{
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
-						"                                                \"Be Quick Alex\"";
+							"                                                \"Be Quick Alex\"                           " +
+							"Strangely, I already feel quicker. ";
 			}
 			if(GameConstants.lastBoss == 2){ //red
 				finalPlot = "As the red figure falls to the floor, it utters a few final words," +
-							"                                                \"Be Strong Alex\"";
+							"                                                \"Be Strong Alex\"                      " +
+							"Strangely, I already feel stronger. ";
 			}
 			if(GameConstants.lastBoss == 3){ //yellow
 				finalPlot = "As the yellow figure falls to the floor, it utters a few final words," +
-						"                                                \"Be Wise Alex\"";
+							"                                                \"Be Wise Alex\"                            " +
+							"Strangely, I alreayd feel wiser.";
 			}
-			finalPlot += "                           Suddenly my mind is pounded with waves of guilt. " +
+			finalPlot += "Suddenly my mind is pounded with waves of guilt. " +
 					 "I have done it again." +
 					 " Countless new questions fill my mind, none of my previous questions answered. I sit and weep.  " +
 					 "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ";
