@@ -1,9 +1,10 @@
 package org.mvfbla.cgs2012;
 
-import org.newdawn.slick.geom.Vector2f;
 import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;
 import static java.lang.StrictMath.toRadians;
+
+import org.newdawn.slick.geom.Vector2f;
 
 
 /**

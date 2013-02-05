@@ -64,12 +64,12 @@ public class YellowBossLevel extends GameLevel {
 		if(!yellowBoss.isAlive()) {
 			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
 			transState = 2;
-			if((GameConstants.bossesDefeated & 0b001) != 0b001) {
+			if((GameConstants.bossesDefeated & 1) != 1) {
 				GameConstants.playNum++;
 				System.out.println(GameConstants.playNum);
 			}
 			GameConstants.lastBoss = 3;
-			GameConstants.bossesDefeated |= 0b001;
+			GameConstants.bossesDefeated |= 1;
 		}
 		if(yellowBoss.isAiming())
 			yellowBoss.setReticle(player.getX());
