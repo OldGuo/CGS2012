@@ -30,6 +30,7 @@ public class YellowBossLevel extends GameLevel {
 	private final static int MAP_HEIGHT = 600;
 	private float fireX,fireY;
 	private YellowButton[] buttons = new YellowButton[3];
+	private Animation lightning;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
@@ -39,6 +40,8 @@ public class YellowBossLevel extends GameLevel {
 		yellowBoss = new YellowBoss(330,100);
 		cameraBox = new CameraObject(player,250,1000);
 		background = new Image("data\\Background.png");
+		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
+		lightning.start();
 	}
 
 	@Override
@@ -47,6 +50,11 @@ public class YellowBossLevel extends GameLevel {
 		if(!yellowBoss.isAlive()) {
 			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
 			transState = 2;
+			if((GameConstants.bossesDefeated & 0b001) != 0b001) {
+				GameConstants.playNum++;
+				System.out.println(GameConstants.playNum);
+			}
+			GameConstants.bossesDefeated |= 0b001;
 		}
 		if(yellowBoss.isAiming())
 			yellowBoss.setReticle(player.getX());
@@ -56,6 +64,7 @@ public class YellowBossLevel extends GameLevel {
 					player.setHealth(player.getHealth()-1);
 			}
 		}
+		lightning.update(delta);
 	}
 
 	@Override
@@ -92,19 +101,19 @@ public class YellowBossLevel extends GameLevel {
 		}
 		g.setColor(Color.green);
 		if(yellowBoss.isActivated(0)){
-			g.fillRect(96,288,128,32);
+			g.drawAnimation(lightning, 96-8, 288-8);
 			buttons[0].setStateNum(2);
 		} else {
 			handleButton(0);
 		}
 		if(yellowBoss.isActivated(1)){
-			g.fillRect(320,224,144,32);
+			g.drawAnimation(lightning, 320, 224-8);
 			buttons[1].setStateNum(2);
 		} else {
 			handleButton(1);
 		}
 		if(yellowBoss.isActivated(2)){
-			g.fillRect(560,288,128,32);
+			g.drawAnimation(lightning, 560-8, 288-8);
 			buttons[2].setStateNum(2);
 		} else {
 			handleButton(2);

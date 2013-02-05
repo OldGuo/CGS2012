@@ -30,8 +30,6 @@ public class TutorialLevel extends GameLevel {
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 		player = new Player(300, 496);
 		cameraBox = new CameraObject(player,250,1300);
-		GameConstants.enemiesKilled = -1;
-		GameConstants.techUsed = -1;
 	}
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
@@ -63,6 +61,8 @@ public class TutorialLevel extends GameLevel {
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		System.out.println("Leaving state " + getID());
+		GameConstants.enemiesKilled = 0;
+		GameConstants.techUsed = 0;
 	}
 
 	@Override
