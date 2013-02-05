@@ -47,13 +47,13 @@ public class PlotState extends BasicGameState{
 					 " Countless new questions fill my mind, none of my previous questions answered. I sit and weep.  " +
 					 "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ";
 			if(killedRedBoss == false){
-				finalPlot += " Perhaps if I had been Stronger...   ";
+				finalPlot += " Perhaps if I had defeated more enemies...   ";
 			}
 			if(killedBlueBoss == false){
-				finalPlot += " Perhaps if I had been Quicker...   ";
+				finalPlot += " Perhaps if I refrained from killing eniemies...   ";
 			}
 			if(killedYellowBoss == false){
-				finalPlot += " Perhaps if I had been Wiser...   ";
+				finalPlot += " Perhaps if I had used more technology...   ";
 			}
 			finalPlot += "...   ...   ...   ...   ...   ...There is nothing around me but a sea of darkness...   ...   ...   " +
 					 "But this is not the end. I will keep searching until I find the answers. " +
