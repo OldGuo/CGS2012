@@ -46,7 +46,7 @@ public class YellowBossLevel extends GameLevel {
 		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
 		yellowBoss = new YellowBoss(330,100);
-		cameraBox = new CameraObject(player,250,1000);
+		cameraBox = new CameraObject(player,2000,1000);
 		background = new Image("data\\Background.png");
 		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
 		lightning.start();
@@ -104,6 +104,7 @@ public class YellowBossLevel extends GameLevel {
 			text.update(container, delta);
 		if(questions.getAnswering()){
 			questions.update(container);
+			GameConstants.level.player.setControl(false);
 		}
 		for(Characters guy : GameConstants.enemies) {
 			String name=guy.getClass().toString();
@@ -111,11 +112,11 @@ public class YellowBossLevel extends GameLevel {
 				YellowBoss boss = (YellowBoss)guy;
 				if(afterQuestions == true){
 					boss.setAttacking(true);
+					GameConstants.level.player.setControl(true);
 				}
 			}
 		}
 	}
-
 	@Override
 	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
 		draw(g);

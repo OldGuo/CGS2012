@@ -43,7 +43,7 @@ public class BlueBossLevel extends GameLevel {
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,250,1300);
+		cameraBox = new CameraObject(player,2000,1300);
 		background = new Image("data\\Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
 		text = new TypeWriter();
@@ -135,6 +135,7 @@ public class BlueBossLevel extends GameLevel {
 			text.update(container, delta);
 		if(questions.getAnswering()){
 			questions.update(container);
+			GameConstants.level.player.setControl(false);
 		}
 		for(Characters guy : GameConstants.enemies) {
 			String name=guy.getClass().toString();
@@ -142,6 +143,7 @@ public class BlueBossLevel extends GameLevel {
 				BlueBoss boss = (BlueBoss)guy;
 				if(afterQuestions == true){
 					boss.setAttacking(true);
+					GameConstants.level.player.setControl(true);
 				}
 			}
 		}
