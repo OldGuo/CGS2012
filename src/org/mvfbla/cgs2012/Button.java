@@ -9,7 +9,7 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	public Trigger getTrigger() {
 		return trigger;
 	}
-	protected AnimatedObject notif;
+	public AnimatedObject notif;
 	protected ButtonListener listener;
 	public void setListener(ButtonListener listener) {
 		this.listener = listener;
