@@ -140,6 +140,7 @@ public abstract class GameLevel extends BasicGameState{
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
 		if(GameConstants.getPaused() == false){
+			text.update(container,delta);
 			if(transState == 1) {
 				transTime += delta;
 				if(transTime >= transLength) {
@@ -259,7 +260,6 @@ public abstract class GameLevel extends BasicGameState{
 				sbg.enterState(Game.YELLOW_BOSS_STATE);
 			if (input.isKeyDown(Input.KEY_8))
 				sbg.enterState(Game.BLACK_BOSS_STATE);
-			text.update(container,delta);
 		}else{
 			player.stopAnimation();
 			for(Characters guy:GameConstants.enemies){
@@ -297,7 +297,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		return out;
 	}
-	public void draw(Graphics g){
+	public void draw(Graphics g) throws SlickException{
 		g.setColor(new Color(58,58,58));
 		for(int i = 0; i < bgNumRepeat; i++)
 			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
@@ -332,11 +332,7 @@ public abstract class GameLevel extends BasicGameState{
 		if(transState != 2&&player.shouldDisplay()){
 			player.draw(g);
 		}
-		try {
-			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+		text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}

@@ -38,7 +38,7 @@ public class ElevatorLevel extends GameLevel {
 		background = new Image("data\\Background.png");
 	}
 
-	@Override 
+	@Override
 	public void unlockElev(int source) {
 		if(source == 1)
 			waiting = true;
@@ -60,7 +60,7 @@ public class ElevatorLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
+	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
 		draw(g);
 	}
 	@Override
@@ -93,7 +93,7 @@ public class ElevatorLevel extends GameLevel {
 			Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
 			questionButton = b;
 			GameConstants.interacts.add(b);
-		}		
+		}
 	}
 	public class ElevButtonListener implements ButtonListener {
 		@Override

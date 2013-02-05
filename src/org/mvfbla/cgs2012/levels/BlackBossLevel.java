@@ -45,7 +45,7 @@ public class BlackBossLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container,StateBasedGame sbg, Graphics g)  {
+	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
 		draw(g);
 		if(blackBoss.shouldDisplay())
 			blackBoss.draw(g);
