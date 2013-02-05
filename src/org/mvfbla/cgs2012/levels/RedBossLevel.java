@@ -68,7 +68,7 @@ public class RedBossLevel extends GameLevel {
 			afterQuestions = true;
 		}
 		if(afterQuestions == true){
-			text.setText("I was done with its games. I want answers now. Who am I? Why am I here?" +
+			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
 					 " But there is no answer, this only" +
 					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
 					 "                                       ");
