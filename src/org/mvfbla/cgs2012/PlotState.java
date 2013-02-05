@@ -32,7 +32,6 @@ public class PlotState extends BasicGameState{
 		if((GameConstants.bossesDefeated & 0b1000) == 0b1000){
 			finalPlot = "";
 		}else{
-			System.out.println("Last boss: " + GameConstants.lastBoss);
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
 						"                                                \"Be Quick Alex\"";

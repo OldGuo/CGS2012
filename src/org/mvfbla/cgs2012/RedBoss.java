@@ -20,6 +20,8 @@ public class RedBoss extends Boss{
 		}
 		if(attacking)
 			super.update(gc, delta);
+		if(!attacking)
+			super.setHealth(3);
 	}
 	public void setAttacking(boolean a){
 		attacking = a;
