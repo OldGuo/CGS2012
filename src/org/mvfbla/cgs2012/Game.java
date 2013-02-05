@@ -20,6 +20,7 @@ public class Game extends StateBasedGame{
 	static final int BLACK_BOSS_STATE           = 8;
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
+	static final int PLOT_STATE                 = 11;
 
 	public Music music;
 	public Game() throws SlickException{
@@ -48,5 +49,6 @@ public class Game extends StateBasedGame{
 		this.addState(new BlackBossLevel(BLACK_BOSS_STATE));
 		this.addState(new AboutPage(ABOUT_STATE));
 		this.addState(new InstructionPage(INSTRUCTIONS_STATE));
+		this.addState(new PlotState(PLOT_STATE));
 	}
 }
