@@ -1,13 +1,11 @@
 package org.mvfbla.cgs2012.levels;
 
 import org.mvfbla.cgs2012.Button;
-import org.mvfbla.cgs2012.CameraObject;
 import org.mvfbla.cgs2012.Characters;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.GameObject;
 import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.TiledObject;
 import org.mvfbla.cgs2012.TypeWriter;
@@ -44,10 +42,8 @@ public class YellowBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
-		player = new Player(300, 496);
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
 		yellowBoss = new YellowBoss(330,100);
-		cameraBox = new CameraObject(player,2000,1000);
 		background = new Image("data\\Background.png");
 		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
 		lightning.start();

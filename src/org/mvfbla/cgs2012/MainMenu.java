@@ -112,6 +112,8 @@ public class MainMenu extends BasicGameState{
 			if(menuButtons.get(i).getAction().equals("Play Game")){
 				nextStateLoc = i;
 				fadeState = 2;
+				//GameConstants.level.reset();
+				GameConstants.clear();
 				nextState = Game.TUTORIAL_STATE;
 			}
 			if(menuButtons.get(i).getAction().equals("Instructions")){

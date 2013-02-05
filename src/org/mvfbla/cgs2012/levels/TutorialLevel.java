@@ -2,12 +2,10 @@ package org.mvfbla.cgs2012.levels;
 
 import org.mvfbla.cgs2012.Button;
 import org.mvfbla.cgs2012.ButtonListener;
-import org.mvfbla.cgs2012.CameraObject;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
 import org.mvfbla.cgs2012.MovingTile;
-import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.TiledObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -28,8 +26,6 @@ public class TutorialLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(1600, 29);
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
-		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,250,1300);
 	}
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
@@ -40,6 +36,7 @@ public class TutorialLevel extends GameLevel {
 		}
 	}
 
+	@Override
 	public void unlockElev(int src) {
 		waiting = true;
 	}

@@ -25,5 +25,6 @@
     <property name="var" value="notBlackBoss"/>
    </properties>
   </object>
+  <object name="playerBoss" type="playerBoss" x="240" y="496" width="48" height="48"/>
  </objectgroup>
 </map>

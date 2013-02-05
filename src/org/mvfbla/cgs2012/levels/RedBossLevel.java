@@ -1,11 +1,9 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.CameraObject;
 import org.mvfbla.cgs2012.Characters;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.RedBoss;
 import org.mvfbla.cgs2012.TiledObject;
@@ -35,8 +33,6 @@ public class RedBossLevel extends GameLevel {
 		afterQuestions = false;
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
-		player = new Player(300, 496);
-		cameraBox = new CameraObject(player,2000,1000);
 		background = new Image("data\\Background.png");
 		text = new TypeWriter();
 		questions = new QuestionWindow();
