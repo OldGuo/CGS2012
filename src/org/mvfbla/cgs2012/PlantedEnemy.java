@@ -1,3 +1,7 @@
+//PlantedEnemy class, extends Enemy
+//same as BasicEnemy, except stands still on guard
+//when player is within range, it will chase the player
+//chasing speed is faster than BasicEnemy
 package org.mvfbla.cgs2012;
 
 import org.newdawn.slick.Animation;
@@ -7,8 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class PlantedEnemy extends Enemy{
-	private boolean awake = false;
-	private float sight = 150;
+	private boolean awake = false; //when player is not in range, PlantedEnemy is "asleep"
+	private float sight = 150; //range for PlantedEnemy to see player
 	private String current;
 
 	public PlantedEnemy (int x, int y) throws SlickException{
@@ -22,16 +26,16 @@ public class PlantedEnemy extends Enemy{
 	public void update(GameContainer gc, int delta){
 		super.playAnimation(current);
 
-		if(GameConstants.getGrav() > 0)
+		if(GameConstants.getGrav() > 0) //flips for gravity level
 			current = "PlantedEnemy";
 		else
 			current = "PlantedEnemyInvert";
 
-		if(!awake){
+		if(!awake){ // stays still when sleeping
 			super.resetAnimation();
 			super.setSpeed(0);
 			super.setDirection(0);
-		}else{
+		}else{ //chases player when awake
 			super.setSpeed(3*super.getEnemyDirection());
 		}
 		super.update(gc, delta);
@@ -41,13 +45,13 @@ public class PlantedEnemy extends Enemy{
 		//g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
 		super.draw(g);
 	}
-	public void changeSleep(boolean inSight){
+	public void changeSleep(boolean inSight){ //changes sleep state
 		awake=inSight;
 	}
-	public float getSight(){
+	public float getSight(){ //returns range of sight
 		return sight;
 	}
-	public void setSight(int size){
+	public void setSight(int size){ //sets range of sight
 		sight = size;
 	}
 }

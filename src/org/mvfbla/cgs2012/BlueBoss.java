@@ -1,6 +1,7 @@
 //BlueBoss class, extends Boss
 //jumps and stomps on the ground, causing explosions
 //explosions will destroy pillars
+//when all 3 pillars are destroyed, boss is defeated
 package org.mvfbla.cgs2012;
 
 
@@ -36,21 +37,21 @@ public class BlueBoss extends Boss{
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(!died && !isAlive()) {
-			GameConstants.playerMaxSpeed++;
+			GameConstants.playerMaxSpeed++; //defeating this boss grants movement speed
 		}
 		if(attacking){
 			super.update(gc, delta);
 			time -= delta;
-			if(time <= 0 && !falling){
+			if(time <= 0 && !falling){ //during this time the boss will stomp
 				stomp();
 				time = ATTACK_DELAY;
 			}
-			if(stomping && super.getVelY() == 0){
+			if(stomping && super.getVelY() == 0){ //this calculates where the explosion will be
 				stompX = (int) super.getX() + 32;
 				stompY =  (int) super.getY() + 320;
 				animTime = 0;
 				stomping = false;
-			}else{
+			}else{ //when it isn't stomping, the explosion hitbox is placed outside the map
 				if(animTime < 0) {
 					stompX = -100;
 					stompY = -100;
@@ -77,29 +78,29 @@ public class BlueBoss extends Boss{
 			float scale = prog+1f;
 			Color alpha = new Color(Color.white);
 			alpha.a = 1-prog;
-			int x = (int) (stompX-(((stomp.getWidth()*scale)-stomp.getWidth())/2));
+			int x = (int) (stompX-(((stomp.getWidth()*scale)-stomp.getWidth())/2)); //this animates the explosion
 			int y = (int) (stompY-(((stomp.getHeight()*scale)-stomp.getHeight())/2));
 			stomp.getScaledCopy(scale).draw(x,y, alpha);
 		}
 	}
-	public void stomp(){
+	public void stomp(){ //method for stomping
 		stomping = true;
 		trans = new Vector(0,0);
 		super.setVelY(-10);
 	}
-	public void changeSleep(boolean inSight){
+	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
 		awake=inSight;
 	}
 	public float getSight(){
 		return sight;
 	}
-	public int getStompX(){
+	public int getStompX(){ //coordinates for explosion
 		return stompX + 32;
 	}
 	public int getStompY(){
 		return stompY + 32;
 	}
-	public void setFalling(boolean f){
+	public void setFalling(boolean f){ //when defeated, the platform falls
 		falling = f;
 	}
 	public boolean getFalling(){
