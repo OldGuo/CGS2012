@@ -79,6 +79,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		background = new Image("data\\Background.png");
 		transState = 1;
+		player.setInitialHealth(GameConstants.playerMaxHealth);
 	}
 	public class MotionButtonListener implements ButtonListener {
 		@Override
@@ -295,7 +296,7 @@ public abstract class GameLevel extends BasicGameState{
 		//g.draw(new Rectangle(t.getX(), t.getY(), t.getWidth(), t.getHeight()));
 		for(InteractiveObject io : GameConstants.interacts)
 			io.draw(g);
-		for(int i=1;i<=3;i++){
+		for(int i=1;i<=GameConstants.playerMaxHealth;i++){
 			if(i<=player.getHealth())
 				g.setColor(Color.red);
 			else

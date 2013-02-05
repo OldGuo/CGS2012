@@ -9,6 +9,7 @@ import org.mvfbla.cgs2012.Player;
 import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.RedBoss;
 import org.mvfbla.cgs2012.TiledObject;
+import org.newdawn.slick.Color;
 import org.mvfbla.cgs2012.TypeWriter;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -49,6 +50,10 @@ public class RedBossLevel extends GameLevel {
 				RedBoss boss = (RedBoss)guy;
 				if(!boss.isAlive()){
 					transState = 2;
+					if((GameConstants.bossesDefeated & 0b010) != 0b010) {
+						GameConstants.playNum++;
+					}
+					GameConstants.lastBoss = 2;
 					GameConstants.bossesDefeated |= 0b010;
 				}
 			}
@@ -96,6 +101,22 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
+		player.draw(g);
+		if(transState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(deathTime > 0) {
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
+		}
 		if(beforeQuestions == true || afterQuestions == true){
 			try {
 				text.draw(g,0,0);

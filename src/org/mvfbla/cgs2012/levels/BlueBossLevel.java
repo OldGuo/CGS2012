@@ -92,6 +92,7 @@ public class BlueBossLevel extends GameLevel {
 					if((GameConstants.bossesDefeated & 0b100) != 0b100) {
 						GameConstants.playNum++;
 					}
+					GameConstants.lastBoss = 1;
 					GameConstants.bossesDefeated |= 0b100;
 				}
 			}
@@ -107,6 +108,22 @@ public class BlueBossLevel extends GameLevel {
 		else{
 			g.fillRect(5*16, fallY, 6*39, 16*2);
 			g.fillRect(27*16, fallY, 6*39, 16*2);
+		}
+		player.draw(g);
+		if(transState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(deathTime > 0) {
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
 		}
 	}
 	@Override

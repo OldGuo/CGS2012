@@ -27,6 +27,9 @@ public class BlueBoss extends Boss{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
+		if(!died && !isAlive()) {
+			GameConstants.playerMaxSpeed++;
+		}
 		super.update(gc, delta);
 		time -= delta;
 		if(time <= 0 && !falling){
