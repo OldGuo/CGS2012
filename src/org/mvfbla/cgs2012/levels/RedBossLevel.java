@@ -107,7 +107,8 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g)  {
 		draw(g);
-		player.draw(g);
+		if(player.shouldDisplay())
+			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);

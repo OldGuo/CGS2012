@@ -171,7 +171,8 @@ public class YellowBossLevel extends GameLevel {
 		} else {
 			handleButton(2);
 		}
-		player.draw(g);
+		if(player.shouldDisplay())
+			player.draw(g);
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);

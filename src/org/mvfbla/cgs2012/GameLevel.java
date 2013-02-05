@@ -263,7 +263,7 @@ public abstract class GameLevel extends BasicGameState{
 				m.update(container, delta);
 			cameraBox.update(container, delta);
 
-			/*testing
+			//testing
 			if (input.isKeyDown(Input.KEY_0))
 				sbg.enterState(Game.MAIN_MENU_STATE);
 			if (input.isKeyDown(Input.KEY_1))
@@ -281,7 +281,7 @@ public abstract class GameLevel extends BasicGameState{
 			if (input.isKeyDown(Input.KEY_7))
 				sbg.enterState(Game.YELLOW_BOSS_STATE);
 			if (input.isKeyDown(Input.KEY_8))
-				sbg.enterState(Game.BLACK_BOSS_STATE);*/
+				sbg.enterState(Game.BLACK_BOSS_STATE);
 			text.update(container,delta);
 		}else{
 			player.stopAnimation();
