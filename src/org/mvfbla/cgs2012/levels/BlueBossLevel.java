@@ -23,6 +23,7 @@ public class BlueBossLevel extends GameLevel {
 	private boolean platformBroken;
 	private Tile platform;
 	private int fallY =18*16;
+	
 	public BlueBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
