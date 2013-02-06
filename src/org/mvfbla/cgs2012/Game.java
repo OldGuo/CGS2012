@@ -29,12 +29,11 @@ public class Game extends StateBasedGame{
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
 	static final int PLOT_STATE                 = 11;
-
-	public Music music;
+	
 	public Game() throws SlickException{
 		super("FBLA CGS 2012");
-		music = new Music("data\\Maps\\Outdated.ogg"); //Music looped throughout the duration of the game
-		music.loop();
+/*		music = new Music("data\\Maps\\Outdated.ogg"); //Music looped throughout the duration of the game
+		music.loop();*/
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());

@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,6 +21,7 @@ public class MainMenu extends BasicGameState{
 	private int fadeState = 0;
 	private int nextState = 0;
 	private int nextStateLoc = 0;
+	private Music music;
 
 	public MainMenu(int stateID){
 		this.stateID = stateID;
@@ -44,6 +46,10 @@ public class MainMenu extends BasicGameState{
 		nextStateLoc = 0;
 		fadeDur = 400;
 		fadeState = 1;
+		if(music == null)
+			music = new Music("data\\Maps\\Outdated.ogg");
+		if(!music.playing())
+			music.loop();
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
@@ -130,5 +136,15 @@ public class MainMenu extends BasicGameState{
 				gc.exit();
 			}
 		}
+	}
+	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		fadeTime = 0;
+		fadeState = 0;
+		nextState = 0;
+		nextStateLoc = 0;
+		fadeDur = 400;
+		fadeState = 1;
 	}
 }
