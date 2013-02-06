@@ -7,7 +7,17 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Young
+ * Basic Enemy class
+ * Moves forward until hits a wall then turns around
+ */
 public class BasicEnemy extends Enemy{
+	/**
+	 * @param x - x position
+	 * @param y - y position
+	 * @throws SlickException
+	 */
 	public BasicEnemy (int x, int y) throws SlickException{
 		super(x, y, 64, 64);
 		addAnimation("BasicEnemyInvert", new Animation(new SpriteSheet("data\\SmallEnemyInverted.png", 64, 64), 150));
@@ -16,6 +26,7 @@ public class BasicEnemy extends Enemy{
 	}
 	@Override
 	public void update(GameContainer gc, int delta){
+		//Updates the Enemy
 		super.update(gc, delta);
 		if(isAlive()){
 			if(GameConstants.getGrav() > 0) //flips for gravity level

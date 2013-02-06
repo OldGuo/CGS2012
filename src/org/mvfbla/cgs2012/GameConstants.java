@@ -3,6 +3,10 @@ package org.mvfbla.cgs2012;
 import java.util.ArrayList;
 
 
+/**
+ * @author Young
+ * Constants for game values
+ */
 public class GameConstants {
 	//public static Game game;
 	// The acceleration of gravity
@@ -27,7 +31,7 @@ public class GameConstants {
 
 	public static long usedQuestions = 0;
 	public static long allUsed = 34359738368L-1;
-	public static void clear() {
+	public static void clear() { //clears arraylists
 		collidableObjects.clear();
 		sensors.clear();
 		triggers.clear();
@@ -40,21 +44,39 @@ public class GameConstants {
 		GRAVITY = 0.37f;
 		level = null;
 	}
+	/**
+	 * Changes between paused and unpaused
+	 */
 	public static void flipPaused(){
 		paused = !paused;
 	}
+	/**
+	 * @return - whether the game is paused or not
+	 */
 	public static boolean getPaused(){
 		return paused;
 	}
+	/**
+	 * Flips synchronization with the Black Boss
+	 */
 	public static void flipSync(){
 		bossSync = !bossSync;
 	}
+	/**
+	 * @return - Whether the player is synced with the Black Boss
+	 */
 	public static boolean getSync(){
 		return bossSync;
 	}
+	/**
+	 * Flips the gravity constant
+	 */
 	public static void flipGrav(){
 		GRAVITY = -GRAVITY;
 	}
+	/**
+	 * @return - The gravity constant
+	 */
 	public static float getGrav(){
 		return GRAVITY;
 	}

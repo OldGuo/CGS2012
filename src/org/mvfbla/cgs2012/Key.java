@@ -4,9 +4,13 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Young
+ * Key used for elevator level
+ */
 public class Key extends AnimatedObject implements InteractiveObject {
-	private GameLevel level;
-	private Trigger trigger;
+	private final GameLevel level;
+	private final Trigger trigger;
 	public Key(TiledObject to, GameLevel level) throws SlickException {
 		super(to.getX(), to.getY(), 16, 32);
 		this.level = level;
@@ -28,14 +32,19 @@ public class Key extends AnimatedObject implements InteractiveObject {
 				level.unlockElev(0);
 			}
 		}
+		@Override
 		public void onExit(GameObject src) {}
+		@Override
 		public void triggered(GameObject src) {}
 	}
+	@Override
 	public void interact(GameObject source) {
 	}
+	@Override
 	public boolean inRange(GameObject source) {
 		return false;
 	}
+	@Override
 	public boolean isActive() {
 		return trigger.isActive();
 	}

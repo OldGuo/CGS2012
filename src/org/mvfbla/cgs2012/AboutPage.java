@@ -9,19 +9,28 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * About Page
+ */
 public class AboutPage extends BasicGameState{
 	private int stateID = -1;
 	private InteractButton back;
 	private Image about;
-	private long fadeDur = 400;
+	private final long fadeDur = 400;
 	private long fadeTime = 0;
 	private int fadeState = 0;
 
+	/**
+	 * Sets the ID of the game state
+	 * @param stateID - ID of the game state
+	 */
 	public AboutPage(int stateID) {
 		this.stateID = stateID;
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		//initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
 		about = new Image("data\\About.png");
 		fadeState = 1;
@@ -29,6 +38,7 @@ public class AboutPage extends BasicGameState{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		//draws the state
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		g.setColor(Color.black);
@@ -42,7 +52,8 @@ public class AboutPage extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)throws SlickException {
-		if(fadeState == 2) {
+		//updates the state
+		if(fadeState == 2) { //fading
 			fadeTime -= delta;
 			if(fadeTime <= 0) {
 				fadeState = 1;

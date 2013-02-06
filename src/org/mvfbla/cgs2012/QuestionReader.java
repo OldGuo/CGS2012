@@ -6,13 +6,20 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Young
+ * Reads Questions in from .txt file and loads into questions
+ */
 public class QuestionReader {
-	static ArrayList<String> questions=new ArrayList<String>();
+	static ArrayList<String> questions=new ArrayList<String>(); //ArrayLists for questions
 	static ArrayList<String> correctAns=new ArrayList<String>();
 	static ArrayList<String> wrongAns1=new ArrayList<String>();
 	static ArrayList<String> wrongAns2=new ArrayList<String>();
 	static ArrayList<String> wrongAns3=new ArrayList<String>();
 	private final File textFile;
+	/**
+	 * @param fileName - File name to retrieve questions from
+	 */
 	public QuestionReader(String fileName){
 		textFile=new File(fileName);
 		processFile();
@@ -21,6 +28,9 @@ public class QuestionReader {
 		QuestionReader parser=new QuestionReader("data\\questions.txt");
 		parser.processFile();
 	}*/
+	/**
+	 * Reads in from the .txt file using Scanner
+	 */
 	public final void processFile(){
 		Scanner scanner = null;
 		try{
@@ -34,6 +44,9 @@ public class QuestionReader {
 			scanner.close();
 		}
 	}
+	/**
+	 * @param aLine - string to be passed in
+	 */
 	protected void processLine(String aLine){
 		Scanner scanner=new Scanner(aLine);
 		scanner.useDelimiter("\t");
@@ -46,12 +59,21 @@ public class QuestionReader {
 			wrongAns3.add(scanner.next());
 		}
 	}
+	/**
+	 * @return - returns the arraylist of questions
+	 */
 	public ArrayList<String>getQuestions(){
 		return questions;
 	}
+	/**
+	 * @return returns the arraylist with correct answers
+	 */
 	public ArrayList<String>getCorrectAns(){
 		return correctAns;
 	}
+	/**
+	 * @return
+	 */
 	public ArrayList<String>getWrongAns1(){
 		return wrongAns1;
 	}
