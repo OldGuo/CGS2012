@@ -54,64 +54,66 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
-		if(!afterQuestions){
-			GameConstants.level.player.setControl(false);
-		}
-		if(!yellowBoss.isAlive()) {
-			yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
-			transState = 2;
-			if((GameConstants.bossesDefeated & 1) != 1) {
-				GameConstants.playNum++;
-				System.out.println(GameConstants.playNum);
+		if(!GameConstants.getPaused()) {
+			if(!afterQuestions){
+				GameConstants.level.player.setControl(false);
 			}
-			GameConstants.lastBoss = 3;
-			GameConstants.bossesDefeated |= 1;
-		}
-		if(yellowBoss.isAiming())
-			yellowBoss.setReticle(player.getX());
-		else if(yellowBoss.isFiring()) {
-			if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
-				if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
-					player.setHealth(player.getHealth()-1);
+			if(!yellowBoss.isAlive()) {
+				yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
+				transState = 2;
+				if((GameConstants.bossesDefeated & 1) != 1) {
+					GameConstants.playNum++;
+					System.out.println(GameConstants.playNum);
+				}
+				GameConstants.lastBoss = 3;
+				GameConstants.bossesDefeated |= 1;
 			}
-		}
-		lightning.update(delta);
-		if(beforeQuestions){
-			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
-						 "I want to ask it so many questions. I want to understand.  A stream of " +
-						 "questions pour from my mouth. But it only responds with questions of its own." +
-						 "                                       ");
-			if(text.isFinished() && beforeQuestions){
-				beforeQuestions = false;
-				needRestart = true;
-				questions.setAnswering(true);
+			if(yellowBoss.isAiming())
+				yellowBoss.setReticle(player.getX());
+			else if(yellowBoss.isFiring()) {
+				if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
+					if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
+						player.setHealth(player.getHealth()-1);
+				}
 			}
-		}
-		if(questions.getAnswering() == false && !beforeQuestions){
-			afterQuestions = true;
-		}
-		if(afterQuestions == true){
-			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
-					 " But there is no answer, this only" +
-					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
-					 "                                       ");
-			if(needRestart){
-				text.restart();
-				needRestart = false;
+			lightning.update(delta);
+			if(beforeQuestions){
+				text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
+						"I want to ask it so many questions. I want to understand.  A stream of " +
+						"questions pour from my mouth. But it only responds with questions of its own." +
+						"                                       ");
+				if(text.isFinished() && beforeQuestions){
+					beforeQuestions = false;
+					needRestart = true;
+					questions.setAnswering(true);
+				}
 			}
-		}
-		if(beforeQuestions == true || afterQuestions == true)
-			text.update(container, delta);
-		if(questions.getAnswering()){
-			questions.update(container);
-		}
-		for(Characters guy : GameConstants.enemies) {
-			String name=guy.getClass().toString();
-			if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
-				YellowBoss boss = (YellowBoss)guy;
-				if(afterQuestions == true){
-					boss.setAttacking(true);
-					GameConstants.level.player.setControl(true);
+			if(questions.getAnswering() == false && !beforeQuestions){
+				afterQuestions = true;
+			}
+			if(afterQuestions == true){
+				text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
+						" But there is no answer, this only" +
+						" seems to infuriate the figure...   ...   ...   ...   ...   " +
+						"                                       ");
+				if(needRestart){
+					text.restart();
+					needRestart = false;
+				}
+			}
+			if(beforeQuestions == true || afterQuestions == true)
+				text.update(container, delta);
+			if(questions.getAnswering()){
+				questions.update(container);
+			}
+			for(Characters guy : GameConstants.enemies) {
+				String name=guy.getClass().toString();
+				if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
+					YellowBoss boss = (YellowBoss)guy;
+					if(afterQuestions == true){
+						boss.setAttacking(true);
+						GameConstants.level.player.setControl(true);
+					}
 				}
 			}
 		}
@@ -193,6 +195,10 @@ public class YellowBossLevel extends GameLevel {
 		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,0,0);
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
 	public void handleButton(int id) {

@@ -49,60 +49,62 @@ public class RedBossLevel extends GameLevel {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException { //Updates the Game
 		updateMain(container, sbg, delta);
-		if(!afterQuestions){
-			GameConstants.level.player.setControl(false); //Handles the pre-boss sequence
-		}
-		for(Characters guy : GameConstants.enemies) { //Determines endings and replay values
-			String name=guy.getClass().toString();
-			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
-				RedBoss boss = (RedBoss)guy;
-				if(!boss.isAlive()){
-					transState = 2;
-					if((GameConstants.bossesDefeated & 2) != 2) {
-						GameConstants.playNum++;
+		if(!GameConstants.getPaused()) {
+			if(!afterQuestions){
+				GameConstants.level.player.setControl(false); //Handles the pre-boss sequence
+			}
+			for(Characters guy : GameConstants.enemies) { //Determines endings and replay values
+				String name=guy.getClass().toString();
+				if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+					RedBoss boss = (RedBoss)guy;
+					if(!boss.isAlive()){
+						transState = 2;
+						if((GameConstants.bossesDefeated & 2) != 2) {
+							GameConstants.playNum++;
+						}
+						GameConstants.lastBoss = 2;
+						GameConstants.bossesDefeated |= 2;
 					}
-					GameConstants.lastBoss = 2;
-					GameConstants.bossesDefeated |= 2;
 				}
 			}
-		}
-		if(beforeQuestions){ //Handles the pre-boss sequence
-			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
-						 "I want to ask it so many questions. I want to understand.  A stream of " +
-						 "questions pour from my mouth. But it only responds with questions of its own." +
-						 "                                       ");
-			if(text.isFinished() && beforeQuestions){
-				beforeQuestions = false;
-				needRestart = true;
-				questions.setAnswering(true);
+			if(beforeQuestions){ //Handles the pre-boss sequence
+				text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
+						"I want to ask it so many questions. I want to understand.  A stream of " +
+						"questions pour from my mouth. But it only responds with questions of its own." +
+						"                                       ");
+				if(text.isFinished() && beforeQuestions){
+					beforeQuestions = false;
+					needRestart = true;
+					questions.setAnswering(true);
+				}
 			}
-		}
-		if(questions.getAnswering() == false && !beforeQuestions){ //Handles the pre-boss sequence
-			afterQuestions = true;
-		}
-		if(afterQuestions == true){ //Handles the pre-boss sequence
-			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
-					 " But there is no answer, this only" +
-					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
-					 "                                       ");
-			if(needRestart){
-				text.restart();
-				needRestart = false;
+			if(questions.getAnswering() == false && !beforeQuestions){ //Handles the pre-boss sequence
+				afterQuestions = true;
 			}
-		}
-		if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
-			text.update(container, delta);
-		if(questions.getAnswering()){ //Handles the pre-boss sequence
-			questions.update(container);
-			GameConstants.level.player.setControl(false);
-		}
-		for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
-			String name=guy.getClass().toString();
-			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
-				RedBoss boss = (RedBoss)guy;
-				if(afterQuestions == true){
-					boss.setAttacking(true);
-					GameConstants.level.player.setControl(true);
+			if(afterQuestions == true){ //Handles the pre-boss sequence
+				text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
+						" But there is no answer, this only" +
+						" seems to infuriate the figure...   ...   ...   ...   ...   " +
+						"                                       ");
+				if(needRestart){
+					text.restart();
+					needRestart = false;
+				}
+			}
+			if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
+				text.update(container, delta);
+			if(questions.getAnswering()){ //Handles the pre-boss sequence
+				questions.update(container);
+				GameConstants.level.player.setControl(false);
+			}
+			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
+				String name=guy.getClass().toString();
+				if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+					RedBoss boss = (RedBoss)guy;
+					if(afterQuestions == true){
+						boss.setAttacking(true);
+						GameConstants.level.player.setControl(true);
+					}
 				}
 			}
 		}
@@ -137,6 +139,14 @@ public class RedBossLevel extends GameLevel {
 		}
 		if(questions.getAnswering() == true){
 			questions.draw(g,0,0);
+		}
+		// Draw question window if needed
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
 	@Override

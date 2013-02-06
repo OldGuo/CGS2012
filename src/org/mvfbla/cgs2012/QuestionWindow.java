@@ -23,7 +23,9 @@ public class QuestionWindow{
 	public void init() throws SlickException{
 		do {
 			randQuestion = (int)(Math.random()*35);
+			System.out.println("Tried: " + randQuestion);
 		} while(isUsed(randQuestion));
+		System.out.println("Used: " + randQuestion);
 		randCorrect = (int)(Math.random()*4);
 		//randCorrect = 0;
 		reader = new QuestionReader("data\\questions.txt");
