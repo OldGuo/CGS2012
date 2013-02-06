@@ -25,12 +25,6 @@ public class GameConstants {
 	public static int playNum = 0;
 	public static int punchRange = 36;
 
-	public static int questionsCorrect;
-	public static int questionsIncorrect;
-	public static int enemiesDefeated;
-	public static int technologyUsed;
-	public static int timesDied;
-
 	public static long usedQuestions = 0;
 	public static long allUsed = 34359738368L-1;
 	public static void clear() {

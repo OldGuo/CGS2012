@@ -15,9 +15,9 @@ public class PauseWindow{
 
 	public void init() throws SlickException {
 		pauseButtons = new ArrayList<InteractButton>(3);
-		pauseButtons.add(new InteractButton("Resume",255,190,300,75,0));
+		pauseButtons.add(new InteractButton("Resume",255,140,300,75,0));
 		pauseButtons.add(new InteractButton("Main Menu",255,280,300,75,0));
-		pauseButtons.add(new InteractButton("Quit",255,370,300,75,0));
+		pauseButtons.add(new InteractButton("Quit",255,420,300,75,0));
 	}
 	public void draw(Graphics g,int x,int y){
 		g.setColor(new Color(20,20,20,0.3f));
