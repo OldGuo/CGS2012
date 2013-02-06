@@ -462,7 +462,7 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		if(textChoice.equals("tutorialEnd")) {
 			textString = "Almost in disbelief, I look down at my suit" +
-					" and see a badge.  EMPLOYEE NAME)) { it says. However the text below it seems to " +
+					" and see a badge.  \"EMPLOYEE NAME\" it says. However the text below it seems to " +
 					"have been intentionally scratched out. " +
 					"So many questions filled my mind, but all the answers lie ahead. " +
 					"                                                                                       " +
