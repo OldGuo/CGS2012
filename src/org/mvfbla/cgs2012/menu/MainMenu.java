@@ -14,6 +14,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Main Menu of the game
+ */
 public class MainMenu extends BasicGameState{
 	private int stateID = -1;
 	private Image background;
@@ -25,6 +29,9 @@ public class MainMenu extends BasicGameState{
 	private int nextStateLoc = 0;
 	private Image title;
 
+	/**
+	 * @param stateID - sets the ID of the state
+	 */
 	public MainMenu(int stateID){
 		this.stateID = stateID;
 	}
