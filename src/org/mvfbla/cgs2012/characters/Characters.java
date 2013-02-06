@@ -163,38 +163,71 @@ public class Characters extends AnimatedObject {
 	public float getVelY() {
 		return force.y;
 	}
+	/**
+	 * Returns whether or not this character is alive
+	 * @return Whether or not this character is alive
+	 */
 	public boolean isAlive(){
 		return alive;
 	}
-	public boolean isBlinking(){ //returns if the character is blinking
+	/**
+	 * Returns whether or not this character is blinking
+	 * @return Boolean showing whether or not this character is blinking
+	 */
+	public boolean isBlinking() {
 		return blinking;
 	}
-	public void setBlink(int howLong){ //sets the duration of the blinking and invulnerability
+	/**
+	 * Sets the duration of the blinking invulnerability
+	 * @param howLong - Duration
+	 */
+	public void setBlink(int howLong){
 		blinkTime=howLong;
 	}
-	public void setForce(Vector v) { //sets force vector
+	/**
+	 * Sets the velocity of this character
+	 * @param v - Force to be set
+	 */
+	public void setForce(Vector v) {
 		force = v;
 	}
-	public void setHealth(float howHealthy){ //sets health
-		if(/*howHealth<health&&*/!blinking){
+	/**
+	 * Sets the health of the character
+	 * @param howHealthy - New health of the character
+	 */
+	public void setHealth(float howHealthy){
+		if(!blinking){
 			health=howHealthy;
 			blinking=true; //after the character is hit, it is invulnerable for a period of time and it blinks
 		}
 	}
-	public void setInitialHealth(float howHealthy){ //sets initial health, doesn't cause blinking
+	/**
+	 * Sets the initial health of the character
+	 * @param howHealthy - The new initial health of the character
+	 */
+	public void setInitialHealth(float howHealthy){
 		health=howHealthy;
 	}
-	public void setVelX(float velX) { //sets x component of velocity
+	/**
+	 * Sets the x component of the velocity
+	 * @param velX - New x component
+	 */
+	public void setVelX(float velX) {
 		force.x = velX;
 	}
-	public void setVelY(float velY) { //sets y component of velocity
+	/**
+	 * Sets the y component of the velocity
+	 * @param velY - New y components
+	 */
+	public void setVelY(float velY) {
 		force.y = velY;
 	}
-	public boolean shouldDisplay(){ //returns if the character should be displayed
+	/**
+	 * Returns whether or not this character should be displayed
+	 * @return display - display boolean
+	 */
+	public boolean shouldDisplay(){
 		return display;
-	}
-	public Vector toVector(Line l) { //sets a line to a vector
-		return new Vector(l.getX2()-l.getX1(), l.getY2() - l.getY1());
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
