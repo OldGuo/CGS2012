@@ -16,6 +16,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Young
+ * Black Boss is an imitation of the player
+ * Reversed controls
+ */
 public class BlackBoss extends Characters{
 
 	private int punchTime=0;
@@ -23,8 +28,14 @@ public class BlackBoss extends Characters{
 	private boolean punching = false;
 	private boolean cooldown = false;
 	private final AnimatedObject arm;
+	/**
+	 * @param x - x position
+	 * @param y - y position
+	 * @throws SlickException
+	 */
 	public BlackBoss(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
+		//Animations for the Black Boss
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\BlackBossLeft.png", 48, 48), 150));
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\BlackBossRight.png", 48, 48), 150));
 		arm = new AnimatedObject(0,0,48,48);
@@ -40,12 +51,21 @@ public class BlackBoss extends Characters{
 	public void draw(Graphics g){
 		super.draw(g);
 	}
+	/**
+	 * @return - range of the punch
+	 */
 	public float getRange(){
 		return punchRange;
 	}
+	/**
+	 * @return - whether punching or not
+	 */
 	public boolean isPunching(){
 		return punching;
 	}
+	/**
+	 * @param whatRange - range for the punch
+	 */
 	public void setRange(float whatRange){
 		punchRange=whatRange;
 	}

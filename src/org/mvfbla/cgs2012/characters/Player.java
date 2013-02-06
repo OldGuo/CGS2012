@@ -15,6 +15,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Young
+ * Player class
+ * User controls with arrows keys
+ */
 public class Player extends Characters{
 	private String left,right;
 	private String current;
@@ -24,12 +29,17 @@ public class Player extends Characters{
 	private boolean wasMovingRight = true;
 	private final AnimatedObject arm;
 	private boolean control;
+	/**
+	 * @param x - x position
+	 * @param y - y position
+	 * @throws SlickException
+	 */
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48); //loads sprite sheets for animations of actions
-		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeftInverted.png", 48, 48), 150)); 
-		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRightInverted.png", 48, 48), 150));
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeft.png", 48, 48), 150));
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRight.png", 48, 48), 150));
+		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150));
+		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\PlayerRightInverted.png", 48, 48), 150));
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
 
 		arm = new AnimatedObject(0,0,48,48);
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackRight.png", 48, 48), 750));
@@ -64,24 +74,39 @@ public class Player extends Characters{
 			g.translate(-getCenterX(), -getCenterY());
 		}
 	}
+	/**
+	 * @return - returns whether or not the user has control of the player
+	 */
 	public boolean getControl() { //returns if the player is controllable
 		return control;
 	}
+	/**
+	 * @return - range of the punch
+	 */
 	public float getRange(){ //returns range of punching
 		return GameConstants.punchRange;
 	}
+	/**
+	 * @return - whether or not punching
+	 */
 	public boolean isPunching(){ //returns if player is punching
 		return punching;
 	}
+	/**
+	 * @param control - sets control of the player
+	 */
 	public void setControl(boolean control) { //sets controls on or off
 		this.control = control;
 	}
+	/**
+	 * @param whatRange - sets range of punching
+	 */
 	public void setRange(float whatRange){ //sets range of punching
 		GameConstants.punchRange=(int) whatRange;
 	}
 	@Override
-	public void update(GameContainer gc, int delta) { 
-		if(!isAlive()) 
+	public void update(GameContainer gc, int delta) {
+		if(!isAlive())
 			return;
 		if(!getControl()) { //during some parts of the game, the player cannot move
 			setVelX(0);
