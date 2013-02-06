@@ -14,6 +14,7 @@ public class LoadingState extends BasicGameState {
 	private int transTime = 0;
 	private int transStay = 1000;
 	private int transFade = 500;
+	private int totalTrans;
 	
 	public LoadingState(int stateID) {
 		this.stateID = stateID;
@@ -25,6 +26,7 @@ public class LoadingState extends BasicGameState {
 		logos[0] = new Image("data\\logo\\fblalogo.png");
 		logos[1] = new Image("data\\logo\\slicklogo.png");
 		transState = 1;
+		totalTrans = logos.length*(transStay + 2 * transFade);
 	}
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
@@ -34,7 +36,9 @@ public class LoadingState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		
+		if(transTime >= totalTrans) {
+			game.enterState(Game.MAIN_MENU_STATE);
+		}
 	}
 	@Override
 	public int getID() {
