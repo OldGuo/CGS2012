@@ -42,7 +42,7 @@ public class PlotState extends BasicGameState{
 		if((GameConstants.bossesDefeated & 8) == 8){ //If the Black Boss was defeated
 			finalPlot = "\"I am proud of you Alex\"" +
 					"\n\"I am sorry if I have hurt you.\"\n\"I am sorry.\"\n\"I am sorry.\"" +
-					"\n\"You are here because you are part of an experiment.\n\"Our goal: discover the extent of the" +
+					"\n\"You are here because you are part of an experiment.\n\"Our goal: discover the extent of the " +
 					"deeply rooted teachings of FBLA in an individual.\"\n\"Your memory was cleared to allow you to " +
 					"discover things on your own. To explore the crevices of your conscience.\"\n" +
 					"\n\"You were able to conquer every floor of this building unharmed, and defeat me.\"" +
@@ -52,7 +52,6 @@ public class PlotState extends BasicGameState{
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
 							"                                                \"Be Quick Alex\"\n" +
 							"Strangely, I already feel quicker. ";
-			}
 			if(GameConstants.lastBoss == 2){ // If the Red Boss was defeated
 				finalPlot = "As the red figure falls to the floor, it utters a few final words," +
 							"                                                \"Be Strong Alex\"\n" +
@@ -82,7 +81,8 @@ public class PlotState extends BasicGameState{
 					"I know they are out there   ...   ...   ...   ..." +
 					"   ...   ...   ...   ...   ...   ...   Somewhere." +
 					"                                                                                         ";
-			text.setText(finalPlot);
+		}
+		text.setText(finalPlot);
 	}
 	@Override
 	public int getID() {
