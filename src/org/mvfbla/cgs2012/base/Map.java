@@ -5,10 +5,20 @@ import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
+/**
+ * @author PenguinToast
+ * Class to represent a Tiled map
+ */
 public class Map {
 	private TiledMap map;
 	private ArrayList<Tile> boxes = new ArrayList<Tile>();
 	private ArrayList<TiledObject> objects = new ArrayList<TiledObject>();
+	/**
+	 * Creates a new 
+	 * @param tiledFile
+	 * @param data
+	 * @throws SlickException
+	 */
 	public Map(String tiledFile, String data) throws SlickException{
 		map = new TiledMap(tiledFile, data);
 		for (int x = 0; x < map.getWidth(); x++) {
