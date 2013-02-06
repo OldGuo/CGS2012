@@ -19,6 +19,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Alex Wang
+ * Yellow Boss Level
+ * Dodge lasers and activate platforms to defeat the boss.
+ */
 public class YellowBossLevel extends GameLevel {
 
 	private YellowBoss yellowBoss;
@@ -255,6 +260,10 @@ public class YellowBossLevel extends GameLevel {
 			}
 		}
 	}
+	/**
+	 * @author Alex Wang
+	 * Buttons in Yellow Boss Level to activate platforms
+	 */
 	public class YellowButton extends Button {
 		public int number;
 		private int state;
