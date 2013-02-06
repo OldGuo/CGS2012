@@ -73,80 +73,87 @@ public class BlackBoss extends Characters{
 	public void update(GameContainer gc, int delta) {
 		if(!isAlive())
 			return;
-		boolean movePressed = false;
-		// Moving left/right/up
-		if(GameConstants.getSync() == true){
-			if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
-				movePressed = true;
-				this.setVelX(GameConstants.playerMaxSpeed);
-				if(this.getVelX() < -GameConstants.playerMaxSpeed)
-					this.setVelX(-GameConstants.playerMaxSpeed);
-				playAnimation("walkRight");
-			//	dust.playAnimation("left");
-				this.setRange(Math.abs(this.getRange())*1);
-			}
-			if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
-				movePressed = true;
-				this.setVelX(-GameConstants.playerMaxSpeed);
-				if(this.getVelX() > GameConstants.playerMaxSpeed)
+		if(GameConstants.getPaused() == false){
+			boolean movePressed = false;
+			// Moving left/right/up
+			if(GameConstants.getSync() == true){
+				if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+					movePressed = true;
 					this.setVelX(GameConstants.playerMaxSpeed);
-				playAnimation("walkLeft");
-				//dust.playAnimation("right");
-				this.setRange(Math.abs(this.getRange())*-1);
-			}
-			if (!movePressed) {
-				// Slow down the player
-				//this.setVelX(Math.signum(this.getVelX())*Math.max(0, (Math.abs(this.getVelX())-0.1f)));
-				this.setVelX(0);
-				resetAnimation();
-			//	dust.resetAnimation();
-	//				player.setVelX(0);
-			}
-			if (gc.getInput().isKeyDown(Input.KEY_UP)) {
-				// Jump
-				if(getDirection(trans) == 1) {
-					trans = new Vector(0,0);
-					this.setVelY(-9);
+					if(this.getVelX() < -GameConstants.playerMaxSpeed)
+						this.setVelX(-GameConstants.playerMaxSpeed);
+					playAnimation("walkRight");
+				//	dust.playAnimation("left");
+					this.setRange(Math.abs(this.getRange())*1);
 				}
-			}
-			if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
-				boolean interacting = false;
-				for(InteractiveObject io : GameConstants.interacts) {
-					if(io.inRange(this) && io.isActive()) {
-						interacting = true;
-						io.interact(this);
+				if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+					movePressed = true;
+					this.setVelX(-GameConstants.playerMaxSpeed);
+					if(this.getVelX() > GameConstants.playerMaxSpeed)
+						this.setVelX(GameConstants.playerMaxSpeed);
+					playAnimation("walkLeft");
+					//dust.playAnimation("right");
+					this.setRange(Math.abs(this.getRange())*-1);
+				}
+				if (!movePressed) {
+					// Slow down the player
+					//this.setVelX(Math.signum(this.getVelX())*Math.max(0, (Math.abs(this.getVelX())-0.1f)));
+					this.setVelX(0);
+					resetAnimation();
+				//	dust.resetAnimation();
+		//				player.setVelX(0);
+				}
+				if (gc.getInput().isKeyDown(Input.KEY_UP)) {
+					// Jump
+					if(getDirection(trans) == 1) {
+						trans = new Vector(0,0);
+						this.setVelY(-9);
 					}
 				}
-				// do da punches
-				if(!interacting&&!cooldown&&!punching) {
-					punching=true;
+				if(gc.getInput().isKeyDown(Input.KEY_SPACE)){
+					boolean interacting = false;
+					for(InteractiveObject io : GameConstants.interacts) {
+						if(io.inRange(this) && io.isActive()) {
+							interacting = true;
+							io.interact(this);
+						}
+					}
+					// do da punches
+					if(!interacting&&!cooldown&&!punching) {
+						punching=true;
+						punchTime=0;
+						if(punchRange > 0)
+							arm.playAnimation("right");
+						else
+							arm.playAnimation("left");
+						arm.setFrame(1);
+						arm.stopAnimation();
+					}
+				}
+				if(punching){
+					punchTime+=delta;
+				}
+				if(cooldown){
+					punchTime-=delta;
+				}
+				if(punchTime<=-500){
 					punchTime=0;
-					if(punchRange > 0)
-						arm.playAnimation("right");
-					else
-						arm.playAnimation("left");
-					arm.setFrame(1);
+					cooldown=false;
+				}
+				if(punchTime>=300){
+					punchTime=0;
+					punching=false;
+					cooldown=true;
+					arm.setFrame(0);
 					arm.stopAnimation();
 				}
 			}
-			if(punching){
-				punchTime+=delta;
-			}
-			if(cooldown){
-				punchTime-=delta;
-			}
-			if(punchTime<=-500){
-				punchTime=0;
-				cooldown=false;
-			}
-			if(punchTime>=300){
-				punchTime=0;
-				punching=false;
-				cooldown=true;
-				arm.setFrame(0);
-				arm.stopAnimation();
-			}
 		}
-		super.update(gc, delta);
+		if(GameConstants.getPaused() == false)
+			super.update(gc, delta);
+		else
+			stopAnimation();
+		setVelX(0);
+
 	}
 }
