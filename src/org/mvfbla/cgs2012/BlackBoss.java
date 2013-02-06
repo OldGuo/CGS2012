@@ -29,7 +29,7 @@ public class BlackBoss extends Characters{
 		addObject(arm);
 		arm.stopAnimation();
 
-		super.setInitialHealth(3);
+		super.setInitialHealth(GameConstants.playerMaxHealth);
 		super.setBlink(2000);
 	}
 	@Override
