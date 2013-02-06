@@ -28,6 +28,11 @@ public class BlueBoss extends Boss{
 	private long animTime = -1;
 	private boolean attacking;
 
+	/**
+	 * @param x - initial x position
+	 * @param y - initial y position
+	 * @throws SlickException
+	 */
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
 		super.setInitialHealth(4);
@@ -83,32 +88,59 @@ public class BlueBoss extends Boss{
 			stomp.getScaledCopy(scale).draw(x,y, alpha);
 		}
 	}
-	public void stomp(){ //method for stomping
+	/**
+	 * method for stomping
+	 */
+	public void stomp(){
 		stomping = true;
 		trans = new Vector(0,0);
 		super.setVelY(-10);
 	}
-	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
+	/**
+	 * @param inSight true when player is within chasing range
+	 */
+	public void changeSleep(boolean inSight){
 		awake=inSight;
 	}
+	/**
+	 * @return range of BlueBoss
+	 */
 	public float getSight(){
 		return sight;
 	}
-	public int getStompX(){ //coordinates for explosion
+	/**
+	 * @return x coordinate of explosion
+	 */
+	public int getStompX(){
 		return stompX + 32;
 	}
+	/**
+	 * @return y coordinate of explosion
+	 */
 	public int getStompY(){
 		return stompY + 32;
 	}
-	public void setFalling(boolean f){ //when defeated, the platform falls
+	/**
+	 * @param f true sets platform to fall
+	 */
+	public void setFalling(boolean f){
 		falling = f;
 	}
+	/**
+	 * @return true when platform is falling
+	 */
 	public boolean getFalling(){
 		return falling;
 	}
+	/**
+	 * @param a true signals when plot text finishes and boss starts attacking
+	 */
 	public void setAttacking(boolean a){
 		attacking = a;
 	}
+	/**
+	 * @return true when boss begins attacking
+	 */
 	public boolean getAttacking(){
 		return attacking;
 	}

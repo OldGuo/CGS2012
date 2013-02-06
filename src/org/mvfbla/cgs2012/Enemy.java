@@ -31,17 +31,29 @@ public class Enemy extends Characters{;
 			super.update(gc, delta);
 		}
 	}
-	public float getSpeed(){ //returns the speed of the enemy
+	/**
+	 * @return the speed of the enemy
+	 */
+	public float getSpeed(){
 		return speed;
 	}
-	public void setSpeed(float howFast){ //sets the speed of the enemy
+	/**
+	 * @param howFast sets the speed of the enemy
+	 */
+	public void setSpeed(float howFast){
 		speed=howFast;
 		this.setVelX(speed);
 	}
-	public float getEnemyDirection(){ //returns the enemy's direction
+	/**
+	 * @return the direction the enemy is facing
+	 */
+	public float getEnemyDirection(){
 		return direction;
 	}
-	public void setDirection(float whichWay){// sets the enemy's direction
+	/**
+	 * @param whichWay sets the direction the enemy is facing
+	 */
+	public void setDirection(float whichWay){
 		direction=whichWay;
 		if(Math.signum(speed)!=whichWay)
 			speed*=-1;

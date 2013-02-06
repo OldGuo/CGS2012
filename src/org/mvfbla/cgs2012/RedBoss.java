@@ -32,4 +32,3 @@ public class RedBoss extends Boss{
 		return attacking;
 	}
 }
-//nerf this guy
