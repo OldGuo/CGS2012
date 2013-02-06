@@ -9,6 +9,10 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 
+/**
+ * @author Young
+ * Window that shows on screen for user to answer questions
+ */
 public class QuestionWindow{
 	private final Color color = new Color(200,200,200,0.45f);
 	private boolean answering;
@@ -17,12 +21,20 @@ public class QuestionWindow{
 	private int randQuestion;
 	private int randCorrect;
 
+	/**
+	 * Initializes the question window
+	 * @throws SlickException
+	 */
 	public QuestionWindow() throws SlickException{
 		init();
 	}
+	/**
+	 * Initializes values
+	 * @throws SlickException
+	 */
 	public void init() throws SlickException{
 		do {
-			randQuestion = (int)(Math.random()*35);
+			randQuestion = (int)(Math.random()*35); //Chooses a random question from the list
 		} while(isUsed(randQuestion));
 		GameConstants.usedQuestions |= powerTwo(randQuestion);
 		randCorrect = (int)(Math.random()*4);
@@ -57,6 +69,10 @@ public class QuestionWindow{
 			break;
 		}
 	}
+	/**
+	 * @param num - number of questions used
+	 * @return - returns whether all questions are used or not
+	 */
 	private boolean isUsed(int num) {
 		if(GameConstants.usedQuestions == GameConstants.allUsed) {
 			GameConstants.usedQuestions = 0;
@@ -74,6 +90,11 @@ public class QuestionWindow{
 		}
 		return out;
 	}
+	/**
+	 * @param g - Graphics
+	 * @param x - x position
+	 * @param y - y position
+	 */
 	public void draw(Graphics g,int x,int y){
 		g.setColor(color);
 		g.fillRect(-300,-300,1100 + x,900 + y);
@@ -91,6 +112,10 @@ public class QuestionWindow{
 		int current = GameConstants.level.wrongCount;
 		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160+x,500+y);
 	}
+	/**
+	 * Updates the QuestionWindow
+	 * @param container - GameContainer
+	 */
 	public void update(GameContainer container){
 		Input input = container.getInput();
 		for(int i = 0; i < questions.size(); i++){
@@ -111,12 +136,21 @@ public class QuestionWindow{
 			}
 		}
 	}
+	/**
+	 * @return - Whether the player is answering questions
+	 */
 	public boolean getAnswering(){
 		return answering;
 	}
+	/**
+	 * @param a - Sets whether the user is answering questions
+	 */
 	public void setAnswering(boolean a){
 		answering = a;
 	}
+	/**
+	 * @return - returns which question is currently being asked
+	 */
 	public int whichQuestion(){
 		return randQuestion;
 	}

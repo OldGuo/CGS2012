@@ -72,14 +72,20 @@ public class QuestionReader {
 		return correctAns;
 	}
 	/**
-	 * @return
+	 * @return - first array list of wrong answers
 	 */
 	public ArrayList<String>getWrongAns1(){
 		return wrongAns1;
 	}
+	/**
+	 * @return - second array of wrong answers
+	 */
 	public ArrayList<String>getWrongAns2(){
 		return wrongAns2;
 	}
+	/**
+	 * @return - third array of wrong answers
+	 */
 	public ArrayList<String>getWrongAns3(){
 		return wrongAns3;
 	}
