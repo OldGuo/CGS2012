@@ -20,49 +20,6 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
-	public class YellowButton extends Button {
-		public int number;
-		private int state;
-		protected YellowButton(int x, int y, int num) throws SlickException {
-			super(x, y, null);
-			number = num;
-			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
-		}
-		public int getStateNum() {
-			return state;
-		}
-		@Override
-		public void interact(GameObject source) {
-			long time = System.currentTimeMillis();
-			if(time-lastPress >= cooldown) {
-				lastPress = time;
-				if(state == 1) {
-					setStateNum(2);
-					yellowBoss.activate(number);
-					playAnimation("broke");
-				}
-			}
-		}
-		/**
-		 * @param state sets the states for the platform switches
-		 */
-		public void setStateNum(int state) {
-			if(state == 2) {
-				trigger.setActive(false);
-				notif.playAnimation("near");
-				playAnimation("broke");
-			}
-			if(state == 1) {
-				trigger.setActive(true);
-				playAnimation("on");
-			}
-			if(state == 0) {
-				trigger.setActive(false);
-				playAnimation("off");
-			}
-			this.state = state;
-		}
-	}
 
 	private YellowBoss yellowBoss;
 	private final static int MAP_WIDTH = 780;
@@ -132,6 +89,11 @@ public class YellowBossLevel extends GameLevel {
 			buttons[2].setStateNum(2);
 		} else {
 			handleButton(2);
+		}
+		if(!yellowBoss.isAlive()) {
+			for(int i = 0; i < 3; i++) {
+				g.drawAnimation(lightning, yellowBoss.getX()-10, yellowBoss.getY()+(i*48));
+			}
 		}
 		if(player.shouldDisplay())
 			player.draw(g);
@@ -283,7 +245,7 @@ public class YellowBossLevel extends GameLevel {
 			}
 			for(Characters guy : GameConstants.enemies) {
 				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
+				if(name.equals("class org.mvfbla.cgs2012.characters.YellowBoss")){
 					YellowBoss boss = (YellowBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);
@@ -291,6 +253,49 @@ public class YellowBossLevel extends GameLevel {
 					}
 				}
 			}
+		}
+	}
+	public class YellowButton extends Button {
+		public int number;
+		private int state;
+		protected YellowButton(int x, int y, int num) throws SlickException {
+			super(x, y, null);
+			number = num;
+			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
+		}
+		public int getStateNum() {
+			return state;
+		}
+		@Override
+		public void interact(GameObject source) {
+			long time = System.currentTimeMillis();
+			if(time-lastPress >= cooldown) {
+				lastPress = time;
+				if(state == 1) {
+					setStateNum(2);
+					yellowBoss.activate(number);
+					playAnimation("broke");
+				}
+			}
+		}
+		/**
+		 * @param state sets the states for the platform switches
+		 */
+		public void setStateNum(int state) {
+			if(state == 2) {
+				trigger.setActive(false);
+				notif.playAnimation("near");
+				playAnimation("broke");
+			}
+			if(state == 1) {
+				trigger.setActive(true);
+				playAnimation("on");
+			}
+			if(state == 0) {
+				trigger.setActive(false);
+				playAnimation("off");
+			}
+			this.state = state;
 		}
 	}
 }
