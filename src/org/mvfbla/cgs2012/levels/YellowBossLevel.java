@@ -43,6 +43,9 @@ public class YellowBossLevel extends GameLevel {
 				}
 			}
 		}
+		/**
+		 * @param state sets the states for the platform switches
+		 */
 		public void setStateNum(int state) {
 			if(state == 2) {
 				trigger.setActive(false);
@@ -82,6 +85,7 @@ public class YellowBossLevel extends GameLevel {
 	public void draw(Graphics g){
 		super.draw(g);
 		g.setColor(Color.red);
+		//reticle follows player
 		if(yellowBoss.isAiming()){
 			fireX=yellowBoss.getReticle();
 			fireY=player.getY();
@@ -90,22 +94,26 @@ public class YellowBossLevel extends GameLevel {
 			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
 			g.drawLine(yellowBoss.getCenterX(), yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()/2, fireY+player.getHeight()/2);
 		}
+		//reticle stays in position where the player last was
 		else if(yellowBoss.isCharging()){
 			g.drawOval(fireX, fireY, yellowBoss.getReticleWidth(), yellowBoss.getReticleWidth());
 			g.drawLine(fireX, fireY+yellowBoss.getReticleWidth()/2, fireX+yellowBoss.getReticleWidth(), fireY+yellowBoss.getReticleWidth()/2);
 			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
 		}
+		//boss fires laser at where reticle aimed
 		else if(yellowBoss.isFiring()){
 			for(float i=0;i<=8;i++){
 				g.drawLine(yellowBoss.getCenterX()-8, yellowBoss.getCenterY()-40, fireX+i, fireY+player.getHeight());
 				g.drawLine(yellowBoss.getCenterX()+8, yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()+i, fireY+player.getHeight());
 			}
 		}
+		//boss teleports to another platform
 		else if(yellowBoss.isTeleporting()){
 			float opacity=(float)((yellowBoss.getTime()-4500)*.001);
 			g.setColor(new Color(0,255,0,opacity));
 			g.fillOval(yellowBoss.getCenterX()-yellowBoss.getHeight()/2, yellowBoss.getCenterY()-yellowBoss.getWidth()/2, yellowBoss.getHeight(), yellowBoss.getWidth());
 		}
+		//animates the broken platforms
 		g.setColor(Color.green);
 		if(yellowBoss.isActivated(0)){
 			g.drawAnimation(lightning, 96-8, 288-8);
@@ -127,10 +135,12 @@ public class YellowBossLevel extends GameLevel {
 		}
 		if(player.shouldDisplay())
 			player.draw(g);
+		//changes opacity during transition state
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
 		}
+		//processes display after death
 		if(deathTime > 0) {
 			player.stopAnimation();
 			player.draw(g);
@@ -175,6 +185,9 @@ public class YellowBossLevel extends GameLevel {
 	public int getID(){
 		return stateID;
 	}
+	/**
+	 * @param id button for each platform
+	 */
 	public void handleButton(int id) {
 		if(yellowBoss.location == id)
 			buttons[id].setStateNum(1);
@@ -210,6 +223,7 @@ public class YellowBossLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+		//upate method for processing battle with YellowBoss
 		updateMain(container, sbg, delta);
 		if(!GameConstants.getPaused()) {
 			if(!afterQuestions){
@@ -225,8 +239,10 @@ public class YellowBossLevel extends GameLevel {
 				GameConstants.lastBoss = 3;
 				GameConstants.bossesDefeated |= 1;
 			}
+			//sets reticle on player
 			if(yellowBoss.isAiming())
 				yellowBoss.setReticle(player.getX());
+			//sets area where laser hits to damage player
 			else if(yellowBoss.isFiring()) {
 				if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
 					if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
@@ -234,6 +250,7 @@ public class YellowBossLevel extends GameLevel {
 				}
 			}
 			lightning.update(delta);
+			//plot text before the battle
 			if(beforeQuestions){
 				text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
 						"I want to ask it so many questions. I want to understand.  A stream of " +
@@ -248,6 +265,7 @@ public class YellowBossLevel extends GameLevel {
 			if(questions.getAnswering() == false && !beforeQuestions){
 				afterQuestions = true;
 			}
+			//plot text after battle
 			if(afterQuestions == true){
 				text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
 						" But there is no answer, this only" +
