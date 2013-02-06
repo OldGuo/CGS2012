@@ -70,6 +70,7 @@ public class PlantedEnemy extends Enemy{
 			super.setDirection(0);
 		}else{ //chases player when awake
 			super.setSpeed(3*super.getEnemyDirection());
+			//System.out.println(super.getSpeed());
 		}
 		super.update(gc, delta);
 	}
