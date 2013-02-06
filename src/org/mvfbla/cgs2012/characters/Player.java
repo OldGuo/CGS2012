@@ -28,8 +28,8 @@ public class Player extends Characters{
 		super(x, y, 48, 48); //loads sprite sheets for animations of actions
 		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150)); 
 		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\PlayerRightInverted.png", 48, 48), 150));
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeft.png", 48, 48), 150));
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRight.png", 48, 48), 150));
 
 		arm = new AnimatedObject(0,0,48,48);
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));

@@ -30,16 +30,20 @@ public class LoadingState extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		// Initialize the logos
 		logos = new Image[2];
 		logos[0] = new Image("data\\logo\\fblalogo.png");
 		logos[1] = new Image("data\\logo\\slicklogo.png");
 		transState = 1;
+		// Total length of the logos
 		totalTrans = logos.length*(transStay + 2 * transFade);
 	}
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
+		// Draw the logo in the center of the screen
 		g.drawImage(logos[currLogo], 400-logos[currLogo].getWidth()/2, 300-logos[currLogo].getHeight()/2);
+		// Draw the fade
 		if(transState != 0) {
 			g.setColor(new Color(0, 0, 0, currAlpha));
 			g.fillRect(0, 0, 100000, 100000);
@@ -48,6 +52,7 @@ public class LoadingState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
+		// Update the transitions
 		transTime += delta;
 		if(transTime >= totalTrans) {
 			game.enterState(Game.MAIN_MENU_STATE);
