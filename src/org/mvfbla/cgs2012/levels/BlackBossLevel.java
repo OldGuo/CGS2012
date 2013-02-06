@@ -81,6 +81,8 @@ public class BlackBossLevel extends GameLevel {
 	public class bossSyncListener implements ButtonListener{ //Syncronize switch for the boss
 		@Override
 		public void buttonPressed(boolean state){
+			blackBoss.setVelX(0);
+			blackBoss.stopAnimation();
 			GameConstants.flipSync();
 		}
 	}

@@ -9,7 +9,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-/** @author davedes */
+/**
+ * @author Young
+ * TyperWriter for plot text
+ */
 public class TypeWriter{
 
 	private int renderRow;
@@ -117,19 +120,14 @@ public class TypeWriter{
 
     //Wraps the given string into a list of split lines based on the width
     public static List<String> wrap(String text, Font font, int width) {
-        //A less accurate but more efficient wrap would be to specify the max
-        //number of columns (e.g. using the width of the 'M' character or something).
-        //The below method will look nicer in the end, though.
-
         List<String> list = new ArrayList<String>();
         String str = text;
         String line = "";
 
-        //we will go through adding characters, once we hit the max width
-        //we will either split the line at the last space OR split the line
+        //go through adding characters, once we hit the max width
+        //either split the line at the last space OR split the line
         //at the given char if no last space exists
-
-        //while we still have text to check
+        //while still have text to check
         int i = 0;
         int lastSpace = -1;
         while (i<str.length()) {
