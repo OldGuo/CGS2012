@@ -14,12 +14,12 @@ public class LoadingState extends BasicGameState {
 	private Image[] logos;
 	private int transState = 0;
 	private int transTime = 0;
-	private int transStay = 1000;
-	private int transFade = 500;
+	private final int transStay = 1000;
+	private final int transFade = 500;
 	private int totalTrans;
 	private int currLogo = 0;
 	private float currAlpha;
-	
+
 	public LoadingState(int stateID) {
 		this.stateID = stateID;
 	}
