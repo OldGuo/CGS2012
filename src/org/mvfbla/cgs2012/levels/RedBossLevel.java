@@ -50,7 +50,7 @@ public class RedBossLevel extends GameLevel {
 		afterQuestions = false;
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 		text = new TypeWriter();
 		questions = new QuestionWindow();
 	}

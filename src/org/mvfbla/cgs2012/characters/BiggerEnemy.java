@@ -21,8 +21,8 @@ public class BiggerEnemy extends Enemy{
 	 */
 	public BiggerEnemy (int x, int y) throws SlickException{
 		super(x, y, 96, 96);
-		addAnimation("BiggerEnemyInvert", new Animation(new SpriteSheet("data\\LargeEnemyInverted.png", 96, 96), 150));
-		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\LargeEnemy.png", 96, 96), 150));
+		addAnimation("BiggerEnemyInvert", new Animation(new SpriteSheet("data\\CharAnim\\LargeEnemyInverted.png", 96, 96), 150));
+		addAnimation("BiggerEnemy", new Animation(new SpriteSheet("data\\CharAnim\\LargeEnemy.png", 96, 96), 150));
 		super.setSpeed(-1);
 		super.setInitialHealth(2);
 	}

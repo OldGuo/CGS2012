@@ -50,7 +50,7 @@ public class GravityLevel extends GameLevel {
 		//Initializes variables
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class Player extends Characters{
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
 
 		arm = new AnimatedObject(0,0,48,48);
-		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
-		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
+		arm.addAnimation("right",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackRight.png", 48, 48), 750));
+		arm.addAnimation("left",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackLeft.png", 48, 48), 750));
 		addObject(arm);
 		arm.stopAnimation();
 

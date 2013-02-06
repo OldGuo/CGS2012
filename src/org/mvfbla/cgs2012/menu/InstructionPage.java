@@ -41,7 +41,7 @@ public class InstructionPage extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//Initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
-		instructions = new Image("data\\Instructions.png");
+		instructions = new Image("data\\Menu\\Instructions.png");
 		fadeState = 1;
 	}
 

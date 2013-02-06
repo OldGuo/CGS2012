@@ -383,7 +383,7 @@ public abstract class GameLevel extends BasicGameState{
 			// Call each GameLevel's own object initialization methods
 			initObject(to);
 		}
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 		transState = 1;
 		// Reset player hp
 		player.setInitialHealth(GameConstants.playerMaxHealth);
