@@ -2,6 +2,13 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
+import org.mvfbla.cgs2012.characters.Characters;
+import org.mvfbla.cgs2012.interactable.InteractiveObject;
+import org.mvfbla.cgs2012.interactable.MotionSensor;
+import org.mvfbla.cgs2012.interactable.MovingTile;
+import org.mvfbla.cgs2012.interactable.Pillar;
+import org.mvfbla.cgs2012.interactable.Trigger;
+import org.mvfbla.cgs2012.menu.MainMenu;
 import org.newdawn.slick.Music;
 
 

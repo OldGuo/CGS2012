@@ -8,6 +8,10 @@ import org.mvfbla.cgs2012.levels.MotionSensorLevel;
 import org.mvfbla.cgs2012.levels.RedBossLevel;
 import org.mvfbla.cgs2012.levels.TutorialLevel;
 import org.mvfbla.cgs2012.levels.YellowBossLevel;
+import org.mvfbla.cgs2012.menu.AboutPage;
+import org.mvfbla.cgs2012.menu.InstructionPage;
+import org.mvfbla.cgs2012.menu.LoadingState;
+import org.mvfbla.cgs2012.menu.MainMenu;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;
@@ -31,18 +35,18 @@ public class Game extends StateBasedGame{
 		}
 	}
 	//Integer values for each State
-	static final int MAIN_MENU_STATE            = 0;
-	static final int TUTORIAL_STATE 			= 1;
-	static final int ELEVATOR_STATE			    = 2;
-	static final int MOTION_SENSOR_STATE        = 3;
-	static final int GRAVITY_STATE              = 4;
-	static final int BLUE_BOSS_STATE            = 5;
-	static final int RED_BOSS_STATE             = 6;
-	static final int YELLOW_BOSS_STATE          = 7;
-	static final int BLACK_BOSS_STATE           = 8;
-	static final int ABOUT_STATE                = 9;
-	static final int INSTRUCTIONS_STATE         = 10;
-	static final int PLOT_STATE                 = 11;
+	public static final int MAIN_MENU_STATE            = 0;
+	public static final int TUTORIAL_STATE 			   = 1;
+	public static final int ELEVATOR_STATE			   = 2;
+	public static final int MOTION_SENSOR_STATE        = 3;
+	public static final int GRAVITY_STATE              = 4;
+	public static final int BLUE_BOSS_STATE            = 5;
+	public static final int RED_BOSS_STATE             = 6;
+	public static final int YELLOW_BOSS_STATE          = 7;
+	public static final int BLACK_BOSS_STATE           = 8;
+	public static final int ABOUT_STATE                = 9;
+	public static final int INSTRUCTIONS_STATE         = 10;
+	public static final int PLOT_STATE                 = 11;
 	
 
 	static final int LOADING_STATE				= 12;

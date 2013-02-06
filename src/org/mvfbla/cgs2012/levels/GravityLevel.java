@@ -1,11 +1,11 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.Button;
-import org.mvfbla.cgs2012.ButtonListener;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
 import org.mvfbla.cgs2012.TiledObject;
+import org.mvfbla.cgs2012.interactable.Button;
+import org.mvfbla.cgs2012.interactable.ButtonListener;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

@@ -2,6 +2,26 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
+import org.mvfbla.cgs2012.characters.BasicEnemy;
+import org.mvfbla.cgs2012.characters.BiggerEnemy;
+import org.mvfbla.cgs2012.characters.BlackBoss;
+import org.mvfbla.cgs2012.characters.BlueBoss;
+import org.mvfbla.cgs2012.characters.Characters;
+import org.mvfbla.cgs2012.characters.Enemy;
+import org.mvfbla.cgs2012.characters.PlantedEnemy;
+import org.mvfbla.cgs2012.characters.Player;
+import org.mvfbla.cgs2012.characters.RedBoss;
+import org.mvfbla.cgs2012.characters.YellowBoss;
+import org.mvfbla.cgs2012.interactable.Button;
+import org.mvfbla.cgs2012.interactable.ButtonListener;
+import org.mvfbla.cgs2012.interactable.Elevator;
+import org.mvfbla.cgs2012.interactable.InteractiveObject;
+import org.mvfbla.cgs2012.interactable.MotionSensor;
+import org.mvfbla.cgs2012.interactable.MovingTile;
+import org.mvfbla.cgs2012.interactable.Pillar;
+import org.mvfbla.cgs2012.interactable.QuestionWindow;
+import org.mvfbla.cgs2012.interactable.Trigger;
+import org.mvfbla.cgs2012.interactable.TriggerListener;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -57,7 +77,7 @@ public abstract class GameLevel extends BasicGameState{
 	protected boolean lost = false;
 	protected int stateID = -1;
 	protected TypeWriter text;
-	protected boolean done = false;
+	public boolean done = false;
 	protected float time=0;
 	public long transTime = 0;
 	protected byte transState = 0;

@@ -1,15 +1,15 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.BlueBoss;
-import org.mvfbla.cgs2012.Characters;
 import org.mvfbla.cgs2012.GameConstants;
 import org.mvfbla.cgs2012.GameLevel;
 import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.Pillar;
-import org.mvfbla.cgs2012.QuestionWindow;
 import org.mvfbla.cgs2012.Tile;
 import org.mvfbla.cgs2012.TiledObject;
 import org.mvfbla.cgs2012.TypeWriter;
+import org.mvfbla.cgs2012.characters.BlueBoss;
+import org.mvfbla.cgs2012.characters.Characters;
+import org.mvfbla.cgs2012.interactable.Pillar;
+import org.mvfbla.cgs2012.interactable.QuestionWindow;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
