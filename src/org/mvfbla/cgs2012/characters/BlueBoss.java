@@ -42,8 +42,8 @@ public class BlueBoss extends Boss{
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
 		super.setInitialHealth(4);
-		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\CharAnim\\BlueBossWalking.png", 128, 128), 150));
-		stomp = new Image("data\\CharAnim\\Stomp.png");
+		addAnimation("BlueBoss", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"CharAnim"+GameConstants.separatorChar+"BlueBossWalking.png", 128, 128), 150));
+		stomp = new Image("data"+GameConstants.separatorChar+"CharAnim"+GameConstants.separatorChar+"Stomp.png");
 	}
 	/**
 	 * @param inSight - If the player is within the bosses sight range

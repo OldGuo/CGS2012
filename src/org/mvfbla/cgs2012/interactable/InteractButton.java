@@ -1,5 +1,6 @@
 package org.mvfbla.cgs2012.interactable;
 
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -33,9 +34,9 @@ public class InteractButton {
 	public InteractButton(String text,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		words = text;
 		action = " ";
-		buttonNormal = new Image("data\\Questions\\QuestionButton.png");
-		buttonHover = new Image("data\\Questions\\QuestionButtonHover.png");
-		buttonClick = new Image("data\\Questions\\QuestionButtonDown.png");
+		buttonNormal = new Image("data"+GameConstants.separatorChar+"Questions"+GameConstants.separatorChar+"QuestionButton.png");
+		buttonHover = new Image("data"+GameConstants.separatorChar+"Questions"+GameConstants.separatorChar+"QuestionButtonHover.png");
+		buttonClick = new Image("data"+GameConstants.separatorChar+"Questions"+GameConstants.separatorChar+"QuestionButtonDown.png");
 		x = xPos;
 		y = yPos;
 		length = l;

@@ -68,7 +68,7 @@ public class QuestionWindow{
 		GameConstants.usedQuestions |= powerTwo(randQuestion);
 		randCorrect = (int)(Math.random()*4);
 		//randCorrect = 0;
-		reader = new QuestionReader("data\\Questions\\questions.txt");
+		reader = new QuestionReader("data"+GameConstants.separatorChar+"Questions"+GameConstants.separatorChar+"questions.txt");
 		questions = new ArrayList<QuestionButton>(4);
 
 		switch(randCorrect){

@@ -58,8 +58,8 @@ public class BlueBossLevel extends GameLevel {
 		beforeQuestions = true;
 		needRestart = false;
 		platformBroken = false;
-		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"BlueBossLevel_5.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
 		text = new TypeWriter();
 		questions = new QuestionWindow();

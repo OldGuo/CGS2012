@@ -58,12 +58,12 @@ public class Elevator extends Button {
 		int[] one = {0,0};
 		int[] two = {1,0};
 		int[] dur = {150};
-		notif.addAnimation("near",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
-		notif.addAnimation("far",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), two, dur));
+		notif.addAnimation("near",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"SpacebarNotif.png", 48, 48), one, dur));
+		notif.addAnimation("far",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"SpacebarNotif.png", 48, 48), two, dur));
 		addObject(notif);
 		notif.playAnimation("near");
-		addAnimation("off", new Animation(new SpriteSheet("data\\maps\\ButtonOff.png", 32, 32), 150));
-		addAnimation("on", new Animation(new SpriteSheet("data\\maps\\ButtonOn.png", 32, 32), 150));
+		addAnimation("off", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"ButtonOff.png", 32, 32), 150));
+		addAnimation("on", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"ButtonOn.png", 32, 32), 150));
 		playAnimation("off");
 	}
 	@Override
@@ -125,7 +125,7 @@ public class Elevator extends Button {
 			// Draw lock is elevator is inactive
 			if(!isActive()) {
 				try {
-					g.drawImage(new Image("data\\Level\\lock.png"), 27, 25);
+					g.drawImage(new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"lock.png"), 27, 25);
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}

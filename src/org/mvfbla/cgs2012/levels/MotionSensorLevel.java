@@ -3,6 +3,7 @@ package org.mvfbla.cgs2012.levels;
 import org.mvfbla.cgs2012.base.GameLevel;
 import org.mvfbla.cgs2012.base.Map;
 import org.mvfbla.cgs2012.base.TiledObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -38,8 +39,8 @@ public class MotionSensorLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		//Initializes values
 		super.setBackgroundInfo(33, 19);
-		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"MotionSensorLevel_3.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {} //Initializes level specific objects, in this case there are none

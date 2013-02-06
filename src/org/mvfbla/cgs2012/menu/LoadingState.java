@@ -1,6 +1,7 @@
 package org.mvfbla.cgs2012.menu;
 
 import org.mvfbla.cgs2012.base.Game;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -36,8 +37,8 @@ public class LoadingState extends BasicGameState {
 			throws SlickException {
 		// Initialize the logos
 		logos = new Image[2];
-		logos[0] = new Image("data\\logo\\fblalogo.png");
-		logos[1] = new Image("data\\logo\\slicklogo.png");
+		logos[0] = new Image("data"+GameConstants.separatorChar+"logo"+GameConstants.separatorChar+"fblalogo.png");
+		logos[1] = new Image("data"+GameConstants.separatorChar+"logo"+GameConstants.separatorChar+"slicklogo.png");
 		transState = 1;
 		// Total length of the logos
 		totalTrans = logos.length*(transStay + 2 * transFade);

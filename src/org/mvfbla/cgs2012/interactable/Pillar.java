@@ -1,6 +1,7 @@
 package org.mvfbla.cgs2012.interactable;
 
 import org.mvfbla.cgs2012.base.GameObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -26,8 +27,8 @@ public class Pillar extends GameObject {
 	public Pillar(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height);
 		broken = false;
-		unbrokenPillar = new Image("data\\Maps\\pillarUnbroken.png");
-		brokenPillar = new Image("data\\Maps\\pillarBroken.png");
+		unbrokenPillar = new Image("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"pillarUnbroken.png");
+		brokenPillar = new Image("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"pillarBroken.png");
 	}
 	@Override
 	public void draw(Graphics g){

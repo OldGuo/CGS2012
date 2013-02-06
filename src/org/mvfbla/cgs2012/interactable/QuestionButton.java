@@ -34,7 +34,7 @@ public class QuestionButton extends InteractButton{
 		questionAnswer = answer;
 		buttonID = id;
 		correct = false;
-		buttonWrong = new Image("data\\Questions\\QuestionButtonWrong.png");
+		buttonWrong = new Image("data"+GameConstants.separatorChar+"Questions"+GameConstants.separatorChar+"QuestionButtonWrong.png");
 	}
 	@Override
 	public void draw(Graphics g,int offsetX,int offsetY){

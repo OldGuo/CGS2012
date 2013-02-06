@@ -57,15 +57,15 @@ public class Button extends AnimatedObject implements InteractiveObject {
 		super(x, y, 32, 32);
 		listener = bl;
 		// Create button on and off buttons
-		addAnimation("off", new Animation(new SpriteSheet("data\\maps\\ButtonOff.png", 32, 32), 150));
-		addAnimation("on", new Animation(new SpriteSheet("data\\maps\\ButtonOn.png", 32, 32), 150));
+		addAnimation("off", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"ButtonOff.png", 32, 32), 150));
+		addAnimation("on", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"ButtonOn.png", 32, 32), 150));
 		// Create notification near and far images
 		notif = new AnimatedObject(-8,-40,48,48);
 		int[] one = {0,0};
 		int[] two = {1,0};
 		int[] dur = {150};
-		notif.addAnimation("near",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
-		notif.addAnimation("far",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), two, dur));
+		notif.addAnimation("near",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"SpacebarNotif.png", 48, 48), one, dur));
+		notif.addAnimation("far",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"SpacebarNotif.png", 48, 48), two, dur));
 		addObject(notif);
 
 		// Makes a trigger for showing the notification when the player is near

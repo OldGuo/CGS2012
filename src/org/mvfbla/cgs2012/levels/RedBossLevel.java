@@ -49,8 +49,8 @@ public class RedBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
-		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"RedBossLevel_5.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 		text = new TypeWriter();
 		questions = new QuestionWindow();
 	}

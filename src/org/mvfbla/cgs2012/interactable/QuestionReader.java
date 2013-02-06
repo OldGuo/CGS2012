@@ -55,7 +55,7 @@ public class QuestionReader {
 		return wrongAns3;
 	}
 	/*public static void main(String[]args) throws FileNotFoundException{
-		QuestionReader parser=new QuestionReader("data\\questions.txt");
+		QuestionReader parser=new QuestionReader("data"+GameConstants.separatorChar+"questions.txt");
 		parser.processFile();
 	}*/
 	/**

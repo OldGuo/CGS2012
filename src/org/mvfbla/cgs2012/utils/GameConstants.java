@@ -1,5 +1,6 @@
 package org.mvfbla.cgs2012.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.mvfbla.cgs2012.base.GameLevel;
@@ -40,6 +41,7 @@ public class GameConstants {
 	public static int bossesDefeated = 0;
 	public static int playNum = 0;
 	public static int punchRange = 36;
+	public static char separatorChar = File.separatorChar;
 
 	public static long usedQuestions = 0;
 	public static long allUsed = 34359738368L-1;

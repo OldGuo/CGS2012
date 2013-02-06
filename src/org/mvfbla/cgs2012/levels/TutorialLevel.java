@@ -53,7 +53,7 @@ public class TutorialLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		//Initializes values
 		super.setBackgroundInfo(1600, 29);
-		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"TutorialLevel_1.tmx", "data"+GameConstants.separatorChar+"Maps");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException { //Initializes level specific objects

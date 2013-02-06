@@ -21,8 +21,8 @@ public class BasicEnemy extends Enemy{
 	 */
 	public BasicEnemy (int x, int y) throws SlickException{
 		super(x, y, 64, 64);
-		addAnimation("BasicEnemyInvert", new Animation(new SpriteSheet("data\\CharAnim\\SmallEnemyInverted.png", 64, 64), 150));
-		addAnimation("BasicEnemy", new Animation(new SpriteSheet("data\\CharAnim\\SmallEnemy.png", 64, 64), 150));
+		addAnimation("BasicEnemyInvert", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"CharAnim"+GameConstants.separatorChar+"SmallEnemyInverted.png", 64, 64), 150));
+		addAnimation("BasicEnemy", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"CharAnim"+GameConstants.separatorChar+"SmallEnemy.png", 64, 64), 150));
 		super.setSpeed(-2);
 	}
 	@Override

@@ -29,7 +29,7 @@ public class YellowBoss extends Boss{
 	 */
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
-		addAnimation("YellowBoss", new Animation(new SpriteSheet("data\\CharAnim\\YellowBossWalking.png", 128, 128), 150));
+		addAnimation("YellowBoss", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"CharAnim"+GameConstants.separatorChar+"YellowBossWalking.png", 128, 128), 150));
 		super.setSpeed(0);
 		time=0;
 		location=1;

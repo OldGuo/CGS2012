@@ -168,10 +168,10 @@ public class YellowBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
-		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"YellowBossLevel_5.tmx","data"+GameConstants.separatorChar+"Maps");
 		yellowBoss = new YellowBoss(330,100);
-		background = new Image("data\\Level\\Background.png");
-		lightning = new Animation(new SpriteSheet("data\\Level\\Lightning.png", 144, 48), 500);
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
+		lightning = new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Lightning.png", 144, 48), 500);
 		lightning.start();
 		text = new TypeWriter();
 		questions = new QuestionWindow();
@@ -270,7 +270,7 @@ public class YellowBossLevel extends GameLevel {
 		protected YellowButton(int x, int y, int num) throws SlickException {
 			super(x, y, null);
 			number = num;
-			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
+			addAnimation("broke", new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"ButtonBroke.png", 32, 32), 150));
 		}
 		public int getStateNum() {
 			return state;
