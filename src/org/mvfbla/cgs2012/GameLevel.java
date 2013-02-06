@@ -54,6 +54,7 @@ public abstract class GameLevel extends BasicGameState{
 		pauseWindow.init();
 		text = new TypeWriter();
 		done = false;
+		questionCount = 0;
 		int motionDelay = 0;
 		// Initialize the Tiled objects
 		for(TiledObject to : map.getObjects()) {
