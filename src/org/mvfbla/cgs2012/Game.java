@@ -29,7 +29,7 @@ public class Game extends StateBasedGame{
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
 	static final int PLOT_STATE                 = 11;
-	private Music music;
+	static final int LOADING_STATE				= 12;
 	
 	public Game() throws SlickException{
 		super("FBLA CGS 2012");
@@ -59,6 +59,8 @@ public class Game extends StateBasedGame{
 		this.addState(new AboutPage(ABOUT_STATE));
 		this.addState(new InstructionPage(INSTRUCTIONS_STATE));
 		this.addState(new PlotState(PLOT_STATE));
+		this.addState(new LoadingState(LOADING_STATE));
+		this.enterState(LOADING_STATE);
 		Runnable r = new MusicThread();
 		Thread t = new Thread(r);
 		t.start();
@@ -71,13 +73,11 @@ public class Game extends StateBasedGame{
 	private class MusicThread implements Runnable {
 		public void run() {
 			try {
-				if(music == null)
-					music = new Music("data\\Maps\\Outdated.ogg");
+				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");
+				System.out.println("Loaded music");
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
-			if(!music.playing())
-				music.loop();
 		}
 	}
 }
