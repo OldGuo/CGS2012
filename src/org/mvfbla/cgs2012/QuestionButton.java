@@ -46,6 +46,30 @@ public class QuestionButton extends InteractButton{
 			super.draw(g,offsetX,offsetY);
 		}
 	}
+	/**
+	 * @return - returns the ID of the button
+	 */
+	public int getID(){
+		return buttonID;
+	}
+	/**
+	 * @return - returns whether correct or not
+	 */
+	public boolean isCorrect(){
+		return correct;
+	}
+	/**
+	 * @return - if pressed, but incorrect
+	 */
+	public boolean pressedAndWrong(){
+		return wrongPressed;
+	}
+	/**
+	 * @param c - Whether correct or not
+	 */
+	public void setCorrect(boolean c){
+		correct = c;
+	}
 	public void update(GameContainer gc, Input input,int correctAnswer){
 		//Updates the button
 		if(input.getMouseX()>getX() && input.getMouseX()<getX() + getLength() && input.getMouseY() > getY()  && input.getMouseY() < getY() + getHeight()){
@@ -69,29 +93,5 @@ public class QuestionButton extends InteractButton{
 			 setClick(false);
 			 setHover(false);
 		 }
-	}
-	/**
-	 * @param c - Whether correct or not
-	 */
-	public void setCorrect(boolean c){
-		correct = c;
-	}
-	/**
-	 * @return - returns whether correct or not
-	 */
-	public boolean isCorrect(){
-		return correct;
-	}
-	/**
-	 * @return - returns the ID of the button
-	 */
-	public int getID(){
-		return buttonID;
-	}
-	/**
-	 * @return - if pressed, but incorrect
-	 */
-	public boolean pressedAndWrong(){
-		return wrongPressed;
 	}
 }

@@ -27,6 +27,29 @@ public class Characters extends AnimatedObject {
 		time=0;
 		blinkTime=550;
 	}
+	public Vector checkCollision() { //checks for collisions of characters
+		Vector v = null;
+		Vector max = new Vector();
+		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
+			GameObject obj = GameConstants.collidableObjects.get(i);
+			Vector t = this.doCollision(obj);
+			if(v == null) {
+				v = t;
+			}
+			if(t != null) {
+				translate(t);
+				if(t.length() >= max.length())
+					max = t;
+			}
+			if(v != null && t != null && !t.equals(new Vector(0,0))) {
+				if(v.getY() >= 0)
+					v = t;
+			}
+		}
+		//if(!max.equals(new Vector()))
+		//	return max;
+		return v;
+	}
 	public Vector doCollision(GameObject obj) { //collisions for characters
 		Vector out = null;
 		if(collides(obj)) {
@@ -67,6 +90,75 @@ public class Characters extends AnimatedObject {
 			}
 		}
 		return out;
+	}
+	@Override
+	public void draw(Graphics g){
+		/*Color orig = g.getColor(); //testing purposes, showed how much health above respective characters
+		for(int i=1;i<=health;i++){
+			g.setColor(Color.red);
+			g.fillRect(this.getCenterX()+i*16-this.getWidth()*3/4,this.getCenterY()-this.getHeight()*3/4, 8, 8);
+		}
+		g.setColor(orig);*/
+		super.draw(g);
+	}
+	public int getDirection(Vector v) { //returns the direction of a vector
+		if(v == null || v.equals(new Vector(0,0)))
+			return 0;
+		v.normalise();
+		if(v.dot(new Vector(0, -1)) == 1)
+			return 1;
+		if(v.dot(new Vector(0, 1)) == 1)
+			return 3;
+		if(v.dot(new Vector(-1, 0)) == 1)
+			return 4;
+		if(v.dot(new Vector(1, 0)) == 1)
+			return 2;
+		return -1;
+	}
+	public Vector getForce() { //returns force vector
+		return force;
+	}
+	public float getHealth(){ //returns health of character
+		return health;
+	}
+	public float getVelX() { //returns x component of velocity
+		return force.x;
+	}
+	public float getVelY() { //returns y component of velocity
+		return force.y;
+	}
+	public boolean isAlive(){ //returns if the character is alive
+		return alive;
+	}
+	public boolean isBlinking(){ //returns if the character is blinking
+		return blinking;
+	}
+	public void setBlink(int howLong){ //sets the duration of the blinking and invulnerability
+		blinkTime=howLong;
+	}
+	public void setForce(Vector v) { //sets force vector
+		force = v;
+	}
+	public void setHealth(float howHealthy){ //sets health
+		if(/*howHealth<health&&*/!blinking){
+			health=howHealthy;
+			blinking=true; //after the character is hit, it is invulnerable for a period of time and it blinks
+		}
+	}
+	public void setInitialHealth(float howHealthy){ //sets initial health, doesn't cause blinking
+		health=howHealthy;
+	}
+	public void setVelX(float velX) { //sets x component of velocity
+		force.x = velX;
+	}
+	public void setVelY(float velY) { //sets y component of velocity
+		force.y = velY;
+	}
+	public boolean shouldDisplay(){ //returns if the character should be displayed
+		return display;
+	}
+	public Vector toVector(Line l) { //sets a line to a vector
+		return new Vector(l.getX2()-l.getX1(), l.getY2() - l.getY1());
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
@@ -121,97 +213,5 @@ public class Characters extends AnimatedObject {
 				time=0;
 			}
 		}
-	}
-	public int getDirection(Vector v) { //returns the direction of a vector
-		if(v == null || v.equals(new Vector(0,0)))
-			return 0;
-		v.normalise();
-		if(v.dot(new Vector(0, -1)) == 1)
-			return 1;
-		if(v.dot(new Vector(0, 1)) == 1)
-			return 3;
-		if(v.dot(new Vector(-1, 0)) == 1)
-			return 4;
-		if(v.dot(new Vector(1, 0)) == 1)
-			return 2;
-		return -1;
-	}
-	public Vector checkCollision() { //checks for collisions of characters
-		Vector v = null;
-		Vector max = new Vector();
-		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
-			GameObject obj = GameConstants.collidableObjects.get(i);
-			Vector t = this.doCollision(obj);
-			if(v == null) {
-				v = t;
-			}
-			if(t != null) {
-				translate(t);
-				if(t.length() >= max.length())
-					max = t;
-			}
-			if(v != null && t != null && !t.equals(new Vector(0,0))) {
-				if(v.getY() >= 0)
-					v = t;
-			}
-		}
-		//if(!max.equals(new Vector()))
-		//	return max;
-		return v;
-	}
-	public Vector toVector(Line l) { //sets a line to a vector
-		return new Vector(l.getX2()-l.getX1(), l.getY2() - l.getY1());
-	}
-	public float getVelX() { //returns x component of velocity
-		return force.x;
-	}
-	public void setVelX(float velX) { //sets x component of velocity
-		force.x = velX;
-	}
-	public float getVelY() { //returns y component of velocity
-		return force.y;
-	}
-	public void setVelY(float velY) { //sets y component of velocity
-		force.y = velY;
-	}
-	public Vector getForce() { //returns force vector
-		return force;
-	}
-	public void setForce(Vector v) { //sets force vector
-		force = v;
-	}
-	public float getHealth(){ //returns health of character
-		return health;
-	}
-	public void setInitialHealth(float howHealthy){ //sets initial health, doesn't cause blinking
-		health=howHealthy;
-	}
-	public void setHealth(float howHealthy){ //sets health
-		if(/*howHealth<health&&*/!blinking){
-			health=howHealthy;
-			blinking=true; //after the character is hit, it is invulnerable for a period of time and it blinks
-		}
-	}
-	public boolean isAlive(){ //returns if the character is alive
-		return alive;
-	}
-	public void setBlink(int howLong){ //sets the duration of the blinking and invulnerability
-		blinkTime=howLong;
-	}
-	public boolean isBlinking(){ //returns if the character is blinking
-		return blinking;
-	}
-	public boolean shouldDisplay(){ //returns if the character should be displayed
-		return display;
-	}
-	@Override
-	public void draw(Graphics g){
-		/*Color orig = g.getColor(); //testing purposes, showed how much health above respective characters
-		for(int i=1;i<=health;i++){
-			g.setColor(Color.red);
-			g.fillRect(this.getCenterX()+i*16-this.getWidth()*3/4,this.getCenterY()-this.getHeight()*3/4, 8, 8);
-		}
-		g.setColor(orig);*/
-		super.draw(g);
 	}
 }

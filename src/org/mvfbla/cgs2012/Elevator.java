@@ -8,6 +8,27 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Elevator extends Button {
+	/**
+	 * @author PenguinToast
+	 * Class to trigger end of level animation
+	 */
+	private class FinishListener implements TriggerListener {
+		@Override
+		public void onEnter(GameObject src) {
+			//bring up question screen
+			GameConstants.level.done = true;
+			GameConstants.level.questions.setAnswering(true);
+		}
+		@Override
+		public void onExit(GameObject src) {
+			end.setActive(false);
+			GameConstants.level.done = false;
+			GameConstants.level.questions.setAnswering(false);
+		}
+		@Override
+		public void triggered(GameObject src) {
+		}
+	}
 	private Trigger end;
 	/**
 	 * Constructs a new Elevator with the specified coordinates
@@ -18,7 +39,7 @@ public class Elevator extends Button {
 	public Elevator(int x, int y) throws SlickException {
 		super(x, y);
 		// Initialize the end of level trigger
-		end = new Trigger((int)x+40, (int)y, 6, 80, new FinishListener());
+		end = new Trigger(x+40, y, 6, 80, new FinishListener());
 		end.setActive(false);
 		GameConstants.triggers.add(end);
 		// Initialize the button press trigger
@@ -36,9 +57,6 @@ public class Elevator extends Button {
 		addAnimation("off", new Animation(new SpriteSheet("data\\maps\\ButtonOff.png", 32, 32), 150));
 		addAnimation("on", new Animation(new SpriteSheet("data\\maps\\ButtonOn.png", 32, 32), 150));
 		playAnimation("off");
-	}
-	public void interact(GameObject source) {
-		end.setActive(true);
 	}
 	@Override
 	public void draw(Graphics g) {
@@ -111,25 +129,8 @@ public class Elevator extends Button {
 		g.setColor(orig);
 		g.translate(-x, -y);
 	}
-	/**
-	 * @author PenguinToast
-	 * Class to trigger end of level animation
-	 */
-	private class FinishListener implements TriggerListener {
-		@Override
-		public void onEnter(GameObject src) {
-			//bring up question screen
-			GameConstants.level.done = true;
-			GameConstants.level.questions.setAnswering(true);
-		}
-		@Override
-		public void onExit(GameObject src) {
-			end.setActive(false);
-			GameConstants.level.done = false;
-			GameConstants.level.questions.setAnswering(false);
-		}
-		@Override
-		public void triggered(GameObject src) {
-		}
+	@Override
+	public void interact(GameObject source) {
+		end.setActive(true);
 	}
 }

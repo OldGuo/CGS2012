@@ -43,6 +43,12 @@ public class MovingTile extends Tile {
 		}
 		g.setColor(c);
 	}
+	public boolean isOn() {
+		return on;
+	}
+	public void setOn(boolean on) {
+		this.on = on;
+	}
 	@Override
 	public void update(GameContainer gc, int delta) {
 		if(on) {
@@ -59,11 +65,5 @@ public class MovingTile extends Tile {
 			v.normalise().scale(move[2]);
 			translate(v);
 		}
-	}
-	public boolean isOn() {
-		return on;
-	}
-	public void setOn(boolean on) {
-		this.on = on;
 	}
 }

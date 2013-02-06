@@ -29,6 +29,34 @@ public class QuestionWindow{
 		init();
 	}
 	/**
+	 * @param g - Graphics
+	 * @param x - x position
+	 * @param y - y position
+	 */
+	public void draw(Graphics g,int x,int y){
+		g.setColor(color);
+		g.fillRect(-300,-300,1100 + x,900 + y);
+		g.setColor(Color.black);
+		String question = reader.getQuestions().get(randQuestion);
+		String[] split = question.split(" - ");
+		g.drawString(split[0], 400 + x - g.getFont().getWidth(split[0])/2,60 + y);
+		int questionLength = g.getFont().getWidth(split[1]);
+		g.drawString(split[1],400 + x - questionLength/2,100 + y);
+		for(int i = 0; i < questions.size(); i++){
+			questions.get(i).draw(g,x,y);
+		}
+		g.setColor(Color.black);
+		int max = GameConstants.wrongCountMax;
+		int current = GameConstants.level.wrongCount;
+		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160+x,500+y);
+	}
+	/**
+	 * @return - Whether the player is answering questions
+	 */
+	public boolean getAnswering(){
+		return answering;
+	}
+	/**
 	 * Initializes values
 	 * @throws SlickException
 	 */
@@ -91,26 +119,10 @@ public class QuestionWindow{
 		return out;
 	}
 	/**
-	 * @param g - Graphics
-	 * @param x - x position
-	 * @param y - y position
+	 * @param a - Sets whether the user is answering questions
 	 */
-	public void draw(Graphics g,int x,int y){
-		g.setColor(color);
-		g.fillRect(-300,-300,1100 + x,900 + y);
-		g.setColor(Color.black);
-		String question = reader.getQuestions().get(randQuestion);
-		String[] split = question.split(" - ");
-		g.drawString(split[0], 400 + x - g.getFont().getWidth(split[0])/2,60 + y);
-		int questionLength = g.getFont().getWidth(split[1]);
-		g.drawString(split[1],400 + x - questionLength/2,100 + y);
-		for(int i = 0; i < questions.size(); i++){
-			questions.get(i).draw(g,x,y);
-		}
-		g.setColor(Color.black);
-		int max = GameConstants.wrongCountMax;
-		int current = GameConstants.level.wrongCount;
-		g.drawString(max - current % max + " more incorrect questions before damage will be taken.",160+x,500+y);
+	public void setAnswering(boolean a){
+		answering = a;
 	}
 	/**
 	 * Updates the QuestionWindow
@@ -135,18 +147,6 @@ public class QuestionWindow{
 				}
 			}
 		}
-	}
-	/**
-	 * @return - Whether the player is answering questions
-	 */
-	public boolean getAnswering(){
-		return answering;
-	}
-	/**
-	 * @param a - Sets whether the user is answering questions
-	 */
-	public void setAnswering(boolean a){
-		answering = a;
 	}
 	/**
 	 * @return - returns which question is currently being asked

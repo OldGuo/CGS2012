@@ -14,21 +14,6 @@ import org.newdawn.slick.geom.Vector2f;
 public class Vector extends Vector2f {
 	
 	/**
-	 * Creates a vector with the given X and Y components.
-	 * @param x - The X component of the vector
-	 * @param y - The Y component of the vector
-	 */
-	public Vector(float x, float y) {
-		super(x,y);
-	}
-	/**
-	 * Creates a Vector from the given vector
-	 * @param v
-	 */
-	public Vector(Vector2f v) {
-		super(v);
-	}
-	/**
 	 * Creates an empty vector
 	 */
 	public Vector() {
@@ -42,13 +27,6 @@ public class Vector extends Vector2f {
 		super(theta);
 	}
 	/**
-	 * Creates a vector with the given coordinates
-	 * @param coords - float array containing x and y coordinates
-	 */
-	public Vector(float[] coords) {
-		super(coords);
-	}
-	/**
 	 * Creates a vector given the length and the angle
 	 * @param theta - The angle of the vector to be created, in degrees
 	 * @param length - The length of the vector to be created
@@ -57,17 +35,26 @@ public class Vector extends Vector2f {
 		this((float)(length * cos(toRadians(theta))), (float)(length * sin(toRadians(theta))));
 	}
 	/**
-	 * Sets the length/magnitude of the vector
-	 * @param length - The length to set the vector to
+	 * Creates a vector with the given X and Y components.
+	 * @param x - The X component of the vector
+	 * @param y - The Y component of the vector
 	 */
-	public strictfp Vector setLength(float length) {
-		scale(length/length());
-		return this;
+	public Vector(float x, float y) {
+		super(x,y);
 	}
-	@Override
-	public strictfp Vector sub(Vector2f v) {
-		super.sub(v);
-		return this;
+	/**
+	 * Creates a vector with the given coordinates
+	 * @param coords - float array containing x and y coordinates
+	 */
+	public Vector(float[] coords) {
+		super(coords);
+	}
+	/**
+	 * Creates a Vector from the given vector
+	 * @param v
+	 */
+	public Vector(Vector2f v) {
+		super(v);
 	}
 	@Override
 	public strictfp Vector add(double theta) {
@@ -75,23 +62,21 @@ public class Vector extends Vector2f {
 		return this;
 	}
 	@Override
-	public strictfp Vector sub(double theta) {
-		super.sub(theta);
+	public strictfp Vector add(Vector2f v) {
+		super.add(v);
 		return this;
 	}
 	@Override
-	public strictfp Vector set(float x, float y) {
-		super.set(x, y);
-		return this;
+	public strictfp Vector copy() {
+		return new Vector(this);
+	}
+	@Override
+	public strictfp Vector getNormal() {
+		return new Vector(super.getNormal());
 	}
 	@Override
 	public strictfp Vector getPerpendicular() {
 		return new Vector(super.getPerpendicular());
-	}
-	@Override
-	public strictfp Vector set(float[] pt) {
-		super.set(pt);
-		return this;
 	}
 	@Override
 	public strictfp Vector negate() {
@@ -103,26 +88,41 @@ public class Vector extends Vector2f {
 		return this;
 	}
 	@Override
-	public strictfp Vector add(Vector2f v) {
-		super.add(v);
-		return this;
-	}
-	@Override
 	public strictfp Vector normalise() {
 		super.normalise();
 		return this;
 	}
 	@Override
-	public strictfp Vector getNormal() {
-		return new Vector(super.getNormal());
-	}
-	@Override
-	public strictfp Vector copy() {
-		return new Vector(this);
-	}
-	@Override
 	public strictfp Vector scale(float a) {
 		super.scale(a);
+		return this;
+	}
+	@Override
+	public strictfp Vector set(float x, float y) {
+		super.set(x, y);
+		return this;
+	}
+	@Override
+	public strictfp Vector set(float[] pt) {
+		super.set(pt);
+		return this;
+	}
+	/**
+	 * Sets the length/magnitude of the vector
+	 * @param length - The length to set the vector to
+	 */
+	public strictfp Vector setLength(float length) {
+		scale(length/length());
+		return this;
+	}
+	@Override
+	public strictfp Vector sub(double theta) {
+		super.sub(theta);
+		return this;
+	}
+	@Override
+	public strictfp Vector sub(Vector2f v) {
+		super.sub(v);
 		return this;
 	}
 }

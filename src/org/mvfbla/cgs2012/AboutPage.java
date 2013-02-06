@@ -29,6 +29,12 @@ public class AboutPage extends BasicGameState{
 		this.stateID = stateID;
 	}
 	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return stateID;
+	}
+
+	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
@@ -73,12 +79,6 @@ public class AboutPage extends BasicGameState{
 		if(back.getAction().equals("Back")){
 			fadeState = 2;
 		}
-	}
-
-	@Override
-	public int getID() {
-		// TODO Auto-generated method stub
-		return stateID;
 	}
 
 }

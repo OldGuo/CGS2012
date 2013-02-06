@@ -42,11 +42,10 @@ public class InteractButton {
 		height = h;
 	}
 	/**
-	 * Sets the text for the question
-	 * @param text - Text for the question
+	 * Clears the text on the button
 	 */
-	public void setText(String text) {
-		words = text;
+	public void clear(){
+		action = " ";
 	}
 	/**
 	 * @param g - Graphics
@@ -62,6 +61,103 @@ public class InteractButton {
 			g.drawImage(buttonClick,getX() + offsetX,getY() + offsetY);
 		g.setColor(Color.black);
 		g.drawString(words,getX() + offsetX + PADDING,getY() + offsetY + PADDING);
+	}
+	/**
+	 * @return returns the action the button will perform
+	 */
+	public String getAction(){
+		return action;
+	}
+	/**
+	 * @return - Clicked or not
+	 */
+	public boolean getClick(){
+		return clickDown;
+	}
+	/**
+	 * @return - Image in clicked state
+	 */
+	public Image getClickButton(){
+		return buttonClick;
+	}
+	/**
+	 * @return - height of the button
+	 */
+	public int getHeight(){
+		return height;
+	}
+	/**
+	 * @return - Hovering or not
+	 */
+	public boolean getHover(){
+		return hover;
+	}
+	/**
+	 * @return - Image in hover state
+	 */
+	public Image getHoverButton(){
+		return buttonHover;
+	}
+	/**
+	 * @return - length of the button
+	 */
+	public int getLength(){
+		return length;
+	}
+	/**
+	 * @return - Image in normal state
+	 */
+	public Image getNormalButton(){
+		return buttonNormal;
+	}
+	/**
+	 * @return - text on the button
+	 */
+	public String getText(){
+		return words;
+	}
+	/**
+	 * @return - X position of the button
+	 */
+	public int getX(){
+		return x;
+	}
+	/**
+	 * @return - Y position of the button
+	 */
+	public int getY(){
+		return y;
+	}
+	/**
+	 * @param click - Set whether clicked or not
+	 */
+	public void setClick(boolean click){
+		clickDown = click;
+	}
+	/**
+	 * @param hovering - Set whether hovering or not
+	 */
+	public void setHover(boolean hovering){
+		hover = hovering;
+	}
+	/**
+	 * Sets the text for the question
+	 * @param text - Text for the question
+	 */
+	public void setText(String text) {
+		words = text;
+	}
+	/**
+	 * @param xPos - sets the x position
+	 */
+	public void setX(int xPos){
+		x = xPos;
+	}
+	/**
+	 * @param yPos - sets the y position
+	 */
+	public void setY(int yPos){
+		y = yPos;
 	}
 	/**
 	 * @param gc - GameContainer
@@ -94,101 +190,5 @@ public class InteractButton {
 			 setClick(false);
 			 setHover(false);
 		 }
-	}
-	/**
-	 * Clears the text on the button
-	 */
-	public void clear(){
-		action = " ";
-	}
-	/**
-	 * @return - Image in normal state
-	 */
-	public Image getNormalButton(){
-		return buttonNormal;
-	}
-	/**
-	 * @return - Image in hover state
-	 */
-	public Image getHoverButton(){
-		return buttonHover;
-	}
-	/**
-	 * @return - Image in clicked state
-	 */
-	public Image getClickButton(){
-		return buttonClick;
-	}
-	/**
-	 * @return - Hovering or not
-	 */
-	public boolean getHover(){
-		return hover;
-	}
-	/**
-	 * @return - Clicked or not
-	 */
-	public boolean getClick(){
-		return clickDown;
-	}
-	/**
-	 * @param hovering - Set whether hovering or not
-	 */
-	public void setHover(boolean hovering){
-		hover = hovering;
-	}
-	/**
-	 * @param click - Set whether clicked or not
-	 */
-	public void setClick(boolean click){
-		clickDown = click;
-	}
-	/**
-	 * @return - X position of the button
-	 */
-	public int getX(){
-		return x;
-	}
-	/**
-	 * @return - Y position of the button
-	 */
-	public int getY(){
-		return y;
-	}
-	/**
-	 * @param xPos - sets the x position
-	 */
-	public void setX(int xPos){
-		x = xPos;
-	}
-	/**
-	 * @param yPos - sets the y position
-	 */
-	public void setY(int yPos){
-		y = yPos;
-	}
-	/**
-	 * @return - length of the button
-	 */
-	public int getLength(){
-		return length;
-	}
-	/**
-	 * @return - height of the button
-	 */
-	public int getHeight(){
-		return height;
-	}
-	/**
-	 * @return - text on the button
-	 */
-	public String getText(){
-		return words;
-	}
-	/**
-	 * @return returns the action the button will perform
-	 */
-	public String getAction(){
-		return action;
 	}
 }

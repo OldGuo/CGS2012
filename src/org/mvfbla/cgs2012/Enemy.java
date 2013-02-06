@@ -13,6 +13,21 @@ public class Enemy extends Characters{;
 		super(x, y, width, height);
 		speed=direction=-1;
 	}
+	public float getEnemyDirection(){ //returns the enemy's direction
+		return direction;
+	}
+	public float getSpeed(){ //returns the speed of the enemy
+		return speed;
+	}
+	public void setDirection(float whichWay){// sets the enemy's direction
+		direction=whichWay;
+		if(Math.signum(speed)!=whichWay)
+			speed*=-1;
+	}
+	public void setSpeed(float howFast){ //sets the speed of the enemy
+		speed=howFast;
+		this.setVelX(speed);
+	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(super.isAlive()){
@@ -30,20 +45,5 @@ public class Enemy extends Characters{;
 			super.stopAnimation();
 			super.update(gc, delta);
 		}
-	}
-	public float getSpeed(){ //returns the speed of the enemy
-		return speed;
-	}
-	public void setSpeed(float howFast){ //sets the speed of the enemy
-		speed=howFast;
-		this.setVelX(speed);
-	}
-	public float getEnemyDirection(){ //returns the enemy's direction
-		return direction;
-	}
-	public void setDirection(float whichWay){// sets the enemy's direction
-		direction=whichWay;
-		if(Math.signum(speed)!=whichWay)
-			speed*=-1;
 	}
 }

@@ -45,12 +45,35 @@ public abstract class GameObject extends Polygon{
 		objects = new ArrayList<GameObject>();
 	}
 	/**
-	 * Checks for intersection between the bounding boxes of the two GameObjects
-	 * @param r - The GameObject to be tested for intersection
-	 * @return A boolean representing whether or not the two objects intersect
+	 * Attaches a GameObject to this one
+	 * @param obj - GameObject to attach
 	 */
-	public boolean intersects(GameObject r) {
-		return getRect().intersects(r.getRect());
+	public void addObject(GameObject obj) {
+		objects.add(obj);
+	}
+	/**
+	 * Checks if this GameObject is colliding with another GameObject
+	 * @param obj - Object to be tested
+	 * @return A boolean representing whether or not the two objects are colliding
+	 */
+	public boolean collides(GameObject obj) {
+		return obj.getCollision().intersects(collision);
+	}
+	/**
+	 * Method to draw the object
+	 * @param g - Graphics context to draw with
+	 */
+	public abstract void draw(Graphics g);
+	/**
+	 * Gets the collision shape of this GameObject
+	 * @return A Shape representing the collision of this object
+	 */
+	public Shape getCollision() {
+		return collision;
+	}
+	@Override
+	public float getHeight() {
+		return getMaxY()-getMinY();
 	}
 	/**
 	 * Gets the rectangle encompassing this GameObject
@@ -59,16 +82,31 @@ public abstract class GameObject extends Polygon{
 	public Rectangle2D.Float getRect() {
 		return new Rectangle2D.Float(x, y, getWidth(), getHeight());
 	}
+	@Override
 	public float getWidth() {
 		return getMaxX()-getMinX();
 	}
-	public float getHeight() {
-		return getMaxY()-getMinY();
+	/**
+	 * Checks for intersection between the bounding boxes of the two GameObjects
+	 * @param r - The GameObject to be tested for intersection
+	 * @return A boolean representing whether or not the two objects intersect
+	 */
+	public boolean intersects(GameObject r) {
+		return getRect().intersects(r.getRect());
 	}
+	/**
+	 * Sets the collision shape of this GameObject
+	 * @param s - Shape to be set as the collision shape
+	 */
+	public void setCollision(Shape s) {
+		collision = s;
+	}
+	@Override
 	public void setX(float x) {
 		super.setX(x);
 		collision.setX(x);
 	}
+	@Override
 	public void setY(float y) {
 		super.setY(y);
 		collision.setY(y);
@@ -82,43 +120,9 @@ public abstract class GameObject extends Polygon{
 		setY(getY() + v.getY());
 	}
 	/**
-	 * Gets the collision shape of this GameObject
-	 * @return A Shape representing the collision of this object
-	 */
-	public Shape getCollision() {
-		return collision;
-	}
-	/**
-	 * Sets the collision shape of this GameObject
-	 * @param s - Shape to be set as the collision shape
-	 */
-	public void setCollision(Shape s) {
-		collision = s;
-	}
-	/**
-	 * Checks if this GameObject is colliding with another GameObject
-	 * @param obj - Object to be tested
-	 * @return A boolean representing whether or not the two objects are colliding
-	 */
-	public boolean collides(GameObject obj) {
-		return obj.getCollision().intersects(collision);
-	}
-	/**
-	 * Attaches a GameObject to this one
-	 * @param obj - GameObject to attach
-	 */
-	public void addObject(GameObject obj) {
-		objects.add(obj);
-	}
-	/**
 	 * Update method on this object, preferably called every frame
 	 * @param gc - GameContainer updating this object
 	 * @param delta - Time since the last update
 	 */
 	public abstract void update(GameContainer gc, int delta);
-	/**
-	 * Method to draw the object
-	 * @param g - Graphics context to draw with
-	 */
-	public abstract void draw(Graphics g);
 }

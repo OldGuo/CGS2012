@@ -41,6 +41,16 @@ public class BlueBossLevel extends GameLevel {
 		this.stateID = stateID;
 	}
 	@Override
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //When the state is entered
+		initStuff();
+	}
+
+	@Override
+	public int getID() { //returns the ID of the level
+		return stateID;
+	}
+
+	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
 		//Initializes variables for the level
@@ -54,7 +64,57 @@ public class BlueBossLevel extends GameLevel {
 		text = new TypeWriter();
 		questions = new QuestionWindow();
 	}
-
+	@Override
+	public void initObject(TiledObject to) throws SlickException { //Creates level specific objects for the Blue Boss Level
+		if(to.getType().equals("pillar")){ //Pillar for interacting with the Blue Boss
+			Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
+			GameConstants.pillars.add(pillar);
+		}
+	}
+	@Override
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
+	@Override
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException{ //Draws the level
+		draw(g);
+		g.setColor(Color.black);
+		if(platformBroken == false) //Draws the platform unless broken
+			g.fillRect(5*16,18*16,16*39,16*2);
+		else{
+			g.fillRect(5*16, fallY, 6*39, 16*2);
+			g.fillRect(27*16, fallY, 6*39, 16*2);
+		}
+		if(player.shouldDisplay()) //Player blinking
+			player.draw(g);
+		if(transState != 0) { //Fade time
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(deathTime > 0) { //Player death
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		if(beforeQuestions == true || afterQuestions == true){ //Handles the pre-boss sequence
+			try {
+				text.draw(g,0,0,720,80);
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+		}
+		if(questions.getAnswering() == true){ //Draws question screen
+			questions.draw(g,0,0);
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){ //If paused
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+	}
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg,int delta) throws SlickException {
 		//Updates the level
@@ -156,66 +216,6 @@ public class BlueBossLevel extends GameLevel {
 					}
 				}
 			}
-		}
-	}
-
-	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException{ //Draws the level
-		draw(g);
-		g.setColor(Color.black);
-		if(platformBroken == false) //Draws the platform unless broken
-			g.fillRect(5*16,18*16,16*39,16*2);
-		else{
-			g.fillRect(5*16, fallY, 6*39, 16*2);
-			g.fillRect(27*16, fallY, 6*39, 16*2);
-		}
-		if(player.shouldDisplay()) //Player blinking
-			player.draw(g);
-		if(transState != 0) { //Fade time
-			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
-			g.fillRect(0, 0, 100000, 100000);
-		}
-		if(deathTime > 0) { //Player death
-			player.stopAnimation();
-			player.draw(g);
-			long time = deathTime % deathDelay;
-			float prog = time/(float)deathDelay;
-			if(prog > 0.5f)
-				prog = 1-prog;
-			Color c = new Color(0, 0, 0, prog);
-			g.setColor(c);
-			g.fillRect(0, 0, 100000, 100000);
-		}
-		if(beforeQuestions == true || afterQuestions == true){ //Handles the pre-boss sequence
-			try {
-				text.draw(g,0,0,720,80);
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-		}
-		if(questions.getAnswering() == true){ //Draws question screen
-			questions.draw(g,0,0);
-		}
-		// Draw pause window if needed
-		if(GameConstants.getPaused() == true){ //If paused
-			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		}
-	}
-	@Override
-	public int getID() { //returns the ID of the level
-		return stateID;
-	}
-	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //When the state is entered
-		initStuff();
-	}
-	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
-	@Override
-	public void initObject(TiledObject to) throws SlickException { //Creates level specific objects for the Blue Boss Level
-		if(to.getType().equals("pillar")){ //Pillar for interacting with the Blue Boss
-			Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
-			GameConstants.pillars.add(pillar);
 		}
 	}
 }

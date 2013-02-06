@@ -17,12 +17,6 @@ public class Pillar extends GameObject {
 		unbrokenPillar = new Image("data\\Maps\\pillarUnbroken.png");
 		brokenPillar = new Image("data\\Maps\\pillarBroken.png");
 	}
-	public boolean isBroken(){
-		return broken;
-	}
-	public void setBroken(boolean b){
-		broken = b;
-	}
 	@Override
 	public void draw(Graphics g){
 		if(broken){
@@ -30,6 +24,12 @@ public class Pillar extends GameObject {
 		}else{
 			unbrokenPillar.draw(getX(),getY());
 		}
+	}
+	public boolean isBroken(){
+		return broken;
+	}
+	public void setBroken(boolean b){
+		broken = b;
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {

@@ -25,11 +25,30 @@ public class MotionSensorLevel extends GameLevel {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
+		initStuff(); //When the level is entered
+	}
+
+	@Override
+	public int getID(){ //returns the ID of the level
+		return stateID;
+	}
+
+	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		//Initializes values
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
+	}
+	@Override
+	public void initObject(TiledObject to) throws SlickException {} //Initializes level specific objects, in this case there are none
+	@Override
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the level is exited
+	@Override
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
+		//Draws level
+		draw(g);
 	}
 
 	@Override
@@ -37,23 +56,4 @@ public class MotionSensorLevel extends GameLevel {
 		//Updates level
 		updateMain(container, sbg, delta);
 	}
-
-	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
-		//Draws level
-		draw(g);
-	}
-	@Override
-	public int getID(){ //returns the ID of the level
-		return stateID;
-	}
-	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		initStuff(); //When the level is entered
-	}
-	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the level is exited
-
-	@Override
-	public void initObject(TiledObject to) throws SlickException {} //Initializes level specific objects, in this case there are none
 }

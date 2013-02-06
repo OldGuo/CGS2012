@@ -24,6 +24,11 @@ public class CameraObject extends GameObject {
 		this.target = target;
 	}
 
+	@Override
+	public void draw(Graphics g) {
+		//draws the camera offset
+		g.translate(offsetX, offsetY);
+	}
 	/**
 	 * @return - The X offset for which the map will have to be translated
 	 */
@@ -55,10 +60,5 @@ public class CameraObject extends GameObject {
 			offsetY -= target.getMaxY() - getMaxY();
 			setY(getY() + (target.getMaxY() - getMaxY()));
 		}
-	}
-	@Override
-	public void draw(Graphics g) {
-		//draws the camera offset
-		g.translate(offsetX, offsetY);
 	}
 }

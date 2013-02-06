@@ -14,18 +14,6 @@ public class Trigger extends TiledObject{
 	 * @param y
 	 * @param width
 	 * @param height
-	 */
-	public Trigger(TiledObject to, TriggerListener al) {
-		super(to.getX(), to.getY(), to.getWidth(), to.getHeight(), "trigger");
-		listener = al;
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
 	 * @param type
 	 */
 	public Trigger(int x, int y, int width, int height, TriggerListener tl) {
@@ -34,12 +22,21 @@ public class Trigger extends TiledObject{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void hit(GameObject source) {
-		listener.triggered(source);
-		if(!contains(source)) {
-			contained.add(source);
-			listener.onEnter(source);
-		}
+	/**
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
+	public Trigger(TiledObject to, TriggerListener al) {
+		super(to.getX(), to.getY(), to.getWidth(), to.getHeight(), "trigger");
+		listener = al;
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean collides(GameObject test) {
+		GameObject go = new Tile(getX(), getY(), getWidth(), getHeight());
+		return test.collides(go) || go.contains(test.getCollision()) || test.getCollision().contains(go);
 	}
 	public boolean contains(GameObject test) {
 		return contained.contains(test);
@@ -48,9 +45,12 @@ public class Trigger extends TiledObject{
 		contained.remove(source);
 		listener.onExit(source);
 	}
-	public boolean collides(GameObject test) {
-		GameObject go = new Tile(getX(), getY(), getWidth(), getHeight());
-		return test.collides(go) || go.contains(test.getCollision()) || test.getCollision().contains(go);
+	public void hit(GameObject source) {
+		listener.triggered(source);
+		if(!contains(source)) {
+			contained.add(source);
+			listener.onEnter(source);
+		}
 	}
 
 	public boolean isActive() {

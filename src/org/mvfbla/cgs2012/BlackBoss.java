@@ -33,6 +33,19 @@ public class BlackBoss extends Characters{
 		super.setBlink(2000);
 	}
 	@Override
+	public void draw(Graphics g){
+		super.draw(g);
+	}
+	public float getRange(){
+		return punchRange;
+	}
+	public boolean isPunching(){
+		return punching;
+	}
+	public void setRange(float whatRange){
+		punchRange=whatRange;
+	}
+	@Override
 	public void update(GameContainer gc, int delta) {
 		if(!isAlive())
 			return;
@@ -111,18 +124,5 @@ public class BlackBoss extends Characters{
 			}
 		}
 		super.update(gc, delta);
-	}
-	public float getRange(){
-		return punchRange;
-	}
-	public void setRange(float whatRange){
-		punchRange=whatRange;
-	}
-	public boolean isPunching(){
-		return punching;
-	}
-	@Override
-	public void draw(Graphics g){
-		super.draw(g);
 	}
 }

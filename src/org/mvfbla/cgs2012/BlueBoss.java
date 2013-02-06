@@ -34,6 +34,50 @@ public class BlueBoss extends Boss{
 		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\BlueBossWalking.png", 128, 128), 150));
 		stomp = new Image("data\\Stomp.png");
 	}
+	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
+		awake=inSight;
+	}
+	@Override
+	public void draw(Graphics g){
+		super.draw(g);
+		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
+		//g.fillRect(stompX, stompY, 64, 64);
+		if(animTime >= 0) {
+			float prog = animTime/(float)animLength;
+			float scale = prog+1f;
+			Color alpha = new Color(Color.white);
+			alpha.a = 1-prog;
+			int x = (int) (stompX-(((stomp.getWidth()*scale)-stomp.getWidth())/2)); //this animates the explosion
+			int y = (int) (stompY-(((stomp.getHeight()*scale)-stomp.getHeight())/2));
+			stomp.getScaledCopy(scale).draw(x,y, alpha);
+		}
+	}
+	public boolean getAttacking(){
+		return attacking;
+	}
+	public boolean getFalling(){
+		return falling;
+	}
+	public float getSight(){
+		return sight;
+	}
+	public int getStompX(){ //coordinates for explosion
+		return stompX + 32;
+	}
+	public int getStompY(){
+		return stompY + 32;
+	}
+	public void setAttacking(boolean a){
+		attacking = a;
+	}
+	public void setFalling(boolean f){ //when defeated, the platform falls
+		falling = f;
+	}
+	public void stomp(){ //method for stomping
+		stomping = true;
+		trans = new Vector(0,0);
+		super.setVelY(-10);
+	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(!died && !isAlive()) {
@@ -67,49 +111,5 @@ public class BlueBoss extends Boss{
 		}if(!attacking){
 			super.setHealth(3);
 		}
-	}
-	@Override
-	public void draw(Graphics g){
-		super.draw(g);
-		g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
-		//g.fillRect(stompX, stompY, 64, 64);
-		if(animTime >= 0) {
-			float prog = animTime/(float)animLength;
-			float scale = prog+1f;
-			Color alpha = new Color(Color.white);
-			alpha.a = 1-prog;
-			int x = (int) (stompX-(((stomp.getWidth()*scale)-stomp.getWidth())/2)); //this animates the explosion
-			int y = (int) (stompY-(((stomp.getHeight()*scale)-stomp.getHeight())/2));
-			stomp.getScaledCopy(scale).draw(x,y, alpha);
-		}
-	}
-	public void stomp(){ //method for stomping
-		stomping = true;
-		trans = new Vector(0,0);
-		super.setVelY(-10);
-	}
-	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
-		awake=inSight;
-	}
-	public float getSight(){
-		return sight;
-	}
-	public int getStompX(){ //coordinates for explosion
-		return stompX + 32;
-	}
-	public int getStompY(){
-		return stompY + 32;
-	}
-	public void setFalling(boolean f){ //when defeated, the platform falls
-		falling = f;
-	}
-	public boolean getFalling(){
-		return falling;
-	}
-	public void setAttacking(boolean a){
-		attacking = a;
-	}
-	public boolean getAttacking(){
-		return attacking;
 	}
 }

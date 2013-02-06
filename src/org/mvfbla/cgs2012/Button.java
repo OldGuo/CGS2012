@@ -5,14 +5,36 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Button extends AnimatedObject implements InteractiveObject {
+	/**
+	 * @author PenguinToast
+	 * Listener to display the spacebar notification as the player apporaches
+	 */
+	protected class myListener implements TriggerListener {
+		@Override
+		public void onEnter(GameObject src) {
+			if(src == GameConstants.level.player)
+				notif.playAnimation("far");
+		}
+
+		@Override
+		public void onExit(GameObject src) {
+			if(src == GameConstants.level.player)
+				notif.playAnimation("near");
+		}
+
+		@Override
+		public void triggered(GameObject src) {
+
+		}
+	}
 	protected Trigger trigger;
 	public AnimatedObject notif;
 	protected ButtonListener listener;
 	protected long lastPress = 0;
 	protected long cooldown = 500;
 	protected boolean on;
-	protected boolean used = false;
 
+	protected boolean used = false;
 	/**
 	 * Creates a new button at the specified location(Mainly for elevator)
 	 * @param x - X location to create the button at
@@ -50,6 +72,14 @@ public class Button extends AnimatedObject implements InteractiveObject {
 		playAnimation("off");
 		notif.playAnimation("near");
 	}
+
+	/**
+	 * Returns the state of this button
+	 * @return The state of this button
+	 */
+	public boolean getState() {
+		return on;
+	}
 	/**
 	 * Returns the trigger that displays the notification
 	 * @return - The trigger the displays the notification
@@ -58,13 +88,11 @@ public class Button extends AnimatedObject implements InteractiveObject {
 		return trigger;
 	}
 
-	/**
-	 * Sets the ButtonListener for this button
-	 * @param listener - The new ButtonListener
-	 */
-	public void setListener(ButtonListener listener) {
-		this.listener = listener;
+	@Override
+	public boolean inRange(GameObject source) {
+		return trigger.collides(source);
 	}
+
 	@Override
 	public void interact(GameObject source) {
 		// Increase tech used variable, and display a question
@@ -87,33 +115,16 @@ public class Button extends AnimatedObject implements InteractiveObject {
 			listener.buttonPressed(on);
 		}
 	}
-
-	/**
-	 * @author PenguinToast
-	 * Listener to display the spacebar notification as the player apporaches
-	 */
-	protected class myListener implements TriggerListener {
-		@Override
-		public void onEnter(GameObject src) {
-			if(src == GameConstants.level.player)
-				notif.playAnimation("far");
-		}
-
-		@Override
-		public void onExit(GameObject src) {
-			if(src == GameConstants.level.player)
-				notif.playAnimation("near");
-		}
-
-		@Override
-		public void triggered(GameObject src) {
-
-		}
-	}
-
 	@Override
-	public boolean inRange(GameObject source) {
-		return trigger.collides(source);
+	public boolean isActive() {
+		return trigger.isActive();
+	}
+	/**
+	 * Sets the ButtonListener for this button
+	 * @param listener - The new ButtonListener
+	 */
+	public void setListener(ButtonListener listener) {
+		this.listener = listener;
 	}
 	/**
 	 * Sets the state of this button(on/off)
@@ -121,17 +132,6 @@ public class Button extends AnimatedObject implements InteractiveObject {
 	 */
 	public void setState(boolean on) {
 		this.on = on;
-	}
-	/**
-	 * Returns the state of this button
-	 * @return The state of this button
-	 */
-	public boolean getState() {
-		return on;
-	}
-	@Override
-	public boolean isActive() {
-		return trigger.isActive();
 	}
 
 }

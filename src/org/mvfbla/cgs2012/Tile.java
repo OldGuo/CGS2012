@@ -12,13 +12,13 @@ public class Tile extends GameObject{
 	}
 
 	@Override
-	public void update(GameContainer gc, int delta) {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void update(GameContainer gc, int delta) {
 		// TODO Auto-generated method stub
 		
 	}

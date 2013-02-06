@@ -24,6 +24,36 @@ public class QuestionReader {
 		textFile=new File(fileName);
 		processFile();
 	}
+	/**
+	 * @return returns the arraylist with correct answers
+	 */
+	public ArrayList<String>getCorrectAns(){
+		return correctAns;
+	}
+	/**
+	 * @return - returns the arraylist of questions
+	 */
+	public ArrayList<String>getQuestions(){
+		return questions;
+	}
+	/**
+	 * @return - first array list of wrong answers
+	 */
+	public ArrayList<String>getWrongAns1(){
+		return wrongAns1;
+	}
+	/**
+	 * @return - second array of wrong answers
+	 */
+	public ArrayList<String>getWrongAns2(){
+		return wrongAns2;
+	}
+	/**
+	 * @return - third array of wrong answers
+	 */
+	public ArrayList<String>getWrongAns3(){
+		return wrongAns3;
+	}
 	/*public static void main(String[]args) throws FileNotFoundException{
 		QuestionReader parser=new QuestionReader("data\\questions.txt");
 		parser.processFile();
@@ -58,35 +88,5 @@ public class QuestionReader {
 			wrongAns2.add(scanner.next());
 			wrongAns3.add(scanner.next());
 		}
-	}
-	/**
-	 * @return - returns the arraylist of questions
-	 */
-	public ArrayList<String>getQuestions(){
-		return questions;
-	}
-	/**
-	 * @return returns the arraylist with correct answers
-	 */
-	public ArrayList<String>getCorrectAns(){
-		return correctAns;
-	}
-	/**
-	 * @return - first array list of wrong answers
-	 */
-	public ArrayList<String>getWrongAns1(){
-		return wrongAns1;
-	}
-	/**
-	 * @return - second array of wrong answers
-	 */
-	public ArrayList<String>getWrongAns2(){
-		return wrongAns2;
-	}
-	/**
-	 * @return - third array of wrong answers
-	 */
-	public ArrayList<String>getWrongAns3(){
-		return wrongAns3;
 	}
 }

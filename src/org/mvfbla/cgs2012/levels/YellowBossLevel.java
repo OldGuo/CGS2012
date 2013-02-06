@@ -20,10 +20,45 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
-	//The Yellow Boss Level
-	//Sets the ID of the level
-	public YellowBossLevel(int stateID) {
-		this.stateID = stateID;
+	public class YellowButton extends Button {
+		public int number;
+		private int state;
+		protected YellowButton(int x, int y, int num) throws SlickException {
+			super(x, y, null);
+			number = num;
+			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
+		}
+		public int getStateNum() {
+			return state;
+		}
+		@Override
+		public void interact(GameObject source) {
+			long time = System.currentTimeMillis();
+			if(time-lastPress >= cooldown) {
+				lastPress = time;
+				if(state == 1) {
+					setStateNum(2);
+					yellowBoss.activate(number);
+					playAnimation("broke");
+				}
+			}
+		}
+		public void setStateNum(int state) {
+			if(state == 2) {
+				trigger.setActive(false);
+				notif.playAnimation("near");
+				playAnimation("broke");
+			}
+			if(state == 1) {
+				trigger.setActive(true);
+				playAnimation("on");
+			}
+			if(state == 0) {
+				trigger.setActive(false);
+				playAnimation("off");
+			}
+			this.state = state;
+		}
 	}
 
 	private YellowBoss yellowBoss;
@@ -37,91 +72,12 @@ public class YellowBossLevel extends GameLevel {
 	private QuestionWindow questions;
 	private boolean beforeQuestions,needRestart,afterQuestions;
 
-	@Override
-	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
-		super.setBackgroundInfo(33, 8);
-		afterQuestions = false;
-		beforeQuestions = true;
-		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
-		yellowBoss = new YellowBoss(330,100);
-		background = new Image("data\\Background.png");
-		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
-		lightning.start();
-		text = new TypeWriter();
-		questions = new QuestionWindow();
+	//The Yellow Boss Level
+	//Sets the ID of the level
+	public YellowBossLevel(int stateID) {
+		this.stateID = stateID;
 	}
 
-	@Override
-	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
-		updateMain(container, sbg, delta);
-		if(!GameConstants.getPaused()) {
-			if(!afterQuestions){
-				GameConstants.level.player.setControl(false);
-			}
-			if(!yellowBoss.isAlive()) {
-				yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
-				transState = 2;
-				if((GameConstants.bossesDefeated & 1) != 1) {
-					GameConstants.playNum++;
-					System.out.println(GameConstants.playNum);
-				}
-				GameConstants.lastBoss = 3;
-				GameConstants.bossesDefeated |= 1;
-			}
-			if(yellowBoss.isAiming())
-				yellowBoss.setReticle(player.getX());
-			else if(yellowBoss.isFiring()) {
-				if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
-					if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
-						player.setHealth(player.getHealth()-1);
-				}
-			}
-			lightning.update(delta);
-			if(beforeQuestions){
-				text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
-						"I want to ask it so many questions. I want to understand.  A stream of " +
-						"questions pour from my mouth. But it only responds with questions of its own." +
-						"                                       ");
-				if(text.isFinished() && beforeQuestions){
-					beforeQuestions = false;
-					needRestart = true;
-					questions.setAnswering(true);
-				}
-			}
-			if(questions.getAnswering() == false && !beforeQuestions){
-				afterQuestions = true;
-			}
-			if(afterQuestions == true){
-				text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
-						" But there is no answer, this only" +
-						" seems to infuriate the figure...   ...   ...   ...   ...   " +
-						"                                       ");
-				if(needRestart){
-					text.restart();
-					needRestart = false;
-				}
-			}
-			if(beforeQuestions == true || afterQuestions == true)
-				text.update(container, delta);
-			if(questions.getAnswering()){
-				questions.update(container);
-			}
-			for(Characters guy : GameConstants.enemies) {
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
-					YellowBoss boss = (YellowBoss)guy;
-					if(afterQuestions == true){
-						boss.setAttacking(true);
-						GameConstants.level.player.setControl(true);
-					}
-				}
-			}
-		}
-	}
-	@Override
-	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
-		draw(g);
-	}
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
@@ -201,58 +157,6 @@ public class YellowBossLevel extends GameLevel {
 			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
-	public void handleButton(int id) {
-		if(yellowBoss.location == id)
-			buttons[id].setStateNum(1);
-		else {
-			buttons[id].setStateNum(0);
-			buttons[id].notif.playAnimation("near");
-		}
-	}
-	public class YellowButton extends Button {
-		public int number;
-		private int state;
-		protected YellowButton(int x, int y, int num) throws SlickException {
-			super(x, y, null);
-			number = num;
-			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
-		}
-		@Override
-		public void interact(GameObject source) {
-			long time = System.currentTimeMillis();
-			if(time-lastPress >= cooldown) {
-				lastPress = time;
-				if(state == 1) {
-					setStateNum(2);
-					yellowBoss.activate(number);
-					playAnimation("broke");
-				}
-			}
-		}
-		public int getStateNum() {
-			return state;
-		}
-		public void setStateNum(int state) {
-			if(state == 2) {
-				trigger.setActive(false);
-				notif.playAnimation("near");
-				playAnimation("broke");
-			}
-			if(state == 1) {
-				trigger.setActive(true);
-				playAnimation("on");
-			}
-			if(state == 0) {
-				trigger.setActive(false);
-				playAnimation("off");
-			}
-			this.state = state;
-		}
-	}
-	@Override
-	public int getID(){
-		return stateID;
-	}
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
 		initStuff();
@@ -268,11 +172,107 @@ public class YellowBossLevel extends GameLevel {
 		GameConstants.interacts.add(b3);
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {}
-
+	public int getID(){
+		return stateID;
+	}
+	public void handleButton(int id) {
+		if(yellowBoss.location == id)
+			buttons[id].setStateNum(1);
+		else {
+			buttons[id].setStateNum(0);
+			buttons[id].notif.playAnimation("near");
+		}
+	}
+	@Override
+	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		super.setBackgroundInfo(33, 8);
+		afterQuestions = false;
+		beforeQuestions = true;
+		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
+		yellowBoss = new YellowBoss(330,100);
+		background = new Image("data\\Background.png");
+		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
+		lightning.start();
+		text = new TypeWriter();
+		questions = new QuestionWindow();
+	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {}
+	@Override
+	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
+		draw(g);
+	}
+
+	@Override
+	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+		updateMain(container, sbg, delta);
+		if(!GameConstants.getPaused()) {
+			if(!afterQuestions){
+				GameConstants.level.player.setControl(false);
+			}
+			if(!yellowBoss.isAlive()) {
+				yellowBoss.aiming = yellowBoss.charging = yellowBoss.firing = yellowBoss.teleporting = false;
+				transState = 2;
+				if((GameConstants.bossesDefeated & 1) != 1) {
+					GameConstants.playNum++;
+					System.out.println(GameConstants.playNum);
+				}
+				GameConstants.lastBoss = 3;
+				GameConstants.bossesDefeated |= 1;
+			}
+			if(yellowBoss.isAiming())
+				yellowBoss.setReticle(player.getX());
+			else if(yellowBoss.isFiring()) {
+				if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
+					if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
+						player.setHealth(player.getHealth()-1);
+				}
+			}
+			lightning.update(delta);
+			if(beforeQuestions){
+				text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
+						"I want to ask it so many questions. I want to understand.  A stream of " +
+						"questions pour from my mouth. But it only responds with questions of its own." +
+						"                                       ");
+				if(text.isFinished() && beforeQuestions){
+					beforeQuestions = false;
+					needRestart = true;
+					questions.setAnswering(true);
+				}
+			}
+			if(questions.getAnswering() == false && !beforeQuestions){
+				afterQuestions = true;
+			}
+			if(afterQuestions == true){
+				text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
+						" But there is no answer, this only" +
+						" seems to infuriate the figure...   ...   ...   ...   ...   " +
+						"                                       ");
+				if(needRestart){
+					text.restart();
+					needRestart = false;
+				}
+			}
+			if(beforeQuestions == true || afterQuestions == true)
+				text.update(container, delta);
+			if(questions.getAnswering()){
+				questions.update(container);
+			}
+			for(Characters guy : GameConstants.enemies) {
+				String name=guy.getClass().toString();
+				if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
+					YellowBoss boss = (YellowBoss)guy;
+					if(afterQuestions == true){
+						boss.setAttacking(true);
+						GameConstants.level.player.setControl(true);
+					}
+				}
+			}
+		}
 	}
 }

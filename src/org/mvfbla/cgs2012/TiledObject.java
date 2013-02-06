@@ -20,40 +20,40 @@ public class TiledObject {
 		this.height = height;
 		this.type = type;
 	}
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
-	}
-	public int getWidth() {
-		return width;
-	}
-	public void setWidth(int width) {
-		this.width = width;
+	public void addProperty(String name, String value) {
+		properties.put(name, value);
 	}
 	public int getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
-		this.height = height;
+	public String getProperty(String name) {
+		return properties.get(name);
 	}
 	public String getType() {
 		return type;
 	}
+	public int getWidth() {
+		return width;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	public void setType(String type) {
 		this.type = type;
 	}
-	public void addProperty(String name, String value) {
-		properties.put(name, value);
+	public void setWidth(int width) {
+		this.width = width;
 	}
-	public String getProperty(String name) {
-		return properties.get(name);
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
 	}
 }
