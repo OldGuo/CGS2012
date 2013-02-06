@@ -18,7 +18,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Young
  * Red Boss Level
- * Moves back and to defeat player.
+ * Moves back and forth to defeat player.
  */
 public class RedBossLevel extends GameLevel {
 
