@@ -9,6 +9,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author PenguinToast
+ * Class to represent end-of-level elevator
+ */
 public class Elevator extends Button {
 	/**
 	 * @author PenguinToast
@@ -32,6 +36,7 @@ public class Elevator extends Button {
 		}
 	}
 	private Trigger end;
+	private int startY = 0;
 	/**
 	 * Constructs a new Elevator with the specified coordinates
 	 * @param x - X coordinate of the elevator
@@ -40,6 +45,7 @@ public class Elevator extends Button {
 	 */
 	public Elevator(int x, int y) throws SlickException {
 		super(x, y);
+		startY = y;
 		// Initialize the end of level trigger
 		end = new Trigger(x+40, y, 6, 80, new FinishListener());
 		end.setActive(false);
@@ -94,9 +100,9 @@ public class Elevator extends Button {
 					g.translate(x, y);
 				}
 			} else {
-				int dist = 50;
+				int dist = 500;
 				prog = 1-prog;
-				setY(getY()-prog*dist);
+				setY(startY-prog*dist);
 				g.setColor(Color.black);
 				g.fill(this);
 				g.translate(x, y);

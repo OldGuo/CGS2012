@@ -46,7 +46,7 @@ public class GameConstants {
 	public static Map currMap;
 	public static int playerMaxHealth = 3;
 	public static int playerMaxSpeed = 5;
-	public static int wrongCountMax = 5;
+	public static int wrongCountMax = 4;
 	public static int lastBoss = -1;
 	//1 blue
 	//2 red

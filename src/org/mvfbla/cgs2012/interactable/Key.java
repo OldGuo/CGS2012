@@ -13,6 +13,10 @@ import org.newdawn.slick.SpriteSheet;
  * Key used for elevator level
  */
 public class Key extends AnimatedObject implements InteractiveObject {
+	/**
+	 * @author PenguinToast
+	 * Listener for when the player picks up the key
+	 */
 	public class KeyListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {
@@ -29,6 +33,12 @@ public class Key extends AnimatedObject implements InteractiveObject {
 	private final GameLevel level;
 	private final Trigger trigger;
 
+	/**
+	 * Creates a key from the specified object
+	 * @param to - The TiledObject with location data
+	 * @param level - The level this key is in
+	 * @throws SlickException
+	 */
 	public Key(TiledObject to, GameLevel level) throws SlickException {
 		super(to.getX(), to.getY(), 16, 32);
 		this.level = level;
