@@ -21,7 +21,9 @@ public class QuestionWindow{
 		init();
 	}
 	public void init() throws SlickException{
-		randQuestion = (int)(Math.random()*35);
+		do {
+			randQuestion = (int)(Math.random()*35);
+		} while(isUsed(randQuestion));
 		randCorrect = (int)(Math.random()*4);
 		//randCorrect = 0;
 		reader = new QuestionReader("data\\questions.txt");
@@ -53,6 +55,23 @@ public class QuestionWindow{
 			questions.add(new QuestionButton(reader.getCorrectAns().get(randQuestion),255,390,300,75,3));
 			break;
 		}
+	}
+	private boolean isUsed(int num) {
+		if(GameConstants.usedQuestions == GameConstants.allUsed) {
+			GameConstants.usedQuestions = 0;
+			return false;
+		}
+		long power = powerTwo(num);
+		return (GameConstants.usedQuestions & power) == power;
+	}
+	private long powerTwo(int num) {
+		if(num == 0)
+			return 1;
+		long out = 2;
+		for(int i = 1; i < num; i++) {
+			out*=2;
+		}
+		return out;
 	}
 	public void draw(Graphics g,int x,int y){
 		g.setColor(color);
