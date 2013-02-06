@@ -12,11 +12,6 @@
   </data>
  </layer>
  <objectgroup name="objects" width="53" height="45">
-  <object type="trigger" x="25" y="13" width="782" height="591">
-   <properties>
-    <property name="var" value="notBlackBoss"/>
-   </properties>
-  </object>
   <object name="playerBoss" type="playerBoss" x="240" y="496" width="48" height="48"/>
  </objectgroup>
 </map>

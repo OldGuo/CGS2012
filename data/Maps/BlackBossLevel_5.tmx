@@ -10,12 +10,12 @@
  </layer>
  <objectgroup name="objects" width="53" height="45">
   <object type="motionSensor" x="336" y="448" width="144" height="32"/>
-  <object type="trigger" x="-93" y="-53" width="1025" height="855">
+  <object type="blackBossButton" x="392" y="272" width="32" height="32"/>
+  <object name="playerBoss" type="playerBoss" x="32" y="400" width="48" height="48"/>
+  <object name="plot text" type="trigger" x="-119" y="-27" width="1031" height="837">
    <properties>
     <property name="var" value="blackBoss"/>
    </properties>
   </object>
-  <object type="blackBossButton" x="392" y="272" width="32" height="32"/>
-  <object name="playerBoss" type="playerBoss" x="32" y="400" width="48" height="48"/>
  </objectgroup>
 </map>
