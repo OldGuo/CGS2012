@@ -24,6 +24,13 @@ public class GameConstants {
 	public static int bossesDefeated = 0;
 	public static int playNum = 0;
 	public static int punchRange = 36;
+
+	public static int questionsCorrect;
+	public static int questionsIncorrect;
+	public static int enemiesDefeated;
+	public static int technologyUsed;
+	public static int timesDied;
+
 	public static void clear() {
 		collidableObjects.clear();
 		sensors.clear();
