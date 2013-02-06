@@ -118,26 +118,6 @@ public class MainMenu extends BasicGameState{
 		else if(GameConstants.playNum == 0)
 			menuButtons.get(0).setText("New Game");
 		Input input = gc.getInput();
-		if (input.isKeyDown(Input.KEY_0))
-			sbg.enterState(Game.MAIN_MENU_STATE);
-		if (input.isKeyDown(Input.KEY_1))
-			sbg.enterState(Game.TUTORIAL_STATE);
-		if (input.isKeyDown(Input.KEY_2))
-			sbg.enterState(Game.ELEVATOR_STATE);
-		if (input.isKeyDown(Input.KEY_3))
-			sbg.enterState(Game.MOTION_SENSOR_STATE);
-		if (input.isKeyDown(Input.KEY_4))
-			sbg.enterState(Game.GRAVITY_STATE);
-		if (input.isKeyDown(Input.KEY_5))
-			sbg.enterState(Game.BLUE_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_6))
-			sbg.enterState(Game.RED_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_7))
-			sbg.enterState(Game.YELLOW_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_8))
-			sbg.enterState(Game.BLACK_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_9))
-			sbg.enterState(Game.PLOT_STATE);
 		// Update buttons
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).update(gc,input);
