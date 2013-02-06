@@ -139,6 +139,7 @@ public class BlueBossLevel extends GameLevel {
 						boss.changeSleep(true);
 						boss.setDirection(Math.signum(tempX));
 						boss.setSpeed(1*Math.signum(tempX));
+						
 					}else{
 						boss.changeSleep(false);
 
