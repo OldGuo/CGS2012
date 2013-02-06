@@ -16,41 +16,47 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * The Elevator Level
+ * Centered around access to the exit Elevator
+ */
 public class ElevatorLevel extends GameLevel {
-
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public ElevatorLevel(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
-	private boolean waiting;
-
+	private boolean waiting; //When waiting to finish answering questions
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 19);
+		//Initializes variables
 		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
 	}
 
 	@Override
-	public void unlockElev(int source) {
+	public void unlockElev(int source) { //Unlocks the elevator
 		if(source == 1)
 			waiting = true;
 		else {
-			elevatorKeyTrigger.setActive(true);
+			elevatorKeyTrigger.setActive(true); //Unlocks the elevator trigger
 		}
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+		//Updates the level
 		updateMain(container, sbg, delta);
 		if(waiting) {
-			if(!questions.getAnswering()) {
+			if(!questions.getAnswering()) { //Not answering questions
 				waiting = false;
 				questionButton.getTrigger().setActive(false);
 				questionButton.getTrigger().exit(null);
-				elevator.getTrigger().setActive(true);
+				elevator.getTrigger().setActive(true); //Start moving
 			}
 		}
 	}

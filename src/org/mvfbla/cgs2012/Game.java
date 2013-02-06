@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame{
 
+	//Integer values for each State
 	static final int MAIN_MENU_STATE            = 0;
 	static final int TUTORIAL_STATE 			= 1;
 	static final int ELEVATOR_STATE			    = 2;
@@ -32,18 +33,19 @@ public class Game extends StateBasedGame{
 	public Music music;
 	public Game() throws SlickException{
 		super("FBLA CGS 2012");
-		music = new Music("data\\Maps\\Outdated.ogg");
+		music = new Music("data\\Maps\\Outdated.ogg"); //Music looped throughout the duration of the game
 		music.loop();
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());
 		app.setShowFPS(false);
-		app.setTargetFrameRate(30);
-		app.setVSync(true);
+		app.setTargetFrameRate(30); //Sets the fps but does not show
+		app.setVSync(true); //Prevents screen tearing and caps frame rate
         app.setDisplayMode(800, 600, false);
-        app.start();
+        app.start(); //Starts the game
 	}
 	@Override
+	//Initializes each level state.
 	public void initStatesList(GameContainer g) throws SlickException{
 		this.addState(new MainMenu(MAIN_MENU_STATE));
 		this.addState(new TutorialLevel(TUTORIAL_STATE));

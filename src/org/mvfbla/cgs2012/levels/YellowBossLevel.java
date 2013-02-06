@@ -20,8 +20,8 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
-
-
+	//The Yellow Boss Level
+	//Sets the ID of the level
 	public YellowBossLevel(int stateID) {
 		this.stateID = stateID;
 	}

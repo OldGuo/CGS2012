@@ -17,6 +17,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * The Blue Boss Level
+ */
 public class BlueBossLevel extends GameLevel {
 
 	private int brokenCount = 3;
@@ -28,16 +32,17 @@ public class BlueBossLevel extends GameLevel {
 	private QuestionWindow questions;
 	private boolean beforeQuestions,needRestart,afterQuestions;
 
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public BlueBossLevel(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
-
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
+		//Initializes variables for the level
 		afterQuestions = false;
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");

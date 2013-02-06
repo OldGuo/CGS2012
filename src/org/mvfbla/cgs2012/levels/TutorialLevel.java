@@ -14,10 +14,12 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class TutorialLevel extends GameLevel {
 
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
 	private boolean waiting;
 
+	/**
+	 * Sets the ID lf the level
+	 * @param stateID - ID of the level
+	 */
 	public TutorialLevel(int stateID) {
 		this.stateID = stateID;
 	}
@@ -40,11 +42,9 @@ public class TutorialLevel extends GameLevel {
 	public void unlockElev(int src) {
 		waiting = true;
 	}
-
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException  {
 		draw(g);
-		//question.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 	}
 	@Override
 	public int getID(){
@@ -61,7 +61,6 @@ public class TutorialLevel extends GameLevel {
 		GameConstants.enemiesKilled = 0;
 		GameConstants.techUsed = 0;
 	}
-
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
 

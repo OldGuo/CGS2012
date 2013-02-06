@@ -11,12 +11,14 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MotionSensorLevel extends GameLevel {
 
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public MotionSensorLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {

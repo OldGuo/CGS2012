@@ -34,7 +34,7 @@ public class TypeWriter{
         renderRow = 0;
         renderCol = 0;
 
-        TYPE_DELAY = 25;
+        TYPE_DELAY = 20;
         time = TYPE_DELAY;
         finished = false;
     }
@@ -106,17 +106,6 @@ public class TypeWriter{
                 renderCol++;
             }
         }
-    }
-
-    //shows ALL text
-    public void showAll() {
-        if (lines.isEmpty())
-            renderRow = renderCol = 0;
-        else {
-            renderRow = lines.size()-1;
-            renderCol = lines.get(renderRow).length();
-        }
-        finished = true;
     }
     //restarts typewriting effect
     public void restart() {

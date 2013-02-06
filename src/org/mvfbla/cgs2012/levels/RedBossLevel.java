@@ -21,11 +21,13 @@ public class RedBossLevel extends GameLevel {
 	private QuestionWindow questions;
 	private boolean beforeQuestions,needRestart,afterQuestions;
 
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public RedBossLevel(int stateID) {
 		this.stateID = stateID;
 	}
-	private final static int MAP_WIDTH = 780;
-	private final static int MAP_HEIGHT = 600;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
