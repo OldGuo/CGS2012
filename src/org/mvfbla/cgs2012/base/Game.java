@@ -1,4 +1,4 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.base;
 
 import org.mvfbla.cgs2012.levels.BlackBossLevel;
 import org.mvfbla.cgs2012.levels.BlueBossLevel;
@@ -12,6 +12,8 @@ import org.mvfbla.cgs2012.menu.AboutPage;
 import org.mvfbla.cgs2012.menu.InstructionPage;
 import org.mvfbla.cgs2012.menu.LoadingState;
 import org.mvfbla.cgs2012.menu.MainMenu;
+import org.mvfbla.cgs2012.menu.PlotState;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;

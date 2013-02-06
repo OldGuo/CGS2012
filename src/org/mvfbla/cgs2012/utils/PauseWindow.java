@@ -1,7 +1,8 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.utils;
 
 import java.util.ArrayList;
 
+import org.mvfbla.cgs2012.base.Game;
 import org.mvfbla.cgs2012.interactable.InteractButton;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

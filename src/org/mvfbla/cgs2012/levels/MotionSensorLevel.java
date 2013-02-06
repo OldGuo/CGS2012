@@ -1,8 +1,8 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.GameLevel;
-import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.TiledObject;
+import org.mvfbla.cgs2012.base.GameLevel;
+import org.mvfbla.cgs2012.base.Map;
+import org.mvfbla.cgs2012.base.TiledObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

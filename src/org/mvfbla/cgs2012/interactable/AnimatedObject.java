@@ -2,7 +2,7 @@ package org.mvfbla.cgs2012.interactable;
 
 import java.util.HashMap;
 
-import org.mvfbla.cgs2012.GameObject;
+import org.mvfbla.cgs2012.base.GameObject;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

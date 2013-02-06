@@ -1,15 +1,15 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.GameLevel;
-import org.mvfbla.cgs2012.GameObject;
-import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.TiledObject;
-import org.mvfbla.cgs2012.TypeWriter;
+import org.mvfbla.cgs2012.base.GameLevel;
+import org.mvfbla.cgs2012.base.GameObject;
+import org.mvfbla.cgs2012.base.Map;
+import org.mvfbla.cgs2012.base.TiledObject;
 import org.mvfbla.cgs2012.characters.Characters;
 import org.mvfbla.cgs2012.characters.YellowBoss;
 import org.mvfbla.cgs2012.interactable.Button;
 import org.mvfbla.cgs2012.interactable.QuestionWindow;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.TypeWriter;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -20,49 +20,6 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
-	public class YellowButton extends Button {
-		public int number;
-		private int state;
-		protected YellowButton(int x, int y, int num) throws SlickException {
-			super(x, y, null);
-			number = num;
-			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
-		}
-		public int getStateNum() {
-			return state;
-		}
-		@Override
-		public void interact(GameObject source) {
-			long time = System.currentTimeMillis();
-			if(time-lastPress >= cooldown) {
-				lastPress = time;
-				if(state == 1) {
-					setStateNum(2);
-					yellowBoss.activate(number);
-					playAnimation("broke");
-				}
-			}
-		}
-		/**
-		 * @param state sets the states for the platform switches
-		 */
-		public void setStateNum(int state) {
-			if(state == 2) {
-				trigger.setActive(false);
-				notif.playAnimation("near");
-				playAnimation("broke");
-			}
-			if(state == 1) {
-				trigger.setActive(true);
-				playAnimation("on");
-			}
-			if(state == 0) {
-				trigger.setActive(false);
-				playAnimation("off");
-			}
-			this.state = state;
-		}
-	}
 
 	private YellowBoss yellowBoss;
 	private final static int MAP_WIDTH = 780;
@@ -132,6 +89,11 @@ public class YellowBossLevel extends GameLevel {
 			buttons[2].setStateNum(2);
 		} else {
 			handleButton(2);
+		}
+		if(!yellowBoss.isAlive()) {
+			for(int i = 0; i < 3; i++) {
+				g.drawAnimation(lightning, yellowBoss.getX()-10, yellowBoss.getY()+(i*48));
+			}
 		}
 		if(player.shouldDisplay())
 			player.draw(g);
@@ -283,7 +245,7 @@ public class YellowBossLevel extends GameLevel {
 			}
 			for(Characters guy : GameConstants.enemies) {
 				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.YellowBoss")){
+				if(name.equals("class org.mvfbla.cgs2012.characters.YellowBoss")){
 					YellowBoss boss = (YellowBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);
@@ -291,6 +253,49 @@ public class YellowBossLevel extends GameLevel {
 					}
 				}
 			}
+		}
+	}
+	public class YellowButton extends Button {
+		public int number;
+		private int state;
+		protected YellowButton(int x, int y, int num) throws SlickException {
+			super(x, y, null);
+			number = num;
+			addAnimation("broke", new Animation(new SpriteSheet("data\\maps\\ButtonBroke.png", 32, 32), 150));
+		}
+		public int getStateNum() {
+			return state;
+		}
+		@Override
+		public void interact(GameObject source) {
+			long time = System.currentTimeMillis();
+			if(time-lastPress >= cooldown) {
+				lastPress = time;
+				if(state == 1) {
+					setStateNum(2);
+					yellowBoss.activate(number);
+					playAnimation("broke");
+				}
+			}
+		}
+		/**
+		 * @param state sets the states for the platform switches
+		 */
+		public void setStateNum(int state) {
+			if(state == 2) {
+				trigger.setActive(false);
+				notif.playAnimation("near");
+				playAnimation("broke");
+			}
+			if(state == 1) {
+				trigger.setActive(true);
+				playAnimation("on");
+			}
+			if(state == 0) {
+				trigger.setActive(false);
+				playAnimation("off");
+			}
+			this.state = state;
 		}
 	}
 }

@@ -2,7 +2,7 @@ package org.mvfbla.cgs2012.interactable;
 
 import java.util.EventListener;
 
-import org.mvfbla.cgs2012.GameObject;
+import org.mvfbla.cgs2012.base.GameObject;
 
 /**
  * @author PenguinToast

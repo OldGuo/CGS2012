@@ -1,8 +1,8 @@
 package org.mvfbla.cgs2012.interactable;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.Tile;
-import org.mvfbla.cgs2012.Vector;
+import org.mvfbla.cgs2012.base.Tile;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

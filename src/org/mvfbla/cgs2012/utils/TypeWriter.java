@@ -1,4 +1,4 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.utils;
 
 import java.util.ArrayList;
 import java.util.List;

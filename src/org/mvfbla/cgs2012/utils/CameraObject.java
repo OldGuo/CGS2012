@@ -1,5 +1,6 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.utils;
 
+import org.mvfbla.cgs2012.base.GameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 

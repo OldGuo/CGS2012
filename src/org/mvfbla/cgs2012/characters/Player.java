@@ -2,10 +2,10 @@
 //sprite controlled by user
 package org.mvfbla.cgs2012.characters;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.Vector;
 import org.mvfbla.cgs2012.interactable.AnimatedObject;
 import org.mvfbla.cgs2012.interactable.InteractiveObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -36,10 +36,10 @@ public class Player extends Characters{
 	 */
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48); //loads sprite sheets for animations of actions
-		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150));
-		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\PlayerRightInverted.png", 48, 48), 150));
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\PlayerLeft.png", 48, 48), 150));
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\PlayerRight.png", 48, 48), 150));
+		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeftInverted.png", 48, 48), 150));
+		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRightInverted.png", 48, 48), 150));
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeft.png", 48, 48), 150));
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRight.png", 48, 48), 150));
 
 		arm = new AnimatedObject(0,0,48,48);
 		arm.addAnimation("right",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackRight.png", 48, 48), 750));
@@ -63,10 +63,10 @@ public class Player extends Characters{
 				int extra = 5;
 				if(current.equals(right)) {
 					int off = -1;
-					g.drawImage(new Image("data\\punchright.png"), off + ((GameConstants.punchRange+off-32+3+extra)*prog), -13, c);
+					g.drawImage(new Image("data\\CharAnim\\punchright.png"), off + ((GameConstants.punchRange+off-32+3+extra)*prog), -13, c);
 				} else if(current.equals(left)) {
 					int off = -30;
-					g.drawImage(new Image("data\\punchleft.png"), off + ((GameConstants.punchRange-off-1-extra)*prog), -13, c);
+					g.drawImage(new Image("data\\CharAnim\\punchleft.png"), off + ((GameConstants.punchRange-off-1-extra)*prog), -13, c);
 				}
 			} catch (SlickException e) {
 				e.printStackTrace();
