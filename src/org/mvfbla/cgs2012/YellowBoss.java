@@ -28,6 +28,53 @@ public class YellowBoss extends Boss{
 		for(int i=0;i<3;i++)
 			activated[i]=false;
 	}
+	public void activate(int platform){ //activates a platform
+		setHealth(getHealth()-1);
+		activated[platform]=true;
+	}
+	public boolean getAttacking(){
+		return attacking;
+	}
+	public float getReticle(){ //returns x coordinate of aiming reticle
+		return reticle;
+	}
+	public float getReticleWidth(){ //returns width of reticle
+		return reticleWidth;
+	}
+	public int getTime(){ //returns time elapsed during cycle
+		return time;
+	}
+	public boolean isActivated(int platform){ //returns if a platform is activated
+		return activated[platform];
+	}
+	public boolean isAiming(){ //returns if it's aiming
+		return aiming;
+	}
+	public boolean isCharging(){ //returns if it's charging
+		return charging;
+	}
+	public boolean isFiring(){ //returns if it's firing
+		return firing;
+	}
+	public boolean isTeleporting(){ //returns if it's teleporting
+		return teleporting;
+	}
+	public void setAttacking(boolean a){
+		attacking = a;
+	}
+	public void setReticle(float xValue){ //sets x coordinate of reticle
+		reticle=xValue;
+	}
+	public void teleport(){
+		teleporting=false;
+		time=0;
+		do{ //chooses another random platform to teleport to
+			int temp = location;
+			do{
+				location=(int)(Math.random()*3);
+			}while(temp == location);
+		}while(activated[location]);
+	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(attacking){
@@ -79,53 +126,6 @@ public class YellowBoss extends Boss{
 				super.setHealth(3);
 			}
 		}
-	}
-	public void teleport(){
-		teleporting=false;
-		time=0;
-		do{ //chooses another random platform to teleport to
-			int temp = location;
-			do{
-				location=(int)(Math.random()*3);
-			}while(temp == location);
-		}while(activated[location]);
-	}
-	public void activate(int platform){ //activates a platform
-		setHealth(getHealth()-1);
-		activated[platform]=true;
-	}
-	public boolean isActivated(int platform){ //returns if a platform is activated
-		return activated[platform];
-	}
-	public boolean isAiming(){ //returns if it's aiming
-		return aiming;
-	}
-	public boolean isCharging(){ //returns if it's charging
-		return charging;
-	}
-	public boolean isFiring(){ //returns if it's firing
-		return firing;
-	}
-	public boolean isTeleporting(){ //returns if it's teleporting
-		return teleporting;
-	}
-	public float getReticle(){ //returns x coordinate of aiming reticle
-		return reticle;
-	}
-	public void setReticle(float xValue){ //sets x coordinate of reticle
-		reticle=xValue;
-	}
-	public float getReticleWidth(){ //returns width of reticle
-		return reticleWidth;
-	}
-	public int getTime(){ //returns time elapsed during cycle
-		return time;
-	}
-	public void setAttacking(boolean a){
-		attacking = a;
-	}
-	public boolean getAttacking(){
-		return attacking;
 	}
 }
 

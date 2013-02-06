@@ -30,6 +30,12 @@ public class InstructionPage extends BasicGameState{
 		// TODO Auto-generated constructor stub
 	}
 	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return stateID;
+	}
+
+	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//Initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
@@ -74,12 +80,6 @@ public class InstructionPage extends BasicGameState{
 		if(back.getAction().equals("Back")){
 			fadeState = 2;
 		}
-	}
-
-	@Override
-	public int getID() {
-		// TODO Auto-generated method stub
-		return stateID;
 	}
 
 }

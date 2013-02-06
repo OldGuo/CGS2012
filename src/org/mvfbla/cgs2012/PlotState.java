@@ -31,12 +31,6 @@ public class PlotState extends BasicGameState{
 		stateID = ID;
 	}
 	@Override
-	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		//initializes variables
-		finalPlot = " ";
-		text = new TypeWriter();
-	}
-	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
 		finalPlot = " ";
 		text = new TypeWriter();
@@ -88,6 +82,16 @@ public class PlotState extends BasicGameState{
 			text.setText(finalPlot);
 	}
 	@Override
+	public int getID() {
+		return stateID;
+	}
+	@Override
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		//initializes variables
+		finalPlot = " ";
+		text = new TypeWriter();
+	}
+	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		//Renders the state
 		g.setColor(Color.white);
@@ -121,9 +125,5 @@ public class PlotState extends BasicGameState{
 		}
 		if(text.isFinished())
 			fadeState = 2;
-	}
-	@Override
-	public int getID() {
-		return stateID;
 	}
 }

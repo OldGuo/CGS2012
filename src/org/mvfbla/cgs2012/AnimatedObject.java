@@ -34,46 +34,6 @@ public class AnimatedObject extends GameObject {
 		animMap.put(name, anim);
 		current = anim;
 	}
-	/**
-	 * Plays the named animation
-	 * @param name - Name of animation to play
-	 */
-	public void playAnimation(String name) {
-		current = animMap.get(name);
-		current.start();
-	}
-	/**
-	 * Resumes current animation if it has been stopped
-	 */
-	public void resumeAnimation() {
-		if(current.isStopped())
-			current.start();
-	}
-	/**
-	 * Resets the current animation and stops it
-	 */
-	public void resetAnimation() {
-		current.setCurrentFrame(0);
-		current.stop();
-	}
-	/**
-	 * Stops the current animation
-	 */
-	public void stopAnimation() {
-		current.stop();
-	}
-	/**
-	 * Returns the current playing animation
-	 * @return The animation that is currently playing
-	 */
-	public Animation getCurrentAnimation() {
-		return current;
-	}
-	@Override
-	public void update(GameContainer gc, int delta) {
-		// TODO Auto-generated method stub
-
-	}
 	@Override
 	public void draw(Graphics g) {
 		// Draw the current animation
@@ -86,6 +46,13 @@ public class AnimatedObject extends GameObject {
 		g.translate(-x, -y);
 	}
 	/**
+	 * Returns the current playing animation
+	 * @return The animation that is currently playing
+	 */
+	public Animation getCurrentAnimation() {
+		return current;
+	}
+	/**
 	 * Returns the current frame of the current animation
 	 * @return
 	 */
@@ -93,10 +60,43 @@ public class AnimatedObject extends GameObject {
 		return current.getFrame();
 	}
 	/**
+	 * Plays the named animation
+	 * @param name - Name of animation to play
+	 */
+	public void playAnimation(String name) {
+		current = animMap.get(name);
+		current.start();
+	}
+	/**
+	 * Resets the current animation and stops it
+	 */
+	public void resetAnimation() {
+		current.setCurrentFrame(0);
+		current.stop();
+	}
+	/**
+	 * Resumes current animation if it has been stopped
+	 */
+	public void resumeAnimation() {
+		if(current.isStopped())
+			current.start();
+	}
+	/**
 	 * Sets the frame of the current animation
 	 * @param frame - Frame number to set to
 	 */
 	public void setFrame(int frame){
 		current.setCurrentFrame(frame);
+	}
+	/**
+	 * Stops the current animation
+	 */
+	public void stopAnimation() {
+		current.stop();
+	}
+	@Override
+	public void update(GameContainer gc, int delta) {
+		// TODO Auto-generated method stub
+
 	}
 }

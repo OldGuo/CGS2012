@@ -16,6 +16,20 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame{
 
+	/**
+	 * @author admin
+	 * Thread to start the music running
+	 */
+	private class MusicThread implements Runnable {
+		@Override
+		public void run() {
+			try {
+				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	//Integer values for each State
 	static final int MAIN_MENU_STATE            = 0;
 	static final int TUTORIAL_STATE 			= 1;
@@ -29,12 +43,9 @@ public class Game extends StateBasedGame{
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
 	static final int PLOT_STATE                 = 11;
-	static final int LOADING_STATE				= 12;
 	
 
-	public Game() throws SlickException{
-		super("Tinge");
-	}
+	static final int LOADING_STATE				= 12;
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());
 		app.setShowFPS(false);
@@ -42,6 +53,9 @@ public class Game extends StateBasedGame{
 		app.setVSync(true); //Prevents screen tearing and caps frame rate
         app.setDisplayMode(800, 600, false);
         app.start(); //Starts the game
+	}
+	public Game() throws SlickException{
+		super("Tinge");
 	}
 	@Override
 	//Initializes each level state.
@@ -64,19 +78,5 @@ public class Game extends StateBasedGame{
 		Thread t = new Thread(r);
 		t.start();
         g.setIcons(new String[] {"data\\logo\\mvfbla_logo32.png", "data\\logo\\mvfbla_logo16.png"});
-	}
-	/**
-	 * @author admin
-	 * Thread to start the music running
-	 */
-	private class MusicThread implements Runnable {
-		@Override
-		public void run() {
-			try {
-				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }

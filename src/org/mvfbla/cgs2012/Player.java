@@ -38,6 +38,44 @@ public class Player extends Characters{
 		super.setBlink(2000); //when hit, invulnerable for 2 seconds
 	}
 	@Override
+	public void draw(Graphics g){
+		super.draw(g);
+		if(punchTime > 0) { //draws the arm punching
+			float prog = punchTime/300f;
+			g.translate(getCenterX(), getCenterY());
+			try {
+				Color c = new Color(Color.white);
+				c.a = 1-prog;
+				int extra = 5;
+				if(current.equals(right)) {
+					int off = -1;
+					g.drawImage(new Image("data\\punchright.png"), off + ((GameConstants.punchRange+off-32+3+extra)*prog), -13, c);
+				} else if(current.equals(left)) {
+					int off = -30;
+					g.drawImage(new Image("data\\punchleft.png"), off + ((GameConstants.punchRange-off-1-extra)*prog), -13, c);
+				}
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			g.translate(-getCenterX(), -getCenterY());
+		}
+	}
+	public boolean getControl() { //returns if the player is controllable
+		return control;
+	}
+	public float getRange(){ //returns range of punching
+		return GameConstants.punchRange;
+	}
+	public boolean isPunching(){ //returns if player is punching
+		return punching;
+	}
+	public void setControl(boolean control) { //sets controls on or off
+		this.control = control;
+	}
+	public void setRange(float whatRange){ //sets range of punching
+		GameConstants.punchRange=(int) whatRange;
+	}
+	@Override
 	public void update(GameContainer gc, int delta) { 
 		if(!isAlive()) 
 			return;
@@ -145,43 +183,5 @@ public class Player extends Characters{
 			arm.stopAnimation();
 		}
 		super.update(gc, delta);
-	}
-	public float getRange(){ //returns range of punching
-		return GameConstants.punchRange;
-	}
-	public void setRange(float whatRange){ //sets range of punching
-		GameConstants.punchRange=(int) whatRange;
-	}
-	public boolean isPunching(){ //returns if player is punching
-		return punching;
-	}
-	@Override
-	public void draw(Graphics g){
-		super.draw(g);
-		if(punchTime > 0) { //draws the arm punching
-			float prog = punchTime/300f;
-			g.translate(getCenterX(), getCenterY());
-			try {
-				Color c = new Color(Color.white);
-				c.a = 1-prog;
-				int extra = 5;
-				if(current.equals(right)) {
-					int off = -1;
-					g.drawImage(new Image("data\\punchright.png"), off + ((GameConstants.punchRange+off-32+3+extra)*prog), -13, c);
-				} else if(current.equals(left)) {
-					int off = -30;
-					g.drawImage(new Image("data\\punchleft.png"), off + ((GameConstants.punchRange-off-1-extra)*prog), -13, c);
-				}
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-			g.translate(-getCenterX(), -getCenterY());
-		}
-	}
-	public boolean getControl() { //returns if the player is controllable
-		return control;
-	}
-	public void setControl(boolean control) { //sets controls on or off
-		this.control = control;
 	}
 }

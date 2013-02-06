@@ -9,21 +9,6 @@ import org.newdawn.slick.SpriteSheet;
  * Key used for elevator level
  */
 public class Key extends AnimatedObject implements InteractiveObject {
-	private final GameLevel level;
-	private final Trigger trigger;
-	public Key(TiledObject to, GameLevel level) throws SlickException {
-		super(to.getX(), to.getY(), 16, 32);
-		this.level = level;
-		trigger = new Trigger(to, new KeyListener());
-		GameConstants.triggers.add(trigger);
-		int[] one = {0,0};
-		int[] two = {1,0};
-		int[] dur = {150};
-		addAnimation("off",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
-		addAnimation("on",new Animation(new SpriteSheet("data\\key.png", 32, 40), one, dur));
-		playAnimation("on");
-	}
-
 	public class KeyListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {
@@ -37,12 +22,27 @@ public class Key extends AnimatedObject implements InteractiveObject {
 		@Override
 		public void triggered(GameObject src) {}
 	}
-	@Override
-	public void interact(GameObject source) {
+	private final GameLevel level;
+	private final Trigger trigger;
+
+	public Key(TiledObject to, GameLevel level) throws SlickException {
+		super(to.getX(), to.getY(), 16, 32);
+		this.level = level;
+		trigger = new Trigger(to, new KeyListener());
+		GameConstants.triggers.add(trigger);
+		int[] one = {0,0};
+		int[] two = {1,0};
+		int[] dur = {150};
+		addAnimation("off",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
+		addAnimation("on",new Animation(new SpriteSheet("data\\key.png", 32, 40), one, dur));
+		playAnimation("on");
 	}
 	@Override
 	public boolean inRange(GameObject source) {
 		return false;
+	}
+	@Override
+	public void interact(GameObject source) {
 	}
 	@Override
 	public boolean isActive() {

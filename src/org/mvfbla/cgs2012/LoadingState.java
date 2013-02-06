@@ -23,6 +23,10 @@ public class LoadingState extends BasicGameState {
 		this.stateID = stateID;
 	}
 	@Override
+	public int getID() {
+		return stateID;
+	}
+	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		logos = new Image[2];
@@ -61,9 +65,5 @@ public class LoadingState extends BasicGameState {
 		} else {
 			transState = 0;
 		}
-	}
-	@Override
-	public int getID() {
-		return stateID;
 	}
 }

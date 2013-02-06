@@ -33,6 +33,15 @@ public class GameConstants {
 
 	public static long usedQuestions = 0;
 	public static long allUsed = 34359738368L-1;
+	public static Map currMap;
+	public static int playerMaxHealth = 3;
+	public static int playerMaxSpeed = 5;
+	public static int wrongCountMax = 5;
+	public static int lastBoss = -1;
+	//1 blue
+	//2 red
+	//3 yellow
+	public static Music music;
 	public static void clear() { //clears arraylists
 		collidableObjects.clear();
 		sensors.clear();
@@ -47,16 +56,16 @@ public class GameConstants {
 		level = null;
 	}
 	/**
+	 * Flips the gravity constant
+	 */
+	public static void flipGrav(){
+		GRAVITY = -GRAVITY;
+	}
+	/**
 	 * Changes between paused and unpaused
 	 */
 	public static void flipPaused(){
 		paused = !paused;
-	}
-	/**
-	 * @return - whether the game is paused or not
-	 */
-	public static boolean getPaused(){
-		return paused;
 	}
 	/**
 	 * Flips synchronization with the Black Boss
@@ -65,30 +74,21 @@ public class GameConstants {
 		bossSync = !bossSync;
 	}
 	/**
-	 * @return - Whether the player is synced with the Black Boss
-	 */
-	public static boolean getSync(){
-		return bossSync;
-	}
-	/**
-	 * Flips the gravity constant
-	 */
-	public static void flipGrav(){
-		GRAVITY = -GRAVITY;
-	}
-	/**
 	 * @return - The gravity constant
 	 */
 	public static float getGrav(){
 		return GRAVITY;
 	}
-	public static Map currMap;
-	public static int playerMaxHealth = 3;
-	public static int playerMaxSpeed = 5;
-	public static int wrongCountMax = 5;
-	public static int lastBoss = -1;
-	//1 blue
-	//2 red
-	//3 yellow
-	public static Music music;
+	/**
+	 * @return - whether the game is paused or not
+	 */
+	public static boolean getPaused(){
+		return paused;
+	}
+	/**
+	 * @return - Whether the player is synced with the Black Boss
+	 */
+	public static boolean getSync(){
+		return bossSync;
+	}
 }

@@ -22,6 +22,20 @@ public class PlantedEnemy extends Enemy{
 		current = "PlantedEnemy";
 		super.setSpeed(0);
 	}
+	public void changeSleep(boolean inSight){ //changes sleep state
+		awake=inSight;
+	}
+	@Override
+	public void draw(Graphics g){
+		//g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
+		super.draw(g);
+	}
+	public float getSight(){ //returns range of sight
+		return sight;
+	}
+	public void setSight(int size){ //sets range of sight
+		sight = size;
+	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		super.playAnimation(current);
@@ -39,19 +53,5 @@ public class PlantedEnemy extends Enemy{
 			super.setSpeed(3*super.getEnemyDirection());
 		}
 		super.update(gc, delta);
-	}
-	@Override
-	public void draw(Graphics g){
-		//g.drawOval(this.getCenterX()-sight, this.getCenterY()-sight, sight*2, sight*2);
-		super.draw(g);
-	}
-	public void changeSleep(boolean inSight){ //changes sleep state
-		awake=inSight;
-	}
-	public float getSight(){ //returns range of sight
-		return sight;
-	}
-	public void setSight(int size){ //sets range of sight
-		sight = size;
 	}
 }

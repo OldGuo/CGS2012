@@ -12,6 +12,39 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class GameLevel extends BasicGameState{
+	// Listener for the motion sensor button
+	public class MotionButtonListener implements ButtonListener {
+		@Override
+		public void buttonPressed(boolean state) {
+			if(state) {
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 0);
+			} else
+				for(MotionSensor ms : GameConstants.sensors)
+					ms.setState((byte) 1);
+		}
+	}
+	// Listener for plot text
+	public class PlotListener implements TriggerListener {
+		private Trigger parent;
+		private String choice;
+		public void init(Trigger t, String choice) {
+			parent = t;
+			this.choice = choice;
+		}
+		@Override
+		public void onEnter(GameObject src) {
+			if(src == player) {
+				textChoice = choice;
+				changeText(textChoice);
+				parent.setActive(false);
+			}
+		}
+		@Override
+		public void onExit(GameObject src) {}
+		@Override
+		public void triggered(GameObject src) {}
+	}
 	// Initialize lots of variables
 	protected int bgOffsetX, bgNumRepeat;
 	public QuestionWindow questions;
@@ -37,9 +70,242 @@ public abstract class GameLevel extends BasicGameState{
 	public int questionCount = 0;
 	public boolean buttonQuestion = false;
 	protected Button questionButton;
+
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
-
+	// Changes the plot text based on player locations
+	public void changeText(String textChoice){
+		String textString = null;
+		if(textChoice.equals("intro")) {
+			textString = "I see nothing around me but a sea of darkness. " +
+					"I try to recall the events prior, but every strand of thought escapes my grasps. " +
+					"I know nothing except that I must move forward." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("firstEnemy")) {
+			textString = "As I come into the bright light, I see something ahead. " +
+					"A furious rage builds up inside me. I want to use [SPACE] to defeat" +
+					" this enemy. " +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("firstTechnology")) {
+			textString = "A strange piece of technology stands before of me. Although it seems alien to me, a voice " +
+					"inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
+					" for time but luckly I can press [ESC] to pause." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("firstQuestion")) {
+			textString = "I feel with a strong sense of achievement." +
+					"  The blur in my mind begins to clear up a bit. " +
+					"But my feeling of accomplishment is quickly drowned out by the pangs of regret. " +
+					" Did I have to defeat that enemy? " +
+					"Perhaps I should refrain from physical conflicts in the future." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("firstJump")) {
+			textString = "Almost effortlessly, I make each jump. " +
+					"These jumps almost seemed familiar to me. " +
+					"Like I have done them countless times in the past." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("longJump")) {
+			textString = "The next jump is longer and wider than the previous.  I want to turn back." +
+					" But a relenteless force drives me to push forward" +
+					"  Clearing this jump requires a leap of faith." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("tutorialEnd")) {
+			textString = "Almost in disbelief, I look down at my suit" +
+					" and see a badge.  \"EMPLOYEE NAME\" it says. However the text below it seems to " +
+					"have been intentionally scratched out. " +
+					"So many questions filled my mind, but all the answers lie ahead. " +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("elevatorLevelStart")) {
+			textString = "The elevator feels like it has brought me up a few floors. " +
+					"My head begins to spin.  I have so many questions.  " +
+					"Where am I? Who am I? Why am I here?" +
+					" All I want are the answers.  ...   ...   ..." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("anotherEnemy")) {
+			textString = "There is a key up above, but another one of those enemies blocks my path.  " +
+					"Something tells me I do not need the key, but I desperately want it anyways. Perhaps" +
+					" this time I will use the [UP] arrow key to jump over the enemy without harm." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("lockedElevator")) {
+			textString = "Locked!? It seems like a key will be useful here. But I wonder about the " +
+					" technology beyond the elevator..." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("motionLevelStart")) {
+			textString = "The elevator brings me up another few floors. The haze in my mind" +
+					" seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
+					"...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("turnOffSensor")) {
+			textString = "It seems dangerous up ahead, but something tells me whats beyond will pay off." +
+					" It is either this or the motion sensors   ...   " +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("accomplishment")) {
+			textString = "I feel proud and accomplished having conquered the motion sensors." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("beatMotionLevel")) {
+			textString = "Something clicks inside my head as I see the elevator." +
+					"  There I felt something up ahead. I have to keep going.  I have to" +
+					" find the answers.  " +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("gravityLevelStart")) {
+			textString = "Rising higher and higher in the buildling, I almost feel anxious. " +
+					"My questions will soon be answered.  I can feel it.  " +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("flippedGrav")) {
+			textString = "A feeling of complete exhiliration comes over me.  All the enemies are on the other" +
+					" side of the wall. I can almost feel their desperation as " +
+					" they attempt to reach me.  I smile at my superior intellect." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("beforeBoss")) {
+			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
+					" The answers lie ahead   ...   ...   ...   ...   ..." +
+					"                                                                                       " +
+                    "                                                                                       ";
+		}
+		if(textChoice.equals("blackBoss")) {
+			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
+					"A figure stands before me.  It copies my every move down to a wire. " +
+					"Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
+					"                  \"I am Perfection\"" +
+					"                                                                                                                              " +
+                    "                                                                                       ";
+        }
+		text.setText(textString);
+		text.restart();
+	}
+	/**
+	 * Main draw method of every level
+	 * @param g - Graphics object
+	 */
+	public void draw(Graphics g){
+		g.setColor(new Color(58,58,58));
+		// Draw background
+		for(int i = 0; i < bgNumRepeat; i++)
+			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
+		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
+		cameraBox.draw(g);
+		// Draw enemies
+		g.setColor(Color.white);
+		for(Characters guy:GameConstants.enemies){
+			if(guy.shouldDisplay()){
+				guy.draw(g);
+			}
+		}
+		// Draw Tiled objects
+		for(MovingTile t : GameConstants.platforms)
+			t.draw(g);
+		for(MotionSensor m : GameConstants.sensors)
+			m.draw(g);
+		for(Pillar p : GameConstants.pillars)
+			p.draw(g);
+		for(InteractiveObject io : GameConstants.interacts)
+			io.draw(g);
+		// Draw Player health bar
+		for(int i=1;i<=GameConstants.playerMaxHealth;i++){
+			if(i<=player.getHealth())
+				g.setColor(Color.red);
+			else
+				g.setColor(Color.gray);
+			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
+		}
+		// Make sure player needs to be draw
+		if(transState != 2&&player.shouldDisplay()){
+			player.draw(g);
+		}
+		try {
+			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		// Draw question window if needed
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		// Draw transition if needed
+		if(transState != 0) {
+			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		// Draw death transition if needed
+		if(deathTime > 0) {
+			player.stopAnimation();
+			player.draw(g);
+			long time = deathTime % deathDelay;
+			float prog = time/(float)deathDelay;
+			if(prog > 0.5f)
+				prog = 1-prog;
+			Color c = new Color(0, 0, 0, prog);
+			g.setColor(c);
+			g.fillRect(0, 0, 100000, 100000);
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+	}
+	/**
+	 * Returns an Enemy object from a given name
+	 * @param name - Name of enemy to be generated
+	 * @param x - X location of enemy
+	 * @param y - Y location of enemy
+	 * @return An enemy from the given name
+	 * @throws SlickException
+	 */
+	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
+		Enemy out = null;
+		if(name.equals("BasicEnemy")) {
+			out = new BasicEnemy(x, y);
+		}
+		if(name.equals("PlantedEnemy")) {
+			out = new PlantedEnemy(x, y);
+		}
+		if(name.equals("BiggerEnemy")) {
+			out = new BiggerEnemy(x, y);
+		}
+		if(name.equals("RedBoss")) {
+			out = new RedBoss(x, y);
+		}
+		if(name.equals("BlueBoss")) {
+			out = new BlueBoss(x, y);
+		}
+		if(name.equals("YellowBoss")) {
+			out = new YellowBoss(x, y);
+		}
+		return out;
+	}
+	// Method for every class to initialize the tiled objects
+	public abstract void initObject(TiledObject to) throws SlickException;
 	public void initStuff() throws SlickException {
 		// Clears constants
 		GameConstants.clear();
@@ -102,43 +368,6 @@ public abstract class GameLevel extends BasicGameState{
 		// Reset player hp
 		player.setInitialHealth(GameConstants.playerMaxHealth);
 	}
-	// Listener for the motion sensor button
-	public class MotionButtonListener implements ButtonListener {
-		@Override
-		public void buttonPressed(boolean state) {
-			if(state) {
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 0);
-			} else
-				for(MotionSensor ms : GameConstants.sensors)
-					ms.setState((byte) 1);
-		}
-	}
-	// Method for every class to initialize the tiled objects
-	public abstract void initObject(TiledObject to) throws SlickException;
-	// Listener for plot text
-	public class PlotListener implements TriggerListener {
-		private Trigger parent;
-		private String choice;
-		public void init(Trigger t, String choice) {
-			parent = t;
-			this.choice = choice;
-		}
-		@Override
-		public void onEnter(GameObject src) {
-			if(src == player) {
-				textChoice = choice;
-				changeText(textChoice);
-				parent.setActive(false);
-			}
-		}
-		@Override
-		public void onExit(GameObject src) {}
-		@Override
-		public void triggered(GameObject src) {}
-	}
-	// Unused method
-	public void unlockElev(int source) {}
 	// Reset the level
 	public void reset() {
 		try {
@@ -148,6 +377,13 @@ public abstract class GameLevel extends BasicGameState{
 			e.printStackTrace();
 		}
 	}
+	// Sets the length of the background, and offset
+	public void setBackgroundInfo(int offset, int numRepeat){
+		bgNumRepeat = numRepeat;
+		bgOffsetX = offset;
+	}
+	// Unused method
+	public void unlockElev(int source) {}
 	// Main update method every level calls every frame
 	public void updateMain(GameContainer container, StateBasedGame sbg,int delta) throws SlickException{
 		Input input = container.getInput();
@@ -307,241 +543,5 @@ public abstract class GameLevel extends BasicGameState{
 		}
 		if(GameConstants.getPaused())
 			pauseWindow.update(container,sbg);
-	}
-	/**
-	 * Returns an Enemy object from a given name
-	 * @param name - Name of enemy to be generated
-	 * @param x - X location of enemy
-	 * @param y - Y location of enemy
-	 * @return An enemy from the given name
-	 * @throws SlickException
-	 */
-	public Enemy enemyFromName(String name, int x, int y) throws SlickException {
-		Enemy out = null;
-		if(name.equals("BasicEnemy")) {
-			out = new BasicEnemy(x, y);
-		}
-		if(name.equals("PlantedEnemy")) {
-			out = new PlantedEnemy(x, y);
-		}
-		if(name.equals("BiggerEnemy")) {
-			out = new BiggerEnemy(x, y);
-		}
-		if(name.equals("RedBoss")) {
-			out = new RedBoss(x, y);
-		}
-		if(name.equals("BlueBoss")) {
-			out = new BlueBoss(x, y);
-		}
-		if(name.equals("YellowBoss")) {
-			out = new YellowBoss(x, y);
-		}
-		return out;
-	}
-	/**
-	 * Main draw method of every level
-	 * @param g - Graphics object
-	 */
-	public void draw(Graphics g){
-		g.setColor(new Color(58,58,58));
-		// Draw background
-		for(int i = 0; i < bgNumRepeat; i++)
-			background.draw((int)cameraBox.getOffsetX()+100*i + bgOffsetX,(int)cameraBox.getOffsetY()-176);
-		map.getMap().render((int)cameraBox.getOffsetX(),(int)cameraBox.getOffsetY());
-		cameraBox.draw(g);
-		// Draw enemies
-		g.setColor(Color.white);
-		for(Characters guy:GameConstants.enemies){
-			if(guy.shouldDisplay()){
-				guy.draw(g);
-			}
-		}
-		// Draw Tiled objects
-		for(MovingTile t : GameConstants.platforms)
-			t.draw(g);
-		for(MotionSensor m : GameConstants.sensors)
-			m.draw(g);
-		for(Pillar p : GameConstants.pillars)
-			p.draw(g);
-		for(InteractiveObject io : GameConstants.interacts)
-			io.draw(g);
-		// Draw Player health bar
-		for(int i=1;i<=GameConstants.playerMaxHealth;i++){
-			if(i<=player.getHealth())
-				g.setColor(Color.red);
-			else
-				g.setColor(Color.gray);
-			g.fillRect(i*40-24-(int)cameraBox.getOffsetX(), 554, 32, 32);
-		}
-		// Make sure player needs to be draw
-		if(transState != 2&&player.shouldDisplay()){
-			player.draw(g);
-		}
-		try {
-			text.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY(),720,80);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-		// Draw question window if needed
-		if(questions.getAnswering() == true){
-			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		}
-		// Draw transition if needed
-		if(transState != 0) {
-			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
-			g.fillRect(0, 0, 100000, 100000);
-		}
-		// Draw death transition if needed
-		if(deathTime > 0) {
-			player.stopAnimation();
-			player.draw(g);
-			long time = deathTime % deathDelay;
-			float prog = time/(float)deathDelay;
-			if(prog > 0.5f)
-				prog = 1-prog;
-			Color c = new Color(0, 0, 0, prog);
-			g.setColor(c);
-			g.fillRect(0, 0, 100000, 100000);
-		}
-		// Draw pause window if needed
-		if(GameConstants.getPaused() == true){
-			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
-		}
-	}
-	// Sets the length of the background, and offset
-	public void setBackgroundInfo(int offset, int numRepeat){
-		bgNumRepeat = numRepeat;
-		bgOffsetX = offset;
-	}
-	// Changes the plot text based on player locations
-	public void changeText(String textChoice){
-		String textString = null;
-		if(textChoice.equals("intro")) {
-			textString = "I see nothing around me but a sea of darkness. " +
-					"I try to recall the events prior, but every strand of thought escapes my grasps. " +
-					"I know nothing except that I must move forward." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("firstEnemy")) {
-			textString = "As I come into the bright light, I see something ahead. " +
-					"A furious rage builds up inside me. I want to use [SPACE] to defeat" +
-					" this enemy. " +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("firstTechnology")) {
-			textString = "A strange piece of technology stands before of me. Although it seems alien to me, a voice " +
-					"inside me tells me to use [SPACE] to active the platform ahead. I feeled rushed" +
-					" for time but luckly I can press [ESC] to pause." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("firstQuestion")) {
-			textString = "I feel with a strong sense of achievement." +
-					"  The blur in my mind begins to clear up a bit. " +
-					"But my feeling of accomplishment is quickly drowned out by the pangs of regret. " +
-					" Did I have to defeat that enemy? " +
-					"Perhaps I should refrain from physical conflicts in the future." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("firstJump")) {
-			textString = "Almost effortlessly, I make each jump. " +
-					"These jumps almost seemed familiar to me. " +
-					"Like I have done them countless times in the past." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("longJump")) {
-			textString = "The next jump is longer and wider than the previous.  I want to turn back." +
-					" But a relenteless force drives me to push forward" +
-					"  Clearing this jump requires a leap of faith." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("tutorialEnd")) {
-			textString = "Almost in disbelief, I look down at my suit" +
-					" and see a badge.  \"EMPLOYEE NAME\" it says. However the text below it seems to " +
-					"have been intentionally scratched out. " +
-					"So many questions filled my mind, but all the answers lie ahead. " +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("elevatorLevelStart")) {
-			textString = "The elevator feels like it has brought me up a few floors. " +
-					"My head begins to spin.  I have so many questions.  " +
-					"Where am I? Who am I? Why am I here?" +
-					" All I want are the answers.  ...   ...   ..." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("anotherEnemy")) {
-			textString = "There is a key up above, but another one of those enemies blocks my path.  " +
-					"Something tells me I do not need the key, but I desperately want it anyways. Perhaps" +
-					" this time I will use the [UP] arrow key to jump over the enemy without harm." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("lockedElevator")) {
-			textString = "Locked!? It seems like a key will be useful here. But I wonder about the " +
-					" technology beyond the elevator..." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("motionLevelStart")) {
-			textString = "The elevator brings me up another few floors. The haze in my mind" +
-					" seems to have cleared up a bit.  My name   ...   Alex Wang.  My job   ...   " +
-					"...   ...   ...   ...   nothing. Hopefully, more will clear up as time progresses." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("turnOffSensor")) {
-			textString = "It seems dangerous up ahead, but something tells me whats beyond will pay off." +
-					" It is either this or the motion sensors   ...   " +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("accomplishment")) {
-			textString = "I feel proud and accomplished having conquered the motion sensors." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("beatMotionLevel")) {
-			textString = "Something clicks inside my head as I see the elevator." +
-					"  There I felt something up ahead. I have to keep going.  I have to" +
-					" find the answers.  " +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("gravityLevelStart")) {
-			textString = "Rising higher and higher in the buildling, I almost feel anxious. " +
-					"My questions will soon be answered.  I can feel it.  " +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("flippedGrav")) {
-			textString = "A feeling of complete exhiliration comes over me.  All the enemies are on the other" +
-					" side of the wall. I can almost feel their desperation as " +
-					" they attempt to reach me.  I smile at my superior intellect." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("beforeBoss")) {
-			textString = "This is it   ...   I can feel it. Whatever is beyond that elevator calls to me.  " +
-					" The answers lie ahead   ...   ...   ...   ...   ..." +
-					"                                                                                       " +
-                    "                                                                                       ";
-		}
-		if(textChoice.equals("blackBoss")) {
-			textString = "...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...   ...    " +
-					"A figure stands before me.  It copies my every move down to a wire. " +
-					"Is it a friend? A foe? I ask it what it is, and it replies in its saccharine tone.                    " +
-					"                  \"I am Perfection\"" +
-					"                                                                                                                              " +
-                    "                                                                                       ";
-        }
-		text.setText(textString);
-		text.restart();
 	}
 }

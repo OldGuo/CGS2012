@@ -13,18 +13,18 @@ public class PauseWindow{
 
 	ArrayList<InteractButton> pauseButtons;
 
-	public void init() throws SlickException {
-		pauseButtons = new ArrayList<InteractButton>(3);
-		pauseButtons.add(new InteractButton("Resume",255,140,300,75,0));
-		pauseButtons.add(new InteractButton("Main Menu",255,280,300,75,0));
-		pauseButtons.add(new InteractButton("Quit",255,420,300,75,0));
-	}
 	public void draw(Graphics g,int x,int y){
 		g.setColor(new Color(20,20,20,0.3f));
 		g.fillRect(0, 0, 800+x, 600+y);
 		for(int i = 0; i < pauseButtons.size(); i++){
 			pauseButtons.get(i).draw(g,x,y);
 		}
+	}
+	public void init() throws SlickException {
+		pauseButtons = new ArrayList<InteractButton>(3);
+		pauseButtons.add(new InteractButton("Resume",255,140,300,75,0));
+		pauseButtons.add(new InteractButton("Main Menu",255,280,300,75,0));
+		pauseButtons.add(new InteractButton("Quit",255,420,300,75,0));
 	}
 	public void update(GameContainer gc,StateBasedGame sbg){
 		// TODO Auto-generated method stub

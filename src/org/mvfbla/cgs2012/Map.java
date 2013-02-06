@@ -29,13 +29,13 @@ public class Map {
 			}
 		}
 	}
-	public ArrayList<TiledObject> getObjects() {
-		return objects;
-	}
 	public ArrayList<Tile> getBoxes() {
 		return boxes;
 	}
 	public TiledMap getMap() {
 		return map;
+	}
+	public ArrayList<TiledObject> getObjects() {
+		return objects;
 	}
 }

@@ -25,6 +25,19 @@ public class MainMenu extends BasicGameState{
 		this.stateID = stateID;
 	}
 	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		// Initialize all fade states
+		fadeTime = 0;
+		fadeState = 0;
+		nextState = 0;
+		nextStateLoc = 0;
+		fadeDur = 400;
+		fadeState = 1;
+		if(GameConstants.music != null && !GameConstants.music.playing())
+			GameConstants.music.loop();
+	}
+	@Override
 	public int getID(){
 		return stateID;
 	}
@@ -136,18 +149,5 @@ public class MainMenu extends BasicGameState{
 				gc.exit();
 			}
 		}
-	}
-	@Override
-	public void enter(GameContainer container, StateBasedGame game)
-			throws SlickException {
-		// Initialize all fade states
-		fadeTime = 0;
-		fadeState = 0;
-		nextState = 0;
-		nextStateLoc = 0;
-		fadeDur = 400;
-		fadeState = 1;
-		if(GameConstants.music != null && !GameConstants.music.playing())
-			GameConstants.music.loop();
 	}
 }

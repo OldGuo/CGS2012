@@ -15,6 +15,12 @@ public class RedBoss extends Boss{
 		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\RedBossWalking.png", 128, 128), 150));
 		super.setSpeed(3.7f); //faster speed
 	}
+	public boolean getAttacking(){ //returns whether or not it's attacking
+		return attacking;
+	}
+	public void setAttacking(boolean a){ //sets attacking
+		attacking = a;
+	}
 	@Override
 	public void update(GameContainer gc, int delta){
 		if(!died && !isAlive()) {
@@ -24,11 +30,5 @@ public class RedBoss extends Boss{
 			super.update(gc, delta);
 		if(!attacking)
 			super.setHealth(3);
-	}
-	public void setAttacking(boolean a){ //sets attacking
-		attacking = a;
-	}
-	public boolean getAttacking(){ //returns whether or not it's attacking
-		return attacking;
 	}
 }
