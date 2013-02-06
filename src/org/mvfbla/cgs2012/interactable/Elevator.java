@@ -100,7 +100,7 @@ public class Elevator extends Button {
 					g.translate(x, y);
 				}
 			} else {
-				int dist = 300;
+				int dist = 500;
 				prog = 1-prog;
 				setY(startY-prog*dist);
 				g.setColor(Color.black);
