@@ -8,6 +8,10 @@ import org.mvfbla.cgs2012.base.TiledObject;
 
 
 
+/**
+ * @author William
+ * Trigger area object
+ */
 public class Trigger extends TiledObject{
 
 	private final TriggerListener listener;

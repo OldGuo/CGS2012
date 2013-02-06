@@ -9,6 +9,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author William
+ * Loading screen w/ logos
+ */
 public class LoadingState extends BasicGameState {
 	private int stateID = -1;
 	private Image[] logos;

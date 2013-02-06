@@ -8,7 +8,15 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+/**
+ * @author PenguinToast
+ * Motion sensor object
+ */
 public class MotionSensor extends GameObject{
+	/**
+	 * @author PenguinToast
+	 * Listetner to detect player movement in sensor
+	 */
 	private class MotionListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) { }
@@ -29,6 +37,11 @@ public class MotionSensor extends GameObject{
 	// 2 : on
 	private byte state = 1;
 	private final Trigger trigger;
+	/**
+	 * Creates a motion sensor from the source TiledObject, and with the specified delay
+	 * @param source - TiledObject
+	 * @param delay - Delay from start
+	 */
 	public MotionSensor(TiledObject source, int delay) {
 		super(source.getX(), source.getY(), source.getWidth(), source.getHeight());
 		counter -= delay;
@@ -49,6 +62,10 @@ public class MotionSensor extends GameObject{
 		}
 		g.setColor(c);
 	}
+	/**
+	 * Sets the state of this motion sensor
+	 * @param state - State to set to
+	 */
 	public void setState(byte state) {
 		this.state = state;
 	}

@@ -13,6 +13,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
 
+/**
+ * @author PenguinToast
+ * Class to represent all characters
+ */
 public class Characters extends AnimatedObject {
 
 	private Vector force;

@@ -10,12 +10,25 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TileSet;
 import org.newdawn.slick.tiled.TiledMap;
 
+/**
+ * @author William
+ * Represents a moving platform
+ */
 public class MovingTile extends Tile {
 	private boolean movement;
 	private Image image;
 	private float[] move;
 	private int nX, nY, nWidth, nHeight;
 	private boolean on;
+	/**
+	 * Creates a new moving platform with specified attributes
+	 * @param x - X location of platform
+	 * @param y - Y location of platform
+	 * @param width - Width of platform
+	 * @param height - Height of platform
+	 * @param movement - Movement data for the platform
+	 * @param imageData - Image data for the platform
+	 */
 	public MovingTile(int x, int y, int width, int height, String movement, String imageData) {
 		super(x, y, width, height);
 		nX = x;
@@ -23,10 +36,12 @@ public class MovingTile extends Tile {
 		nWidth = width;
 		nHeight = height;
 		move = new float[3];
+		// Get movement data
 		String[] temp = movement.split(",");
 		for(int i = 0; i < move.length; i++)
 			move[i] = Float.parseFloat(temp[i]);
 		TiledMap map = GameConstants.currMap.getMap();
+		// Get image data
 		String[] imageArray = imageData.split(",");
 		for(int k = 0; k < map.getTileSetCount(); k++) {
 			TileSet ts = map.getTileSet(k);
@@ -46,14 +61,23 @@ public class MovingTile extends Tile {
 		}
 		g.setColor(c);
 	}
+	/**
+	 * Checks if the platform is on
+	 * @return If the platform is on
+	 */
 	public boolean isOn() {
 		return on;
 	}
+	/**
+	 * Sets the state of the platform
+	 * @param on - New state
+	 */
 	public void setOn(boolean on) {
 		this.on = on;
 	}
 	@Override
 	public void update(GameContainer gc, int delta) {
+		// Update movement
 		if(on) {
 			Vector v = new Vector();
 			if(getX() == nX && getY() == nY)

@@ -77,6 +77,9 @@ public class TypeWriter{
 
     private int x,y;
 
+	/**
+	 * Creates a new TypeWriter
+	 */
 	public TypeWriter() {
         width = 720;
         height = 80;
@@ -90,6 +93,15 @@ public class TypeWriter{
         time = TYPE_DELAY;
         finished = false;
     }
+    /**
+     * Draws this typewriter
+     * @param g - Graphics context to draw with
+     * @param xPos - X position to draw to
+     * @param yPos - Y position to draw to
+     * @param w - Width of the typewriter
+     * @param h - Height of the typewriter
+     * @throws SlickException
+     */
     public void draw(Graphics g,int xPos,int yPos,int w,int h) throws SlickException {
         if(!finished){
 			x = 40 + xPos;
@@ -118,10 +130,16 @@ public class TypeWriter{
 	        }
         }
     }
+    /**
+     * Checks if the text is finished typing
+     * @return Whether or not the text is finished
+     */
     public boolean isFinished(){
     	return finished;
     }
-	//restarts typewriting effect
+    /**
+     * Restarts the typewriter
+     */
     public void restart() {
         renderCol = 0;
         renderRow = 0;
@@ -132,16 +150,24 @@ public class TypeWriter{
     /**
      * Entry point to our test
      *
-     * @param argv The arguments passed to the test
+     * @param d - The arguments passed to the test
      */
     public void setDelay(int d){
     	TYPE_DELAY = d;
     }
+    /**
+     * Sets the text of the typewriter
+     * @param s - New text
+     */
     public void setText(String s){
     	text = s;
     }
 
-    //update the game logic and typewriting effect
+	/**
+	 * Update the game logic and typewriting effect
+	 * @param container - GameContainer this typewriter is in
+	 * @param delta - Time since last update
+	 */
 	public void update(GameContainer container,int delta) {
         time -= delta;
         font = container.getDefaultFont();
