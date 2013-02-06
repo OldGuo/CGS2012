@@ -116,7 +116,15 @@ public class BlueBoss extends Boss{
 			GameConstants.playerMaxSpeed++; //defeating this boss grants movement speed
 		}
 		if(attacking){
-			super.update(gc, delta);
+			if(!super.isAlive()){
+				if(!died)
+					GameConstants.enemiesKilled++; //counts the number of enemies killed
+				died = true;
+				super.resetAnimation(); //stops the enemy from moving when dead
+				super.stopAnimation();
+				super.update(gc, delta);
+			}
+			superUpdate(gc, delta);
 			time -= delta;
 			if(time <= 0 && !falling){ //during this time the boss will stomp
 				stomp();

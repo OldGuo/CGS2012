@@ -75,6 +75,14 @@ public class BlackBossLevel extends GameLevel {
 			blackBoss.draw(g);
 		if(!blackBoss.isAlive()&&player.shouldDisplay()) //Draws the player
 			player.draw(g);
+		// Draw question window if needed
+		if(questions.getAnswering() == true){
+			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
+		// Draw pause window if needed
+		if(GameConstants.getPaused() == true){
+			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
+		}
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {

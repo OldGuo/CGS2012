@@ -70,4 +70,12 @@ public class Enemy extends Characters{;
 			super.update(gc, delta);
 		}
 	}
+	/**
+	 * Updates superclass
+	 * @param gc
+	 * @param delta
+	 */
+	public void superUpdate(GameContainer gc, int delta) {
+		super.update(gc, delta);
+	}
 }

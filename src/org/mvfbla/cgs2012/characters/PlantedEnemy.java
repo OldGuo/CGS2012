@@ -71,6 +71,14 @@ public class PlantedEnemy extends Enemy{
 		}else{ //chases player when awake
 			super.setSpeed(3*super.getEnemyDirection());
 		}
-		super.update(gc, delta);
+		if(!super.isAlive()){
+			if(!died)
+				GameConstants.enemiesKilled++; //counts the number of enemies killed
+			died = true;
+			super.resetAnimation(); //stops the enemy from moving when dead
+			super.stopAnimation();
+			super.update(gc, delta);
+		}
+		superUpdate(gc, delta);
 	}
 }
