@@ -23,6 +23,7 @@ public class MainMenu extends BasicGameState{
 	private int fadeState = 0;
 	private int nextState = 0;
 	private int nextStateLoc = 0;
+	private Image title;
 
 	public MainMenu(int stateID){
 		this.stateID = stateID;
@@ -53,6 +54,7 @@ public class MainMenu extends BasicGameState{
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
+		title = new Image("data\\Title.png");
 		background = new Image("data\\Level\\background.png");
 		// Initialize fade variables
 		fadeTime = 0;
@@ -73,7 +75,8 @@ public class MainMenu extends BasicGameState{
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).draw(g,0,0);
 		}
-		g.drawString("Tinge",375,90);
+		//g.drawString("Tinge",375,90);
+		title.draw(235,45);
 		// Draw fade
 		if(fadeState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
