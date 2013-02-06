@@ -31,10 +31,9 @@ public class Game extends StateBasedGame{
 	static final int PLOT_STATE                 = 11;
 	static final int LOADING_STATE				= 12;
 	
+
 	public Game() throws SlickException{
-		super("FBLA CGS 2012");
-/*		music = new Music("data\\Maps\\Outdated.ogg"); //Music looped throughout the duration of the game
-		music.loop();*/
+		super("Tinge");
 	}
 	public static void main(String [] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new Game());
@@ -71,6 +70,7 @@ public class Game extends StateBasedGame{
 	 * Thread to start the music running
 	 */
 	private class MusicThread implements Runnable {
+		@Override
 		public void run() {
 			try {
 				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");

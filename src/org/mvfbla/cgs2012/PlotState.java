@@ -44,17 +44,17 @@ public class PlotState extends BasicGameState{
 		}else{
 			if(GameConstants.lastBoss == 1){ // blue
 				finalPlot = "As the blue figure falls to the floor, it utters a few final words," +
-							"                                                \"Be Quick Alex\"                           " +
+							"                                                \"Be Quick Alex\"\n" +
 							"Strangely, I already feel quicker. ";
 			}
 			if(GameConstants.lastBoss == 2){ //red
 				finalPlot = "As the red figure falls to the floor, it utters a few final words," +
-							"                                                \"Be Strong Alex\"                      " +
+							"                                                \"Be Strong Alex\"\n" +
 							"Strangely, I already feel stronger. ";
 			}
 			if(GameConstants.lastBoss == 3){ //yellow
 				finalPlot = "As the yellow figure falls to the floor, it utters a few final words," +
-							"                                                \"Be Wise Alex\"                            " +
+							"                                                \"Be Wise Alex\"\n" +
 							"Strangely, I already feel wiser.";
 			}
 			finalPlot += "Suddenly my mind is pounded with waves of guilt. " +

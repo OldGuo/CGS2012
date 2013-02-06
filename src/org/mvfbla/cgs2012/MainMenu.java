@@ -56,8 +56,7 @@ public class MainMenu extends BasicGameState{
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).draw(g,0,0);
 		}
-		g.setColor(Color.black);
-		g.drawString("Insert Title Here",325,100);
+		g.drawString("Tinge",375,90);
 		if(fadeState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
 			g.fillRect(0, 0, 100000, 100000);
