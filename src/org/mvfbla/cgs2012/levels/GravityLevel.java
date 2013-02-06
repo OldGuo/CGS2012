@@ -12,38 +12,43 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * The Gravity Level
+ * Centered around rotating gravity through technology
+ */
 public class GravityLevel extends GameLevel {
-
-
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public GravityLevel(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
 	private boolean waiting;
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		//Initializes variables
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
-		if(to.getType().equals("gravityButton")) {
+		if(to.getType().equals("gravityButton")) { //Adds a gravity button from  the .tmx file
 			Button b = new Button(to.getX(), to.getY(), new GravityListener());
 			GameConstants.interacts.add(b);
 		}
 	}
 	@Override
-	public void unlockElev(int src) {
+	public void unlockElev(int src) { //Unlocks the elevator if the player is not waiting for questions
 		waiting = true;
 	}
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
 		updateMain(container, sbg, delta);
-		if(waiting && !questions.getAnswering()) {
+		if(waiting && !questions.getAnswering()) { //Rotates gravity if the questions are finished answering
 			waiting = false;
 			GameConstants.flipGrav();
 		}
@@ -51,25 +56,25 @@ public class GravityLevel extends GameLevel {
 
 	@Override
 	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
-		draw(g);
+		draw(g); //Draws the level
 	}
 	@Override
-	public int getID(){
+	public int getID(){ //returns the ID of the level
 		return stateID;
 	}
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
-		initStuff();
+		initStuff(); //Initializes variables when entering a state
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
+	/**
+	 * @author Young
+	 * Flips the gravity
+	 */
 	public class GravityListener implements ButtonListener{
 		@Override
 		public void buttonPressed(boolean state){
-			//Blargh using random method
 			unlockElev(0);
 		}
 	}

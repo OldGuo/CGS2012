@@ -141,9 +141,8 @@ public abstract class GameLevel extends BasicGameState{
 	// Reset the level
 	public void reset() {
 		try {
-			initStuff();
-			GameConstants.level.init(null, null);
-			//enter(null, null);
+			init(null, null);
+			enter(null, null);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

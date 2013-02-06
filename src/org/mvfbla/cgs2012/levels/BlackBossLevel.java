@@ -13,10 +13,20 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * The Black Boss Level
+ * Mimics the Player
+ */
 public class BlackBossLevel extends GameLevel {
 
 	private BlackBoss blackBoss;
 
+
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public BlackBossLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
@@ -24,6 +34,7 @@ public class BlackBossLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		//Initializes variables
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
@@ -32,9 +43,10 @@ public class BlackBossLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+		//Update method
 		updateMain(container, sbg, delta);
 		blackBoss.update(container,delta);
-		if(!blackBoss.isAlive()) {
+		if(!blackBoss.isAlive()) { //Ends the level
 			done = true;
 			transState = 2;
 		}
@@ -43,33 +55,30 @@ public class BlackBossLevel extends GameLevel {
 	@Override
 	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
 		draw(g);
-		if(blackBoss.shouldDisplay())
+		if(blackBoss.shouldDisplay()) //Draws the black boss
 			blackBoss.draw(g);
-		if(!blackBoss.isAlive()&&player.shouldDisplay())
+		if(!blackBoss.isAlive()&&player.shouldDisplay()) //Draws the player
 			player.draw(g);
 	}
 	@Override
-	public int getID(){
+	public int getID(){ //Returns the ID of the level
 		return stateID;
 	}
 	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //On enter of the state
 		initStuff();
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //On exit of the state
 
 	@Override
-	public void initObject(TiledObject to) throws SlickException {
+	public void initObject(TiledObject to) throws SlickException { //Initializes the button for the level
 		if(to.getType().equals("blackBossButton")) {
 			Button b = new Button(to.getX(), to.getY(), new bossSyncListener());
 			GameConstants.interacts.add(b);
 		}
 	}
-	public class bossSyncListener implements ButtonListener{
+	public class bossSyncListener implements ButtonListener{ //Syncronize switch for the boss
 		@Override
 		public void buttonPressed(boolean state){
 			GameConstants.flipSync();

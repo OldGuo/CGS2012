@@ -9,17 +9,24 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Motion Sensor Level
+ * Centered around bypassing the Motion Sensors
+ */
 public class MotionSensorLevel extends GameLevel {
 
+	/**
+	 * Sets the ID of the level
+	 * @param stateID - ID of the level
+	 */
 	public MotionSensorLevel(int stateID) {
 		this.stateID = stateID;
 		// TODO Auto-generated constructor stub
 	}
-	private final static int MAP_WIDTH = 800;
-	private final static int MAP_HEIGHT = 600;
-
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		//Initializes values
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
@@ -27,31 +34,26 @@ public class MotionSensorLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
+		//Updates level
 		updateMain(container, sbg, delta);
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
+		//Draws level
 		draw(g);
 	}
 	@Override
-	public int getID(){
+	public int getID(){ //returns the ID of the level
 		return stateID;
 	}
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
-		initStuff();
-		//text.setText("OHMAHGERD ITS A MOTION SENSOR");
+		initStuff(); //When the level is entered
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the level is exited
 
 	@Override
-	public void initObject(TiledObject to) throws SlickException {
-
-
-	}
+	public void initObject(TiledObject to) throws SlickException {} //Initializes level specific objects, in this case there are none
 }

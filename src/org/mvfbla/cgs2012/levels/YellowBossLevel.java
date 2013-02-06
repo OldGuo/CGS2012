@@ -20,8 +20,8 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class YellowBossLevel extends GameLevel {
-
-
+	//The Yellow Boss Level
+	//Sets the ID of the level
 	public YellowBossLevel(int stateID) {
 		this.stateID = stateID;
 	}
@@ -249,7 +249,6 @@ public class YellowBossLevel extends GameLevel {
 	}
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
 		initStuff();
 		GameConstants.enemies.add(yellowBoss);
 		YellowButton b1 = new YellowButton(125,500, 0);
@@ -263,9 +262,7 @@ public class YellowBossLevel extends GameLevel {
 		GameConstants.interacts.add(b3);
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {}
 
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
