@@ -83,6 +83,6 @@ public class Game extends StateBasedGame{
 		Runnable r = new MusicThread();
 		Thread t = new Thread(r);
 		t.start();
-        g.setIcons(new String[] {"data\\logo\\mvfbla_logo32.png", "data\\logo\\mvfbla_logo16.png"});
+        g.setIcons(new String[] {"data\\logo\\fbla_32.png", "data\\logo\\fbla_16.png"});
 	}
 }
