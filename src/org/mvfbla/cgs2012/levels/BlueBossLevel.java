@@ -20,6 +20,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Young
  * The Blue Boss Level
+ * Attempts to follow the player and "Stomp" on player.
  */
 public class BlueBossLevel extends GameLevel {
 
@@ -54,15 +55,16 @@ public class BlueBossLevel extends GameLevel {
 
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg,int delta) throws SlickException {
+		//Updates the level
 		updateMain(container, sbg, delta);
-		if(!afterQuestions){
+		if(!afterQuestions){ //Handles the pre-boss sequence
 			GameConstants.level.player.setControl(false);
 		}
 		GameConstants.collidableObjects.add(platform);
 		if(platformBroken){
 			fallY+=7;
 		}
-		for(Characters guy : GameConstants.enemies) {
+		for(Characters guy : GameConstants.enemies) { //Handles the updating of the Blue Boss
 			float tempX=player.getCenterX()-guy.getCenterX();//calculates distance between player and enemy
 			double Xdist=Math.pow(tempX, 2);
 			double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
@@ -74,7 +76,6 @@ public class BlueBossLevel extends GameLevel {
 					boss.changeSleep(true);
 					boss.setDirection(Math.signum(tempX));
 					boss.setSpeed(1*Math.signum(tempX));
-					//System.out.println(boss.getSpeed());
 				}else{
 					boss.changeSleep(false);
 
@@ -112,37 +113,37 @@ public class BlueBossLevel extends GameLevel {
 				}
 			}
 		}
-		if(beforeQuestions){
+		if(beforeQuestions){ //Handles the pre-boss sequence
 			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
-						 "I want to ask it so many questions. I want to understand.  A stream of " +
-						 "questions pour from my mouth. But it only responds with questions of its own." +
-						 "                                       ");
+					"I want to ask it so many questions. I want to understand.  A stream of " +
+					"questions pour from my mouth. But it only responds with questions of its own." +
+					"                                       ");
 			if(text.isFinished() && beforeQuestions){
 				beforeQuestions = false;
 				needRestart = true;
 				questions.setAnswering(true);
 			}
 		}
-		if(questions.getAnswering() == false && !beforeQuestions){
+		if(questions.getAnswering() == false && !beforeQuestions){ //Handles the pre-boss sequence
 			afterQuestions = true;
 		}
-		if(afterQuestions == true){
+		if(afterQuestions == true){ //Handles the pre-boss sequence
 			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
-					 " But there is no answer, this only" +
-					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
-					 "                                       ");
+					" But there is no answer, this only" +
+					" seems to infuriate the figure...   ...   ...   ...   ...   " +
+					"                                       ");
 			if(needRestart){
 				text.restart();
 				needRestart = false;
 			}
 		}
-		if(beforeQuestions == true || afterQuestions == true)
+		if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
 			text.update(container, delta);
-		if(questions.getAnswering()){
+		if(questions.getAnswering()){ //Handles the pre-boss sequence
 			questions.update(container);
 			GameConstants.level.player.setControl(false);
 		}
-		for(Characters guy : GameConstants.enemies) {
+		for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
 			String name=guy.getClass().toString();
 			if(name.equals("class org.mvfbla.cgs2012.BlueBoss")){
 				BlueBoss boss = (BlueBoss)guy;
@@ -155,22 +156,22 @@ public class BlueBossLevel extends GameLevel {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
+	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException{ //Draws the level
 		draw(g);
 		g.setColor(Color.black);
-		if(platformBroken == false)
+		if(platformBroken == false) //Draws the platform unless broken
 			g.fillRect(5*16,18*16,16*39,16*2);
 		else{
 			g.fillRect(5*16, fallY, 6*39, 16*2);
 			g.fillRect(27*16, fallY, 6*39, 16*2);
 		}
-		if(player.shouldDisplay())
+		if(player.shouldDisplay()) //Player blinking
 			player.draw(g);
-		if(transState != 0) {
+		if(transState != 0) { //Fade time
 			g.setColor(new Color(0, 0, 0, 1f-(transTime/(float)transLength)));
 			g.fillRect(0, 0, 100000, 100000);
 		}
-		if(deathTime > 0) {
+		if(deathTime > 0) { //Player death
 			player.stopAnimation();
 			player.draw(g);
 			long time = deathTime % deathDelay;
@@ -181,38 +182,34 @@ public class BlueBossLevel extends GameLevel {
 			g.setColor(c);
 			g.fillRect(0, 0, 100000, 100000);
 		}
-		if(beforeQuestions == true || afterQuestions == true){
+		if(beforeQuestions == true || afterQuestions == true){ //Handles the pre-boss sequence
 			try {
 				text.draw(g,0,0,720,80);
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
 		}
-		if(questions.getAnswering() == true){
+		if(questions.getAnswering() == true){ //Draws question screen
 			questions.draw(g,0,0);
 		}
 		// Draw pause window if needed
-		if(GameConstants.getPaused() == true){
+		if(GameConstants.getPaused() == true){ //If paused
 			pauseWindow.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}
 	}
 	@Override
-	public int getID() {
+	public int getID() { //returns the ID of the level
 		return stateID;
 	}
 	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //When the state is entered
 		initStuff();
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
-
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
 	@Override
-	public void initObject(TiledObject to) throws SlickException {
-		if(to.getType().equals("pillar")){
+	public void initObject(TiledObject to) throws SlickException { //Creates level specific objects for the Blue Boss Level
+		if(to.getType().equals("pillar")){ //Pillar for interacting with the Blue Boss
 			Pillar pillar = new Pillar(to.getX(),to.getY(),48,224);
 			GameConstants.pillars.add(pillar);
 		}

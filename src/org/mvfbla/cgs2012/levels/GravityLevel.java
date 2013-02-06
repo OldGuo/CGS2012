@@ -42,7 +42,7 @@ public class GravityLevel extends GameLevel {
 		}
 	}
 	@Override
-	public void unlockElev(int src) {
+	public void unlockElev(int src) { //Unlocks the elevator if the player is not waiting for questions
 		waiting = true;
 	}
 	@Override
@@ -68,10 +68,13 @@ public class GravityLevel extends GameLevel {
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
+	/**
+	 * @author Young
+	 * Flips the gravity
+	 */
 	public class GravityListener implements ButtonListener{
 		@Override
 		public void buttonPressed(boolean state){
-			//Blargh using random method
 			unlockElev(0);
 		}
 	}

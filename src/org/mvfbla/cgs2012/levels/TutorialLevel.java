@@ -12,6 +12,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Tutorial Level
+ * Teaches the player core aspects of gameplay.
+ */
 public class TutorialLevel extends GameLevel {
 
 	private boolean waiting;
@@ -26,11 +31,13 @@ public class TutorialLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		//Initializes values
 		super.setBackgroundInfo(1600, 29);
 		map = new Map("data\\Maps\\TutorialLevel_1.tmx", "data\\Maps");
 	}
 	@Override
 	public void update(GameContainer container,StateBasedGame sbg, int delta) throws SlickException {
+		//Updates level
 		updateMain(container, sbg, delta);
 		if(waiting && !questions.getAnswering()) {
 			waiting = false;
@@ -39,41 +46,46 @@ public class TutorialLevel extends GameLevel {
 	}
 
 	@Override
-	public void unlockElev(int src) {
+	public void unlockElev(int src) { //Unlocks the elevator
 		waiting = true;
 	}
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException  {
+		//Draws the level
 		draw(g);
 	}
 	@Override
-	public int getID(){
+	public int getID(){ //returns the ID of the level
 		return stateID;
 	}
 	@Override
 	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
+		//Initializes values
 		initStuff();
 	}
 	@Override
 	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
 		GameConstants.enemiesKilled = 0;
 		GameConstants.techUsed = 0;
+		//Resets the values used for Boss choosing
+		//Tutorial Level does not count towards those values
 	}
 	@Override
-	public void initObject(TiledObject to) throws SlickException {
-
-		if(to.getType().equals("movingPlatform")) {
+	public void initObject(TiledObject to) throws SlickException { //Initializes level specific objects
+		if(to.getType().equals("movingPlatform")) { //Moving platform
 			MovingTile t = new MovingTile(to.getX(), to.getY(), to.getWidth(), to.getHeight(), to.getProperty("var"), to.getProperty("image"));
 			GameConstants.platforms.add(t);
 			GameConstants.collidableObjects.add(t);
 		}
-		if(to.getType().equals("platformButton")) {
+		if(to.getType().equals("platformButton")) { //Button for the moving platform
 			Button b = new Button(to.getX(), to.getY(), new PlatformListener());
 			GameConstants.interacts.add(b);
 		}
 	}
+	/**
+	 * @author Young
+	 * Unlocks the platform if switch is activated
+	 */
 	public class PlatformListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {

@@ -63,27 +63,23 @@ public class ElevatorLevel extends GameLevel {
 
 	@Override
 	public void render(GameContainer container,StateBasedGame sbg, Graphics g) throws SlickException  {
-		draw(g);
+		draw(g); //Renders the game
 	}
 	@Override
 	public int getID(){
-		return stateID;
+		return stateID; //Returns the ID of the state
 	}
 	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
-		initStuff();
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //When teh state is entered
+		initStuff(); //Initialize values
 		elevator.getTrigger().setActive(false);
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the state is left
 
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
-
-		if(to.getType().equals("key")) {
+		if(to.getType().equals("key")) { //Creates a key in location specified by .tmx file
 			Key key = new Key(to, this);
 			GameConstants.interacts.add(key);
 			Trigger keyTrigger = new Trigger((int)elevator.getX(), (int)elevator.getY(), (int)elevator.getWidth(), (int)elevator.getHeight(), new ElevatorKeyListener());
@@ -91,12 +87,16 @@ public class ElevatorLevel extends GameLevel {
 			elevatorKeyTrigger = keyTrigger;
 			GameConstants.triggers.add(keyTrigger);
 		}
-		if(to.getType().equals("elevButton")) {
+		if(to.getType().equals("elevButton")) { //Creates Elevator Button in location sepcified by .tmx file
 			Button b = new Button(to.getX(), to.getY(), new ElevButtonListener());
 			questionButton = b;
 			GameConstants.interacts.add(b);
 		}
 	}
+	/**
+	 * @author Young
+	 * Unlocks the Elevator if the switch is activated
+	 */
 	public class ElevButtonListener implements ButtonListener {
 		@Override
 		public void buttonPressed(boolean state) {
@@ -105,6 +105,10 @@ public class ElevatorLevel extends GameLevel {
 			}
 		}
 	}
+	/**
+	 * @author Young
+	 * Activates the Elevator if you have the key
+	 */
 	public class ElevatorKeyListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {

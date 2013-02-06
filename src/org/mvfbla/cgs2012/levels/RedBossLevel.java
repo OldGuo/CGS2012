@@ -15,6 +15,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Red Boss Level
+ * Moves back and to defeat player.
+ */
 public class RedBossLevel extends GameLevel {
 
 	private TypeWriter text;
@@ -31,6 +36,7 @@ public class RedBossLevel extends GameLevel {
 
 	@Override
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
+		//Initializes Values
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
@@ -41,12 +47,12 @@ public class RedBossLevel extends GameLevel {
 	}
 
 	@Override
-	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame sbg,int delta) throws SlickException { //Updates the Game
 		updateMain(container, sbg, delta);
 		if(!afterQuestions){
-			GameConstants.level.player.setControl(false);
+			GameConstants.level.player.setControl(false); //Handles the pre-boss sequence
 		}
-		for(Characters guy : GameConstants.enemies) {
+		for(Characters guy : GameConstants.enemies) { //Determines endings and replay values
 			String name=guy.getClass().toString();
 			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
 				RedBoss boss = (RedBoss)guy;
@@ -60,7 +66,7 @@ public class RedBossLevel extends GameLevel {
 				}
 			}
 		}
-		if(beforeQuestions){
+		if(beforeQuestions){ //Handles the pre-boss sequence
 			text.setText("The moment I enter, I sense the air of superiority emanating from the figure in the room. " +
 						 "I want to ask it so many questions. I want to understand.  A stream of " +
 						 "questions pour from my mouth. But it only responds with questions of its own." +
@@ -71,10 +77,10 @@ public class RedBossLevel extends GameLevel {
 				questions.setAnswering(true);
 			}
 		}
-		if(questions.getAnswering() == false && !beforeQuestions){
+		if(questions.getAnswering() == false && !beforeQuestions){ //Handles the pre-boss sequence
 			afterQuestions = true;
 		}
-		if(afterQuestions == true){
+		if(afterQuestions == true){ //Handles the pre-boss sequence
 			text.setText("I am done with its games. I want answers now. Who am I? Why am I here?" +
 					 " But there is no answer, this only" +
 					 " seems to infuriate the figure...   ...   ...   ...   ...   " +
@@ -84,13 +90,13 @@ public class RedBossLevel extends GameLevel {
 				needRestart = false;
 			}
 		}
-		if(beforeQuestions == true || afterQuestions == true)
+		if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
 			text.update(container, delta);
-		if(questions.getAnswering()){
+		if(questions.getAnswering()){ //Handles the pre-boss sequence
 			questions.update(container);
 			GameConstants.level.player.setControl(false);
 		}
-		for(Characters guy : GameConstants.enemies) {
+		for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
 			String name=guy.getClass().toString();
 			if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
 				RedBoss boss = (RedBoss)guy;
@@ -101,9 +107,9 @@ public class RedBossLevel extends GameLevel {
 			}
 		}
 	}
-
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg,Graphics g) throws SlickException  {
+		//Draws the level
 		draw(g);
 		if(player.shouldDisplay())
 			player.draw(g);
@@ -134,21 +140,16 @@ public class RedBossLevel extends GameLevel {
 		}
 	}
 	@Override
-	public int getID(){
+	public int getID(){ //returns the ID of the level
 		return stateID;
 	}
 	@Override
-	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Entering state " + getID());
+	public void enter(GameContainer container, StateBasedGame stateBasedGame) throws SlickException { //When the level is entered
 		initStuff();
 	}
 	@Override
-	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
-		System.out.println("Leaving state " + getID());
-	}
+	public void leave(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {} //When the level is exited
 
 	@Override
-	public void initObject(TiledObject to) throws SlickException {
-
-	}
+	public void initObject(TiledObject to) throws SlickException {} //Initializes player specific objects, in this case there are none
 }

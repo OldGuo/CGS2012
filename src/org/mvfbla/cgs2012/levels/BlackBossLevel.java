@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Young
  * The Black Boss Level
+ * Mimics the Player
  */
 public class BlackBossLevel extends GameLevel {
 
