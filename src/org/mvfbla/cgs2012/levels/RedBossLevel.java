@@ -108,7 +108,7 @@ public class RedBossLevel extends GameLevel {
 			}
 			for(Characters guy : GameConstants.enemies) { //Determines endings and replay values
 				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+				if(name.equals("class org.mvfbla.cgs2012.characters.RedBoss")){
 					RedBoss boss = (RedBoss)guy;
 					if(!boss.isAlive()){
 						transState = 2;
@@ -152,7 +152,7 @@ public class RedBossLevel extends GameLevel {
 			}
 			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
 				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.RedBoss")){
+				if(name.equals("class org.mvfbla.cgs2012.characters.RedBoss")){
 					RedBoss boss = (RedBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);

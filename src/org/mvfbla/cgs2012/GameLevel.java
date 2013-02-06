@@ -487,7 +487,7 @@ public abstract class GameLevel extends BasicGameState{
 				String name=guy.getClass().toString();
 				float hit=0;
 				if(player.collides(guy)&&guy.isAlive()){
-					if(name.equals("class org.mvfbla.cgs2012.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+					if(name.equals("class org.mvfbla.cgs2012.characters.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
 						if(Math.abs(tempX)<20)
 							player.setHealth(player.getHealth()-1);
 					}
@@ -498,7 +498,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 				// Make PlantedEnemy walk towards the player
 				hit+=(guy.getWidth()/2);
-				if(name.equals("class org.mvfbla.cgs2012.PlantedEnemy")){
+				if(name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 						((PlantedEnemy)guy).changeSleep(true);
 						((PlantedEnemy)guy).setDirection(Math.signum(tempX));
