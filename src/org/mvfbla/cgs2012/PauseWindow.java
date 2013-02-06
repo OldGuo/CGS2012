@@ -61,6 +61,8 @@ public class PauseWindow{
 				}
 				pauseButtons.get(i).clear();
 				sbg.enterState(Game.MAIN_MENU_STATE);
+				//GameConstants.level.reset();
+				//GameConstants.clear();
 			}
 			if(pauseButtons.get(i).getAction().equals("Quit")){
 				gc.exit();

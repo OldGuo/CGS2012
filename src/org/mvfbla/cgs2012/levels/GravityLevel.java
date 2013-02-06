@@ -12,6 +12,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * The Gravity Level
+ * Centered around rotating gravity through technology
+ */
 public class GravityLevel extends GameLevel {
 	/**
 	 * Sets the ID of the level

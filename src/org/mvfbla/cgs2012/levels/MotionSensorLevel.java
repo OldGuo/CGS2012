@@ -9,6 +9,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Motion Sensor Level
+ * Centered around bypassing the Motion Sensors
+ */
 public class MotionSensorLevel extends GameLevel {
 
 	/**
