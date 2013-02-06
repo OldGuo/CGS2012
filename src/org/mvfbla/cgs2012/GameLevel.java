@@ -49,7 +49,7 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.level = this;
 		boolean flag=false;
 		// Make questions and pause window
-		questions=new QuestionWindow();
+		questions = new QuestionWindow();
 		pauseWindow = new PauseWindow();
 		pauseWindow.init();
 		text = new TypeWriter();
@@ -382,7 +382,7 @@ public abstract class GameLevel extends BasicGameState{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		// Draw question qindow if needed
+		// Draw question window if needed
 		if(questions.getAnswering() == true){
 			questions.draw(g,-(int)cameraBox.getOffsetX(),-(int)cameraBox.getOffsetY());
 		}

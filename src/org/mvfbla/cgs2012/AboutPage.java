@@ -19,7 +19,6 @@ public class AboutPage extends BasicGameState{
 
 	public AboutPage(int stateID) {
 		this.stateID = stateID;
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {

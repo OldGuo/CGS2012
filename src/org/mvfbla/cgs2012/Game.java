@@ -29,6 +29,7 @@ public class Game extends StateBasedGame{
 	static final int ABOUT_STATE                = 9;
 	static final int INSTRUCTIONS_STATE         = 10;
 	static final int PLOT_STATE                 = 11;
+	private Music music;
 	
 	public Game() throws SlickException{
 		super("FBLA CGS 2012");
@@ -58,5 +59,25 @@ public class Game extends StateBasedGame{
 		this.addState(new AboutPage(ABOUT_STATE));
 		this.addState(new InstructionPage(INSTRUCTIONS_STATE));
 		this.addState(new PlotState(PLOT_STATE));
+		Runnable r = new MusicThread();
+		Thread t = new Thread(r);
+		t.start();
+        g.setIcons(new String[] {"data\\logo\\mvfbla_logo32.png", "data\\logo\\mvfbla_logo16.png"});
+	}
+	/**
+	 * @author admin
+	 * Thread to start the music running
+	 */
+	private class MusicThread implements Runnable {
+		public void run() {
+			try {
+				if(music == null)
+					music = new Music("data\\Maps\\Outdated.ogg");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			if(!music.playing())
+				music.loop();
+		}
 	}
 }

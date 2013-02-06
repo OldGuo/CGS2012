@@ -21,7 +21,6 @@ public class MainMenu extends BasicGameState{
 	private int fadeState = 0;
 	private int nextState = 0;
 	private int nextStateLoc = 0;
-	private Music music;
 
 	public MainMenu(int stateID){
 		this.stateID = stateID;
@@ -32,8 +31,8 @@ public class MainMenu extends BasicGameState{
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException {
-		// TODO Auto-generated method stub
 		GameConstants.mainMenu = this;
+		// Initilize all the buttons
 		menuButtons = new ArrayList<InteractButton>();
 		menuButtons.add(new InteractButton("New Game",255,190,300,75,0));
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
@@ -46,14 +45,9 @@ public class MainMenu extends BasicGameState{
 		nextStateLoc = 0;
 		fadeDur = 400;
 		fadeState = 1;
-		if(music == null)
-			music = new Music("data\\Maps\\Outdated.ogg");
-		if(!music.playing())
-			music.loop();
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
-		// TODO Auto-generated method stub
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		for(int i = 0; i < 10; i++)
