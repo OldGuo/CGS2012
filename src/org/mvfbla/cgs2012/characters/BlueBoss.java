@@ -15,6 +15,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Young
+ * Blue Boss
+ */
 public class BlueBoss extends Boss{
 	private boolean awake = false;
 	private final float sight = 1000;
@@ -41,6 +45,9 @@ public class BlueBoss extends Boss{
 		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\BlueBossWalking.png", 128, 128), 150));
 		stomp = new Image("data\\Stomp.png");
 	}
+	/**
+	 * @param inSight - If the player is within the bosses sight range
+	 */
 	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
 		awake=inSight;
 	}
@@ -59,21 +66,39 @@ public class BlueBoss extends Boss{
 			stomp.getScaledCopy(scale).draw(x,y, alpha);
 		}
 	}
+	/**
+	 * @return - Whether the boss is attacking or not
+	 */
 	public boolean getAttacking(){
 		return attacking;
 	}
+	/**
+	 * @return - Whether the boss is falling
+	 */
 	public boolean getFalling(){
 		return falling;
 	}
+	/**
+	 * @return - The sight range of the Blue Boss
+	 */
 	public float getSight(){
 		return sight;
 	}
+	/**
+	 * @return - X position of the boss stomp
+	 */
 	public int getStompX(){ //coordinates for explosion
 		return stompX + 32;
 	}
+	/**
+	 * @return - Y position of the boss stomp
+	 */
 	public int getStompY(){
 		return stompY + 32;
 	}
+	/**
+	 * @param a - sets the boss to either start attacking or stop attacking
+	 */
 	public void setAttacking(boolean a){
 		attacking = a;
 	}
