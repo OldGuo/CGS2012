@@ -55,7 +55,7 @@ public class BlackBossLevel extends GameLevel {
 		//Initializes variables
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 		blackBoss = new BlackBoss(735,416);
 	}
 	@Override

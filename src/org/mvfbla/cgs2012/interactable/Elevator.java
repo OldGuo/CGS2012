@@ -119,7 +119,7 @@ public class Elevator extends Button {
 			// Draw lock is elevator is inactive
 			if(!isActive()) {
 				try {
-					g.drawImage(new Image("data\\lock.png"), 27, 25);
+					g.drawImage(new Image("data\\Level\\lock.png"), 27, 25);
 				} catch (SlickException e) {
 					e.printStackTrace();
 				}

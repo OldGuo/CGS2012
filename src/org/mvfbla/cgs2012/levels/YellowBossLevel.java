@@ -203,8 +203,8 @@ public class YellowBossLevel extends GameLevel {
 		beforeQuestions = true;
 		map = new Map("data\\Maps\\YellowBossLevel_5.tmx","data\\Maps");
 		yellowBoss = new YellowBoss(330,100);
-		background = new Image("data\\Background.png");
-		lightning = new Animation(new SpriteSheet("data\\Lightning.png", 144, 48), 500);
+		background = new Image("data\\Level\\Background.png");
+		lightning = new Animation(new SpriteSheet("data\\Level\\Lightning.png", 144, 48), 500);
 		lightning.start();
 		text = new TypeWriter();
 		questions = new QuestionWindow();
