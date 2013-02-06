@@ -40,12 +40,6 @@ public abstract class GameLevel extends BasicGameState{
 	protected Trigger elevatorKeyTrigger;
 	public int wrongCount = 0;
 
-	//Initialize used questions variable.
-	private final boolean[] used=new boolean [35];
-	public GameLevel(){
-		for(int i=0;i<35;i++)
-			used[i]=false;
-	}
 	public void initStuff() throws SlickException {
 		// Clears constants
 		GameConstants.clear();
@@ -54,18 +48,8 @@ public abstract class GameLevel extends BasicGameState{
 		GameConstants.platforms = new ArrayList<MovingTile>();
 		GameConstants.level = this;
 		boolean flag=false;
-		for(int i=0;i<35;i++){
-			if(!used[i])
-				flag=true;
-		}
-		if(!flag){
-			for(int i=0;i<35;i++)
-				used[i]=false;
-		}
 		// Make questions and pause window
-		do{
-			questions=new QuestionWindow();
-		}while(used[questions.whichQuestion()]);
+		questions=new QuestionWindow();
 		pauseWindow = new PauseWindow();
 		pauseWindow.init();
 		text = new TypeWriter();
@@ -157,9 +141,8 @@ public abstract class GameLevel extends BasicGameState{
 	// Reset the level
 	public void reset() {
 		try {
-			initStuff();
-			GameConstants.level.init(null, null);
-			//enter(null, null);
+			init(null, null);
+			enter(null, null);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -203,6 +186,11 @@ public abstract class GameLevel extends BasicGameState{
 					init(container, sbg);
 					enter(container, sbg);
 				}
+			}
+			// Resume all animations
+			for(Characters guy:GameConstants.enemies){
+				if(guy.shouldDisplay())
+					guy.resumeAnimation();
 			}
 			// Handle player death
 			if(!player.isAlive()) {

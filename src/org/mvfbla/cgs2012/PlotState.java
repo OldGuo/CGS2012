@@ -28,7 +28,7 @@ public class PlotState extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		text.setDelay(1);
+		text.setDelay(10);
 		fadeState = 1;
 		if((GameConstants.bossesDefeated & 8) == 8){
 			finalPlot = "\"I am proud of you Alex\"" +
