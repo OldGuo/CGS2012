@@ -23,6 +23,14 @@ public class Characters extends AnimatedObject {
 	private float health;
 	private int time, blinkTime;
 
+	/**
+	 * Creates a new Characater with the specified location and dimensions
+	 * @param x - X location of character
+	 * @param y - Y location of character
+	 * @param width - Width of character
+	 * @param height - Height of character
+	 * @throws SlickException
+	 */
 	public Characters(int x, int y, int width, int height) throws SlickException {
 		super(x, y, width, height-1);
 		force = new Vector(0,0);
@@ -32,30 +40,37 @@ public class Characters extends AnimatedObject {
 		time=0;
 		blinkTime=550;
 	}
-	public Vector checkCollision() { //checks for collisions of characters
+	/**
+	 * Moves this character out of collision with other GameObjects
+	 * @return The vector that the character was moved by to avoid collision
+	 */
+	public Vector checkCollision() {
 		Vector v = null;
-		Vector max = new Vector();
+		// Loop through each collidable object
 		for(int i = 0; i < GameConstants.collidableObjects.size(); i++) {
 			GameObject obj = GameConstants.collidableObjects.get(i);
+			// Get the projection vector
 			Vector t = this.doCollision(obj);
 			if(v == null) {
 				v = t;
 			}
+			// Translate this character
 			if(t != null) {
 				translate(t);
-				if(t.length() >= max.length())
-					max = t;
 			}
 			if(v != null && t != null && !t.equals(new Vector(0,0))) {
 				if(v.getY() >= 0)
 					v = t;
 			}
 		}
-		//if(!max.equals(new Vector()))
-		//	return max;
 		return v;
 	}
-	public Vector doCollision(GameObject obj) { //collisions for characters
+	/**
+	 * Gets the projection vector between this character an a gameobject
+	 * @param obj - The GameObject to check collision with
+	 * @return - The project vector
+	 */
+	public Vector doCollision(GameObject obj) {
 		Vector out = null;
 		if(collides(obj)) {
 			while(getVelY() > 7) {
@@ -77,17 +92,14 @@ public class Characters extends AnimatedObject {
 			// Check distance between right of the character and left of the object
 			if(getMaxX() - obj.getMinX() < Math.abs(diff) && getMaxX() - obj.getMinX() >= 0) {
 				diff = getMaxX() - obj.getMinX();
-				//setVelX(Math.min(getVelX(), 0));
 				vertical = false;
 			}
 			// Check distance between left of the character and right of the object
 			if(-(getMinX() - obj.getMaxX()) < Math.abs(diff) && getMinX() - obj.getMaxX() <= 0) {
 				diff = getMinX() - obj.getMaxX();
-				//setVelX(Math.max(0, getVelX()));
 				vertical = false;
 			}
 			// Get the projection vector
-			//System.out.println("colliding: " + diff);
 			if(vertical) {
 				out = new Vector(0, -diff);
 			} else {
@@ -98,15 +110,18 @@ public class Characters extends AnimatedObject {
 	}
 	@Override
 	public void draw(Graphics g){
-		/*Color orig = g.getColor(); //testing purposes, showed how much health above respective characters
-		for(int i=1;i<=health;i++){
-			g.setColor(Color.red);
-			g.fillRect(this.getCenterX()+i*16-this.getWidth()*3/4,this.getCenterY()-this.getHeight()*3/4, 8, 8);
-		}
-		g.setColor(orig);*/
 		super.draw(g);
 	}
-	public int getDirection(Vector v) { //returns the direction of a vector
+	/**
+	 * Returns the direction of a vector
+	 * @param v - The Vector to direction check
+	 * @return An integer representing the direction of the vector:
+	 * 	1: up
+	 * 	2: right
+	 * 	3: down
+	 * 	4: left
+	 */
+	public int getDirection(Vector v) {
 		if(v == null || v.equals(new Vector(0,0)))
 			return 0;
 		v.normalise();
@@ -120,19 +135,35 @@ public class Characters extends AnimatedObject {
 			return 2;
 		return -1;
 	}
-	public Vector getForce() { //returns force vector
+	/**
+	 * Gets the current velocity vector of the character
+	 * @return A Vector representing the velocity of the character
+	 */
+	public Vector getForce() {
 		return force;
 	}
-	public float getHealth(){ //returns health of character
+	/**
+	 * Returns the current health of the player
+	 * @return The current health of the player
+	 */
+	public float getHealth(){
 		return health;
 	}
-	public float getVelX() { //returns x component of velocity
+	/**
+	 * Returns the X velocity of this character
+	 * @return The X velocity of this character
+	 */
+	public float getVelX() {
 		return force.x;
 	}
-	public float getVelY() { //returns y component of velocity
+	/**
+	 * Returns the Y velocity of this character
+	 * @return - The Y velocity of this character
+	 */
+	public float getVelY() {
 		return force.y;
 	}
-	public boolean isAlive(){ //returns if the character is alive
+	public boolean isAlive(){
 		return alive;
 	}
 	public boolean isBlinking(){ //returns if the character is blinking
