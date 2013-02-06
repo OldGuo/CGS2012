@@ -1,7 +1,10 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.utils;
 
 import java.util.ArrayList;
 
+import org.mvfbla.cgs2012.base.GameLevel;
+import org.mvfbla.cgs2012.base.GameObject;
+import org.mvfbla.cgs2012.base.Map;
 import org.mvfbla.cgs2012.characters.Characters;
 import org.mvfbla.cgs2012.interactable.InteractiveObject;
 import org.mvfbla.cgs2012.interactable.MotionSensor;

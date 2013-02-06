@@ -1,8 +1,9 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.base;
 
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;

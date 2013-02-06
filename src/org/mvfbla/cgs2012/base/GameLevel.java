@@ -1,4 +1,4 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.base;
 
 import java.util.ArrayList;
 
@@ -22,6 +22,10 @@ import org.mvfbla.cgs2012.interactable.Pillar;
 import org.mvfbla.cgs2012.interactable.QuestionWindow;
 import org.mvfbla.cgs2012.interactable.Trigger;
 import org.mvfbla.cgs2012.interactable.TriggerListener;
+import org.mvfbla.cgs2012.utils.CameraObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.PauseWindow;
+import org.mvfbla.cgs2012.utils.TypeWriter;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

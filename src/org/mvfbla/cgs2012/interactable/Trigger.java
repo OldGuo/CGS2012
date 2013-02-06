@@ -2,9 +2,9 @@ package org.mvfbla.cgs2012.interactable;
 
 import java.util.ArrayList;
 
-import org.mvfbla.cgs2012.GameObject;
-import org.mvfbla.cgs2012.Tile;
-import org.mvfbla.cgs2012.TiledObject;
+import org.mvfbla.cgs2012.base.GameObject;
+import org.mvfbla.cgs2012.base.Tile;
+import org.mvfbla.cgs2012.base.TiledObject;
 
 
 

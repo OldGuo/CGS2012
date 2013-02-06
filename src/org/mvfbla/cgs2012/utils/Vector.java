@@ -1,4 +1,4 @@
-package org.mvfbla.cgs2012;
+package org.mvfbla.cgs2012.utils;
 
 import static java.lang.StrictMath.cos;
 import static java.lang.StrictMath.sin;

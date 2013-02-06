@@ -5,8 +5,8 @@
 package org.mvfbla.cgs2012.characters;
 
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.Vector;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

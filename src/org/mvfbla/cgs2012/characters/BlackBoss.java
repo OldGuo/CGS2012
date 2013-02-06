@@ -5,10 +5,10 @@
 //defeated by deactivating the mirror motion, and forcing it into the motion sensor
 package org.mvfbla.cgs2012.characters;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.Vector;
 import org.mvfbla.cgs2012.interactable.AnimatedObject;
 import org.mvfbla.cgs2012.interactable.InteractiveObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

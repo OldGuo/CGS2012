@@ -2,7 +2,7 @@
 //takes one hit to defeat, speed is medium
 package org.mvfbla.cgs2012.characters;
 
-import org.mvfbla.cgs2012.GameConstants;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

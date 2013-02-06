@@ -1,9 +1,9 @@
 package org.mvfbla.cgs2012.interactable;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.GameLevel;
-import org.mvfbla.cgs2012.GameObject;
-import org.mvfbla.cgs2012.TiledObject;
+import org.mvfbla.cgs2012.base.GameLevel;
+import org.mvfbla.cgs2012.base.GameObject;
+import org.mvfbla.cgs2012.base.TiledObject;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;

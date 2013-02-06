@@ -1,13 +1,13 @@
 package org.mvfbla.cgs2012.levels;
 
-import org.mvfbla.cgs2012.GameConstants;
-import org.mvfbla.cgs2012.GameLevel;
-import org.mvfbla.cgs2012.Map;
-import org.mvfbla.cgs2012.TiledObject;
-import org.mvfbla.cgs2012.TypeWriter;
+import org.mvfbla.cgs2012.base.GameLevel;
+import org.mvfbla.cgs2012.base.Map;
+import org.mvfbla.cgs2012.base.TiledObject;
 import org.mvfbla.cgs2012.characters.Characters;
 import org.mvfbla.cgs2012.characters.RedBoss;
 import org.mvfbla.cgs2012.interactable.QuestionWindow;
+import org.mvfbla.cgs2012.utils.GameConstants;
+import org.mvfbla.cgs2012.utils.TypeWriter;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

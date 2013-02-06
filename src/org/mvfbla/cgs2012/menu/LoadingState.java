@@ -1,6 +1,6 @@
 package org.mvfbla.cgs2012.menu;
 
-import org.mvfbla.cgs2012.Game;
+import org.mvfbla.cgs2012.base.Game;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
