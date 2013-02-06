@@ -139,5 +139,7 @@ public class MainMenu extends BasicGameState{
 		nextStateLoc = 0;
 		fadeDur = 400;
 		fadeState = 1;
+		if(GameConstants.music != null && !GameConstants.music.playing())
+			GameConstants.music.loop();
 	}
 }

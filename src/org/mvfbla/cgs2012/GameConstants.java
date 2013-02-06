@@ -2,6 +2,8 @@ package org.mvfbla.cgs2012;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Music;
+
 
 /**
  * @author Young
@@ -88,4 +90,5 @@ public class GameConstants {
 	//1 blue
 	//2 red
 	//3 yellow
+	public static Music music;
 }
