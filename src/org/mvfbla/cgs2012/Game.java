@@ -74,7 +74,6 @@ public class Game extends StateBasedGame{
 		public void run() {
 			try {
 				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");
-				System.out.println("Loaded music");
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}

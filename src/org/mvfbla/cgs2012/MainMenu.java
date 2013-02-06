@@ -7,7 +7,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -39,6 +38,7 @@ public class MainMenu extends BasicGameState{
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
 		background = new Image("data\\background.png");
+		// Initialize fade variables
 		fadeTime = 0;
 		fadeState = 0;
 		nextState = 0;
@@ -48,6 +48,7 @@ public class MainMenu extends BasicGameState{
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException {
+		// Draw buttons
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, 800, 600);
 		for(int i = 0; i < 10; i++)
@@ -57,6 +58,7 @@ public class MainMenu extends BasicGameState{
 			menuButtons.get(i).draw(g,0,0);
 		}
 		g.drawString("Tinge",375,90);
+		// Draw fade
 		if(fadeState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
 			g.fillRect(0, 0, 100000, 100000);
@@ -64,6 +66,10 @@ public class MainMenu extends BasicGameState{
 	}
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)throws SlickException {
+		// Make sure music is playing
+		if(GameConstants.music != null && !GameConstants.music.playing())
+			GameConstants.music.loop();
+		// Update transitions
 		if(fadeState == 2) {
 			fadeTime -= delta;
 			if(fadeTime <= 0) {
@@ -79,6 +85,7 @@ public class MainMenu extends BasicGameState{
 			}
 			return;
 		}
+		// Check how many bosses have been defeated
 		if(GameConstants.playNum == 2)
 			menuButtons.get(0).setText("New Game++");
 		else if(GameConstants.playNum == 1)
@@ -106,12 +113,12 @@ public class MainMenu extends BasicGameState{
 			sbg.enterState(Game.BLACK_BOSS_STATE);
 		if (input.isKeyDown(Input.KEY_9))
 			sbg.enterState(Game.PLOT_STATE);
+		// Update buttons
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).update(gc,input);
 			if(menuButtons.get(i).getAction().equals("Play Game")){
 				nextStateLoc = i;
 				fadeState = 2;
-				//GameConstants.level.reset();
 				GameConstants.clear();
 				nextState = Game.TUTORIAL_STATE;
 			}
@@ -133,6 +140,7 @@ public class MainMenu extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		// Initialize all fade states
 		fadeTime = 0;
 		fadeState = 0;
 		nextState = 0;

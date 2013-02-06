@@ -8,16 +8,23 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Elevator extends Button {
-	private GameLevel level;
 	private Trigger end;
-	public Elevator(int x, int y, GameLevel level) throws SlickException {
+	/**
+	 * Constructs a new Elevator with the specified coordinates
+	 * @param x - X coordinate of the elevator
+	 * @param y - Y coordinate of the elevator
+	 * @throws SlickException
+	 */
+	public Elevator(int x, int y) throws SlickException {
 		super(x, y);
+		// Initialize the end of level trigger
 		end = new Trigger((int)x+40, (int)y, 6, 80, new FinishListener());
 		end.setActive(false);
 		GameConstants.triggers.add(end);
-		this.level = level;
+		// Initialize the button press trigger
 		trigger = new Trigger(x+40, y, 6, 80, new myListener());
 		GameConstants.triggers.add(trigger);
+		// Initialize the notification animation
 		notif = new AnimatedObject(25, -40, 48, 48);
 		int[] one = {0,0};
 		int[] two = {1,0};
@@ -36,9 +43,11 @@ public class Elevator extends Button {
 	@Override
 	public void draw(Graphics g) {
 		Color orig = g.getColor();
-		if(level.done && level.questions.getAnswering() == false) {
+		if(GameConstants.level.done && GameConstants.level.questions.getAnswering() == false) {
 			boolean behind = true;
-			float prog = (level.transTime/(float)level.transLength);
+			// Progress of end of level animation
+			float prog = (GameConstants.level.transTime/(float)GameConstants.level.transLength);
+			// Draw elevator
 			if(prog >= 1) {
 				g.setColor(Color.black);
 				g.fill(this);
@@ -51,16 +60,17 @@ public class Elevator extends Button {
 					prog = 1-prog;
 					behind = false;
 				}
+				// Draw the player in the correct place
 				if(behind) {
 					g.translate(-x, -y);
-					level.player.draw(g);
+					GameConstants.level.player.draw(g);
 					g.translate(x, y);
 				}
 				g.fillRect(5-(43*prog), 5, 43, 75);
 				g.fillRect(48+(43*prog), 5, 43, 75);
 				if(!behind) {
 					g.translate(-x, -y);
-					level.player.draw(g);
+					GameConstants.level.player.draw(g);
 					g.translate(x, y);
 				}
 			} else {
@@ -77,6 +87,7 @@ public class Elevator extends Button {
 				g.fillRect(48, 5, 43, 75);
 			}
 		} else {
+			// Draw non-moving elevator
 			g.setColor(Color.black);
 			g.fill(this);
 			g.translate(x, y);
@@ -85,6 +96,7 @@ public class Elevator extends Button {
 			g.setColor(Color.gray);
 			g.fillRect(5, 5, 43, 75);
 			g.fillRect(48, 5, 43, 75);
+			// Draw lock is elevator is inactive
 			if(!isActive()) {
 				try {
 					g.drawImage(new Image("data\\lock.png"), 27, 25);
@@ -99,18 +111,22 @@ public class Elevator extends Button {
 		g.setColor(orig);
 		g.translate(-x, -y);
 	}
+	/**
+	 * @author PenguinToast
+	 * Class to trigger end of level animation
+	 */
 	private class FinishListener implements TriggerListener {
 		@Override
 		public void onEnter(GameObject src) {
 			//bring up question screen
-			level.done = true;
-			level.questions.setAnswering(true);
+			GameConstants.level.done = true;
+			GameConstants.level.questions.setAnswering(true);
 		}
 		@Override
 		public void onExit(GameObject src) {
 			end.setActive(false);
-			level.done = false;
-			level.questions.setAnswering(false);
+			GameConstants.level.done = false;
+			GameConstants.level.questions.setAnswering(false);
 		}
 		@Override
 		public void triggered(GameObject src) {

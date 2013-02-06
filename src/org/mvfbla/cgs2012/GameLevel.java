@@ -71,7 +71,7 @@ public abstract class GameLevel extends BasicGameState{
 			}
 			// Trigger for level finish
 			if(to.getType().equals("finish")) {
-				Elevator e = new Elevator(to.getX(), to.getY(), this);
+				Elevator e = new Elevator(to.getX(), to.getY());
 				GameConstants.interacts.add(e);
 				elevator = e;
 			}
