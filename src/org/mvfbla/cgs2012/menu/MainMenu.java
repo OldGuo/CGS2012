@@ -82,6 +82,7 @@ public class MainMenu extends BasicGameState{
 		for(int i = 0; i < menuButtons.size(); i++){
 			menuButtons.get(i).draw(g,0,0);
 		}
+		title.draw(400-title.getWidth()/2, 75);
 		// Draw fade
 		if(fadeState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));

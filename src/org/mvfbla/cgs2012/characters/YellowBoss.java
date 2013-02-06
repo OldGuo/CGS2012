@@ -9,6 +9,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+/**
+ * @author Alex Wang
+ * Yellow Boss
+ * targets player, charges laser, shoots, then teleports
+ * defeated by activating all 3 platforms
+ */
 public class YellowBoss extends Boss{
 	int time;
 	public int location;
@@ -16,6 +22,11 @@ public class YellowBoss extends Boss{
 	public boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
 	private boolean attacking;
+	/**
+	 * @param x - initial x position
+	 * @param y - initial y position
+	 * @throws SlickException
+	 */
 	public YellowBoss (int x, int y) throws SlickException{
 		super(x,y);
 		addAnimation("YellowBoss", new Animation(new SpriteSheet("data\\CharAnim\\YellowBossWalking.png", 128, 128), 150));
@@ -29,47 +40,87 @@ public class YellowBoss extends Boss{
 		for(int i=0;i<3;i++)
 			activated[i]=false;
 	}
-	public void activate(int platform){ //activates a platform
+	/**
+	 * @param platform - activates platform
+	 */
+	public void activate(int platform){
 		setHealth(getHealth()-1);
 		activated[platform]=true;
 	}
+	/**
+	 * @return true when plot text is finished and boss is attacking
+	 */
 	public boolean getAttacking(){
 		return attacking;
 	}
-	public float getReticle(){ //returns x coordinate of aiming reticle
+	/**
+	 * @return x coordinate of aiming reticle
+	 */
+	public float getReticle(){
 		return reticle;
 	}
-	public float getReticleWidth(){ //returns width of reticle
+	/**
+	 * @return returns width of reticle
+	 */
+	public float getReticleWidth(){
 		return reticleWidth;
 	}
-	public int getTime(){ //returns time elapsed during cycle
+	/**
+	 * @return time elapsed during 5 second cycle
+	 */
+	public int getTime(){
 		return time;
 	}
-	public boolean isActivated(int platform){ //returns if a platform is activated
+	/**
+	 * @param platform - one of three platforms
+	 * @return true if platform is activated
+	 */
+	public boolean isActivated(int platform){
 		return activated[platform];
 	}
-	public boolean isAiming(){ //returns if it's aiming
+	/**
+	 * @return true if it's aiming
+	 */
+	public boolean isAiming(){
 		return aiming;
 	}
-	public boolean isCharging(){ //returns if it's charging
+	/**
+	 * @return true if it's charging
+	 */
+	public boolean isCharging(){
 		return charging;
 	}
-	public boolean isFiring(){ //returns if it's firing
+	/**
+	 * @return true if it's firing
+	 */
+	public boolean isFiring(){
 		return firing;
 	}
-	public boolean isTeleporting(){ //returns if it's teleporting
+	/**
+	 * @return true if it's teleporting
+	 */
+	public boolean isTeleporting(){
 		return teleporting;
 	}
+	/**
+	 * @param a sets if it's attacking
+	 */
 	public void setAttacking(boolean a){
 		attacking = a;
 	}
-	public void setReticle(float xValue){ //sets x coordinate of reticle
+	/**
+	 * @param xValue - x coordinate of reticle
+	 */
+	public void setReticle(float xValue){
 		reticle=xValue;
 	}
+	/**
+	 * chooses another random platform to teleport to
+	 */
 	public void teleport(){
 		teleporting=false;
 		time=0;
-		do{ //chooses another random platform to teleport to
+		do{
 			int temp = location;
 			do{
 				location=(int)(Math.random()*3);

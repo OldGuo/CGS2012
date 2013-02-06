@@ -8,8 +8,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="FBLA/native/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/natives-linux.jar"/>
-	<classpathentry kind="lib" path="lib/natives-mac.jar"/>
 	<classpathentry kind="lib" path="lib/natives-win32.jar"/>
 	<classpathentry kind="lib" path="lib/slick.jar" sourcepath="C:/William/GIT/slick/src">
 		<attributes>
