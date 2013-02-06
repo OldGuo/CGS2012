@@ -54,7 +54,7 @@ public class MainMenu extends BasicGameState{
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
-		title = new Image("data\\Title.png");
+		title = new Image("data\\Menu\\TingedTitle.png");
 		background = new Image("data\\Level\\background.png");
 		// Initialize fade variables
 		fadeTime = 0;
@@ -76,7 +76,7 @@ public class MainMenu extends BasicGameState{
 			menuButtons.get(i).draw(g,0,0);
 		}
 		//g.drawString("Tinge",375,90);
-		title.draw(235,45);
+		title.draw(290,75);
 		// Draw fade
 		if(fadeState != 0) {
 			g.setColor(new Color(0, 0, 0, 1f-(fadeTime/(float)fadeDur)));
