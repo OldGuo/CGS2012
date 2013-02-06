@@ -204,6 +204,11 @@ public abstract class GameLevel extends BasicGameState{
 					enter(container, sbg);
 				}
 			}
+			// Resume all animations
+			for(Characters guy:GameConstants.enemies){
+				if(guy.shouldDisplay())
+					guy.resumeAnimation();
+			}
 			// Handle player death
 			if(!player.isAlive()) {
 				deathTime += delta;

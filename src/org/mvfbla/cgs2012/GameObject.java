@@ -103,9 +103,22 @@ public abstract class GameObject extends Polygon{
 	public boolean collides(GameObject obj) {
 		return obj.getCollision().intersects(collision);
 	}
+	/**
+	 * Attaches a GameObject to this one
+	 * @param obj - GameObject to attach
+	 */
 	public void addObject(GameObject obj) {
 		objects.add(obj);
 	}
+	/**
+	 * Update method on this object, preferably called every frame
+	 * @param gc - GameContainer updating this object
+	 * @param delta - Time since the last update
+	 */
 	public abstract void update(GameContainer gc, int delta);
+	/**
+	 * Method to draw the object
+	 * @param g - Graphics context to draw with
+	 */
 	public abstract void draw(Graphics g);
 }

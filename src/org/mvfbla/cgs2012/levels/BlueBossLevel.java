@@ -40,6 +40,8 @@ public class BlueBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
+		needRestart = false;
+		platformBroken = false;
 		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
 		background = new Image("data\\Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
