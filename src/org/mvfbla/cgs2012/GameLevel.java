@@ -202,11 +202,6 @@ public abstract class GameLevel extends BasicGameState{
 					reset();
 				}
 			}
-			// Finish the level
-			if(done && questions.getAnswering() == false && questionCount >= 4) {
-				player.setControl(false);
-				transState = 2;
-			}
 			// Disable player controls while answering questions
 			if(questions.getAnswering()) {
 				questions.update(container);
@@ -214,7 +209,14 @@ public abstract class GameLevel extends BasicGameState{
 			}else{
 				if(stateID < 5 || stateID >= 8)
 					player.setControl(true);
-			}if(!lost){
+			}
+			// Finish the level
+			if(done && questions.getAnswering() == false && questionCount >= 4) {
+				player.setControl(false);
+				transState = 2;
+			}
+
+			if(!lost){
 				player.update(container, delta);
 			}
 			// Handle the enemies
