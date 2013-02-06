@@ -10,10 +10,19 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * @author Young
+ * Window for pausing
+ */
 public class PauseWindow{
 
-	ArrayList<InteractButton> pauseButtons;
+	ArrayList<InteractButton> pauseButtons; //Arraylist of pause buttons
 
+	/**
+	 * @param g - Graphics
+	 * @param x - x position
+	 * @param y - y position
+	 */
 	public void draw(Graphics g,int x,int y){
 		g.setColor(new Color(20,20,20,0.3f));
 		g.fillRect(0, 0, 800+x, 600+y);
@@ -21,33 +30,24 @@ public class PauseWindow{
 			pauseButtons.get(i).draw(g,x,y);
 		}
 	}
+	/**
+	 * Initializes questions
+	 * @throws SlickException
+	 */
 	public void init() throws SlickException {
 		pauseButtons = new ArrayList<InteractButton>(3);
 		pauseButtons.add(new InteractButton("Resume",255,140,300,75,0));
 		pauseButtons.add(new InteractButton("Main Menu",255,280,300,75,0));
 		pauseButtons.add(new InteractButton("Quit",255,420,300,75,0));
 	}
+	/**
+	 * Updates the question screen
+	 * @param gc - Game Container
+	 * @param sbg - State Based Game
+	 */
 	public void update(GameContainer gc,StateBasedGame sbg){
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
-		if (input.isKeyDown(Input.KEY_0))
-			sbg.enterState(Game.MAIN_MENU_STATE);
-		if (input.isKeyDown(Input.KEY_1))
-			sbg.enterState(Game.TUTORIAL_STATE);
-		if (input.isKeyDown(Input.KEY_2))
-			sbg.enterState(Game.ELEVATOR_STATE);
-		if (input.isKeyDown(Input.KEY_3))
-			sbg.enterState(Game.MOTION_SENSOR_STATE);
-		if (input.isKeyDown(Input.KEY_4))
-			sbg.enterState(Game.GRAVITY_STATE);
-		if (input.isKeyDown(Input.KEY_5))
-			sbg.enterState(Game.BLUE_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_6))
-			sbg.enterState(Game.RED_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_7))
-			sbg.enterState(Game.YELLOW_BOSS_STATE);
-		if (input.isKeyDown(Input.KEY_8))
-			sbg.enterState(Game.BLACK_BOSS_STATE);
 		for(int i = 0; i < pauseButtons.size(); i++){
 			pauseButtons.get(i).update(gc,input);
 			if(pauseButtons.get(i).getAction().equals("Resume")){
