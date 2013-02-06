@@ -33,9 +33,9 @@ public class InteractButton {
 	public InteractButton(String text,int xPos,int yPos,int l, int h,int id) throws SlickException{
 		words = text;
 		action = " ";
-		buttonNormal = new Image("data\\QuestionButton.png");
-		buttonHover = new Image("data\\QuestionButtonHover.png");
-		buttonClick = new Image("data\\QuestionButtonDown.png");
+		buttonNormal = new Image("data\\Questions\\QuestionButton.png");
+		buttonHover = new Image("data\\Questions\\QuestionButtonHover.png");
+		buttonClick = new Image("data\\Questions\\QuestionButtonDown.png");
 		x = xPos;
 		y = yPos;
 		length = l;

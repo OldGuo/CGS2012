@@ -38,8 +38,8 @@ public class BlueBoss extends Boss{
 	public BlueBoss (int x, int y) throws SlickException{
 		super(x,y);
 		super.setInitialHealth(4);
-		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\BlueBossWalking.png", 128, 128), 150));
-		stomp = new Image("data\\Stomp.png");
+		addAnimation("BlueBoss", new Animation(new SpriteSheet("data\\CharAnim\\BlueBossWalking.png", 128, 128), 150));
+		stomp = new Image("data\\CharAnim\\Stomp.png");
 	}
 	public void changeSleep(boolean inSight){ //taken from PlantedEnemy class to follow player
 		awake=inSight;

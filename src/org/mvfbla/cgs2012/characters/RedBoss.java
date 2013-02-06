@@ -13,7 +13,7 @@ public class RedBoss extends Boss{
 
 	public RedBoss (int x, int y) throws SlickException{
 		super(x,y);
-		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\RedBossWalking.png", 128, 128), 150));
+		addAnimation("RedBoss", new Animation(new SpriteSheet("data\\CharAnim\\RedBossWalking.png", 128, 128), 150));
 		super.setSpeed(3.7f); //faster speed
 	}
 	public boolean getAttacking(){ //returns whether or not it's attacking

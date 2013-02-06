@@ -26,14 +26,14 @@ public class Player extends Characters{
 	private boolean control;
 	public Player(int x, int y) throws SlickException {
 		super(x, y, 48, 48); //loads sprite sheets for animations of actions
-		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\PlayerLeftInverted.png", 48, 48), 150)); 
-		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\PlayerRightInverted.png", 48, 48), 150));
+		addAnimation("walkLeftInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeftInverted.png", 48, 48), 150)); 
+		addAnimation("walkRightInvert", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRightInverted.png", 48, 48), 150));
 		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\PlayerLeft.png", 48, 48), 150));
 		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\PlayerRight.png", 48, 48), 150));
 
 		arm = new AnimatedObject(0,0,48,48);
-		arm.addAnimation("right",new Animation(new SpriteSheet("data\\PlayerAttackRight.png", 48, 48), 750));
-		arm.addAnimation("left",new Animation(new SpriteSheet("data\\PlayerAttackLeft.png", 48, 48), 750));
+		arm.addAnimation("right",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackRight.png", 48, 48), 750));
+		arm.addAnimation("left",new Animation(new SpriteSheet("data\\CharAnim\\PlayerAttackLeft.png", 48, 48), 750));
 		addObject(arm);
 		arm.stopAnimation();
 

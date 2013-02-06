@@ -39,7 +39,7 @@ public class MotionSensorLevel extends GameLevel {
 		//Initializes values
 		super.setBackgroundInfo(33, 19);
 		map = new Map("data\\Maps\\MotionSensorLevel_3.tmx","data\\Maps");
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {} //Initializes level specific objects, in this case there are none

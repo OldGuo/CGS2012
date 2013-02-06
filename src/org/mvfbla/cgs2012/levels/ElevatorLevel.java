@@ -73,7 +73,7 @@ public class ElevatorLevel extends GameLevel {
 		super.setBackgroundInfo(33, 19);
 		//Initializes variables
 		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
-		background = new Image("data\\Background.png");
+		background = new Image("data\\Level\\Background.png");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {

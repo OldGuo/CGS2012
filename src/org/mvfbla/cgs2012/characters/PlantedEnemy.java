@@ -18,8 +18,8 @@ public class PlantedEnemy extends Enemy{
 
 	public PlantedEnemy (int x, int y) throws SlickException{
 		super(x, y, 64, 64);
-		addAnimation("PlantedEnemyInvert", new Animation(new SpriteSheet("data\\SmallEnemyInverted.png", 64, 64), 150));
-		addAnimation("PlantedEnemy", new Animation(new SpriteSheet("data\\SmallEnemy.png", 64, 64), 150));
+		addAnimation("PlantedEnemyInvert", new Animation(new SpriteSheet("data\\CharAnim\\SmallEnemyInverted.png", 64, 64), 150));
+		addAnimation("PlantedEnemy", new Animation(new SpriteSheet("data\\CharAnim\\SmallEnemy.png", 64, 64), 150));
 		current = "PlantedEnemy";
 		super.setSpeed(0);
 	}

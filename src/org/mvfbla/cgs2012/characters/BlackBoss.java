@@ -25,11 +25,11 @@ public class BlackBoss extends Characters{
 	private final AnimatedObject arm;
 	public BlackBoss(int x, int y) throws SlickException {
 		super(x, y, 48, 48);
-		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\BlackBossLeft.png", 48, 48), 150));
-		addAnimation("walkRight", new Animation(new SpriteSheet("data\\BlackBossRight.png", 48, 48), 150));
+		addAnimation("walkLeft", new Animation(new SpriteSheet("data\\CharAnim\\BlackBossLeft.png", 48, 48), 150));
+		addAnimation("walkRight", new Animation(new SpriteSheet("data\\CharAnim\\BlackBossRight.png", 48, 48), 150));
 		arm = new AnimatedObject(0,0,48,48);
-		arm.addAnimation("right",new Animation(new SpriteSheet("data\\BlackBossAttackRight.png", 48, 48), 750));
-		arm.addAnimation("left",new Animation(new SpriteSheet("data\\BlackBossAttackLeft.png", 48, 48), 750));
+		arm.addAnimation("right",new Animation(new SpriteSheet("data\\CharAnim\\BlackBossAttackRight.png", 48, 48), 750));
+		arm.addAnimation("left",new Animation(new SpriteSheet("data\\CharAnim\\BlackBossAttackLeft.png", 48, 48), 750));
 		addObject(arm);
 		arm.stopAnimation();
 

@@ -40,7 +40,7 @@ public class AboutPage extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
-		about = new Image("data\\About.png");
+		about = new Image("data\\Menu\\About.png");
 		fadeState = 1;
 	}
 
