@@ -525,7 +525,7 @@ public abstract class GameLevel extends BasicGameState{
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 						((PlantedEnemy)guy).changeSleep(true);
 						((PlantedEnemy)guy).setDirection(Math.signum(tempX));
-						((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
+						//((PlantedEnemy)guy).setSpeed(3*Math.signum(tempX));
 					}
 					else
 						((PlantedEnemy)guy).changeSleep(false);
