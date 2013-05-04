@@ -488,10 +488,9 @@ public abstract class GameLevel extends BasicGameState{
 				double Xdist=Math.pow(tempX, 2);
 				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 				float totalDist=(float)Math.sqrt(Xdist+Ydist);
-				String name=guy.getClass().toString();
 				float hit=0;
 				if(player.collides(guy)&&guy.isAlive()){
-					if(name.equals("class org.mvfbla.cgs2012.characters.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
+					if(guy instanceof BasicEnemy || guy instanceof PlantedEnemy){
 						if(Math.abs(tempX)<20)
 							player.setHealth(player.getHealth()-1);
 					}
@@ -502,7 +501,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 				// Make PlantedEnemy walk towards the player
 				hit+=(guy.getWidth()/2);
-				if(name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
+				if(guy instanceof PlantedEnemy){
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 						((PlantedEnemy)guy).changeSleep(true);
 						((PlantedEnemy)guy).setDirection(Math.signum(tempX));

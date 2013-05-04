@@ -132,8 +132,7 @@ public class BlueBossLevel extends GameLevel {
 				double Xdist=Math.pow(tempX, 2);
 				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 				float totalDist=(float)Math.sqrt(Xdist+Ydist);
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.BlueBoss")){
+				if(guy instanceof BlueBoss){
 					BlueBoss boss = (BlueBoss)guy;
 					if(totalDist<boss.getSight()){
 						boss.changeSleep(true);
@@ -208,8 +207,7 @@ public class BlueBossLevel extends GameLevel {
 				GameConstants.level.player.setControl(false);
 			}
 			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.BlueBoss")){
+				if(guy instanceof BlueBoss){
 					BlueBoss boss = (BlueBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);

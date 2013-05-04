@@ -249,8 +249,7 @@ public class YellowBossLevel extends GameLevel {
 				questions.update(container);
 			}
 			for(Characters guy : GameConstants.enemies) {
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.YellowBoss")){
+				if(guy instanceof YellowBoss){
 					YellowBoss boss = (YellowBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);
