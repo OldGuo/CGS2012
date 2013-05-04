@@ -465,7 +465,7 @@ public abstract class GameLevel extends BasicGameState{
 			}
 			// Disable player controls while answering questions
 			if(questions.getAnswering()) {
-				questions.update(container);
+				questions.update(container, delta);
 				player.setControl(false);
 			}else{
 				if(stateID < 5 || stateID >= 8)

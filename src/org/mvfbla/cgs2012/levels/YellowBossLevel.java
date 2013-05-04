@@ -207,7 +207,7 @@ public class YellowBossLevel extends GameLevel {
 			if(beforeQuestions == true || afterQuestions == true)
 				text.update(container, delta);
 			if(questions.getAnswering()){
-				questions.update(container);
+				questions.update(container, delta);
 			}
 			for(Characters guy : GameConstants.enemies) {
 				if(guy instanceof YellowBoss){

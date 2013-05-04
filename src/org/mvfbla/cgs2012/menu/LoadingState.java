@@ -59,9 +59,9 @@ public class LoadingState extends BasicGameState {
 			throws SlickException {
 		// Update the transitions
 		transTime += delta;
-		if(transTime >= totalTrans) {
+		//if(transTime >= totalTrans) {
 			game.enterState(Game.MAIN_MENU_STATE);
-		}
+		//}
 		int logoDur = transStay + transFade*2;
 		int currDur = transTime % logoDur;
 		currLogo = (int) Math.floor(transTime/(float)logoDur);

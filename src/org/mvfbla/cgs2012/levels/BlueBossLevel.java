@@ -203,7 +203,7 @@ public class BlueBossLevel extends GameLevel {
 			if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
 				text.update(container, delta);
 			if(questions.getAnswering()){ //Handles the pre-boss sequence
-				questions.update(container);
+				questions.update(container, delta);
 				GameConstants.level.player.setControl(false);
 			}
 			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
