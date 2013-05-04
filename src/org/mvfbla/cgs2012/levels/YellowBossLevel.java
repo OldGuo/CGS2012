@@ -29,7 +29,6 @@ public class YellowBossLevel extends GameLevel {
 	private YellowBoss yellowBoss;
 	private final static int MAP_WIDTH = 780;
 	private final static int MAP_HEIGHT = 600;
-	private float fireX,fireY;
 	private final YellowButton[] buttons = new YellowButton[3];
 	private Animation lightning;
 
@@ -46,35 +45,6 @@ public class YellowBossLevel extends GameLevel {
 	@Override
 	public void draw(Graphics g){
 		super.draw(g);
-		g.setColor(Color.red);
-		//reticle follows player
-		if(yellowBoss.isAiming()){
-			fireX=yellowBoss.getReticle();
-			fireY=player.getY();
-			g.drawOval(fireX,fireY, yellowBoss.getReticleWidth(), yellowBoss.getReticleWidth());
-			g.drawLine(fireX, fireY+yellowBoss.getReticleWidth()/2, fireX+yellowBoss.getReticleWidth(), fireY+yellowBoss.getReticleWidth()/2);
-			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
-			g.drawLine(yellowBoss.getCenterX(), yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()/2, fireY+player.getHeight()/2);
-		}
-		//reticle stays in position where the player last was
-		else if(yellowBoss.isCharging()){
-			g.drawOval(fireX, fireY, yellowBoss.getReticleWidth(), yellowBoss.getReticleWidth());
-			g.drawLine(fireX, fireY+yellowBoss.getReticleWidth()/2, fireX+yellowBoss.getReticleWidth(), fireY+yellowBoss.getReticleWidth()/2);
-			g.drawLine(fireX+yellowBoss.getReticleWidth()/2, fireY, fireX+yellowBoss.getReticleWidth()/2, fireY+yellowBoss.getReticleWidth());
-		}
-		//boss fires laser at where reticle aimed
-		else if(yellowBoss.isFiring()){
-			for(float i=0;i<=8;i++){
-				g.drawLine(yellowBoss.getCenterX()-8, yellowBoss.getCenterY()-40, fireX+i, fireY+player.getHeight());
-				g.drawLine(yellowBoss.getCenterX()+8, yellowBoss.getCenterY()-40, fireX+yellowBoss.getReticleWidth()+i, fireY+player.getHeight());
-			}
-		}
-		//boss teleports to another platform
-		else if(yellowBoss.isTeleporting()){
-			float opacity=(float)((yellowBoss.getTime()-4500)*.001);
-			g.setColor(new Color(0,255,0,opacity));
-			g.fillOval(yellowBoss.getCenterX()-yellowBoss.getHeight()/2, yellowBoss.getCenterY()-yellowBoss.getWidth()/2, yellowBoss.getHeight(), yellowBoss.getWidth());
-		}
 		//animates the broken platforms
 		g.setColor(Color.green);
 		if(yellowBoss.isActivated(0)){
@@ -147,6 +117,7 @@ public class YellowBossLevel extends GameLevel {
 		GameConstants.interacts.add(b1);
 		GameConstants.interacts.add(b2);
 		GameConstants.interacts.add(b3);
+		yellowBoss.setPlayer(player);
 	}
 	@Override
 	public int getID(){
@@ -178,7 +149,7 @@ public class YellowBossLevel extends GameLevel {
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {
-		// TODO Auto-generated method stub
+		// no special objects
 
 	}
 	@Override
@@ -205,16 +176,6 @@ public class YellowBossLevel extends GameLevel {
 				}
 				GameConstants.lastBoss = 3;
 				GameConstants.bossesDefeated |= 1;
-			}
-			//sets reticle on player
-			if(yellowBoss.isAiming())
-				yellowBoss.setReticle(player.getX());
-			//sets area where laser hits to damage player
-			else if(yellowBoss.isFiring()) {
-				if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+yellowBoss.getReticleWidth()){
-					if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+yellowBoss.getReticleWidth())
-						player.setHealth(player.getHealth()-1);
-				}
 			}
 			lightning.update(delta);
 			//plot text before the battle

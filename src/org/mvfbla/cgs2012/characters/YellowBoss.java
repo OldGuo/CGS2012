@@ -5,7 +5,9 @@ package org.mvfbla.cgs2012.characters;
 
 import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
@@ -21,7 +23,9 @@ public class YellowBoss extends Boss{
 	boolean[] activated;
 	public boolean aiming, firing, charging, teleporting;
 	float reticle, reticleWidth;
+	private float fireX,fireY;
 	private boolean attacking;
+	private Player player;
 	/**
 	 * @param x - initial x position
 	 * @param y - initial y position
@@ -39,6 +43,13 @@ public class YellowBoss extends Boss{
 		activated=new boolean[3];
 		for(int i=0;i<3;i++)
 			activated[i]=false;
+	}
+	/**
+	 * Sets the reference to the player
+	 * @param p - Player
+	 */
+	public void setPlayer(Player p) {
+		player = p;
 	}
 	/**
 	 * @param platform - activates platform
@@ -177,6 +188,49 @@ public class YellowBoss extends Boss{
 			if(!attacking){
 				super.setHealth(3);
 			}
+		}
+		//sets reticle on player
+		if(isAiming())
+			setReticle(player.getX());
+		//sets area where laser hits to damage player
+		else if(isFiring()) {
+			if(player.getCenterX()>=fireX&&player.getCenterX()<=fireX+getReticleWidth()){
+				if(player.getCenterY()>=fireY&&player.getCenterY()<=fireY+getReticleWidth())
+					player.setHealth(player.getHealth()-1);
+			}
+		}
+	}
+	@Override
+	public void draw(Graphics g) {
+		super.draw(g);
+		g.setColor(Color.red);
+		//reticle follows player
+		if(isAiming()){
+			fireX=getReticle();
+			fireY=player.getY();
+			g.drawOval(fireX,fireY, getReticleWidth(), getReticleWidth());
+			g.drawLine(fireX, fireY+getReticleWidth()/2, fireX+getReticleWidth(), fireY+getReticleWidth()/2);
+			g.drawLine(fireX+getReticleWidth()/2, fireY, fireX+getReticleWidth()/2, fireY+getReticleWidth());
+			g.drawLine(getCenterX(), getCenterY()-40, fireX+getReticleWidth()/2, fireY+player.getHeight()/2);
+		}
+		//reticle stays in position where the player last was
+		else if(isCharging()){
+			g.drawOval(fireX, fireY, getReticleWidth(), getReticleWidth());
+			g.drawLine(fireX, fireY+getReticleWidth()/2, fireX+getReticleWidth(), fireY+getReticleWidth()/2);
+			g.drawLine(fireX+getReticleWidth()/2, fireY, fireX+getReticleWidth()/2, fireY+getReticleWidth());
+		}
+		//boss fires laser at where reticle aimed
+		else if(isFiring()){
+			for(float i=0;i<=8;i++){
+				g.drawLine(getCenterX()-8, getCenterY()-40, fireX+i, fireY+player.getHeight());
+				g.drawLine(getCenterX()+8, getCenterY()-40, fireX+getReticleWidth()+i, fireY+player.getHeight());
+			}
+		}
+		//boss teleports to another platform
+		else if(isTeleporting()){
+			float opacity=(float)((getTime()-4500)*.001);
+			g.setColor(new Color(0,255,0,opacity));
+			g.fillOval(getCenterX()-getHeight()/2, getCenterY()-getWidth()/2, getHeight(), getWidth());
 		}
 	}
 }
