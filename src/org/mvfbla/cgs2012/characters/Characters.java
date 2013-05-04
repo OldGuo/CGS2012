@@ -13,7 +13,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Class to represent all characters
  */
 public class Characters extends AnimatedObject {

@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Represents a game tile
  */
 public class Tile extends GameObject{

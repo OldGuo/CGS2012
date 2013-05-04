@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Represents all objects with animations
  */
 public class AnimatedObject extends GameObject {

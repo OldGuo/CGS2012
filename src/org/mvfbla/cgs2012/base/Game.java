@@ -23,7 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends StateBasedGame{
 
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Thread to start the music running
 	 */
 	private class MusicThread implements Runnable {

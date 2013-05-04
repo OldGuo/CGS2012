@@ -4,7 +4,7 @@ import org.mvfbla.cgs2012.base.GameObject;
 import org.newdawn.slick.Graphics;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Interface representing an object that the player can interact with
  */
 public interface InteractiveObject {

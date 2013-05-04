@@ -10,7 +10,7 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * An abstract class to represent all game objects
  */
 public abstract class GameObject extends Polygon{

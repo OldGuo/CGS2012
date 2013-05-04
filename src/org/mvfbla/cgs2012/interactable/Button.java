@@ -8,7 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 
 public class Button extends AnimatedObject implements InteractiveObject {
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Listener to display the spacebar notification as the player apporaches
 	 */
 	protected class myListener implements TriggerListener {

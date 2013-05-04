@@ -10,12 +10,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Class to represent end-of-level elevator
  */
 public class Elevator extends Button {
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Class to trigger end of level animation
 	 */
 	private class FinishListener implements TriggerListener {

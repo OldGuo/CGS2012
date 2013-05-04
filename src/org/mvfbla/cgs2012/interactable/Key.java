@@ -14,7 +14,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Key extends AnimatedObject implements InteractiveObject {
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Listener for when the player picks up the key
 	 */
 	public class KeyListener implements TriggerListener {
