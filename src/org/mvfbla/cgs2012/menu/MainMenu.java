@@ -61,8 +61,8 @@ public class MainMenu extends BasicGameState{
 		menuButtons.add(new InteractButton("Instructions",255,280,300,75,0));
 		menuButtons.add(new InteractButton("About",255,370,300,75,0));
 		menuButtons.add(new InteractButton("Quit",255,460,300,75,0));
-		title = new Image("data\\Menu\\TingedTitle.png");
-		background = new Image("data\\Level\\background.png");
+		title = new Image("data"+GameConstants.separatorChar+"Menu"+GameConstants.separatorChar+"TingedTitle.png");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"background.png");
 		// Initialize fade variables
 		fadeTime = 0;
 		fadeState = 0;

@@ -59,8 +59,8 @@ public class BlueBossLevel extends GameLevel {
 		beforeQuestions = true;
 		needRestart = false;
 		platformBroken = false;
-		map = new Map("data\\Maps\\BlueBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"BlueBossLevel_5.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 		platform = new Tile(5*16,18*16,16*39,16*2);
 		text = new TypeWriter();
 		questions = new QuestionWindow();
@@ -133,8 +133,7 @@ public class BlueBossLevel extends GameLevel {
 				double Xdist=Math.pow(tempX, 2);
 				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 				float totalDist=(float)Math.sqrt(Xdist+Ydist);
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.BlueBoss")){
+				if(guy instanceof BlueBoss){
 					BlueBoss boss = (BlueBoss)guy;
 					if(totalDist<boss.getSight()){
 						boss.changeSleep(true);
@@ -205,12 +204,11 @@ public class BlueBossLevel extends GameLevel {
 			if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
 				text.update(container, delta);
 			if(questions.getAnswering()){ //Handles the pre-boss sequence
-				questions.update(container);
+				questions.update(container, delta);
 				GameConstants.level.player.setControl(false);
 			}
 			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.BlueBoss")){
+				if(guy instanceof BlueBoss){
 					BlueBoss boss = (BlueBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);

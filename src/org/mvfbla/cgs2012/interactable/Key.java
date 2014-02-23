@@ -14,7 +14,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Key extends AnimatedObject implements InteractiveObject {
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Listener for when the player picks up the key
 	 */
 	public class KeyListener implements TriggerListener {
@@ -47,8 +47,8 @@ public class Key extends AnimatedObject implements InteractiveObject {
 		int[] one = {0,0};
 		int[] two = {1,0};
 		int[] dur = {150};
-		addAnimation("off",new Animation(new SpriteSheet("data\\maps\\SpacebarNotif.png", 48, 48), one, dur));
-		addAnimation("on",new Animation(new SpriteSheet("data\\Level\\key.png", 32, 40), one, dur));
+		addAnimation("off",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"maps"+GameConstants.separatorChar+"SpacebarNotif.png", 48, 48), one, dur));
+		addAnimation("on",new Animation(new SpriteSheet("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"key.png", 32, 40), one, dur));
 		playAnimation("on");
 	}
 	@Override

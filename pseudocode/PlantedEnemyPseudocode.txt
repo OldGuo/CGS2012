@@ -1,0 +1,18 @@
+class PlantedEnemy extends Enemy
+	Boolean : following player or not
+	Float : sight range
+	this Constructor:
+		Call superclass constructor
+		Add animations to this character - Normal, and inverted(if antigravity)
+	void Draw:
+		Draws like super class
+	void Update:
+		Every update, draw current animation
+		if the gravity is flipped, set sprite to flipped sprite
+		if not following player, then sit still
+		if following player, move towards the player at a speed of 3
+		if dead:
+			Increment total number of enemies killed
+			Reset animations
+			Start death animation
+end

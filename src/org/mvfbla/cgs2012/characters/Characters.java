@@ -11,10 +11,9 @@ import org.mvfbla.cgs2012.utils.Vector;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Line;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Class to represent all characters
  */
 public class Characters extends AnimatedObject {

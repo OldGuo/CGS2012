@@ -387,7 +387,7 @@ public abstract class GameLevel extends BasicGameState{
 			// Call each GameLevel's own object initialization methods
 			initObject(to);
 		}
-		background = new Image("data\\Level\\Background.png");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 		transState = 1;
 		// Reset player hp
 		player.setInitialHealth(GameConstants.playerMaxHealth);
@@ -465,7 +465,7 @@ public abstract class GameLevel extends BasicGameState{
 			}
 			// Disable player controls while answering questions
 			if(questions.getAnswering()) {
-				questions.update(container);
+				questions.update(container, delta);
 				player.setControl(false);
 			}else{
 				if(stateID < 5 || stateID >= 8)
@@ -488,10 +488,9 @@ public abstract class GameLevel extends BasicGameState{
 				double Xdist=Math.pow(tempX, 2);
 				double Ydist=Math.pow(player.getCenterY()-guy.getCenterY(), 2);
 				float totalDist=(float)Math.sqrt(Xdist+Ydist);
-				String name=guy.getClass().toString();
 				float hit=0;
 				if(player.collides(guy)&&guy.isAlive()){
-					if(name.equals("class org.mvfbla.cgs2012.characters.BasicEnemy")||name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
+					if(guy instanceof BasicEnemy || guy instanceof PlantedEnemy){
 						if(Math.abs(tempX)<20)
 							player.setHealth(player.getHealth()-1);
 					}
@@ -502,7 +501,7 @@ public abstract class GameLevel extends BasicGameState{
 				}
 				// Make PlantedEnemy walk towards the player
 				hit+=(guy.getWidth()/2);
-				if(name.equals("class org.mvfbla.cgs2012.characters.PlantedEnemy")){
+				if(guy instanceof PlantedEnemy){
 					if(totalDist<((PlantedEnemy)guy).getSight()&&totalDist>9){
 						((PlantedEnemy)guy).changeSleep(true);
 						((PlantedEnemy)guy).setDirection(Math.signum(tempX));

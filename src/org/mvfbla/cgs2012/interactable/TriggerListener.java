@@ -5,7 +5,7 @@ import java.util.EventListener;
 import org.mvfbla.cgs2012.base.GameObject;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Listener for trigger areas
  */
 public interface TriggerListener extends EventListener{

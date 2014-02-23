@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * A simple vector class to represent a 2d vector.
  */
 public class Vector extends Vector2f {

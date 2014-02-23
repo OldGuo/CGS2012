@@ -72,8 +72,8 @@ public class ElevatorLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 19);
 		//Initializes variables
-		map = new Map("data\\Maps\\ElevatorLevel_2.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"ElevatorLevel_2.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException {

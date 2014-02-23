@@ -49,8 +49,8 @@ public class RedBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		afterQuestions = false;
 		beforeQuestions = true;
-		map = new Map("data\\Maps\\RedBossLevel_5.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"RedBossLevel_5.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 		text = new TypeWriter();
 		questions = new QuestionWindow();
 	}
@@ -107,8 +107,7 @@ public class RedBossLevel extends GameLevel {
 				GameConstants.level.player.setControl(false); //Handles the pre-boss sequence
 			}
 			for(Characters guy : GameConstants.enemies) { //Determines endings and replay values
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.RedBoss")){
+				if(guy instanceof RedBoss){
 					RedBoss boss = (RedBoss)guy;
 					if(!boss.isAlive()){
 						transState = 2;
@@ -147,12 +146,11 @@ public class RedBossLevel extends GameLevel {
 			if(beforeQuestions == true || afterQuestions == true) //Handles the pre-boss sequence
 				text.update(container, delta);
 			if(questions.getAnswering()){ //Handles the pre-boss sequence
-				questions.update(container);
+				questions.update(container, delta);
 				GameConstants.level.player.setControl(false);
 			}
 			for(Characters guy : GameConstants.enemies) { //Handles the pre-boss sequence
-				String name=guy.getClass().toString();
-				if(name.equals("class org.mvfbla.cgs2012.characters.RedBoss")){
+				if(guy instanceof RedBoss){
 					RedBoss boss = (RedBoss)guy;
 					if(afterQuestions == true){
 						boss.setAttacking(true);

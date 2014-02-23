@@ -2,6 +2,7 @@ package org.mvfbla.cgs2012.menu;
 
 import org.mvfbla.cgs2012.base.Game;
 import org.mvfbla.cgs2012.interactable.InteractButton;
+import org.mvfbla.cgs2012.utils.GameConstants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -41,7 +42,7 @@ public class InstructionPage extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//Initializes variables
 		back = new InteractButton("Back",255,490,300,75,0);
-		instructions = new Image("data\\Menu\\Instructions.png");
+		instructions = new Image("data"+GameConstants.separatorChar+"Menu"+GameConstants.separatorChar+"Instructions.png");
 		fadeState = 1;
 	}
 

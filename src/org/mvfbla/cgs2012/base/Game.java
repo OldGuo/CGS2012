@@ -23,14 +23,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends StateBasedGame{
 
 	/**
-	 * @author PenguinToast
+	 * @author William Sheu
 	 * Thread to start the music running
 	 */
 	private class MusicThread implements Runnable {
 		@Override
 		public void run() {
 			try {
-				GameConstants.music = new Music("data\\Maps\\Outdated.ogg");
+				GameConstants.music = new Music("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"Outdated.ogg");
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -83,6 +83,6 @@ public class Game extends StateBasedGame{
 		Runnable r = new MusicThread();
 		Thread t = new Thread(r);
 		t.start();
-        g.setIcons(new String[] {"data\\logo\\fbla_32.png", "data\\logo\\fbla_16.png"});
+        g.setIcons(new String[] {"data"+GameConstants.separatorChar+"logo"+GameConstants.separatorChar+"fbla_32.png", "data"+GameConstants.separatorChar+"logo"+GameConstants.separatorChar+"fbla_16.png"});
 	}
 }

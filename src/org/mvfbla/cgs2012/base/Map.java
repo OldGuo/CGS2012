@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
- * @author PenguinToast
+ * @author William Sheu
  * Class to represent a Tiled map
  */
 public class Map {

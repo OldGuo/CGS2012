@@ -49,8 +49,8 @@ public class GravityLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		//Initializes variables
 		super.setBackgroundInfo(33, 19);
-		map = new Map("data\\Maps\\GravityLevel_4.tmx","data\\Maps");
-		background = new Image("data\\Level\\Background.png");
+		map = new Map("data"+GameConstants.separatorChar+"Maps"+GameConstants.separatorChar+"GravityLevel_4.tmx","data"+GameConstants.separatorChar+"Maps");
+		background = new Image("data"+GameConstants.separatorChar+"Level"+GameConstants.separatorChar+"Background.png");
 	}
 
 	@Override
