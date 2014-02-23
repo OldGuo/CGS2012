@@ -54,6 +54,7 @@ public class BlueBossLevel extends GameLevel {
 	public void init(GameContainer container,StateBasedGame sbg) throws SlickException {
 		super.setBackgroundInfo(33, 8);
 		//Initializes variables for the level
+		fallY = 18*16;
 		afterQuestions = false;
 		beforeQuestions = true;
 		needRestart = false;
@@ -139,7 +140,7 @@ public class BlueBossLevel extends GameLevel {
 						boss.changeSleep(true);
 						boss.setDirection(Math.signum(tempX));
 						boss.setSpeed(1*Math.signum(tempX));
-						
+
 					}else{
 						boss.changeSleep(false);
 

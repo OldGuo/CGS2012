@@ -56,7 +56,7 @@ public class BlackBossLevel extends GameLevel {
 		super.setBackgroundInfo(33, 8);
 		map = new Map("data\\Maps\\BlackBossLevel_5.tmx","data\\Maps");
 		background = new Image("data\\Level\\Background.png");
-		blackBoss = new BlackBoss(735,416);
+		blackBoss = new BlackBoss(736,416);
 	}
 	@Override
 	public void initObject(TiledObject to) throws SlickException { //Initializes the button for the level
